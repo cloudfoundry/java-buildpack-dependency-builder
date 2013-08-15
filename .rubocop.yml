@@ -1,0 +1,14 @@
+---
+AllCops:
+  Excludes:
+    - vendor/**
+Documentation:
+  Enabled: false
+LineLength:
+  Enabled: false
+MethodLength:
+  Max: 25
+ParameterLists:
+  Max: 6
+AvoidClassVars:
+  Enabled: false

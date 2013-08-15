@@ -1,0 +1,20 @@
+---
+apt_upgrade: true
+packages:
+ - ant
+ - build-essential
+ - gawk
+ - lesstif2-dev
+ - libasound2-dev
+ - libcups2-dev
+ - libfreetype6-dev
+ - libopenssl-ruby
+ - libxml2-dev
+ - libxrender-dev
+ - libxslt-dev
+ - libxtst-dev
+ - mercurial
+ - ruby
+ - ruby-dev
+ - rubygems
+ - zip
