@@ -24,7 +24,7 @@ The list of available versions for each dependency can be found at the following
 | Groovy | <http://download.pivotal.io.s3.amazonaws.com/groovy/index.yml>
 | MySQL JDBC | <http://download.pivotal.io.s3.amazonaws.com/mysql-jdbc/index.yml>
 | New Relic | <http://download.pivotal.io.s3.amazonaws.com/new-relic/index.yml>
-| OpenJDK | <http://download.pivotal.io.s3.amazonaws.com/openjdk/index.yml>
+| OpenJDK | <http://download.pivotal.io.s3.amazonaws.com/openjdk/lucid/x86_64/index.yml>
 | Play JPA Plugin | <http://download.pivotal.io.s3.amazonaws.com/play-jpa-plugin/index.yml>
 | PostgreSQL JDBC | <http://download.pivotal.io.s3.amazonaws.com/postgresql-jdbc/index.yml>
 | Spring Boot CLI| <http://download.pivotal.io.s3.amazonaws.com/spring-boot-cli/index.yml>
