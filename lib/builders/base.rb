@@ -98,7 +98,7 @@ module Builders
       end
 
       versions[version] = uri bucket, version
-      index.write(versions.to_yaml)
+      index.write(versions.to_yaml, content_type: 'text/x-yaml')
 
       puts ''
     end
