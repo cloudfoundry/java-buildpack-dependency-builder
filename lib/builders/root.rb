@@ -17,6 +17,7 @@ require 'builders/auto_reconfiguration'
 require 'builders/groovy'
 require 'builders/mysql_jdbc'
 require 'builders/openjdk'
+require 'builders/openjdk_inner'
 require 'builders/new_relic'
 require 'builders/play_jpa_plugin'
 require 'builders/postgresql_jdbc'
@@ -69,11 +70,6 @@ module Builders
     end
 
     desc 'openjdk [OPTIONS]', 'Publish a version of OpenJDK'
-    option :key_name, {
-      desc: 'The name of the EC2 keypar to use when creating the instance. This is optional and defaults to Cloud Foundry.',
-      aliases: '-k',
-      default: 'Cloud Foundry'
-    }
     option :build_number, {
       desc: 'The builder number of OpenJDK to create',
       aliases: '-n',
@@ -84,8 +80,29 @@ module Builders
       aliases: '-t',
       required: true
     }
+    option :platforms, {
+      desc: 'An list of the platfoms the version should be built on',
+      aliases: '-p',
+      type: :array,
+      default: ['lucid', 'precise', 'osx']
+    }
     def openjdk
       OpenJDK.new(options).publish
+    end
+
+    desc 'openjdk-inner [OPTIONS]', 'Publish a version of OpenJDK'
+    option :build_number, {
+      desc: 'The builder number of OpenJDK to create',
+      aliases: '-n',
+      required: true
+    }
+    option :tag, {
+      desc: 'The repository tag to build from',
+      aliases: '-t',
+      required: true
+    }
+    def openjdk_inner
+      OpenJDKInner.new(options).publish
     end
 
     desc 'new-relic [OPTIONS]', 'Publish a version of New Relic'

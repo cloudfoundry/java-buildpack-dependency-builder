@@ -23,18 +23,18 @@ module Builders
       super 'postgresql-jdbc', 'jar', options
     end
 
+    protected
+
+    def normalize(raw)
+      raw.sub(/-/, '.').sub(/-/, '_')
+    end
+
     def version_specific(version)
       if version =~ /^8/ || version =~ /^9.0/ || version =~ /^9.1/
         ->(v) { "http://central.maven.org/maven2/postgresql/postgresql/#{v}.jdbc4/postgresql-#{v}.jdbc4.jar" }
       else
         ->(v) { "http://central.maven.org/maven2/org/postgresql/postgresql/#{v}-jdbc4/postgresql-#{v}-jdbc4.jar" }
       end
-    end
-
-    protected
-
-    def normalize(raw)
-      raw.sub(/-/, '.').sub(/-/, '_')
     end
 
   end

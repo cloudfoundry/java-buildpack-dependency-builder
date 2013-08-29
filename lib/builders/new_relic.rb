@@ -23,6 +23,8 @@ module Builders
       super 'new-relic', 'jar', options
     end
 
+    protected
+
     def version_specific(version)
       ->(v) { "http://central.maven.org/maven2/com/newrelic/agent/java/newrelic-agent/#{v}/newrelic-agent-#{v}.jar" }
     end

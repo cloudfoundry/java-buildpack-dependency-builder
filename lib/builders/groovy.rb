@@ -23,6 +23,8 @@ module Builders
       super 'groovy', 'zip', options
     end
 
+    protected
+
     def version_specific(version)
       ->(v) { "http://dist.groovy.codehaus.org/distributions/groovy-binary-#{v}.zip" }
     end

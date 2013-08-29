@@ -1,4 +1,4 @@
-# Encoding: utf-8
+#!/usr/bin/env bash
 # Copyright (c) 2013 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,28 +13,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'builders/base'
+PACKAGES=" \
+	ant \
+	build-essential \
+	curl \
+	lesstif2-dev \
+	libasound2-dev \
+	libcups2-dev \
+	libfreetype6-dev \
+	libopenssl-ruby \
+	libxml2-dev \
+	libxslt-dev \
+	libxtst-dev \
+	mercurial \
+	openjdk-6-jdk \
+	ruby \
+	ruby-dev \
+	rubygems \
+	zip"
 
-module Builders
+apt-get update
+apt-get install -y $PACKAGES
 
-  class Tomcat < Base
-
-    def initialize(options)
-      super 'tomcat', 'tar.gz', options
-    end
-
-    protected
-
-    def version_specific(version)
-      if version =~ /^6/
-        ->(v) { "http://archive.apache.org/dist/tomcat/tomcat-6/v#{v}/bin/apache-tomcat-#{v}.tar.gz" }
-      elsif version =~ /^7/
-        ->(v) { "http://archive.apache.org/dist/tomcat/tomcat-7/v#{v}/bin/apache-tomcat-#{v}.tar.gz" }
-      else
-        fail "Unable to process version '#{version}'"
-      end
-    end
-
-  end
-
-end
+curl -L https://get.rvm.io | bash -s stable
+source /etc/profile.d/rvm.sh
+rvm install 1.9.3
+bundle install --gemfile /java-buildpack-dependency-builder/Gemfile

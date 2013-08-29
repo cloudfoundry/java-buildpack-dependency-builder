@@ -23,16 +23,6 @@ module Builders
       super 'spring-boot-cli', 'tar.gz', options
     end
 
-    def version_specific(version)
-      if version =~ /BUILD/
-        ->(v) { "http://repo.springsource.org/simple/libs-snapshot-local/org/springframework/boot/spring-boot-cli/#{non_qualifier_version v}.BUILD-SNAPSHOT/spring-boot-cli-#{v}-bin.tar.gz" }
-      elsif version =~ /\.M/
-        ->(v) { "http://repo.springsource.org/milestone/org/springframework/boot/spring-boot-cli/#{v}/spring-boot-cli-#{v}-bin.tar.gz" }
-      else
-        fail "Unable to process version '#{version}'"
-      end
-    end
-
     protected
 
     def normalize(raw)
@@ -41,6 +31,16 @@ module Builders
       q = components[3, components.length - 3]
       new_q = q && q.length > 0 ? '_' + q.join('.') : nil
       mmm.join('.') + (new_q ? new_q : '')
+    end
+
+    def version_specific(version)
+      if version =~ /BUILD/
+        ->(v) { "http://repo.springsource.org/libs-snapshot-local/org/springframework/boot/spring-boot-cli/#{non_qualifier_version v}.BUILD-SNAPSHOT/spring-boot-cli-#{v}-bin.tar.gz" }
+      elsif version =~ /\.M/
+        ->(v) { "http://repo.springsource.org/milestone/org/springframework/boot/spring-boot-cli/#{v}/spring-boot-cli-#{v}-bin.tar.gz" }
+      else
+        fail "Unable to process version '#{version}'"
+      end
     end
 
     private

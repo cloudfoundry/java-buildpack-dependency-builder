@@ -42,14 +42,12 @@ module Builders
 
     protected
 
-    def normalize(raw)
-      raw
+    def base_path
+      @name
     end
 
-    private
-
     def download(file, version)
-      uri = URI(version_specific(version).call(version))
+      uri = URI(instance_exec(version, &version_specific(version)))
 
       print "Downloading #{@name} #{version} from #{uri}"
 
@@ -70,6 +68,16 @@ module Builders
       file.close
     end
 
+    def normalize(raw)
+      raw
+    end
+
+    def version_specific(version)
+      fail "Method 'version_specific(version)' must be defined"
+    end
+
+    private
+
     def upload(file, bucket, version)
       print "Uploading #{@name} #{version} to s3://#{bucket}/#{key version}"
 
@@ -80,7 +88,7 @@ module Builders
         object.write(content_length: f.size) do |buffer, bytes|
           content = f.read(bytes)
           buffer.write content
-          progress.increment content.length
+          progress.increment content.length if content
         end
 
         progress.finish
@@ -106,9 +114,6 @@ module Builders
     def artifact(version)
       "#{@name}-#{version}.#{@type}"
     end
-
-    attr_reader :name
-    alias_method :base_path, :name
 
     def index_key
       "#{base_path}/index.yml"
