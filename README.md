@@ -20,15 +20,15 @@ The list of available versions for each dependency can be found at the following
 
 | Dependency | Location
 | ---------- | ---------
-| Auto Reconfiguration | <https://download.pivotal.io.s3.amazonaws.com/auto-reconfiguration/lucid/x86_64/index.yml>
-| Groovy | <https://download.pivotal.io.s3.amazonaws.com/groovy/lucid/x86_64/index.yml>
-| MySQL JDBC | <https://download.pivotal.io.s3.amazonaws.com/mysql-jdbc/lucid/x86_64/index.yml>
-| New Relic | <https://download.pivotal.io.s3.amazonaws.com/new-relic/lucid/x86_64/index.yml>
-| OpenJDK | <https://download.pivotal.io.s3.amazonaws.com/openjdk/lucid/x86_64/index.yml>
-| Play JPA Plugin | <https://download.pivotal.io.s3.amazonaws.com/play-jpa-plugin/lucid/x86_64/index.yml>
-| PostgreSQL JDBC | <https://download.pivotal.io.s3.amazonaws.com/postgresql-jdbc/lucid/x86_64/index.yml>
-| Spring Boot CLI| <https://download.pivotal.io.s3.amazonaws.com/spring-boot-cli/lucid/x86_64/index.yml>
-| Tomcat | <https://download.pivotal.io.s3.amazonaws.com/tomcat/lucid/x86_64/index.yml>
+| Auto Reconfiguration | <http://download.pivotal.io.s3.amazonaws.com/auto-reconfiguration/index.yml>
+| Groovy | <http://download.pivotal.io.s3.amazonaws.com/groovy/index.yml>
+| MySQL JDBC | <http://download.pivotal.io.s3.amazonaws.com/mysql-jdbc/index.yml>
+| New Relic | <http://download.pivotal.io.s3.amazonaws.com/new-relic/index.yml>
+| OpenJDK | <http://download.pivotal.io.s3.amazonaws.com/openjdk/index.yml>
+| Play JPA Plugin | <http://download.pivotal.io.s3.amazonaws.com/play-jpa-plugin/index.yml>
+| PostgreSQL JDBC | <http://download.pivotal.io.s3.amazonaws.com/postgresql-jdbc/index.yml>
+| Spring Boot CLI| <http://download.pivotal.io.s3.amazonaws.com/spring-boot-cli/index.yml>
+| Tomcat | <http://download.pivotal.io.s3.amazonaws.com/tomcat/index.yml>
 
 
 ## Running Tests
