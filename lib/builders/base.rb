@@ -108,9 +108,7 @@ module Builders
     end
 
     def base_path
-      architecture = 'x86_64'
-      codename = 'lucid'
-      "#{@name}/#{codename}/#{architecture}"
+      @name
     end
 
     def index_key
