@@ -21,6 +21,7 @@ require 'builders/new_relic'
 require 'builders/play_jpa_plugin'
 require 'builders/postgresql_jdbc'
 require 'builders/spring_boot_cli'
+require 'builders/tc_server'
 require 'builders/tomcat'
 require 'thor'
 
@@ -105,6 +106,11 @@ module Builders
     desc 'spring-boot-cli [OPTIONS]', 'Publish a version of Spring Boot'
     def spring_boot_cli
       SpringBootCLI.new(options).publish
+    end
+
+    desc 'tc-server [OPTIONS]', 'Publish a version of tc Server'
+    def tc_server
+      TcServer.new(options).publish
     end
 
     desc 'tomcat [OPTIONS]', 'Publish a version of Tomcat'

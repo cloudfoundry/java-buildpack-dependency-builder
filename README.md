@@ -28,6 +28,7 @@ The list of available versions for each dependency can be found at the following
 | Play JPA Plugin | <http://download.pivotal.io.s3.amazonaws.com/play-jpa-plugin/index.yml>
 | PostgreSQL JDBC | <http://download.pivotal.io.s3.amazonaws.com/postgresql-jdbc/index.yml>
 | Spring Boot CLI| <http://download.pivotal.io.s3.amazonaws.com/spring-boot-cli/index.yml>
+| tc Server| <http://download.pivotal.io.s3.amazonaws.com/tc-server/index.yml>
 | Tomcat | <http://download.pivotal.io.s3.amazonaws.com/tomcat/index.yml>
 
 
