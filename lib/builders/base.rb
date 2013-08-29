@@ -107,9 +107,8 @@ module Builders
       "#{@name}-#{version}.#{@type}"
     end
 
-    def base_path
-      @name
-    end
+    attr_reader :name
+    alias_method :base_path, :name
 
     def index_key
       "#{base_path}/index.yml"
