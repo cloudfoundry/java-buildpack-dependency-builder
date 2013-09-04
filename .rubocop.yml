@@ -12,3 +12,5 @@ ParameterLists:
   Max: 6
 AvoidClassVars:
   Enabled: false
+TrivialAccessors:
+  ExactNameMatch: true

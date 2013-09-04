@@ -23,6 +23,8 @@ module Builders
       super 'play-jpa-plugin', 'jar', options
     end
 
+    protected
+
     def version_specific(version)
       ->(v) { "http://maven.springframework.org.s3.amazonaws.com/milestone/org/cloudfoundry/play-jpa-plugin/#{v}/play-jpa-plugin-#{v}.jar" }
     end

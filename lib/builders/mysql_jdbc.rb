@@ -23,6 +23,8 @@ module Builders
       super 'mysql-jdbc', 'jar', options
     end
 
+    protected
+
     def version_specific(version)
       ->(v) { "http://central.maven.org/maven2/mysql/mysql-connector-java/#{v}/mysql-connector-java-#{v}.jar" }
     end

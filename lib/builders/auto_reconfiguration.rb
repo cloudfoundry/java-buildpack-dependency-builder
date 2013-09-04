@@ -23,6 +23,8 @@ module Builders
       super 'auto-reconfiguration', 'jar', options
     end
 
+    protected
+
     def version_specific(version)
       ->(v) { "http://maven.springframework.org.s3.amazonaws.com/milestone/org/cloudfoundry/auto-reconfiguration/#{v}/auto-reconfiguration-#{v}.jar" }
     end
