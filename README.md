@@ -31,6 +31,13 @@ The list of available versions for each dependency can be found at the following
 | tc Server| <http://download.pivotal.io.s3.amazonaws.com/tc-server/index.yml>
 | Tomcat | <http://download.pivotal.io.s3.amazonaws.com/tomcat/index.yml>
 
+Note that the following additional dependency is built and published using the [Java Buildpack Support][] repository.
+
+| Dependency | Location
+| ---------- | ---------
+| Tomcat Buildpack Support | <http://download.pivotal.io.s3.amazonaws.com/tomcat-buildpack-support/index.yml>
+
+[Java Buildpack Support]: https://github.com/cloudfoundry/java-buildpack-support
 
 ## Running Tests
 To run the tests, do the following:
