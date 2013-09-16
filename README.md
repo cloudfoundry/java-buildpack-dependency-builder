@@ -28,7 +28,7 @@ The list of available versions for each dependency can be found at the following
 | Auto Reconfiguration | [`universal`](http://download.pivotal.io.s3.amazonaws.com/auto-reconfiguration/index.yml)
 | Groovy | [`universal`](http://download.pivotal.io.s3.amazonaws.com/groovy/index.yml)
 | MySQL JDBC | [`universal`](http://download.pivotal.io.s3.amazonaws.com/mysql-jdbc/index.yml)
-| OpenJDK | [`lucid`](http://download.pivotal.io.s3.amazonaws.com/openjdk/lucid/x86_64/index.yml), [`precise`](http://download.pivotal.io.s3.amazonaws.com/openjdk/precise/x86_64/index.yml)
+| OpenJDK | [`lucid`](http://download.pivotal.io.s3.amazonaws.com/openjdk/lucid/x86_64/index.yml), [`mountainlion`](http://download.pivotal.io.s3.amazonaws.com/openjdk/mountainlion/x86_64/index.yml), [`precise`](http://download.pivotal.io.s3.amazonaws.com/openjdk/precise/x86_64/index.yml)
 | New Relic | [`universal`](http://download.pivotal.io.s3.amazonaws.com/new-relic/index.yml)
 | Play JPA Plugin | [`universal`](http://download.pivotal.io.s3.amazonaws.com/play-jpa-plugin/index.yml)
 | PostgreSQL JDBC | [`universal`](http://download.pivotal.io.s3.amazonaws.com/postgresql-jdbc/index.yml)
@@ -113,5 +113,7 @@ This table shows the mappings between versions, build numbers, and repository ta
 | `1.7.0_17` | `b31` | `jdk7u17-b31`
 | `1.7.0_21` | `b30` | `jdk7u21-b30`
 | `1.7.0_25` | `b11` | `jdk7u25-b11`
+| `1.7.0_40` | `b43` | `jdk7u25-b43`
 | `1.8.0_M6` | `b75` | `jdk8-b75`
 | `1.8.0_M7` | `b91` | `jdk8-b91`
+| `1.8.0_M8` | `b106` | `jdk8-b106`
