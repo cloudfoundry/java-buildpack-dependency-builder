@@ -181,6 +181,8 @@ done
         end
       else
         puts "Cloning #{repository} to #{source_location}..."
+
+        FileUtils.mkdir_p source_location
         system "hg clone #{repository} #{source_location}"
       end
 
