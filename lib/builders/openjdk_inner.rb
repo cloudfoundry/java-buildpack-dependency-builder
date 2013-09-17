@@ -67,6 +67,8 @@ module Builders
 
     SOUND_PATCH = File.expand_path('../openjdk/6_and_7/asound.diff', __FILE__)
 
+    STAT64_PATCH = File.expand_path('../openjdk/6_and_7/stat64.diff', __FILE__)
+
     VENDOR_DIRECTORY = File.expand_path('../../../vendor/openjdk', __FILE__)
 
     BOOSTRAP_JDK_ROOT = File.join VENDOR_DIRECTORY, 'bootstrap-jdk'
@@ -106,6 +108,7 @@ module Builders
 patch -N -p0 -i #{LEAF_PATCH}
 patch -N -p0 -i #{SEL_PATCH}
 patch -N -p0 -i #{SOUND_PATCH}
+patch -N -p0 -i #{STAT64_PATCH}
 export LANG=C ALT_BOOTDIR=#{alt_boot_dir} ALT_CACERTS_FILE=#{CACERTS_FILE} PATH=/usr/bin:$PATH JAVA_HOME=
 make MILESTONE=fcs JDK_VERSION=#{version} BUILD_NUMBER=#{build_number} ALLOW_DOWNLOADS=true NO_DOCS=true PARALLEL_COMPILE_JOBS=#{cpu_count} HOTSPOT_BUILD_JOBS=#{cpu_count}
 
