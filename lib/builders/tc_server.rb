@@ -34,7 +34,17 @@ module Builders
     end
 
     def version_specific(version)
-      ->(v) { "http://dist.springsource.com.s3.amazonaws.com/release/TCS/vfabric-tc-server-standard-#{v}.tar.gz" }
+
+    end
+
+    def version_specific(version)
+      if version =~ /CI/
+        ->(v) { "http://dist.springsource.com.s3.amazonaws.com/snapshot/TCS/vfabric-tc-server-standard-#{v}.tar.gz" }
+      elsif version =~ /RELEASE/
+        ->(v) { "http://dist.springsource.com.s3.amazonaws.com/release/TCS/vfabric-tc-server-standard-#{v}.tar.gz" }
+      else
+        fail "Unable to process version '#{version}'"
+      end
     end
 
   end
