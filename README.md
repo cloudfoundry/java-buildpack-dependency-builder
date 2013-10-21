@@ -96,7 +96,7 @@ Once the change to `config/blobs.yml` has been committed or the pull request mer
 
 More information is available in [blobstore information][].
 
-[blobstore information](https://github.com/cloudfoundry/internal-docs/blob/master/howtos/upload_blobs.md)
+[blobstore information]: https://github.com/cloudfoundry/internal-docs/blob/master/howtos/upload_blobs.md
 
 ## Contributing
 [Pull requests][] are welcome; see the [contributor guidelines][] for details.
