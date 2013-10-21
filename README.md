@@ -52,6 +52,47 @@ bundle install
 bundle exec rake
 ```
 
+## Populating the Buildpack Cache
+
+When DEAs are provisioned, everything in the `buildpack_cache` directory will be available via the `$BUILDPACK_CACHE` environment variable. To populate the `buildpack_cache` directory, follow these steps:
+
+1. Clone `https://github.com/cloudfoundry/cf-release.git` and update its submodules (which takes a few minutes)
+
+2. Change directory into the clone
+
+3. Create `config/private.yml` with contents in the following format containing the appropriate S3 keys (see more information for details):
+```
+    ---
+    blobstore:
+      s3:
+        secret_access_key: secretaccesskey
+        access_key_id: accesskeyid
+```
+
+4. Issue `mkdir -p blobs/buildpack_cache/java-buildpack`
+
+5. Go through the list of Java buildpack dependency repositories (in the Available Artifacts section above) and for each one:
+
+  5.1 Run the [populate-buildpack-stash.rb](bin/populate-buildpack-stash.rb) script as follows:
+
+	  `~/populate-buildpack-stash.rb /path/to/clone/blobs/buildpack_cache/java-buildpack <repository index.yml URL>`
+	
+  5.2 Edit the downloaded file to exclude any versions not required in the buildpack cache - typically all except the latest version
+      Refer to /path/to/clone/config/blobs.yml to see what is already in the buildpack cache (take care to look in buildpack_cache/java-buildpack)
+      If there are no items in the edited index.yml which are not already in the buildpack cache, delete the downloaded index.yml file and skip the next step.
+
+  5.3 For each item in the above edited index.yml which is not already in the buildpack cache, issue:
+
+        `~/populate-buildpack-stash.rb /path/to/clone/blobs/buildpack_cache/java-buildpack <URL from index.yml>`
+	
+6. Run `bosh upload blobs` from the clone directory
+
+7. Commit the change to `config/blobs.yml` or, if you don't have commit rights, create a pull request
+
+Once the change to `config/blobs.yml` has been committed or the pull request merged, you can expect the uploaded files to become available on tabasco within a few hours.
+
+More information is available here: https://github.com/cloudfoundry/internal-docs/blob/master/howtos/upload_blobs.md
+
 ## Contributing
 [Pull requests][] are welcome; see the [contributor guidelines][] for details.
 
