@@ -56,9 +56,9 @@ bundle exec rake
 
 When DEAs are provisioned, everything in the `buildpack_cache` directory will be available via the `$BUILDPACK_CACHE` environment variable. To populate the `buildpack_cache` directory, follow these steps:
 
-1. Clone `https://github.com/cloudfoundry/cf-release.git` and update its submodules (which takes a few minutes)
+1. Clone `https://github.com/cloudfoundry/cf-release.git` and update its submodules (which takes a few minutes).
 
-2. Change directory into the clone
+2. Change directory into the clone.
 
 3. Create `config/private.yml` with contents in the following format containing the appropriate S3 keys (see [blobstore information][] for more information):
 
@@ -70,7 +70,7 @@ When DEAs are provisioned, everything in the `buildpack_cache` directory will be
         access_key_id: accesskeyid
 ```
 
-4. Issue `mkdir -p blobs/buildpack_cache/java-buildpack`
+4. Issue `mkdir -p blobs/buildpack_cache/java-buildpack`.
 
 5. Go through the list of Java buildpack dependency repositories (in the Available Artifacts section above) and for each one:
 
@@ -78,7 +78,7 @@ When DEAs are provisioned, everything in the `buildpack_cache` directory will be
 
 	  `~/populate-buildpack-stash.rb /clone/blobs/buildpack_cache/java-buildpack <repository index.yml URL>`
 	
-  5.2 Edit the downloaded file to exclude any versions not required in the buildpack cache - typically all except the latest version
+  5.2 Edit the downloaded file to exclude any versions not required in the buildpack cache - typically all except the latest version.
 
       Refer to `/clone/config/blobs.yml` to see what is already in the buildpack cache (take care to look in the entries containing `buildpack_cache/java-buildpack`).
 
@@ -88,9 +88,9 @@ When DEAs are provisioned, everything in the `buildpack_cache` directory will be
 
         `~/populate-buildpack-stash.rb /clone/blobs/buildpack_cache/java-buildpack <URL from index.yml>`
 	
-6. Run `bosh upload blobs` from the clone directory
+6. Run `bosh upload blobs` from the clone directory.
 
-7. Commit the change to `config/blobs.yml` or, if you don't have commit rights, create a pull request
+7. Commit the change to `config/blobs.yml` or, if you don't have commit rights, create a pull request.
 
 Once the change to `config/blobs.yml` has been committed or the pull request merged, you can expect the uploaded files to become available on tabasco within a few hours.
 
