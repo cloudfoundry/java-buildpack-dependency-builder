@@ -26,14 +26,14 @@ module Builders
 
     protected
 
-     def download(file, version)
+    def download(file, version)
       uri = URI(instance_exec(version, &version_specific(version)))
 
       print "Downloading #{@name} #{version} from #{uri}"
 
       Net::HTTP.start(uri.host, uri.port) do |http|
         request = Net::HTTP::Post.new('https://login.appdynamics.com/sso/login/')
-        request.set_form_data({'username' => @username, 'password' => @password})
+        request.set_form_data({ 'username' => @username, 'password' => @password })
         cookie = http.request(request).response['set-cookie'].split('; ')[0]
 
         request = Net::HTTP::Get.new(uri.path)
