@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require 'builders/app_dynamics'
 require 'builders/auto_reconfiguration'
 require 'builders/groovy'
 require 'builders/mysql_jdbc'
@@ -54,6 +55,28 @@ module Builders
       required: true
     }
 
+    desc 'app-dynamics [OPTIONS]', 'Publish a version of AppDynamics'
+
+    option :latest, {
+      desc: 'Whether the version is the latest version of the plugin',
+      aliases: '-l',
+      type: :boolean,
+      default: true
+    }
+    option :password, {
+      desc: 'The password to authenticate with',
+      aliases: '-p',
+      required: true
+    }
+    option :username, {
+      desc: 'The username to authenticate with',
+      aliases: '-u',
+      required: true
+    }
+    def app_dynamics
+      AppDynamics.new(options).publish
+    end
+
     desc 'auto-reconfiguration [OPTIONS]', 'Publish a version of Auto Reconfiguration'
     def auto_reconfiguration
       AutoReconfiguration.new(options).publish
@@ -67,6 +90,11 @@ module Builders
     desc 'mysql-jdbc [OPTIONS]', 'Publish a version of MySQL JDBC'
     def mysql_jdbc
       MySQLJDBC.new(options).publish
+    end
+
+    desc 'new-relic [OPTIONS]', 'Publish a version of New Relic'
+    def new_relic
+      NewRelic.new(options).publish
     end
 
     desc 'openjdk [OPTIONS]', 'Publish a version of OpenJDK'
@@ -103,11 +131,6 @@ module Builders
     }
     def openjdk_inner
       OpenJDKInner.new(options).publish
-    end
-
-    desc 'new-relic [OPTIONS]', 'Publish a version of New Relic'
-    def new_relic
-      NewRelic.new(options).publish
     end
 
     desc 'play-jpa-plugin [OPTIONS]', 'Publish a version of the Play JPA Plugin'

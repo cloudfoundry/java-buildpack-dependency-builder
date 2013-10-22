@@ -15,6 +15,7 @@
 
 require 'aws-sdk'
 require 'builders/progress_indicator'
+require 'net/http'
 require 'tempfile'
 
 module Builders
