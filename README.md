@@ -18,13 +18,14 @@ In order to build OpenJDK for the linuxes you will need [Vagrant][] and [Virtual
 In order to build OpenJDK for OS X you will need Mercurial and [XQuartz][].  Mercurial can be installed with homebrew, XQuartz should be installed by following the default installation instructions.
 
 ### Credentials
-Pivotal employees should contact Ben Hale for AWS credentials if they have not already been issued.
+Pivotal employees should contact Ben Hale for AWS and AppDynamics credentials if they have not already been issued.
 
 ## Available Artifacts
 The list of available versions for each dependency can be found at the following locations.
 
 | Dependency | Location
 | ---------- | ---------
+| App Dynamics | [`universal`](http://download.pivotal.io.s3.amazonaws.com/app-dynamics/index.yml)
 | Auto Reconfiguration | [`universal`](http://download.pivotal.io.s3.amazonaws.com/auto-reconfiguration/index.yml)
 | Groovy | [`universal`](http://download.pivotal.io.s3.amazonaws.com/groovy/index.yml)
 | MySQL JDBC | [`universal`](http://download.pivotal.io.s3.amazonaws.com/mysql-jdbc/index.yml)
@@ -77,7 +78,7 @@ When DEAs are provisioned, everything in the `buildpack_cache` directory will be
   5.1 Run the [populate-buildpack-stash.rb](bin/populate-buildpack-stash.rb) script as follows:
 
 	  `~/populate-buildpack-stash.rb /clone/blobs/buildpack_cache/java-buildpack <repository index.yml URL>`
-	
+
   5.2 Edit the downloaded file to exclude any versions not required in the buildpack cache - typically all except the latest version.
 
       Refer to `/clone/config/blobs.yml` to see what is already in the buildpack cache (take care to look in the entries containing `buildpack_cache/java-buildpack`).
@@ -87,7 +88,7 @@ When DEAs are provisioned, everything in the `buildpack_cache` directory will be
   5.3 For each item in the above edited `index.yml` which is not already in the buildpack cache, issue:
 
         `~/populate-buildpack-stash.rb /clone/blobs/buildpack_cache/java-buildpack <URL from index.yml>`
-	
+
 6. Run `bosh upload blobs` from the clone directory.
 
 7. Commit the change to `config/blobs.yml` or, if you don't have commit rights, create a pull request.
@@ -118,6 +119,7 @@ This table shows locations to check for new releases of cached dependencies.  It
 
 | Dependency | Location
 | ---------- | --------
+| App Dynamics | [`release`](http://download.appdynamics.com/browse/zone/3/)
 | Auto Reconfiguration | [`release`](http://maven.springframework.org.s3.amazonaws.com/milestone/org/cloudfoundry/auto-reconfiguration/maven-metadata.xml)
 | Groovy | [`release`](http://groovy.codehaus.org/Download?nc)
 | MySQL JDBC | [`release`](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22mysql%22%20AND%20a%3A%22mysql-connector-java%22)
