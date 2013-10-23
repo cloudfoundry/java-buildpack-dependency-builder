@@ -112,7 +112,7 @@ module Builders
       desc: 'An list of the platfoms the version should be built on',
       aliases: '-p',
       type: :array,
-      default: %w(lucid precise osx)
+      default: %w(centos6 lucid precise osx)
     }
     def openjdk
       OpenJDK.new(options).publish

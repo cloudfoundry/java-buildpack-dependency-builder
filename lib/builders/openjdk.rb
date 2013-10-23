@@ -23,6 +23,7 @@ module Builders
       options.each { |key, value| instance_variable_set("@#{key}", value) }
 
       @platforms = []
+      @platforms << VagrantPlatform.new('centos6', @version) if options[:platforms].include? 'centos6'
       @platforms << VagrantPlatform.new('lucid', @version) if options[:platforms].include? 'lucid'
       @platforms << VagrantPlatform.new('precise', @version) if options[:platforms].include? 'precise'
       @platforms << LocalPlatform.new(@version) if options[:platforms].include? 'osx'
@@ -82,7 +83,7 @@ module Builders
         elsif version =~ /^1.8/
           VERSION_SPECIFIC[:eight]
         else
-          raise "Unable to process version '#{version}'"
+          fail "Unable to process version '#{version}'"
         end
       end
 

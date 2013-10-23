@@ -29,8 +29,19 @@ module Builders
 
     def base_path
       architecture = `uname -m`.strip
-      codename = MACOSX ? 'mountainlion' : `lsb_release -cs`.strip
       "openjdk/#{codename}/#{architecture}"
+    end
+
+    def codename
+      if IS_CENTOS
+        File.open('/etc/redhat-release', 'r') { |f| "centos#{f.read.match(/CentOS release (\d)/)[1]}" }
+      elsif IS_MACOSX
+        'mountainlion'
+      elsif IS_UBUNTU
+        `lsb_release -cs`.strip
+      else
+        fail 'Unable to determine codename'
+      end
     end
 
     def download(file, version)
@@ -49,7 +60,7 @@ module Builders
       elsif version =~ /^1.8/
         VERSION_SPECIFIC[:eight]
       else
-        raise "Unable to process version '#{version}'"
+        fail "Unable to process version '#{version}'"
       end
     end
 
@@ -59,7 +70,11 @@ module Builders
 
     CACERTS_URI = 'http://curl.haxx.se/ca/cacert.pem'
 
-    MACOSX = `uname -s` =~ /Darwin/
+    IS_CENTOS = File.exists? '/etc/redhat-release'
+
+    IS_MACOSX = `uname -s` =~ /Darwin/
+
+    IS_UBUNTU = !`which lsb_release 2> /dev/null`.empty?
 
     LEAF_PATCH = File.expand_path('../openjdk/6_and_7/leaf.diff', __FILE__)
 
@@ -97,22 +112,47 @@ module Builders
       }
     }
 
+    def alt_bootdir
+      if IS_CENTOS
+        '/usr/lib/jvm/java-1.6.0-openjdk.x86_64'
+      elsif IS_UBUNTU
+        '/usr/lib/jvm/java-6-openjdk'
+      elsif IS_MACOSX
+        ENV['JAVA6_HOME']
+      else
+        fail 'Unable to determin ALT_BOOTDIR'
+      end
+    end
+
+    def build_dir_6_and_7
+      IS_MACOSX ? 'macosx-x86_64' : 'linux-amd64'
+    end
+
+    def build_dir_8
+      IS_MACOSX ? 'macosx-x86_64-normal-server-release' : 'linux-x86_64-normal-server-release'
+    end
+
+    def cpu_count
+      if IS_CENTOS
+        `nproc`.strip
+      else
+        `sysctl -n hw.ncpu`.strip
+      end
+    end
+
     def build_6_and_7(file, version, build_number, source_location)
       puts "Building #{@name} #{version}..."
       Dir.chdir source_location do
-        alt_boot_dir = MACOSX ? ENV['JAVA6_HOME'] : '/usr/lib/jvm/java-6-openjdk'
-        build_dir = MACOSX ? 'macosx-x86_64' : 'linux-amd64'
-        cpu_count = `sysctl -n hw.ncpu`.strip
-
         system <<-EOF
 patch -N -p0 -i #{LEAF_PATCH}
 patch -N -p0 -i #{SEL_PATCH}
 patch -N -p0 -i #{SOUND_PATCH}
 patch -N -p0 -i #{STAT64_PATCH}
-export LANG=C ALT_BOOTDIR=#{alt_boot_dir} ALT_CACERTS_FILE=#{CACERTS_FILE} PATH=/usr/bin:$PATH JAVA_HOME=
+unset JAVA_HOME
+export LANG=C ALT_BOOTDIR=#{alt_bootdir} ALT_CACERTS_FILE=#{CACERTS_FILE} PATH=/usr/bin:$PATH
 make MILESTONE=fcs JDK_VERSION=#{version} BUILD_NUMBER=#{build_number} ALLOW_DOWNLOADS=true NO_DOCS=true PARALLEL_COMPILE_JOBS=#{cpu_count} HOTSPOT_BUILD_JOBS=#{cpu_count}
 
-tar czvf #{file.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build_dir}/j2re-image .
+tar czvf #{file.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build_dir_6_and_7}/j2re-image .
         EOF
       end
 
@@ -120,7 +160,7 @@ tar czvf #{file.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build_dir
     end
 
     def build_8(file, version, build_number, source_location)
-      unless File.exists? BOOSTRAP_JDK_ROOT || MACOSX
+      unless File.exists? BOOSTRAP_JDK_ROOT || IS_MACOSX
         puts 'Downloading bootstrap JDK...'
         system "mkdir #{BOOSTRAP_JDK_ROOT}"
         system "curl -Ls --cookie 'gpw_e24=http%3A%2F%2Fwww.oracle.com%2F' #{BOOSTRAP_JDK_URI} | tar xz --strip 1 -C #{BOOSTRAP_JDK_ROOT}"
@@ -128,15 +168,12 @@ tar czvf #{file.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build_dir
 
       puts "Building #{@name} #{version}..."
       Dir.chdir source_location do
-        build_dir = MACOSX ? 'macosx-x86_64-normal-server-release' : 'linux-x86_64-normal-server-release'
-        cpu_count = `sysctl -n hw.ncpu`.strip
-
         system <<-EOF
 export LANG=C PATH=#{BOOSTRAP_JDK_ROOT}/bin:$PATH
 bash ./configure --with-cacerts-file=#{CACERTS_FILE}
 make MILESTONE= JDK_VERSION=#{version} JDK_BUILD_NUMBER=#{build_number} ALLOW_DOWNLOADS=true GENERATE_DOCS=false PARALLEL_COMPILE_JOBS=#{cpu_count} HOTSPOT_BUILD_JOBS=#{cpu_count} all
 
-tar czvf #{file.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build_dir}/images/j2re-image .
+tar czvf #{file.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build_dir_8}/images/j2re-image .
         EOF
       end
 
@@ -148,7 +185,7 @@ tar czvf #{file.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build_dir
         puts 'Creating cacerts...'
 
         Dir.mktmpdir do |root|
-          splitter = MACOSX ? "split  -p '-----BEGIN CERTIFICATE-----' - #{root}/" : "csplit -s -f #{root}/ - '/-----BEGIN CERTIFICATE-----/' {*}"
+          splitter = IS_MACOSX ? "split  -p '-----BEGIN CERTIFICATE-----' - #{root}/" : "csplit -s -f #{root}/ - '/-----BEGIN CERTIFICATE-----/' {*}"
 
           system <<-EOF
 curl -s #{CACERTS_URI} | awk '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/{ print $0; }' | #{splitter}

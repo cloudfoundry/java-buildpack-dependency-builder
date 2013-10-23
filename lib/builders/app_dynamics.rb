@@ -33,7 +33,7 @@ module Builders
 
       Net::HTTP.start(uri.host, uri.port) do |http|
         request = Net::HTTP::Post.new('https://login.appdynamics.com/sso/login/')
-        request.set_form_data({ 'username' => @username, 'password' => @password })
+        request.set_form_data('username' => @username, 'password' => @password)
         cookie = http.request(request).response['set-cookie'].split('; ')[0]
 
         request = Net::HTTP::Get.new(uri.path)
