@@ -53,6 +53,14 @@ module Builders
       file.close
     end
 
+    def normalize(raw)
+      components = raw.split('.')
+      mmm = components[0..2]
+      q = components[3, components.length - 3]
+      new_q = q && q.length > 0 ? '_' + q.join('.') : nil
+      mmm.join('.') + (new_q ? new_q : '')
+    end
+
     def version_specific(version)
       if @latest
         ->(v) { 'http://download.appdynamics.com/onpremise/public/latest/AppServerAgent.zip' }
