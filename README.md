@@ -81,9 +81,9 @@ When DEAs are provisioned, everything in the `buildpack_cache` directory will be
 
   5.2 Edit the downloaded file to exclude any versions not required in the buildpack cache - typically all except the latest version.
 
-      Refer to `/clone/config/blobs.yml` to see what is already in the buildpack cache (take care to look in the entries containing `buildpack_cache/java-buildpack`).
+  Refer to `/clone/config/blobs.yml` to see what is already in the buildpack cache (take care to look in the entries containing `buildpack_cache/java-buildpack`).
 
-      If there are no items in the edited `index.yml` which are not already in the buildpack cache, delete the downloaded `index.yml` file and skip the next step.
+  If there are no items in the edited `index.yml` which are not already in the buildpack cache, delete the downloaded `index.yml` file and skip the next step.
 
   5.3 For each item in the above edited `index.yml` which is not already in the buildpack cache, issue:
 
