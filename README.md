@@ -63,13 +63,13 @@ When DEAs are provisioned, everything in the `buildpack_cache` directory will be
 
 3. Create `config/private.yml` with contents in the following format containing the appropriate S3 keys (see [blobstore information][] for more information):
 
-```
+    ```
     ---
     blobstore:
       s3:
         secret_access_key: secretaccesskey
         access_key_id: accesskeyid
-```
+    ```
 
 4. Issue `mkdir -p blobs/buildpack_cache/java-buildpack`.
 
