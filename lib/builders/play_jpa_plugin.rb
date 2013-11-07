@@ -16,7 +16,6 @@
 require 'builders/base'
 
 module Builders
-
   class PlayJPAPlugin < Base
 
     def initialize(options)
@@ -30,5 +29,4 @@ module Builders
     end
 
   end
-
 end
