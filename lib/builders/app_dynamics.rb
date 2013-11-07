@@ -17,9 +17,7 @@ require 'builders/base'
 require 'net/http'
 
 module Builders
-
   class AppDynamics < Base
-
     def initialize(options)
       super 'app-dynamics', 'zip', options
     end
@@ -67,9 +65,6 @@ module Builders
       else
         ->(v) { "http://download.appdynamics.com/onpremise/public/archives/#{v}/AppServerAgent.zip" }
       end
-
     end
-
   end
-
 end

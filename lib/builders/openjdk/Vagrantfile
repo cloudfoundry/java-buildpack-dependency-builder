@@ -17,7 +17,7 @@ Vagrant.configure('2') do |config|
   config.vm.synced_folder '../../../../', '/java-buildpack-dependency-builder'
 
   config.vm.provider :virtualbox do |vb|
-    vb.customize ['modifyvm', :id, '--memory', '2048', '--cpus', `sysctl -n hw.ncpu`.strip ]
+    vb.customize ['modifyvm', :id, '--memory', '2048', '--cpus', `sysctl -n hw.ncpu`.strip]
   end
 
   config.vm.define :centos6 do |centos6|

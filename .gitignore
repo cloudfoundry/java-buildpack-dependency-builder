@@ -1,2 +1,5 @@
 .vagrant
+out
+tasks.xml
 vendor
+workspace.xml

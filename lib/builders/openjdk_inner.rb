@@ -95,21 +95,21 @@ module Builders
     SOURCE_ROOT = File.join VENDOR_DIRECTORY, 'source'
 
     VERSION_SPECIFIC = {
-      six: {
-        repository: 'http://hg.openjdk.java.net/jdk6/jdk6',
-        source_location: File.join(SOURCE_ROOT, 'jdk6'),
-        builder: ->(file, version, build_number, source_location) { build_6_and_7(file, version, build_number, source_location) }
+        six: {
+            repository: 'http://hg.openjdk.java.net/jdk6/jdk6',
+            source_location: File.join(SOURCE_ROOT, 'jdk6'),
+            builder: ->(file, version, build_number, source_location) { build_6_and_7(file, version, build_number, source_location) }
         },
-      seven: {
-        repository: 'http://hg.openjdk.java.net/jdk7u/jdk7u',
-        source_location: File.join(SOURCE_ROOT, 'jdk7u'),
-        builder: ->(file, version, build_number, source_location) { build_6_and_7(file, version, build_number, source_location) }
-      },
-      eight: {
-        repository: 'http://hg.openjdk.java.net/jdk8/jdk8',
-        source_location: File.join(SOURCE_ROOT, 'jdk8'),
-        builder: ->(file, version, build_number, source_location) { build_8(file, version, build_number, source_location) }
-      }
+        seven: {
+            repository: 'http://hg.openjdk.java.net/jdk7u/jdk7u',
+            source_location: File.join(SOURCE_ROOT, 'jdk7u'),
+            builder: ->(file, version, build_number, source_location) { build_6_and_7(file, version, build_number, source_location) }
+        },
+        eight: {
+            repository: 'http://hg.openjdk.java.net/jdk8/jdk8',
+            source_location: File.join(SOURCE_ROOT, 'jdk8'),
+            builder: ->(file, version, build_number, source_location) { build_8(file, version, build_number, source_location) }
+        }
     }
 
     def alt_bootdir
