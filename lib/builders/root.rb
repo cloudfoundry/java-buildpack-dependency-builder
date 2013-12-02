@@ -17,7 +17,6 @@ require 'builders/app_dynamics'
 require 'builders/auto_reconfiguration'
 require 'builders/groovy'
 require 'builders/mariadb_jdbc'
-require 'builders/mysql_jdbc'
 require 'builders/openjdk'
 require 'builders/openjdk_inner'
 require 'builders/new_relic'
@@ -89,12 +88,6 @@ module Builders
 
     def mariadb_jdbc
       MariaDbJDBC.new(options).publish
-    end
-
-    desc 'mysql-jdbc [OPTIONS]', 'Publish a version of MySQL JDBC'
-
-    def mysql_jdbc
-      MySQLJDBC.new(options).publish
     end
 
     desc 'new-relic [OPTIONS]', 'Publish a version of New Relic'
