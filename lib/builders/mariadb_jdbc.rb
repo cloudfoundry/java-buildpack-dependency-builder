@@ -26,7 +26,7 @@ module Builders
     protected
 
     def version_specific(version)
-      ->(v) { "http://mirrors.coreix.net/mariadb/client-java-#{v}/mariadb-java-client-#{v}/from/http://mirrors.coreix.net/mariadb" }
+      ->(v) { "http://mirrors.coreix.net/mariadb/client-java-#{v}/mariadb-java-client-#{v}.jar" }
     end
 
   end

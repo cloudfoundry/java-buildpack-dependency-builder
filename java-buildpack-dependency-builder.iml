@@ -9,7 +9,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="ast (v1.1.0, rbenv: 1.9.3-p448) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="aws-sdk (v1.24.0, rbenv: 1.9.3-p448) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="aws-sdk (v1.29.0, rbenv: 1.9.3-p448) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bundler (v1.3.5, rbenv: 1.9.3-p448) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="json (v1.8.1, rbenv: 1.9.3-p448) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mini_portile (v0.5.2, rbenv: 1.9.3-p448) [gem]" level="application" />

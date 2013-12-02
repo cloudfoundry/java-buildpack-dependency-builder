@@ -3,7 +3,9 @@
     <words>
       <w>buildpack's</w>
       <w>centos</w>
+      <w>coreix</w>
       <w>cpus</w>
+      <w>mariadb</w>
       <w>modifyvm</w>
       <w>ncpu</w>
       <w>sqljdbc</w>
