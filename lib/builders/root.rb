@@ -16,6 +16,7 @@
 require 'builders/app_dynamics'
 require 'builders/auto_reconfiguration'
 require 'builders/groovy'
+require 'builders/mariadb_jdbc'
 require 'builders/mysql_jdbc'
 require 'builders/openjdk'
 require 'builders/openjdk_inner'
@@ -82,6 +83,12 @@ module Builders
 
     def groovy
       Groovy.new(options).publish
+    end
+
+    desc 'mariadb-jdbc [OPTIONS]', 'Publish a version of MariaDB JDBC'
+
+    def mariadb_jdbc
+      MariaDbJDBC.new(options).publish
     end
 
     desc 'mysql-jdbc [OPTIONS]', 'Publish a version of MySQL JDBC'
