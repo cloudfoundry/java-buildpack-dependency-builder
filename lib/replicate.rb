@@ -23,26 +23,32 @@ class Replicate < Thor
 
   desc '[OPTIONS]', 'Replicate the Java Buildpack Dependency Cache to the local filesystem'
   option :access_key, {
-    desc: 'The AWS access key to use',
-    aliases: '-a',
-    required: true
+      desc: 'The AWS access key to use',
+      aliases: '-a',
+      required: true
+  }
+  option :host_name, {
+      desc: 'The hostname to use inside index.yml files',
+      aliases: '-h',
+      required: true
   }
   option :number_of_downloads, {
-    desc: 'The number of parallel downloads',
-    aliases: '-n',
-    type: :numeric,
-    default: 50
+      desc: 'The number of parallel downloads',
+      aliases: '-n',
+      type: :numeric,
+      default: 50
   }
   option :output, {
-      desc: 'The outuput location for the replicated cache',
+      desc: 'The output location for the replicated cache',
       aliases: '-o',
       required: true
-    }
-  option :secret_access_key, {
-    desc: 'The AWS secret access key to use',
-    aliases: '-s',
-    required: true
   }
+  option :secret_access_key, {
+      desc: 'The AWS secret access key to use',
+      aliases: '-s',
+      required: true
+  }
+
   def replicate
     download_start_time = Time.now
 
@@ -50,8 +56,8 @@ class Replicate < Thor
 
     pool = Thread.pool(options[:number_of_downloads])
     s3.buckets[BUCKET].objects
-      .select { |object| object.key !~ /\/$/ }
-      .each { |object| process object, pool}
+    .select { |object| object.key !~ /\/$/ }
+    .each { |object| process object, pool }
     pool.shutdown
 
     print "\nComplete (#{(Time.now - download_start_time).duration})\n"
@@ -61,11 +67,16 @@ class Replicate < Thor
 
   BUCKET = 'download.pivotal.io'.freeze
 
+  HOST_NAME = "#{BUCKET}.s3.amazonaws.com".freeze
+
+  INDEX_FILE = Pathname.new 'index.yml'
+
   default_task :replicate
 
   def process(object, pool)
     pool.process do
       path = Pathname.new(options[:output]) + object.key
+      host_name = options[:host_name]
 
       begin
         download_start_time = Time.now
@@ -75,10 +86,21 @@ class Replicate < Thor
         File.utime(object.last_modified, object.last_modified, path)
 
         print "#{object.key} (#{object.content_length.ibi} => #{(Time.now - download_start_time).duration})\n"
+
+        if path.basename == INDEX_FILE
+          replace_host_name(path, host_name)
+        end
       rescue => e
         FileUtils.rm_rf path
         print "FAILURE (#{object.key}): #{e}\n"
       end
+    end
+  end
+
+  def replace_host_name path, host_name
+    content = path.read.gsub(/#{HOST_NAME}/, host_name)
+    path.open('w') do |file|
+      file.write content
     end
   end
 
@@ -89,8 +111,8 @@ class Replicate < Thor
 
   def s3
     AWS::S3.new(
-      access_key_id: options[:access_key],
-      secret_access_key: options[:secret_access_key]
+        access_key_id: options[:access_key],
+        secret_access_key: options[:secret_access_key]
     )
   end
 
