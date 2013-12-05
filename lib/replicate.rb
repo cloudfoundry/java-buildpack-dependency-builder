@@ -22,32 +22,32 @@ require 'thread/pool'
 class Replicate < Thor
 
   desc '[OPTIONS]', 'Replicate the Java Buildpack Dependency Cache to the local filesystem'
-  option :access_key, {
-      desc: 'The AWS access key to use',
-      aliases: '-a',
-      required: true
-  }
-  option :host_name, {
-      desc: 'The hostname to use inside index.yml files',
-      aliases: '-h',
-      required: true
-  }
-  option :number_of_downloads, {
-      desc: 'The number of parallel downloads',
-      aliases: '-n',
-      type: :numeric,
-      default: 50
-  }
-  option :output, {
-      desc: 'The output location for the replicated cache',
-      aliases: '-o',
-      required: true
-  }
-  option :secret_access_key, {
-      desc: 'The AWS secret access key to use',
-      aliases: '-s',
-      required: true
-  }
+
+  option :access_key,
+         desc: 'The AWS access key to use',
+         aliases: '-a',
+         required: true
+
+  option :host_name,
+         desc: 'The hostname to use inside index.yml files',
+         aliases: '-h',
+         required: true
+
+  option :number_of_downloads,
+         desc: 'The number of parallel downloads',
+         aliases: '-n',
+         type: :numeric,
+         default: 50
+
+  option :output,
+         desc: 'The output location for the replicated cache',
+         aliases: '-o',
+         required: true
+
+  option :secret_access_key,
+         desc: 'The AWS secret access key to use',
+         aliases: '-s',
+         required: true
 
   def replicate
     download_start_time = Time.now
@@ -87,9 +87,7 @@ class Replicate < Thor
 
         print "#{object.key} (#{object.content_length.ibi} => #{(Time.now - download_start_time).duration})\n"
 
-        if path.basename == INDEX_FILE
-          replace_host_name(path, host_name)
-        end
+        replace_host_name(path, host_name) if path.basename == INDEX_FILE
       rescue => e
         FileUtils.rm_rf path
         print "FAILURE (#{object.key}): #{e}\n"
@@ -97,7 +95,7 @@ class Replicate < Thor
     end
   end
 
-  def replace_host_name path, host_name
+  def replace_host_name(path, host_name)
     content = path.read.gsub(/#{HOST_NAME}/, host_name)
     path.open('w') do |file|
       file.write content
@@ -142,11 +140,11 @@ class Numeric
 
   def ibi
     if self > GIBI
-      "%.1f GiB" % (self / GIBI)
+      sprintf('%.1f GiB', (self / GIBI))
     elsif self > MIBI
-      "%.1f MiB" % (self / MIBI)
+      sprintf('%.1f MiB', (self / MIBI))
     elsif self > KIBI
-      "%.1f KiB" % (self / KIBI)
+      sprintf('%.1f KiB', (self / KIBI))
     else
       "#{self} B"
     end
@@ -173,4 +171,3 @@ class Numeric
   GIBI = (1024 * MIBI).freeze
 
 end
-
