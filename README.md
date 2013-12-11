@@ -5,7 +5,7 @@
 This project automates the building and publication of Java Buildpack dependency artifacts.
 
 ## Usage
-To run the builder, do the following:
+To run the builder, issue the following commands from the root directory of a clone of this repository:
 
 ```bash
 bundle install
@@ -46,12 +46,31 @@ Note that the following additional dependency is built and published using the [
 [Java Buildpack Support]: https://github.com/cloudfoundry/java-buildpack-support
 
 ## Running Tests
-To run the tests, do the following:
+To run the tests, issue the following commands from the root directory of a clone of this repository:
 
 ```bash
 bundle install
 bundle exec rake
 ```
+
+## Rehosting Artifacts
+
+To host the Java Buildpack dependency artifacts on your own server, first download the artifacts and `index.yml` files as described below, make them available at suitable locations on a web server, and then fork the
+Java buildpack and update its [repository configuration](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/util-repositories.md#configuration) to point at the web server.
+
+All the artifacts and `index.yml` files may be downloaded using the [`replicate`](bin/replicate) script.
+
+To use the script, issue the following commands from the root directory of a clone of this repository:
+
+```bash
+bundle install
+bundle exec bin/replicate --access-key <access key> --secret-access-key <secret access key> --host-name <new hostname> --output <directory path>
+```
+
+where:
+* `<access key>` and `<secret access key>` are any valid Amazon S3 credentials.
+* `<new hostname>` is the hostname which will serve the rehosted artifacts. The script will replace the host in each downloaded index file.
+* `<directory path>` is the path to a directory for the downloaded artifacts and `index.yml` files.
 
 ## Populating the Buildpack Cache
 
