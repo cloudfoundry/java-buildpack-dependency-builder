@@ -152,7 +152,7 @@ unset JAVA_HOME
 export LANG=C ALT_BOOTDIR=#{alt_bootdir} ALT_CACERTS_FILE=#{CACERTS_FILE} PATH=/usr/bin:$PATH
 make MILESTONE=fcs JDK_VERSION=#{version} BUILD_NUMBER=#{build_number} ALLOW_DOWNLOADS=true NO_DOCS=true PARALLEL_COMPILE_JOBS=#{cpu_count} HOTSPOT_BUILD_JOBS=#{cpu_count}
 
-tar czvf #{file.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build_dir_6_and_7}/j2re-image .
+tar czvf #{file.path} --exclude=*.debuginfo --exclude=*.diz --exclude=src.zip -C build/#{build_dir_6_and_7}/j2sdk-server-image .
         EOF
       end
 
@@ -173,7 +173,7 @@ export LANG=C PATH=#{BOOSTRAP_JDK_ROOT}/bin:$PATH
 bash ./configure --with-cacerts-file=#{CACERTS_FILE}
 make MILESTONE= JDK_VERSION=#{version} JDK_BUILD_NUMBER=#{build_number} ALLOW_DOWNLOADS=true GENERATE_DOCS=false PARALLEL_COMPILE_JOBS=#{cpu_count} HOTSPOT_BUILD_JOBS=#{cpu_count} all
 
-tar czvf #{file.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build_dir_8}/images/j2re-image .
+tar czvf #{file.path} --exclude=*.debuginfo --exclude=*.diz --exclude=src.zip -C build/#{build_dir_8}/j2sdk-server-image .
         EOF
       end
 
