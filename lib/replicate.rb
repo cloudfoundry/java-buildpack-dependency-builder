@@ -61,7 +61,7 @@ class Replicate < Thor
       .each { |object| process object, pool }
       pool.shutdown
       print "\nComplete (#{(Time.now - download_start_time).duration})\n"
-    rescue SignalException => s
+    rescue SignalException
       puts "\nInterrupted"
       pool.shutdown!
     end
