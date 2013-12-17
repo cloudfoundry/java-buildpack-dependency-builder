@@ -55,12 +55,17 @@ class Replicate < Thor
     init_output
 
     pool = Thread.pool(options[:number_of_downloads])
-    s3.buckets[BUCKET].objects
-    .select { |object| object.key !~ /\/$/ }
-    .each { |object| process object, pool }
-    pool.shutdown
+    begin
+      s3.buckets[BUCKET].objects
+      .select { |object| object.key !~ /\/$/ }
+      .each { |object| process object, pool }
+      pool.shutdown
+      print "\nComplete (#{(Time.now - download_start_time).duration})\n"
+    rescue SignalException => s
+      puts "\nInterrupted"
+      pool.shutdown!
+    end
 
-    print "\nComplete (#{(Time.now - download_start_time).duration})\n"
   end
 
   private
