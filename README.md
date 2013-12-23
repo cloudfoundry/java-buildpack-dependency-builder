@@ -1,6 +1,7 @@
 # Java Buildpack Dependency Builders
 [![Build Status](https://travis-ci.org/cloudfoundry/java-buildpack-dependency-builder.png?branch=master)](https://travis-ci.org/cloudfoundry/java-buildpack-dependency-builder)
 [![Dependency Status](https://gemnasium.com/cloudfoundry/java-buildpack-dependency-builder.png)](http://gemnasium.com/cloudfoundry/java-buildpack-dependency-builder)
+[![Code Climate](https://codeclimate.com/repos/52b84ef86956807cc400133a/badges/b442d613a128726bcbe8/gpa.png)](https://codeclimate.com/repos/52b84ef86956807cc400133a/feed)
 
 This project automates the building and publication of Java Buildpack dependency artifacts.
 
