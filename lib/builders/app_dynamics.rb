@@ -14,10 +14,13 @@
 # limitations under the License.
 
 require 'builders/base'
+require 'builders/util/mmmq_normalizer'
 require 'net/http'
 
 module Builders
   class AppDynamics < Base
+    include Builders::MMMQNormalizer
+
     def initialize(options)
       super 'app-dynamics', 'zip', options
     end
@@ -49,14 +52,6 @@ module Builders
       end
 
       file.close
-    end
-
-    def normalize(raw)
-      components = raw.split('.')
-      mmm = components[0..2]
-      q = components[3, components.length - 3]
-      new_q = q && q.length > 0 ? '_' + q.join('.') : nil
-      mmm.join('.') + (new_q ? new_q : '')
     end
 
     def version_specific(version)

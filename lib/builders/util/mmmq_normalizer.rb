@@ -14,29 +14,15 @@
 # limitations under the License.
 
 require 'builders/base'
-require 'builders/util/mmmq_normalizer'
 
-module Builders
+module Builders::MMMQNormalizer
 
-  class TcServer < Base
-    include Builders::MMMQNormalizer
-
-    def initialize(options)
-      super 'tc-server', 'tar.gz', options
-    end
-
-    protected
-
-    def version_specific(version)
-      if version =~ /CI/
-        ->(v) { "http://dist.springsource.com.s3.amazonaws.com/snapshot/TCS/vfabric-tc-server-standard-#{v}.tar.gz" }
-      elsif version =~ /RELEASE/
-        ->(v) { "http://dist.springsource.com.s3.amazonaws.com/release/TCS/vfabric-tc-server-standard-#{v}.tar.gz" }
-      else
-        fail "Unable to process version '#{version}'"
-      end
-    end
-
+  def normalize(raw)
+    components = raw.split('.')
+    mmm = components[0..2]
+    q = components[3, components.length - 3]
+    new_q = q && q.length > 0 ? '_' + q.join('.') : nil
+    mmm.join('.') + (new_q ? new_q : '')
   end
 
 end

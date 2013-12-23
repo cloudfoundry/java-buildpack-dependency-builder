@@ -14,24 +14,18 @@
 # limitations under the License.
 
 require 'builders/base'
+require 'builders/util/mmmq_normalizer'
 
 module Builders
 
   class SpringBootCLI < Base
+    include Builders::MMMQNormalizer
 
     def initialize(options)
       super 'spring-boot-cli', 'tar.gz', options
     end
 
     protected
-
-    def normalize(raw)
-      components = raw.split('.')
-      mmm = components[0..2]
-      q = components[3, components.length - 3]
-      new_q = q && q.length > 0 ? '_' + q.join('.') : nil
-      mmm.join('.') + (new_q ? new_q : '')
-    end
 
     def version_specific(version)
       if version =~ /BUILD/
