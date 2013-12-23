@@ -50,22 +50,18 @@ class Replicate < Thor
          required: true
 
   def replicate
-    download_start_time = Time.now
-
     init_output
 
     pool = Thread.pool(options[:number_of_downloads])
     begin
-      s3.buckets[BUCKET].objects
-      .select { |object| object.key !~ /\/$/ }
-      .each { |object| process object, pool }
-      pool.shutdown
-      print "\nComplete (#{(Time.now - download_start_time).duration})\n"
+      with_replicate_timing do
+        items.each { |object| pool.process { process object } }
+        pool.shutdown
+      end
     rescue SignalException
       puts "\nInterrupted"
       pool.shutdown!
     end
-
   end
 
   private
@@ -78,25 +74,19 @@ class Replicate < Thor
 
   default_task :replicate
 
-  def process(object, pool)
-    pool.process do
-      path = Pathname.new(options[:output]) + object.key
-      host_name = options[:host_name]
+  def process(object)
+    path = Pathname.new(options[:output]) + object.key
+    host_name = options[:host_name]
 
-      begin
-        download_start_time = Time.now
+    with_cleanup(path) do
+      with_object_timing(object) do
 
         FileUtils.mkdir_p path.dirname
         File.open(path, 'wb') { |file| object.read { |chunk| file.write(chunk) } }
         File.utime(object.last_modified, object.last_modified, path)
-
-        print "#{object.key} (#{object.content_length.ibi} => #{(Time.now - download_start_time).duration})\n"
-
-        replace_host_name(path, host_name) if path.basename == INDEX_FILE
-      rescue => e
-        FileUtils.rm_rf path
-        print "FAILURE (#{object.key}): #{e}\n"
       end
+
+      replace_host_name(path, host_name) if path.basename == INDEX_FILE
     end
   end
 
@@ -112,11 +102,34 @@ class Replicate < Thor
     FileUtils.mkdir_p options[:output]
   end
 
+  def items
+    s3.buckets[BUCKET].objects.select { |object| object.key !~ /\/$/ }
+  end
+
   def s3
     AWS::S3.new(
         access_key_id: options[:access_key],
         secret_access_key: options[:secret_access_key]
     )
+  end
+
+  def with_cleanup(path)
+    yield
+  rescue => e
+    FileUtils.rm_rf path
+    print "FAILURE (#{object.key}): #{e}\n"
+  end
+
+  def with_object_timing(object)
+    download_start_time = Time.now
+    yield
+    print "#{object.key} (#{object.content_length.ibi} => #{(Time.now - download_start_time).duration})\n"
+  end
+
+  def with_replicate_timing
+    download_start_time = Time.now
+    yield
+    print "\nComplete (#{(Time.now - download_start_time).duration})\n"
   end
 
 end
