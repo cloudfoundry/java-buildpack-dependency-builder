@@ -54,19 +54,23 @@ module Builders
 
       Net::HTTP.start(uri.host, uri.port) do |http|
         request = Net::HTTP::Get.new(uri.path)
-        http.request request do |response|
-          progress = ProgressIndicator.new(response['Content-Length'].to_i)
-
-          response.read_body do |chunk|
-            file.write chunk
-            progress.increment chunk.length
-          end
-
-          progress.finish
-        end
+        pump file, http, request
       end
 
       file.close
+    end
+
+    def pump(file, http, request)
+      http.request request do |response|
+        progress = ProgressIndicator.new(response['Content-Length'].to_i)
+
+        response.read_body do |chunk|
+          file.write chunk
+          progress.increment chunk.length
+        end
+
+        progress.finish
+      end
     end
 
     def normalize(raw)

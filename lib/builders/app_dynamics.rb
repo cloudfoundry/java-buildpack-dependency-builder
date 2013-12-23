@@ -39,16 +39,8 @@ module Builders
 
         request = Net::HTTP::Get.new(uri.path)
         request['Cookie'] = cookie
-        http.request request do |response|
-          progress = ProgressIndicator.new(response['Content-Length'].to_i)
 
-          response.read_body do |chunk|
-            file.write chunk
-            progress.increment chunk.length
-          end
-
-          progress.finish
-        end
+        pump file, http, request
       end
 
       file.close
