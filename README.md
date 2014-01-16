@@ -93,7 +93,7 @@ When DEAs are provisioned, everything in the `buildpack_cache` directory will be
 
 4. Issue `mkdir -p blobs/buildpack_cache/java-buildpack`.
 
-5. Go through the list of Java buildpack dependency repositories (in the Available Artifacts section above) and for each one:
+5. Go through the list of Java buildpack dependency repositories (in the Available Artifacts section above) and for each one (except for OpenJDK where the `centos6` and `mountainlion` repositories are only needed for testing and should not be published to the buildpack cache):
 
   5.1 Run the [populate-buildpack-stash.rb](bin/populate-buildpack-stash.rb) script as follows:
 
