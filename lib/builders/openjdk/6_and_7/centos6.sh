@@ -28,6 +28,7 @@ PACKAGES=" \
 	libXtst-devel \
 	mercurial \
 	unzip \
+	yum-utils \
 	zip"
 
 
