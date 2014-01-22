@@ -32,6 +32,8 @@ module Builders
         ->(v) { "http://repo.springsource.org/libs-snapshot-local/org/springframework/boot/spring-boot-cli/#{non_qualifier_version v}.BUILD-SNAPSHOT/spring-boot-cli-#{v}-bin.tar.gz" }
       elsif version =~ /\.M/
         ->(v) { "http://repo.springsource.org/milestone/org/springframework/boot/spring-boot-cli/#{v}/spring-boot-cli-#{v}-bin.tar.gz" }
+      elsif version =~ /\.RC/
+        ->(v) { "http://repo.springsource.org/milestone/org/springframework/boot/spring-boot-cli/#{v}/spring-boot-cli-#{v}-bin.tar.gz" }
       else
         fail "Unable to process version '#{version}'"
       end
