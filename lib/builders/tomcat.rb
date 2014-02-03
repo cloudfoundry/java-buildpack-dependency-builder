@@ -30,6 +30,8 @@ module Builders
         ->(v) { "http://archive.apache.org/dist/tomcat/tomcat-6/v#{v}/bin/apache-tomcat-#{v}.tar.gz" }
       elsif version =~ /^7/
         ->(v) { "http://archive.apache.org/dist/tomcat/tomcat-7/v#{v}/bin/apache-tomcat-#{v}.tar.gz" }
+      elsif version =~ /^8/
+        ->(v) { "http://archive.apache.org/dist/tomcat/tomcat-8/v#{v}/bin/apache-tomcat-#{v}.tar.gz" }
       else
         fail "Unable to process version '#{version}'"
       end

@@ -160,7 +160,7 @@ tar czvf #{file.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build_dir
     end
 
     def build_8(file, version, build_number, source_location)
-      unless File.exists? BOOSTRAP_JDK_ROOT || IS_MACOSX
+      unless File.exists?(BOOSTRAP_JDK_ROOT || IS_MACOSX)
         puts 'Downloading bootstrap JDK...'
         system "mkdir #{BOOSTRAP_JDK_ROOT}"
         system "curl -Ls --cookie 'gpw_e24=http%3A%2F%2Fwww.oracle.com%2F' #{BOOSTRAP_JDK_URI} | tar xz --strip 1 -C #{BOOSTRAP_JDK_ROOT}"
