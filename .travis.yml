@@ -4,4 +4,7 @@ rvm:
   - 2.0.0
   - 1.9.3
 notifications:
-  webhooks: http://build-monitor.cfapps.io/projects/BLDR/webhook
+  webhooks:
+    urls:
+      - http://build-monitor.cfapps.io/projects/BLDR/webhook
+    on_start: true
