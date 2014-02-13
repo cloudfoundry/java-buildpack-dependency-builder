@@ -10,6 +10,7 @@
       <w>modifyvm</w>
       <w>ncpu</w>
       <w>rubygems</w>
+      <w>sessionid</w>
       <w>sqljdbc</w>
       <w>sysctl</w>
       <w>virtualbox</w>
