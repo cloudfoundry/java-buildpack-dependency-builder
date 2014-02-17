@@ -25,6 +25,8 @@ require 'builders/postgresql_jdbc'
 require 'builders/spring_boot_cli'
 require 'builders/tc_server'
 require 'builders/tomcat'
+require 'builders/tomcat_lifecycle_support'
+require 'builders/tomcat_logging_support'
 require 'thor'
 
 module Builders
@@ -160,6 +162,18 @@ module Builders
 
     def tomcat
       Tomcat.new(options).publish
+    end
+
+    desc 'tomcat-lifecycle-support [OPTIONS]', 'Publish a version of tomcat-lifecycle-support'
+
+    def tomcat_lifecycle_support
+      TomcatLifecycleSupport.new(options).publish
+    end
+
+    desc 'tomcat-logging-support [OPTIONS]', 'Publish a version of tomcat-logging-support'
+
+    def tomcat_logging_support
+      TomcatLoggingSupport.new(options).publish
     end
 
   end

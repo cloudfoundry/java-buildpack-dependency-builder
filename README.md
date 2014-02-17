@@ -42,7 +42,8 @@ Note that the following additional dependency is built and published using the [
 
 | Dependency | Location
 | ---------- | ---------
-| Tomcat Buildpack Support | <http://download.pivotal.io.s3.amazonaws.com/tomcat-buildpack-support/index.yml>
+| Tomcat Lifecycle Support | <http://download.pivotal.io.s3.amazonaws.com/tomcat-lifecycle-support/index.yml>
+| Tomcat Logging Support | <http://download.pivotal.io.s3.amazonaws.com/tomcat-logging-support/index.yml>
 
 [Java Buildpack Support]: https://github.com/cloudfoundry/java-buildpack-support
 
