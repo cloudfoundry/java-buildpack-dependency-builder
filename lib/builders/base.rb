@@ -53,7 +53,7 @@ module Builders
       http_download file, uri
     end
 
-    def http_download file, uri
+    def http_download(file, uri)
       Net::HTTP.start(uri.host, uri.port) do |http|
         request = Net::HTTP::Get.new(uri.path)
 
@@ -65,7 +65,7 @@ module Builders
           elsif status_code =~ /200/
             pump file, response
           else
-            raise "Unable to download from '#{uri}'.  Received '#{status_code}'."
+            fail "Unable to download from '#{uri}'.  Received '#{status_code}'."
           end
         end
 
