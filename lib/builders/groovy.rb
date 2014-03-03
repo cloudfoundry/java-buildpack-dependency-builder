@@ -26,7 +26,11 @@ module Builders
     protected
 
     def version_specific(version)
-      ->(v) { "http://dist.groovy.codehaus.org/distributions/groovy-binary-#{v}.zip" }
+      if version < '2.2.1'
+        ->(v) { "http://dist.groovy.codehaus.org/distributions/groovy-binary-#{v}.zip" }
+      else
+        ->(v) { "http://dl.bintray.com/groovy/maven/groovy-binary-#{v}.zip" }
+      end
     end
 
   end

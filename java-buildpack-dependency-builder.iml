@@ -6,7 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/lib/builders" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
     </content>
-    <orderEntry type="jdk" jdkName="rbenv: 1.9.3-p484" jdkType="RUBY_SDK" />
+    <orderEntry type="jdk" jdkName="rbenv: 1.9.3-p545" jdkType="RUBY_SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="ast (v1.1.0, rbenv: 1.9.3-p484) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="aws-sdk (v1.34.1, rbenv: 1.9.3-p484) [gem]" level="application" />
