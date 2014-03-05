@@ -22,6 +22,7 @@ require 'builders/openjdk_inner'
 require 'builders/new_relic'
 require 'builders/play_jpa_plugin'
 require 'builders/postgresql_jdbc'
+require 'builders/redis_store'
 require 'builders/spring_boot_cli'
 require 'builders/tc_server'
 require 'builders/tomcat'
@@ -144,6 +145,12 @@ module Builders
 
     def postgresql_jdbc
       PostgreSQLJDBC.new(options).publish
+    end
+
+    desc 'redis-store [OPTIONS]', 'Publish a version of redis-store'
+
+    def redis_store
+      RedisStore.new(options).publish
     end
 
     desc 'spring-boot-cli [OPTIONS]', 'Publish a version of Spring Boot'

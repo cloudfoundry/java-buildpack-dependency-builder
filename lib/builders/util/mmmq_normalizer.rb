@@ -17,6 +17,10 @@ require 'builders/base'
 
 module Builders::MMMQNormalizer
 
+  def non_qualifier_version(version)
+    version.split('.')[0..2].join('.')
+  end
+
   def normalize(raw)
     components = raw.split('.')
     mmm = components[0..2]
