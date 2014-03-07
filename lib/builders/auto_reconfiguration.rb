@@ -14,10 +14,12 @@
 # limitations under the License.
 
 require 'builders/base'
+require 'builders/util/mmmq_normalizer'
 
 module Builders
 
   class AutoReconfiguration < Base
+    include Builders::MMMQNormalizer
 
     def initialize(options)
       super 'auto-reconfiguration', 'jar', options
@@ -26,7 +28,13 @@ module Builders
     protected
 
     def version_specific(version)
-      ->(v) { "http://maven.springframework.org.s3.amazonaws.com/milestone/org/cloudfoundry/auto-reconfiguration/#{v}/auto-reconfiguration-#{v}.jar" }
+      if version =~ /BUILD/
+        ->(v) { "http://maven.gopivotal.com.s3.amazonaws.com/snapshot/org/cloudfoundry/auto-reconfiguration/#{non_qualifier_version v}.BUILD-SNAPSHOT/auto-reconfiguration-#{v}.jar" }
+      elsif version =~ /RELEASE/
+        ->(v) { "http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/auto-reconfiguration/#{v}/auto-reconfiguration-#{v}.jar" }
+      else
+        ->(v) { "http://maven.springframework.org.s3.amazonaws.com/milestone/org/cloudfoundry/auto-reconfiguration/#{v}/auto-reconfiguration-#{v}.jar" }
+      end
     end
 
   end
