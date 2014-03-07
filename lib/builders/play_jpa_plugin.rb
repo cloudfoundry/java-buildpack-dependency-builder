@@ -14,9 +14,11 @@
 # limitations under the License.
 
 require 'builders/base'
+require 'builders/util/mmmq_normalizer'
 
 module Builders
   class PlayJPAPlugin < Base
+    include Builders::MMMQNormalizer
 
     def initialize(options)
       super 'play-jpa-plugin', 'jar', options
@@ -25,7 +27,13 @@ module Builders
     protected
 
     def version_specific(version)
-      ->(v) { "http://maven.springframework.org.s3.amazonaws.com/milestone/org/cloudfoundry/play-jpa-plugin/#{v}/play-jpa-plugin-#{v}.jar" }
+      if version =~ /BUILD/
+        ->(v) { "http://maven.gopivotal.com.s3.amazonaws.com/snapshot/org/cloudfoundry/play-jpa-plugin/#{non_qualifier_version v}.BUILD-SNAPSHOT/play-jpa-plugin-#{v}.jar" }
+      elsif version =~ /RELEASE/
+        ->(v) { "http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/play-jpa-plugin/#{v}/play-jpa-plugin-#{v}.jar" }
+      else
+        ->(v) { "http://maven.springframework.org.s3.amazonaws.com/milestone/org/cloudfoundry/play-jpa-plugin/#{v}/play-jpa-plugin-#{v}.jar" }
+      end
     end
 
   end
