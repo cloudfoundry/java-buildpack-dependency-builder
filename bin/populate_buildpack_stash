@@ -7,9 +7,9 @@
 
 require 'uri'
 
-cache = ARGV[0]
-uri = ARGV[1]
-key = URI.escape(uri, '/')
+cache      = ARGV[0]
+uri        = ARGV[1]
+key        = URI.escape(uri, '/')
 stash_file = File.join(cache, "#{key}.cached")
 
 puts `wget #{uri} -O #{stash_file}`

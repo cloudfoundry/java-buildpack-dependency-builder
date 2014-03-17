@@ -42,8 +42,8 @@ module Builders
     VAGRANT_DIR = File.expand_path('../openjdk', __FILE__)
 
     VERSION_SPECIFIC = {
-        six_and_seven: File.join(VAGRANT_DIR, '6_and_7'),
-        eight: File.join(VAGRANT_DIR, '8')
+      six_and_seven: File.join(VAGRANT_DIR, '6_and_7'),
+      eight:         File.join(VAGRANT_DIR, '8')
     }
 
     def with_vagrant(platform, &block)
@@ -60,7 +60,7 @@ module Builders
     class VagrantPlatform
 
       def initialize(name, version)
-        @name = name
+        @name    = name
         @version = version
       end
 

@@ -35,40 +35,40 @@ module Builders
   class Root < Thor
 
     class_option :access_key,
-                 desc: 'The AWS access key to use',
-                 aliases: '-a',
+                 desc:     'The AWS access key to use',
+                 aliases:  '-a',
                  required: true
 
     class_option :bucket,
-                 desc: 'The name of the AWS S3 bucket to upload to',
-                 aliases: '-b',
+                 desc:     'The name of the AWS S3 bucket to upload to',
+                 aliases:  '-b',
                  required: true
 
     class_option :secret_access_key,
-                 desc: 'The AWS secret access key to use',
-                 aliases: '-s',
+                 desc:     'The AWS secret access key to use',
+                 aliases:  '-s',
                  required: true
 
     class_option :version,
-                 desc: 'The version to publish',
-                 aliases: '-v',
+                 desc:     'The version to publish',
+                 aliases:  '-v',
                  required: true
 
     desc 'app-dynamics [OPTIONS]', 'Publish a version of AppDynamics'
     option :latest,
-           desc: 'Whether the version is the latest version of the plugin',
+           desc:    'Whether the version is the latest version of the plugin',
            aliases: '-l',
-           type: :boolean,
+           type:    :boolean,
            default: true
 
     option :password,
-           desc: 'The password to authenticate with',
-           aliases: '-p',
+           desc:     'The password to authenticate with',
+           aliases:  '-p',
            required: true
 
     option :username,
-           desc: 'The username to authenticate with',
-           aliases: '-u',
+           desc:     'The username to authenticate with',
+           aliases:  '-u',
            required: true
 
     def app_dynamics
@@ -101,19 +101,19 @@ module Builders
 
     desc 'openjdk [OPTIONS]', 'Publish a version of OpenJDK'
     option :build_number,
-           desc: 'The builder number of OpenJDK to create',
-           aliases: '-n',
+           desc:     'The builder number of OpenJDK to create',
+           aliases:  '-n',
            required: true
 
     option :tag,
-           desc: 'The repository tag to build from',
-           aliases: '-t',
+           desc:     'The repository tag to build from',
+           aliases:  '-t',
            required: true
 
     option :platforms,
-           desc: 'An list of the platfoms the version should be built on',
+           desc:    'An list of the platfoms the version should be built on',
            aliases: '-p',
-           type: :array,
+           type:    :array,
            default: %w(centos6 lucid precise osx)
 
     def openjdk
@@ -122,13 +122,13 @@ module Builders
 
     desc 'openjdk-inner [OPTIONS]', 'Publish a version of OpenJDK'
     option :build_number,
-           desc: 'The builder number of OpenJDK to create',
-           aliases: '-n',
+           desc:     'The builder number of OpenJDK to create',
+           aliases:  '-n',
            required: true
 
     option :tag,
-           desc: 'The repository tag to build from',
-           aliases: '-t',
+           desc:     'The repository tag to build from',
+           aliases:  '-t',
            required: true
 
     def openjdk_inner

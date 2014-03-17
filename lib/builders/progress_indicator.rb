@@ -18,9 +18,9 @@ module Builders
   class ProgressIndicator
 
     def initialize(total)
-      @current = 0
+      @current   = 0
       @increment = total / 10
-      @limit = @increment
+      @limit     = @increment
     end
 
     def increment(chunk)

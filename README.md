@@ -96,9 +96,9 @@ When DEAs are provisioned, everything in the `buildpack_cache` directory will be
 
 5. Go through the list of Java buildpack dependency repositories (in the Available Artifacts section above) and for each one (except for OpenJDK where the `centos6` and `mountainlion` repositories are only needed for testing and should not be published to the buildpack cache):
 
-  5.1 Run the [populate-buildpack-stash.rb](bin/populate-buildpack-stash.rb) script as follows:
+  5.1 Run the [populate_buildpack_stash](bin/populate_buildpack_stash) script as follows:
 
-	  `~/populate-buildpack-stash.rb /clone/blobs/buildpack_cache/java-buildpack <repository index.yml URL>`
+	  `~/populate_buildpack_stash /clone/blobs/buildpack_cache/java-buildpack <repository index.yml URL>`
 
   5.2 Edit the downloaded file to exclude any versions not required in the buildpack cache - typically all except the latest version.
 
@@ -108,7 +108,7 @@ When DEAs are provisioned, everything in the `buildpack_cache` directory will be
 
   5.3 For each item in the above edited `index.yml` which is not already in the buildpack cache, issue:
 
-        `~/populate-buildpack-stash.rb /clone/blobs/buildpack_cache/java-buildpack <URL from index.yml>`
+        `~/populate_buildpack_stash /clone/blobs/buildpack_cache/java-buildpack <URL from index.yml>`
 
 6. Run `bosh upload blobs` from the clone directory.
 

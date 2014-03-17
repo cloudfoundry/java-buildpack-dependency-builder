@@ -70,7 +70,7 @@ module Builders
 
     CACERTS_URI = 'http://curl.haxx.se/ca/cacert.pem'
 
-    IS_CENTOS = File.exists? '/etc/redhat-release'
+    IS_CENTOS = File.exist? '/etc/redhat-release'
 
     IS_MACOSX = `uname -s` =~ /Darwin/
 
@@ -95,21 +95,21 @@ module Builders
     SOURCE_ROOT = File.join VENDOR_DIRECTORY, 'source'
 
     VERSION_SPECIFIC = {
-        six: {
-            repository: 'http://hg.openjdk.java.net/jdk6/jdk6',
-            source_location: File.join(SOURCE_ROOT, 'jdk6'),
-            builder: ->(file, version, build_number, source_location) { build_6_and_7(file, version, build_number, source_location) }
-        },
-        seven: {
-            repository: 'http://hg.openjdk.java.net/jdk7u/jdk7u',
-            source_location: File.join(SOURCE_ROOT, 'jdk7u'),
-            builder: ->(file, version, build_number, source_location) { build_6_and_7(file, version, build_number, source_location) }
-        },
-        eight: {
-            repository: 'http://hg.openjdk.java.net/jdk8/jdk8',
-            source_location: File.join(SOURCE_ROOT, 'jdk8'),
-            builder: ->(file, version, build_number, source_location) { build_8(file, version, build_number, source_location) }
-        }
+      six:   {
+        repository:      'http://hg.openjdk.java.net/jdk6/jdk6',
+        source_location: File.join(SOURCE_ROOT, 'jdk6'),
+        builder:         ->(file, version, build_number, source_location) { build_6_and_7(file, version, build_number, source_location) }
+      },
+      seven: {
+        repository:      'http://hg.openjdk.java.net/jdk7u/jdk7u',
+        source_location: File.join(SOURCE_ROOT, 'jdk7u'),
+        builder:         ->(file, version, build_number, source_location) { build_6_and_7(file, version, build_number, source_location) }
+      },
+      eight: {
+        repository:      'http://hg.openjdk.java.net/jdk8/jdk8',
+        source_location: File.join(SOURCE_ROOT, 'jdk8'),
+        builder:         ->(file, version, build_number, source_location) { build_8(file, version, build_number, source_location) }
+      }
     }
 
     def alt_bootdir
@@ -120,7 +120,7 @@ module Builders
       elsif IS_MACOSX
         ENV['JAVA6_HOME']
       else
-        fail 'Unable to determin ALT_BOOTDIR'
+        fail 'Unable to determine ALT_BOOTDIR'
       end
     end
 
@@ -160,7 +160,7 @@ tar czvf #{file.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build_dir
     end
 
     def build_8(file, version, build_number, source_location)
-      unless File.exists?(BOOSTRAP_JDK_ROOT || IS_MACOSX)
+      unless File.exist?(BOOSTRAP_JDK_ROOT || IS_MACOSX)
         puts 'Downloading bootstrap JDK...'
         system "mkdir #{BOOSTRAP_JDK_ROOT}"
         system "curl -Ls --cookie 'gpw_e24=http%3A%2F%2Fwww.oracle.com%2F' #{BOOSTRAP_JDK_URI} | tar xz --strip 1 -C #{BOOSTRAP_JDK_ROOT}"
@@ -181,7 +181,7 @@ tar czvf #{file.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build_dir
     end
 
     def create_cacerts
-      unless File.exists? CACERTS_FILE
+      unless File.exist? CACERTS_FILE
         puts 'Creating cacerts...'
 
         Dir.mktmpdir do |root|
@@ -211,9 +211,9 @@ done
 
     def clone(repository, source_location)
       hgrc = File.join ENV['HOME'], '/.hgrc'
-      File.open(hgrc, 'w') { |f| f.write "[extensions]\npurge =\n" } unless File.exists? hgrc
+      File.open(hgrc, 'w') { |f| f.write "[extensions]\npurge =\n" } unless File.exist? hgrc
 
-      if File.exists? source_location
+      if File.exist? source_location
         puts "Updating #{source_location} from #{repository}..."
         Dir.chdir(source_location) do
           system 'hg purge --all'
