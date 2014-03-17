@@ -24,29 +24,29 @@ class Replicate < Thor
   desc '[OPTIONS]', 'Replicate the Java Buildpack Dependency Cache to the local filesystem'
 
   option :access_key,
-         desc: 'The AWS access key to use',
-         aliases: '-a',
+         desc:     'The AWS access key to use',
+         aliases:  '-a',
          required: true
 
   option :host_name,
-         desc: 'The hostname to use inside index.yml files',
-         aliases: '-h',
+         desc:     'The hostname to use inside index.yml files',
+         aliases:  '-h',
          required: true
 
   option :number_of_downloads,
-         desc: 'The number of parallel downloads',
+         desc:    'The number of parallel downloads',
          aliases: '-n',
-         type: :numeric,
+         type:    :numeric,
          default: 50
 
   option :output,
-         desc: 'The output location for the replicated cache',
-         aliases: '-o',
+         desc:     'The output location for the replicated cache',
+         aliases:  '-o',
          required: true
 
   option :secret_access_key,
-         desc: 'The AWS secret access key to use',
-         aliases: '-s',
+         desc:     'The AWS secret access key to use',
+         aliases:  '-s',
          required: true
 
   def replicate
@@ -75,7 +75,7 @@ class Replicate < Thor
   default_task :replicate
 
   def process(object)
-    path = Pathname.new(options[:output]) + object.key
+    path      = Pathname.new(options[:output]) + object.key
     host_name = options[:host_name]
 
     with_cleanup(path) do
@@ -108,8 +108,8 @@ class Replicate < Thor
 
   def s3
     AWS::S3.new(
-        access_key_id: options[:access_key],
-        secret_access_key: options[:secret_access_key]
+      access_key_id:     options[:access_key],
+      secret_access_key: options[:secret_access_key]
     )
   end
 
@@ -139,15 +139,15 @@ class Numeric
   def duration
     remainder = self
 
-    hours = (remainder / HOUR).to_int
+    hours     = (remainder / HOUR).to_int
     remainder -= HOUR * hours
 
-    minutes = (remainder / MINUTE).to_int
+    minutes   = (remainder / MINUTE).to_int
     remainder -= MINUTE * minutes
 
     return "#{hours}h #{minutes}m" if hours > 0
 
-    seconds = (remainder / SECOND).to_int
+    seconds   = (remainder / SECOND).to_int
     remainder -= SECOND * seconds
 
     return "#{minutes}m #{seconds}s" if minutes > 0
@@ -158,11 +158,11 @@ class Numeric
 
   def ibi
     if self > GIBI
-      sprintf('%.1f GiB', (self / GIBI))
+      format('%.1f GiB', (self / GIBI))
     elsif self > MIBI
-      sprintf('%.1f MiB', (self / MIBI))
+      format('%.1f MiB', (self / MIBI))
     elsif self > KIBI
-      sprintf('%.1f KiB', (self / KIBI))
+      format('%.1f KiB', (self / KIBI))
     else
       "#{self} B"
     end

@@ -36,9 +36,9 @@ module Builders
         request = Net::HTTP::Post.new('https://login.appdynamics.com/sso/login/')
         request.set_form_data('username' => @username, 'password' => @password)
         response = http.request(request).response
-        cookie = response.get_fields('set-cookie').find { |h| h =~ /sso-sessionid/ }.split('; ').first
+        cookie   = response.get_fields('set-cookie').find { |h| h =~ /sso-sessionid/ }.split('; ').first
 
-        request = Net::HTTP::Get.new(uri.path)
+        request           = Net::HTTP::Get.new(uri.path)
         request['Cookie'] = cookie
 
         pump file, http, request

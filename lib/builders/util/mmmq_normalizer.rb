@@ -15,18 +15,20 @@
 
 require 'builders/base'
 
-module Builders::MMMQNormalizer
+module Builders
+  module MMMQNormalizer
 
-  def non_qualifier_version(version)
-    version.split('.')[0..2].join('.')
+    def non_qualifier_version(version)
+      version.split('.')[0..2].join('.')
+    end
+
+    def normalize(raw)
+      components = raw.split('.')
+      mmm        = components[0..2]
+      q          = components[3, components.length - 3]
+      new_q      = q && q.length > 0 ? '_' + q.join('.') : nil
+      mmm.join('.') + (new_q ? new_q : '')
+    end
+
   end
-
-  def normalize(raw)
-    components = raw.split('.')
-    mmm = components[0..2]
-    q = components[3, components.length - 3]
-    new_q = q && q.length > 0 ? '_' + q.join('.') : nil
-    mmm.join('.') + (new_q ? new_q : '')
-  end
-
 end

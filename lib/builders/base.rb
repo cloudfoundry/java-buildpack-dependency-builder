@@ -28,8 +28,8 @@ module Builders
       options.each { |key, value| instance_variable_set("@#{key}", value) }
 
       @s3 = AWS::S3.new(
-          access_key_id: @access_key,
-          secret_access_key: @secret_access_key
+        access_key_id:     @access_key,
+        secret_access_key: @secret_access_key
       )
     end
 
