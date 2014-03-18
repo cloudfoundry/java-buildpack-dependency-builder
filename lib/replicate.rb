@@ -68,7 +68,7 @@ class Replicate < Thor
 
   BUCKET = 'download.pivotal.io'.freeze
 
-  HOST_NAME = "download.run.pivotal.io".freeze
+  HOST_NAME = 'download.run.pivotal.io'.freeze
 
   INDEX_FILE = Pathname.new 'index.yml'
 
