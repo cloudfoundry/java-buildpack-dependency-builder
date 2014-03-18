@@ -26,24 +26,20 @@ The list of available versions for each dependency can be found at the following
 
 | Dependency | Location
 | ---------- | ---------
-| App Dynamics | [`universal`](http://download.pivotal.io.s3.amazonaws.com/app-dynamics/index.yml)
-| Auto Reconfiguration | [`universal`](http://download.pivotal.io.s3.amazonaws.com/auto-reconfiguration/index.yml)
-| Groovy | [`universal`](http://download.pivotal.io.s3.amazonaws.com/groovy/index.yml)
-| MariaDB JDBC | [`universal`](http://download.pivotal.io.s3.amazonaws.com/mariadb-jdbc/index.yml)
-| OpenJDK | [`centos6`](http://download.pivotal.io.s3.amazonaws.com/openjdk/centos6/x86_64/index.yml), [`lucid`](http://download.pivotal.io.s3.amazonaws.com/openjdk/lucid/x86_64/index.yml), [`mountainlion`](http://download.pivotal.io.s3.amazonaws.com/openjdk/mountainlion/x86_64/index.yml), [`precise`](http://download.pivotal.io.s3.amazonaws.com/openjdk/precise/x86_64/index.yml)
-| New Relic | [`universal`](http://download.pivotal.io.s3.amazonaws.com/new-relic/index.yml)
-| Play JPA Plugin | [`universal`](http://download.pivotal.io.s3.amazonaws.com/play-jpa-plugin/index.yml)
-| PostgreSQL JDBC | [`universal`](http://download.pivotal.io.s3.amazonaws.com/postgresql-jdbc/index.yml)
-| Spring Boot CLI | [`universal`](http://download.pivotal.io.s3.amazonaws.com/spring-boot-cli/index.yml)
-| tc Server| [`universal`](http://download.pivotal.io.s3.amazonaws.com/tc-server/index.yml)
-| Tomcat | [`universal`](http://download.pivotal.io.s3.amazonaws.com/tomcat/index.yml)
+| App Dynamics | [`universal`](http://download.run.pivotal.io/app-dynamics/index.yml)
+| Auto Reconfiguration | [`universal`](http://download.run.pivotal.io/auto-reconfiguration/index.yml)
+| Groovy | [`universal`](http://download.run.pivotal.io/groovy/index.yml)
+| MariaDB JDBC | [`universal`](http://download.run.pivotal.io/mariadb-jdbc/index.yml)
+| OpenJDK | [`centos6`](http://download.run.pivotal.io/openjdk/centos6/x86_64/index.yml), [`lucid`](http://download.run.pivotal.io/openjdk/lucid/x86_64/index.yml), [`mountainlion`](http://download.run.pivotal.io/openjdk/mountainlion/x86_64/index.yml), [`precise`](http://download.run.pivotal.io/openjdk/precise/x86_64/index.yml)
+| New Relic | [`universal`](http://download.run.pivotal.io/new-relic/index.yml)
+| Play JPA Plugin | [`universal`](http://download.run.pivotal.io/play-jpa-plugin/index.yml)
+| PostgreSQL JDBC | [`universal`](http://download.run.pivotal.io/postgresql-jdbc/index.yml)
+| Spring Boot CLI | [`universal`](http://download.run.pivotal.io/spring-boot-cli/index.yml)
+| tc Server| [`universal`](http://download.run.pivotal.io/tc-server/index.yml)
+| Tomcat | [`universal`](http://download.run.pivotal.io/tomcat/index.yml)
+| Tomcat Lifecycle Support | [`universal`](http://download.run.pivotal.io/tomcat-lifecycle-support/index.yml)
+| Tomcat Logging Support | [`universal`](http://download.run.pivotal.io/tomcat-logging-support/index.yml)
 
-Note that the following additional dependency is built and published using the [Java Buildpack Support][] repository.
-
-| Dependency | Location
-| ---------- | ---------
-| Tomcat Lifecycle Support | <http://download.pivotal.io.s3.amazonaws.com/tomcat-lifecycle-support/index.yml>
-| Tomcat Logging Support | <http://download.pivotal.io.s3.amazonaws.com/tomcat-logging-support/index.yml>
 
 [Java Buildpack Support]: https://github.com/cloudfoundry/java-buildpack-support
 
