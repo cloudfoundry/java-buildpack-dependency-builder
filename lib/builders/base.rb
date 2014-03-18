@@ -121,7 +121,7 @@ module Builders
         versions = {}
       end
 
-      versions[version] = uri bucket, version
+      versions[version] = uri version
       index.write(versions.to_yaml, content_type: 'text/x-yaml')
 
       puts ''
@@ -139,8 +139,8 @@ module Builders
       "#{base_path}/#{artifact version}"
     end
 
-    def uri(bucket, version)
-      "http://#{bucket}.s3.amazonaws.com/#{key version}"
+    def uri(version)
+      "http://download.run.pivotal.io/#{key version}"
     end
 
   end
