@@ -26,16 +26,18 @@ PACKAGES=" \
 	libxslt-devel \
 	libXt-devel \
 	libXtst-devel \
-	mercurial \
 	unzip \
 	yum-utils \
 	zip"
 
+rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.rpm
+rpm -Uvh http://pkgs.repoforge.org/mercurial/mercurial-2.2.2-1.el6.rfx.x86_64.rpm
 
 yum update -y
 yum install -y $PACKAGES
 
-curl -L https://get.rvm.io | bash -s stable
+http://www.mirrorservice.org/sites/dl.fedoraproject.org/pub/epel
+curl -sL https://get.rvm.io | bash -s stable
 source /etc/profile.d/rvm.sh
 rvm install 1.9.3
 bundle install --gemfile /java-buildpack-dependency-builder/Gemfile

@@ -1,7 +1,7 @@
 # Java Buildpack Dependency Builders
-[![Build Status](https://travis-ci.org/cloudfoundry/java-buildpack-dependency-builder.png?branch=master)](https://travis-ci.org/cloudfoundry/java-buildpack-dependency-builder)
-[![Dependency Status](https://gemnasium.com/cloudfoundry/java-buildpack-dependency-builder.png)](http://gemnasium.com/cloudfoundry/java-buildpack-dependency-builder)
-[![Code Climate](https://codeclimate.com/repos/52b84ef86956807cc400133a/badges/b442d613a128726bcbe8/gpa.png)](https://codeclimate.com/repos/52b84ef86956807cc400133a/feed)
+[![Build Status](https://travis-ci.org/cloudfoundry/java-buildpack-dependency-builder.svg?branch=master)](https://travis-ci.org/cloudfoundry/java-buildpack-dependency-builder)
+[![Dependency Status](https://gemnasium.com/cloudfoundry/java-buildpack-dependency-builder.svg)](https://gemnasium.com/cloudfoundry/java-buildpack-dependency-builder)
+[![Code Climate](https://codeclimate.com/repos/52b84ef86956807cc400133a/badges/b442d613a128726bcbe8/gpa.svg)](https://codeclimate.com/repos/52b84ef86956807cc400133a/feed)
 
 This project automates the building and publication of Java Buildpack dependency artifacts.
 
@@ -140,7 +140,7 @@ This table shows locations to check for new releases of cached dependencies.  It
 | Auto Reconfiguration | [`release`](http://maven.springframework.org.s3.amazonaws.com/milestone/org/cloudfoundry/auto-reconfiguration/maven-metadata.xml)
 | Groovy | [`release`](http://groovy.codehaus.org/Download?nc)
 | MariaDB JDBC | [`release`](https://downloads.mariadb.org/client-java/)
-| OpenJDK | [`jdk8`](http://openjdk.java.net/projects/jdk8/milestones), [`jdk7u`](http://www.oracle.com/technetwork/java/javase/downloads/index.html), [`jdk6`](http://hg.openjdk.java.net/jdk6/jdk6/summary)
+| OpenJDK | [`oracle`](http://www.oracle.com/technetwork/java/javase/downloads/index.html), [`jdk8u`](http://hg.openjdk.java.net/jdk8u/jdk8u), [`jdk7u`](http://hg.openjdk.java.net/jdk7u/jdk7u), [`jdk6`](http://hg.openjdk.java.net/jdk6/jdk6)
 | New Relic | [`release`](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.newrelic.agent.java%22%20AND%20a%3A%22newrelic-agent%22)
 | Play JPA Plugin | [`release`](http://maven.springframework.org.s3.amazonaws.com/milestone/org/cloudfoundry/play-jpa-plugin/maven-metadata.xml)
 | PostgreSQL JDBC | [`release`](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.postgresql%22%20AND%20a%3A%22postgresql%22)
@@ -149,39 +149,43 @@ This table shows locations to check for new releases of cached dependencies.  It
 | Tomcat | [`8.x`](http://tomcat.apache.org/download-80.cgi), [`7.x`](http://tomcat.apache.org/download-70.cgi), [`6.x`](http://tomcat.apache.org/download-60.cgi)
 
 ## Open JDK Build Details
-This table shows the mappings between versions, build numbers, and repository tags for OpenJDK releases.  It is used primarily by Pivotal employees to keep track of exactly what was built.
+This table shows the mappings between versions, build numbers, and repository tags for OpenJDK releases.  It is used primarily by Pivotal employees to keep track of exactly what was built and should not be considered authoritative
 
-| JDK Version | Build Number | Tag
-| ----------- | ------------ | ---
-| `1.6.0_21` | `b21` | `jdk6-b21`
-| `1.6.0_22` | `b22` | `jdk6-b22`
-| `1.6.0_23` | `b23` | `jdk6-b23`
-| `1.6.0_24` | `b24` | `jdk6-b24`
-| `1.6.0_25` | `b25` | `jdk6-b25`
-| `1.6.0_26` | `b26` | `jdk6-b26`
-| `1.6.0_27` | `b27` | `jdk6-b27`
-| `1.7.0_01` | `b08` | `jdk7u1-b08`
-| `1.7.0_02` | `b21` | `jdk7u2-b21`
-| `1.7.0_03` | `b04` | `jdk7u3-b04`
-| `1.7.0_04` | `b31` | `jdk7u4-b31`
-| `1.7.0_05` | `b30` | `jdk7u5-b30`
-| `1.7.0_06` | `b31` | `jdk7u6-b31`
-| `1.7.0_07` | `b31` | `jdk7u7-b31`
-| `1.7.0_08` | `b05` | `jdk7u8-b05`
-| `1.7.0_09` | `b32` | `jdk7u9-b32`
-| `1.7.0_10` | `b31` | `jdk7u10-b31`
-| `1.7.0_11` | `b33` | `jdk7u11-b33`
-| `1.7.0_12` | `b09` | `jdk7u12-b09`
-| `1.7.0_13` | `b30` | `jdk7u13-b30`
-| `1.7.0_14` | `b22` | `jdk7u14-b22`
-| `1.7.0_15` | `b33` | `jdk7u15-b33`
-| `1.7.0_17` | `b31` | `jdk7u17-b31`
-| `1.7.0_21` | `b30` | `jdk7u21-b30`
-| `1.7.0_25` | `b11` | `jdk7u25-b11`
-| `1.7.0_40` | `b43` | `jdk7u40-b43`
-| `1.7.0_45` | `b31` | `jdk7u45-b31`
-| `1.7.0_51` | `b31` | `jdk7u51-b31`
-| `1.8.0_M6` | `b75` | `jdk8-b75`
-| `1.8.0_M7` | `b91` | `jdk8-b91`
-| `1.8.0_M8` | `b106` | `jdk8-b106`
-| `1.8.0_RC1` | `b128` | `jdk8-b128`
+| JDK Version | Build Number | Tag           | Centos6 | Lucid | Mountain Lion | Precise |
+| ----------- | ------------ | ------------- | ------- | ----- | ------------- | ------- |
+| `1.6.0_21`  | `b21`        | `jdk6-b21`    |         | ✓     |               |         |
+| `1.6.0_22`  | `b22`        | `jdk6-b22`    |         | ✓     |               |         |
+| `1.6.0_23`  | `b23`        | `jdk6-b23`    |         | ✓     |               |         |
+| `1.6.0_24`  | `b24`        | `jdk6-b24`    |         | ✓     |               |         |
+| `1.6.0_25`  | `b25`        | `jdk6-b25`    |         | ✓     |               |         |
+| `1.6.0_26`  | `b26`        | `jdk6-b26`    |         | ✓     |               |         |
+| `1.6.0_27`  | `b27`        | `jdk6-b27`    |         | ✓     |               |         |
+|             |              |               |         |       |               |         |
+| `1.7.0_01`  | `b08`        | `jdk7u1-b08`  | ✓       | ✓     |               | ✓       |
+| `1.7.0_02`  | `b21`        | `jdk7u2-b21`  | ✓       | ✓     |               | ✓       |
+| `1.7.0_03`  | `b04`        | `jdk7u3-b04`  | ✓       | ✓     |               | ✓       |
+| `1.7.0_04`  | `b31`        | `jdk7u4-b31`  | ✓       | ✓     | ✓             | ✓       |
+| `1.7.0_05`  | `b30`        | `jdk7u5-b30`  | ✓       | ✓     | ✓             | ✓       |
+| `1.7.0_06`  | `b31`        | `jdk7u6-b31`  | ✓       | ✓     | ✓             | ✓       |
+| `1.7.0_07`  | `b31`        | `jdk7u7-b31`  | ✓       | ✓     | ✓             | ✓       |
+| `1.7.0_08`  | `b05`        | `jdk7u8-b05`  | ✓       | ✓     | ✓             | ✓       |
+| `1.7.0_09`  | `b32`        | `jdk7u9-b32`  | ✓       | ✓     | ✓             | ✓       |
+| `1.7.0_10`  | `b31`        | `jdk7u10-b31` | ✓       | ✓     | ✓             | ✓       |
+| `1.7.0_11`  | `b33`        | `jdk7u11-b33` | ✓       | ✓     | ✓             | ✓       |
+| `1.7.0_12`  | `b09`        | `jdk7u12-b09` | ✓       | ✓     | ✓             | ✓       |
+| `1.7.0_13`  | `b30`        | `jdk7u13-b30` | ✓       | ✓     | ✓             | ✓       |
+| `1.7.0_14`  | `b22`        | `jdk7u14-b22` | ✓       | ✓     | ✓             | ✓       |
+| `1.7.0_15`  | `b33`        | `jdk7u15-b33` | ✓       | ✓     | ✓             | ✓       |
+| `1.7.0_17`  | `b31`        | `jdk7u17-b31` | ✓       | ✓     | ✓             | ✓       |
+| `1.7.0_21`  | `b30`        | `jdk7u21-b30` | ✓       | ✓     | ✓             | ✓       |
+| `1.7.0_25`  | `b11`        | `jdk7u25-b11` | ✓       | ✓     | ✓             | ✓       |
+| `1.7.0_40`  | `b43`        | `jdk7u40-b43` | ✓       | ✓     | ✓             | ✓       |
+| `1.7.0_45`  | `b31`        | `jdk7u45-b31` | ✓       | ✓     | ✓             | ✓       |
+| `1.7.0_51`  | `b31`        | `jdk7u51-b31` | ✓       | ✓     | ✓             | ✓       |
+|             |              |               |         |       |               |         |
+| `1.8.0_M6`  | `b75`        | `jdk8-b75`    | ✓       | ✓     | ✓             | ✓       |
+| `1.8.0_M7`  | `b91`        | `jdk8-b91`    | ✓       | ✓     | ✓             | ✓       |
+| `1.8.0_M8`  | `b106`       | `jdk8-b106`   | ✓       | ✓     | ✓             | ✓       |
+| `1.8.0_RC1` | `b128`       | `jdk8-b128`   | ✓       | ✓     | ✓             | ✓       |
+| `1.8.0`     | `b132`       | `jdk8-b132`   | ✓       | ✓     | ✓             | ✓       |
+
