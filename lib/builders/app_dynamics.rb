@@ -33,13 +33,8 @@ module Builders
       print "Downloading #{@name} #{version} from #{uri}"
 
       Net::HTTP.start(uri.host, uri.port) do |http|
-        request = Net::HTTP::Post.new('https://login.appdynamics.com/sso/login/')
-        request.set_form_data('username' => @username, 'password' => @password)
-        response = http.request(request).response
-        cookie   = response.get_fields('set-cookie').find { |h| h =~ /sso-sessionid/ }.split('; ').first
-
         request           = Net::HTTP::Get.new(uri.path)
-        request['Cookie'] = cookie
+        request['Cookie'] = cookie(http)
 
         http.request request do |response|
           if response.code =~ /200/
@@ -60,5 +55,16 @@ module Builders
         ->(v) { "http://download.appdynamics.com/onpremise/public/archives/#{v}/AppServerAgent.zip" }
       end
     end
+
+    private
+
+    def cookie(http)
+      request = Net::HTTP::Post.new('https://login.appdynamics.com/sso/login/')
+      request.set_form_data('username' => @username, 'password' => @password)
+
+      response = http.request(request).response
+      response.get_fields('set-cookie').find { |h| h =~ /sso-sessionid/ }.split('; ').first
+    end
+
   end
 end
