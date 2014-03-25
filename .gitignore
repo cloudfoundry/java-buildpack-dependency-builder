@@ -1,6 +1,4 @@
-.bundle
 .idea/tasks.xml
 .idea/workspace.xml
 .vagrant
-out
 vendor

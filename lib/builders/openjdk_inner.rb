@@ -66,7 +66,7 @@ module Builders
 
     private
 
-    BOOSTRAP_JDK_URI = 'http://download.oracle.com/otn-pub/java/jdk/7u21-b11/jdk-7u21-linux-x64.tar.gz'
+    BOOSTRAP_JDK_URI = 'http://download.oracle.com/otn-pub/java/jdk/7u51-b13/jdk-7u51-linux-x64.tar.gz'
 
     CACERTS_URI = 'http://curl.haxx.se/ca/cacert.pem'
 
@@ -163,7 +163,7 @@ tar czvf #{file.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build_dir
       unless File.exist?(BOOSTRAP_JDK_ROOT || IS_MACOSX)
         puts 'Downloading bootstrap JDK...'
         system "mkdir #{BOOSTRAP_JDK_ROOT}"
-        system "curl -Ls --cookie 'gpw_e24=http%3A%2F%2Fwww.oracle.com%2F' #{BOOSTRAP_JDK_URI} | tar xz --strip 1 -C #{BOOSTRAP_JDK_ROOT}"
+        system "curl -Ls --header 'Cookie: oraclelicense=accept-securebackup-cookie' #{BOOSTRAP_JDK_URI} | tar xz --strip 1 -C #{BOOSTRAP_JDK_ROOT}"
       end
 
       puts "Building #{@name} #{version}..."

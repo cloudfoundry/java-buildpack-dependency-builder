@@ -41,7 +41,13 @@ module Builders
         request           = Net::HTTP::Get.new(uri.path)
         request['Cookie'] = cookie
 
-        pump file, http, request
+        http.request request do |response|
+          if response.code =~ /200/
+            pump file, response
+          else
+            fail "Unable to download from '#{uri}'.  Received '#{status_code}'."
+          end
+        end
       end
 
       file.close

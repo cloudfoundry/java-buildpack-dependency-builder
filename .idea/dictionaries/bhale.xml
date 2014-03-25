@@ -3,18 +3,35 @@
     <words>
       <w>buildpack's</w>
       <w>centos</w>
+      <w>changeit</w>
       <w>coreix</w>
       <w>cpus</w>
+      <w>czvf</w>
+      <w>freetype</w>
+      <w>fwww</w>
+      <w>hgforest</w>
+      <w>hgrc</w>
+      <w>hotspot</w>
+      <w>importcert</w>
+      <w>keystore</w>
+      <w>keytool</w>
       <w>mariadb</w>
       <w>mmmq</w>
       <w>modifyvm</w>
       <w>ncpu</w>
+      <w>noprompt</w>
+      <w>nproc</w>
+      <w>obuild</w>
+      <w>obuildfactory</w>
       <w>rubygems</w>
       <w>sessionid</w>
       <w>sqljdbc</w>
+      <w>storepass</w>
       <w>sysctl</w>
       <w>vfabric</w>
       <w>virtualbox</w>
+      <w>xbuild</w>
+      <w>xuse</w>
     </words>
   </dictionary>
 </component>

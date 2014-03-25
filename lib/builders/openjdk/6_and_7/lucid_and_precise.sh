@@ -33,9 +33,12 @@ PACKAGES=" \
 	zip"
 
 apt-get update
+apt-get install -y python-software-properties
+add-apt-repository ppa:mercurial-ppa/releases
+apt-get update
 apt-get install -y $PACKAGES
 
-curl -L https://get.rvm.io | bash -s stable
+curl -sL https://get.rvm.io | bash -s stable
 source /etc/profile.d/rvm.sh
 rvm install 1.9.3
 bundle install --gemfile /java-buildpack-dependency-builder/Gemfile
