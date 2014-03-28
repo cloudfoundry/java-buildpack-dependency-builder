@@ -2,7 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (1.1.0)
-    aws-sdk (1.37.0)
+    aws-sdk (1.38.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
@@ -15,7 +15,7 @@ GEM
       slop (~> 3.4, >= 3.4.5)
     powerpack (0.0.9)
     rainbow (2.0.0)
-    rake (10.2.0)
+    rake (10.2.2)
     rubocop (0.19.1)
       json (>= 1.7.7, < 2)
       parser (~> 2.1.7)
