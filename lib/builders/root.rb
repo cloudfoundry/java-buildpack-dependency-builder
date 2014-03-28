@@ -44,6 +44,11 @@ module Builders
                  aliases:  '-b',
                  required: true
 
+    class_option :distribution_id,
+                 desc:     'The id of the Cloudfront distribution to invalidate',
+                 aliases:  '-d',
+                 required: false
+
     class_option :secret_access_key,
                  desc:     'The AWS secret access key to use',
                  aliases:  '-s',
