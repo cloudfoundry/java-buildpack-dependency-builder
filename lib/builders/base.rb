@@ -16,6 +16,7 @@
 require 'aws-sdk'
 require 'builders/progress_indicator'
 require 'net/http'
+require 'securerandom'
 require 'tempfile'
 
 module Builders
@@ -27,10 +28,13 @@ module Builders
       @type = type
       options.each { |key, value| instance_variable_set("@#{key}", value) }
 
-      @s3 = AWS::S3.new(
+      AWS.config(
         access_key_id:     @access_key,
         secret_access_key: @secret_access_key
       )
+
+      @cloudfront = AWS::CloudFront.new
+      @s3         = AWS::S3.new
     end
 
     def publish
@@ -95,36 +99,42 @@ module Builders
     private
 
     def upload(file, bucket, version)
-      print "Uploading #{@name} #{version} to s3://#{bucket}/#{key version}"
+      object = @s3.buckets[bucket].objects[key(version)]
 
-      File.open(file, 'rb') do |f|
-        progress = ProgressIndicator.new(f.size)
+      with_invalidation(object) do
+        print "Uploading #{@name} #{version} to s3://#{bucket}/#{key version}"
 
-        object = @s3.buckets[bucket].objects[key(version)]
-        object.write(content_length: f.size) do |buffer, bytes|
-          content = f.read(bytes)
-          buffer.write content
-          progress.increment content.length if content
+        File.open(file, 'rb') do |f|
+          progress = ProgressIndicator.new(f.size)
+
+          object.write(content_length: f.size) do |buffer, bytes|
+            content = f.read(bytes)
+            buffer.write content
+            progress.increment content.length if content
+          end
+
+          progress.finish
         end
-
-        progress.finish
       end
     end
 
     def update_index(bucket, version)
-      print "Adding #{@name} #{version} to index at s3://#{bucket}/#{index_key}"
-
       index = @s3.buckets[bucket].objects[index_key]
-      if index.exists?
-        versions = YAML.load(index.read)
-      else
-        versions = {}
+
+      with_invalidation(index) do
+        print "Adding #{@name} #{version} to index at s3://#{bucket}/#{index_key}"
+
+        if index.exists?
+          versions = YAML.load(index.read)
+        else
+          versions = {}
+        end
+
+        versions[version] = uri version
+        index.write(versions.to_yaml, content_type: 'text/x-yaml')
+
+        puts ''
       end
-
-      versions[version] = uri version
-      index.write(versions.to_yaml, content_type: 'text/x-yaml')
-
-      puts ''
     end
 
     def artifact(version)
@@ -141,6 +151,25 @@ module Builders
 
     def uri(version)
       "http://download.run.pivotal.io/#{key version}"
+    end
+
+    def with_invalidation(object, &block)
+      exist_previously = object.exists?
+
+      yield
+
+      if exist_previously && @distribution_id
+        print "Invalidating cache for s3://#{object.bucket.name}/#{object.key}"
+
+        @cloudfront.client.create_invalidation(distribution_id:    @distribution_id,
+                                               invalidation_batch: {
+                                                 paths:            {
+                                                   quantity: 1,
+                                                   items:    ["/#{object.key}"]
+                                                 },
+                                                 caller_reference: SecureRandom.uuid })
+        puts ''
+      end
     end
 
   end
