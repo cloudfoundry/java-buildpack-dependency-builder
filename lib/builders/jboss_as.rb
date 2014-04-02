@@ -18,24 +18,18 @@ require 'builders/util/mmmq_normalizer'
 
 module Builders
 
-  class SpringBootCLI < Base
+  class JBossAS < Base
     include Builders::MMMQNormalizer
 
     def initialize(options)
-      super 'spring-boot-cli', 'tar.gz', options
+      super 'jboss-as', 'tar.gz', options
     end
 
     protected
 
     def version_specific(version)
-      if version =~ /BUILD/
-        ->(v) { "http://repo.spring.io/libs-snapshot-local/org/springframework/boot/spring-boot-cli/#{non_qualifier_version v}.BUILD-SNAPSHOT/spring-boot-cli-#{v}-bin.tar.gz" }
-      elsif version =~ /\.M/
-        ->(v) { "http://repo.spring.io/milestone/org/springframework/boot/spring-boot-cli/#{v}/spring-boot-cli-#{v}-bin.tar.gz" }
-      elsif version =~ /\.RC/
-        ->(v) { "http://repo.spring.io/milestone/org/springframework/boot/spring-boot-cli/#{v}/spring-boot-cli-#{v}-bin.tar.gz" }
-      elsif version =~ /\.RELEASE/
-        ->(v) { "http://repo.spring.io/release/org/springframework/boot/spring-boot-cli/#{v}/spring-boot-cli-#{v}-bin.tar.gz" }
+      if version =~ /^7.1/
+        ->(v) { "http://download.jboss.org/jbossas/7.1/jboss-as-#{v}/jboss-as-#{v}.tar.gz" }
       else
         fail "Unable to process version '#{version}'"
       end
