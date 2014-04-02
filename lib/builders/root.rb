@@ -16,6 +16,7 @@
 require 'builders/app_dynamics'
 require 'builders/auto_reconfiguration'
 require 'builders/groovy'
+require 'builders/jboss_as'
 require 'builders/mariadb_jdbc'
 require 'builders/openjdk'
 require 'builders/openjdk_inner'
@@ -90,6 +91,12 @@ module Builders
 
     def groovy
       Groovy.new(options).publish
+    end
+
+    desc 'jboss-as [OPTIONS]', 'Publish a version of JBoss AS'
+
+    def jboss_as
+      JBossAS.new(options).publish
     end
 
     desc 'mariadb-jdbc [OPTIONS]', 'Publish a version of MariaDB JDBC'

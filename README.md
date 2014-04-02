@@ -16,7 +16,7 @@ bundle exec bin/build [DEPENDENCY] [OPTIONS]
 ### Building OpenJDK
 In order to build OpenJDK for the linuxes you will need [Vagrant][] and [VirtualBox][].  Follow the default installation instructions for these applications.
 
-In order to build OpenJDK for OS X you will need Mercurial and [XQuartz][].  Mercurial can be installed with homebrew, XQuartz should be installed by following the default installation instructions.
+In order to build OpenJDK for OS X you will need [VMware Fusion][] and the [build VM][].
 
 ### Credentials
 Pivotal employees should contact Ben Hale for AWS and AppDynamics credentials if they have not already been issued.
@@ -29,19 +29,18 @@ The list of available versions for each dependency can be found at the following
 | App Dynamics | [`universal`](http://download.run.pivotal.io/app-dynamics/index.yml)
 | Auto Reconfiguration | [`universal`](http://download.run.pivotal.io/auto-reconfiguration/index.yml)
 | Groovy | [`universal`](http://download.run.pivotal.io/groovy/index.yml)
+| JBoss AS | [`universal`](http://download.run.pivotal.io/jboss-as/index.yml)
 | MariaDB JDBC | [`universal`](http://download.run.pivotal.io/mariadb-jdbc/index.yml)
 | OpenJDK | [`centos6`](http://download.run.pivotal.io/openjdk/centos6/x86_64/index.yml), [`lucid`](http://download.run.pivotal.io/openjdk/lucid/x86_64/index.yml), [`mountainlion`](http://download.run.pivotal.io/openjdk/mountainlion/x86_64/index.yml), [`precise`](http://download.run.pivotal.io/openjdk/precise/x86_64/index.yml)
 | New Relic | [`universal`](http://download.run.pivotal.io/new-relic/index.yml)
 | Play JPA Plugin | [`universal`](http://download.run.pivotal.io/play-jpa-plugin/index.yml)
 | PostgreSQL JDBC | [`universal`](http://download.run.pivotal.io/postgresql-jdbc/index.yml)
 | Spring Boot CLI | [`universal`](http://download.run.pivotal.io/spring-boot-cli/index.yml)
+| Spring Boot CLI | [`universal`](http://download.run.pivotal.io/spring-boot-cli/index.yml)
 | tc Server| [`universal`](http://download.run.pivotal.io/tc-server/index.yml)
 | Tomcat | [`universal`](http://download.run.pivotal.io/tomcat/index.yml)
 | Tomcat Lifecycle Support | [`universal`](http://download.run.pivotal.io/tomcat-lifecycle-support/index.yml)
 | Tomcat Logging Support | [`universal`](http://download.run.pivotal.io/tomcat-logging-support/index.yml)
-
-
-[Java Buildpack Support]: https://github.com/cloudfoundry/java-buildpack-support
 
 ## Running Tests
 To run the tests, issue the following commands from the root directory of a clone of this repository:
@@ -51,8 +50,7 @@ bundle install
 bundle exec rake
 ```
 
-## Rehosting Artifacts
-
+## Replicating Repository
 To host the Java Buildpack dependency artifacts on your own server, first download the artifacts and `index.yml` files as described below, make them available at suitable locations on a web server, and then fork the
 Java buildpack and update its [repository configuration](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/util-repositories.md#configuration) to point at the web server.
 
@@ -70,52 +68,6 @@ where:
 * `<new hostname>` is the hostname which will serve the rehosted artifacts. The script will replace the host in each downloaded index file.
 * `<directory path>` is the path to a directory for the downloaded artifacts and `index.yml` files.
 
-## Populating the Buildpack Cache
-
-When DEAs are provisioned, everything in the `buildpack_cache` directory will be available via the `$BUILDPACK_CACHE` environment variable. To populate the `buildpack_cache` directory, follow these steps:
-
-1. Clone `https://github.com/cloudfoundry/cf-release.git` and update its submodules (which takes a few minutes).
-
-2. Change directory into the clone.
-
-3. Create `config/private.yml` with contents in the following format containing the appropriate S3 keys (see [blobstore information][] for more information):
-
-    ```
-    ---
-    blobstore:
-      s3:
-        secret_access_key: secretaccesskey
-        access_key_id: accesskeyid
-    ```
-
-4. Issue `mkdir -p blobs/buildpack_cache/java-buildpack`.
-
-5. Go through the list of Java buildpack dependency repositories (in the Available Artifacts section above) and for each one (except for OpenJDK where the `centos6` and `mountainlion` repositories are only needed for testing and should not be published to the buildpack cache):
-
-  5.1 Run the [populate_buildpack_stash](bin/populate_buildpack_stash) script as follows:
-
-	  `~/populate_buildpack_stash /clone/blobs/buildpack_cache/java-buildpack <repository index.yml URL>`
-
-  5.2 Edit the downloaded file to exclude any versions not required in the buildpack cache - typically all except the latest version.
-
-  Refer to `/clone/config/blobs.yml` to see what is already in the buildpack cache (take care to look in the entries containing `buildpack_cache/java-buildpack`).
-
-  If there are no items in the edited `index.yml` which are not already in the buildpack cache, delete the downloaded `index.yml` file and skip the next step.
-
-  5.3 For each item in the above edited `index.yml` which is not already in the buildpack cache, issue:
-
-        `~/populate_buildpack_stash /clone/blobs/buildpack_cache/java-buildpack <URL from index.yml>`
-
-6. Run `bosh upload blobs` from the clone directory.
-
-7. Commit the change to `config/blobs.yml` or, if you don't have commit rights, create a pull request.
-
-Once the change to `config/blobs.yml` has been committed or the pull request merged, you can expect the uploaded files to become available on tabasco within a few hours.
-
-More information is available in [blobstore information][].
-
-[blobstore information]: https://github.com/cloudfoundry/internal-docs/blob/master/howtos/upload_blobs.md
-
 ## Contributing
 [Pull requests][] are welcome; see the [contributor guidelines][] for details.
 
@@ -123,12 +75,12 @@ More information is available in [blobstore information][].
 The Builder is released under version 2.0 of the [Apache License][].
 
 [Apache License]: http://www.apache.org/licenses/LICENSE-2.0
+[build VM]: http://boxes.gopivotal.com.s3.amazonaws.com/mac-osx-10.8.tar.gz
 [contributor guidelines]: CONTRIBUTING.md
 [Pull requests]: http://help.github.com/send-pull-requests
 [Vagrant]: http://www.vagrantup.com
 [VirtualBox]: https://www.virtualbox.org
-[XQuartz]: http://xquartz.macosforge.org/landing/
-
+[VMware Fusion]: http://www.vmware.com/products/fusion
 ---
 
 ## Update Locations
@@ -139,12 +91,13 @@ This table shows locations to check for new releases of cached dependencies.  It
 | App Dynamics | [`release`](http://download.appdynamics.com/browse/zone/3/)
 | Auto Reconfiguration | [`release`](http://maven.springframework.org.s3.amazonaws.com/milestone/org/cloudfoundry/auto-reconfiguration/maven-metadata.xml)
 | Groovy | [`release`](http://groovy.codehaus.org/Download?nc)
+| JBoss AS | [`release`](http://www.jboss.org/jbossas/downloads)
 | MariaDB JDBC | [`release`](https://downloads.mariadb.org/client-java/)
 | OpenJDK | [`oracle`](http://www.oracle.com/technetwork/java/javase/downloads/index.html), [`jdk8u`](http://hg.openjdk.java.net/jdk8u/jdk8u), [`jdk7u`](http://hg.openjdk.java.net/jdk7u/jdk7u), [`jdk6`](http://hg.openjdk.java.net/jdk6/jdk6)
 | New Relic | [`release`](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.newrelic.agent.java%22%20AND%20a%3A%22newrelic-agent%22)
 | Play JPA Plugin | [`release`](http://maven.springframework.org.s3.amazonaws.com/milestone/org/cloudfoundry/play-jpa-plugin/maven-metadata.xml)
 | PostgreSQL JDBC | [`release`](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.postgresql%22%20AND%20a%3A%22postgresql%22)
-| Spring Boot CLI | [`release`](http://repo.springsource.org/release/org/springframework/boot/spring-boot-cli/), [`milestone`](http://repo.springsource.org/milestone/org/springframework/boot/spring-boot-cli/), [`snapshot`](http://repo.springsource.org/libs-snapshot-local/org/springframework/boot/spring-boot-cli/)
+| Spring Boot CLI | [`release`](http://repo.springsource.org/release/org/springframework/boot/spring-boot-cli/)
 | tc Server | [`release`](http://gopivotal.com/pivotal-products/pivotal-vfabric)
 | Tomcat | [`8.x`](http://tomcat.apache.org/download-80.cgi), [`7.x`](http://tomcat.apache.org/download-70.cgi), [`6.x`](http://tomcat.apache.org/download-60.cgi)
 
