@@ -19,6 +19,6 @@ $stderr.sync = true
 
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
-require 'replicate'
+require 'replicate/root'
 
-Replicate.start(ARGV)
+Replicate::Root.start(ARGV)

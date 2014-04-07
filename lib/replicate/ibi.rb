@@ -13,6 +13,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# A module encapsulating the replicator for the Java Buildpack's dependencies
-module Replicate
+class Numeric
+
+  def ibi
+    if self > GIBI
+      format('%.1f GiB', (self / GIBI))
+    elsif self > MIBI
+      format('%.1f MiB', (self / MIBI))
+    elsif self > KIBI
+      format('%.1f KiB', (self / KIBI))
+    else
+      "#{self} B"
+    end
+  end
+
+  BYTE = 1.freeze
+
+  KIBI = (1024 * BYTE).freeze
+
+  MIBI = (1024 * KIBI).freeze
+
+  GIBI = (1024 * MIBI).freeze
+
 end

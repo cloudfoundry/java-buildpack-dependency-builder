@@ -5,6 +5,23 @@
 
 This project automates the building and publication of Java Buildpack dependency artifacts.
 
+## Replicating Repository
+To host the Java Buildpack dependency artifacts on your own server, first download the artifacts and `index.yml` files as described below, make them available at suitable locations on a web server, and then fork the Java buildpack and update its [repository configuration](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/util-repositories.md#configuration) to point at the web server.
+
+All the artifacts and `index.yml` files may be downloaded using the [`replicate`](bin/replicate) script.
+
+To use the script, issue the following commands from the root directory of a clone of this repository:
+
+```bash
+bundle install
+bundle exec bin/replicate --host-name <new hostname> --output <directory path>
+```
+
+where:
+* `<new hostname>` is the hostname which will serve the rehosted artifacts. The script will replace the host in each downloaded index file.
+* `<directory path>` is the path to a directory for the downloaded artifacts and `index.yml` files.
+
+
 ## Usage
 To run the builder, issue the following commands from the root directory of a clone of this repository:
 
@@ -35,7 +52,7 @@ The list of available versions for each dependency can be found at the following
 | New Relic | [`universal`](http://download.run.pivotal.io/new-relic/index.yml)
 | Play JPA Plugin | [`universal`](http://download.run.pivotal.io/play-jpa-plugin/index.yml)
 | PostgreSQL JDBC | [`universal`](http://download.run.pivotal.io/postgresql-jdbc/index.yml)
-| Spring Boot CLI | [`universal`](http://download.run.pivotal.io/spring-boot-cli/index.yml)
+| RedisStore | [`universal`](http://download.run.pivotal.io/redis-store/index.yml)
 | Spring Boot CLI | [`universal`](http://download.run.pivotal.io/spring-boot-cli/index.yml)
 | tc Server| [`universal`](http://download.run.pivotal.io/tc-server/index.yml)
 | Tomcat | [`universal`](http://download.run.pivotal.io/tomcat/index.yml)
@@ -49,24 +66,6 @@ To run the tests, issue the following commands from the root directory of a clon
 bundle install
 bundle exec rake
 ```
-
-## Replicating Repository
-To host the Java Buildpack dependency artifacts on your own server, first download the artifacts and `index.yml` files as described below, make them available at suitable locations on a web server, and then fork the
-Java buildpack and update its [repository configuration](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/util-repositories.md#configuration) to point at the web server.
-
-All the artifacts and `index.yml` files may be downloaded using the [`replicate`](bin/replicate) script.
-
-To use the script, issue the following commands from the root directory of a clone of this repository:
-
-```bash
-bundle install
-bundle exec bin/replicate --access-key <access key> --secret-access-key <secret access key> --host-name <new hostname> --output <directory path>
-```
-
-where:
-* `<access key>` and `<secret access key>` are any valid Amazon S3 credentials.
-* `<new hostname>` is the hostname which will serve the rehosted artifacts. The script will replace the host in each downloaded index file.
-* `<directory path>` is the path to a directory for the downloaded artifacts and `index.yml` files.
 
 ## Contributing
 [Pull requests][] are welcome; see the [contributor guidelines][] for details.

@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'aws-sdk', '~> 1.15'
+gem 'nokogiri', '~> 1.6.1'
 gem 'thor', '~> 0.18'
 gem 'thread', '~> 0.1.1'
 
