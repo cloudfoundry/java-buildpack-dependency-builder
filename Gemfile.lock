@@ -16,7 +16,7 @@ GEM
     powerpack (0.0.9)
     rainbow (2.0.0)
     rake (10.2.2)
-    rubocop (0.19.1)
+    rubocop (0.20.1)
       json (>= 1.7.7, < 2)
       parser (~> 2.1.7)
       powerpack (~> 0.0.6)

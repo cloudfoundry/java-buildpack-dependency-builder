@@ -1,3 +1,4 @@
+# Encoding: utf-8
 # Copyright 2013 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,4 +16,4 @@
 require 'rubocop/rake_task'
 Rubocop::RakeTask.new
 
-task :default => :rubocop
+task default: :rubocop

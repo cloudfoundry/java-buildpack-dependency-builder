@@ -70,7 +70,9 @@ class Replicate < Thor
 
   HOST_NAME = 'download.run.pivotal.io'.freeze
 
-  INDEX_FILE = Pathname.new 'index.yml'
+  INDEX_FILE = Pathname.new 'index.yml'.freeze
+
+  private_constant :BUCKET, :HOST_NAME, :INDEX_FILE
 
   default_task :replicate
 
@@ -167,8 +169,6 @@ class Numeric
       "#{self} B"
     end
   end
-
-  private
 
   MILLISECOND = 0.001.freeze
 
