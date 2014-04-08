@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require 'net/http'
 require 'nokogiri'
 require 'time'
 require 'uri'
@@ -30,7 +31,7 @@ module Replicate
     end
 
     def read(location = URI("http://download.run.pivotal.io/#{@key}"), &block)
-      Net::HTTP.start(location.host, location.port) do |http|
+      proxy(location).start(location.host, location.port) do |http|
         request = Net::HTTP::Get.new(location.path)
 
         http.request request do |response|
@@ -46,6 +47,22 @@ module Replicate
         end
 
       end
+    end
+
+    private
+
+    def proxy(uri)
+      proxy_uri = if secure?(uri)
+                    URI.parse(ENV['https_proxy'] || ENV['HTTPS_PROXY'] || '')
+                  else
+                    URI.parse(ENV['http_proxy'] || ENV['HTTP_PROXY'] || '')
+                  end
+
+      Net::HTTP::Proxy(proxy_uri.host, proxy_uri.port, proxy_uri.user, proxy_uri.password)
+    end
+
+    def secure?(uri)
+      uri.scheme == 'https'
     end
 
   end
