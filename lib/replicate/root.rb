@@ -16,6 +16,7 @@
 require 'fileutils'
 require 'nokogiri'
 require 'open-uri'
+require 'pathname'
 require 'replicate'
 require 'replicate/duration'
 require 'replicate/ibi'
