@@ -13,26 +13,35 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-class Numeric
+require 'replicate'
 
-  def ibi
-    if self >= GIBI
-      format('%.1f GiB', (self / GIBI))
-    elsif self >= MIBI
-      format('%.1f MiB', (self / MIBI))
-    elsif self >= KIBI
-      format('%.1f KiB', (self / KIBI))
-    else
-      "#{self} B"
+module Replicate
+
+  class IndexUpdater
+
+    def initialize(host_name)
+      @host_name = host_name
     end
+
+    def update(replicated_file)
+      if candidate?(replicated_file)
+        content = replicated_file.content.gsub(/#{HOST_NAME}/, @host_name)
+        replicated_file.content { |f| f.write content }
+      end
+    end
+
+    private
+
+    HOST_NAME = 'download.run.pivotal.io'.freeze
+
+    INDEX_FILE = 'index.yml'.freeze
+
+    private_constant :HOST_NAME, :INDEX_FILE
+
+    def candidate?(replicated_file)
+      replicated_file.path.basename.to_s == INDEX_FILE
+    end
+
   end
-
-  BYTE = 1.freeze
-
-  KIBI = (1024 * BYTE).freeze
-
-  MIBI = (1024 * KIBI).freeze
-
-  GIBI = (1024 * MIBI).freeze
 
 end

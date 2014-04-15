@@ -1,4 +1,5 @@
 # Encoding: utf-8
+# Cloud Foundry Java Buildpack
 # Copyright 2013 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,13 +14,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'rake/clean'
+require 'spec_helper'
 
-require 'rspec/core/rake_task'
-RSpec::Core::RakeTask.new
-CLEAN.include 'coverage'
+shared_context 'environment_helper' do
 
-require 'rubocop/rake_task'
-Rubocop::RakeTask.new
+  previous_environment = ENV.to_hash
 
-task default: %w(rubocop spec)
+  let(:environment) { {} }
+
+  before do
+    ENV.update environment
+  end
+
+  after do
+    ENV.replace previous_environment
+  end
+
+end

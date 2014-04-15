@@ -1,4 +1,5 @@
 # Encoding: utf-8
+# Cloud Foundry Java Buildpack
 # Copyright 2013 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,13 +14,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'rake/clean'
+require 'spec_helper'
+require 'tee'
 
-require 'rspec/core/rake_task'
-RSpec::Core::RakeTask.new
-CLEAN.include 'coverage'
+shared_context 'console_helper' do
 
-require 'rubocop/rake_task'
-Rubocop::RakeTask.new
+  STDOUT.sync
+  STDERR.sync
 
-task default: %w(rubocop spec)
+  let(:stdout) { StringIO.new }
+  let(:stderr) { StringIO.new }
+
+  before do |example|
+    $stdout = Tee.open(stdout, stdout: nil)
+    $stderr = Tee.open(stderr, stdout: nil)
+
+    if example.metadata[:show_output]
+      $stdout.add STDOUT
+      $stderr.add STDERR
+    end
+  end
+
+  after do
+    $stderr = STDERR
+    $stdout = STDOUT
+  end
+
+end

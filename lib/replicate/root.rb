@@ -14,13 +14,13 @@
 # limitations under the License.
 
 require 'fileutils'
-require 'nokogiri'
-require 'open-uri'
 require 'pathname'
 require 'replicate'
 require 'replicate/duration'
 require 'replicate/ibi'
-require 'replicate/object'
+require 'replicate/index_updater'
+require 'replicate/object_collection'
+require 'replicate/replicated_file'
 require 'thor'
 require 'thread/pool'
 
@@ -46,81 +46,44 @@ module Replicate
            aliases:  '-o',
            required: true
 
-    def replicate
-      init_output
+    def initialize(args = [], local_options = {}, config = {})
+      super(args, local_options, config)
 
-      pool = Thread.pool(options[:number_of_downloads])
-      begin
-        with_replicate_timing do
-          items.each { |object| pool.process { process object } }
-          pool.shutdown
-        end
-      rescue SignalException
-        puts "\nInterrupted"
-        pool.shutdown!
+      @pool          = Thread.pool(options[:number_of_downloads])
+      @index_updater = IndexUpdater.new(options[:host_name])
+    end
+
+    def replicate
+      with_timing do
+        ObjectCollection.new.each { |object| @pool.process { process object } }
+        @pool.shutdown
       end
+    rescue SignalException
+      puts "\nInterrupted"
+      @pool.shutdown!
     end
 
     private
 
-    ROOT = 'http://download.pivotal.io.s3.amazonaws.com/'.freeze
-
-    HOST_NAME = 'download.run.pivotal.io'.freeze
-
-    INDEX_FILE = Pathname.new 'index.yml'.freeze
-
-    private_constant :ROOT, :HOST_NAME, :INDEX_FILE
-
     default_task :replicate
 
-    def init_output
-      FileUtils.rm_rf options[:output]
-      FileUtils.mkdir_p options[:output]
-    end
-
-    def items
-      doc = Nokogiri::XML(open(ROOT))
-
-      doc.xpath('./xmlns:ListBucketResult/xmlns:Contents').map { |contents| Object.new(contents) }
-      .select { |object| object.key !~ /\/$/ }
-    end
-
     def process(object)
-      path      = Pathname.new(options[:output]) + object.key
-      host_name = options[:host_name]
+      replicated_file = ReplicatedFile.new options[:output], object.key
 
-      with_cleanup(object, path) do
-        with_object_timing(object) do
-          FileUtils.mkdir_p path.dirname
-          File.open(path, 'wb') { |file| object.read { |chunk| file.write(chunk) } }
-          File.utime(object.last_modified, object.last_modified, path)
-        end
-
-        replace_host_name(path, host_name) if path.basename == INDEX_FILE
+      with_cleanup(object, replicated_file) do
+        object.replicate replicated_file
+        @index_updater.update replicated_file
       end
     end
 
-    def replace_host_name(path, host_name)
-      content = path.read.gsub(/#{HOST_NAME}/, host_name)
-      path.open('w') do |file|
-        file.write content
-      end
-    end
-
-    def with_cleanup(object, path)
+    def with_cleanup(object, replicated_file)
       yield
     rescue => e
-      FileUtils.rm_rf path
+      replicated_file.destroy
       print "FAILURE (#{object.key}): #{e}\n"
     end
 
-    def with_object_timing(object)
-      download_start_time = Time.now
-      yield
-      print "#{object.key} (#{object.content_length.ibi} => #{(Time.now - download_start_time).duration})\n"
-    end
-
-    def with_replicate_timing
+    def with_timing
       download_start_time = Time.now
       yield
       print "\nComplete (#{(Time.now - download_start_time).duration})\n"

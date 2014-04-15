@@ -1,5 +1,5 @@
 # Encoding: utf-8
-# Copyright 2013 the original author or authors.
+# Copyright (c) 2013 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,13 +13,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'rake/clean'
+require 'nokogiri'
+require 'open-uri'
+require 'replicate'
+require 'replicate/object'
 
-require 'rspec/core/rake_task'
-RSpec::Core::RakeTask.new
-CLEAN.include 'coverage'
+module Replicate
 
-require 'rubocop/rake_task'
-Rubocop::RakeTask.new
+  class ObjectCollection < Array
 
-task default: %w(rubocop spec)
+    def initialize
+      concat contents.map { |contents| Object.new contents }.select { |object| object.key !~ /\/$/ }
+    end
+
+    private
+
+    def contents
+      Nokogiri::XML(open('http://download.pivotal.io.s3.amazonaws.com/'))
+      .xpath('./xmlns:ListBucketResult/xmlns:Contents')
+    end
+
+  end
+
+end

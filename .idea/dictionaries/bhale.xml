@@ -7,14 +7,19 @@
       <w>coreix</w>
       <w>cpus</w>
       <w>czvf</w>
+      <w>dbbd</w>
+      <w>ebcc</w>
       <w>freetype</w>
       <w>fwww</w>
+      <w>gibibytes</w>
       <w>hgforest</w>
       <w>hgrc</w>
       <w>hotspot</w>
       <w>importcert</w>
+      <w>ioend</w>
       <w>keystore</w>
       <w>keytool</w>
+      <w>kibibytes</w>
       <w>mariadb</w>
       <w>mmmq</w>
       <w>modifyvm</w>

@@ -15,6 +15,7 @@
 
 require 'net/http'
 require 'nokogiri'
+require 'replicate'
 require 'time'
 require 'uri'
 
@@ -22,47 +23,73 @@ module Replicate
 
   class Object
 
-    attr_reader :content_length, :key, :last_modified
+    attr_reader :key
 
     def initialize(contents)
       @content_length = contents.at_xpath('./xmlns:Size').content.to_i
+      @etag           = contents.at_xpath('./xmlns:ETag').content
       @key            = contents.at_xpath('./xmlns:Key').content
       @last_modified  = Time.parse(contents.at_xpath('./xmlns:LastModified').content)
     end
 
-    def read(location = URI("http://download.run.pivotal.io/#{@key}"), &block)
-      proxy(location).start(location.host, location.port) do |http|
-        request = Net::HTTP::Get.new(location.path)
-
-        http.request request do |response|
-          status_code = response.code
-
-          if status_code =~ /30[\d]/
-            read(URI(response['Location']), &block)
-          elsif status_code =~ /200/
-            response.read_body(&block)
-          else
-            fail "Unable to download from '#{uri}'.  Received '#{status_code}'."
-          end
-        end
-
-      end
+    def replicate(replicated_file)
+      with_object_timing { download URI("http://download.run.pivotal.io/#{@key}"), replicated_file }
     end
 
     private
 
-    def proxy(uri)
-      proxy_uri = if secure?(uri)
-                    URI.parse(ENV['https_proxy'] || ENV['HTTPS_PROXY'] || '')
-                  else
-                    URI.parse(ENV['http_proxy'] || ENV['HTTP_PROXY'] || '')
-                  end
+    REDIRECT_TYPES = [
+      Net::HTTPMovedPermanently,
+      Net::HTTPFound,
+      Net::HTTPSeeOther,
+      Net::HTTPTemporaryRedirect
+    ].freeze
 
+    private_constant :REDIRECT_TYPES
+
+    def download(location, replicated_file)
+      downloaded = false
+
+      proxy.start(location.host, location.port) do |http|
+        request                      = Net::HTTP::Get.new(location.path)
+        request['If-None-Match']     = replicated_file.etag if replicated_file.etag?
+        request['If-Modified-Since'] = replicated_file.last_modified if replicated_file.last_modified?
+
+        http.request request do |response|
+          status_code = response.code
+
+          if response.is_a? Net::HTTPOK
+            replicated_file.content { |f| response.read_body { |chunk| f.write chunk } }
+            replicated_file.etag          = @etag
+            replicated_file.last_modified = @last_modified
+            downloaded                    = true
+          elsif response.is_a? Net::HTTPNotModified
+            downloaded = false
+          elsif redirect?(response)
+            downloaded = download URI(response['Location']), replicated_file
+          else
+            fail "Unable to download from '#{location}'.  Received '#{status_code}'."
+          end
+        end
+      end
+
+      downloaded
+    end
+
+    def proxy
+      proxy_uri = URI.parse(ENV['http_proxy'] || ENV['HTTP_PROXY'] || '')
       Net::HTTP::Proxy(proxy_uri.host, proxy_uri.port, proxy_uri.user, proxy_uri.password)
     end
 
-    def secure?(uri)
-      uri.scheme == 'https'
+    def redirect?(response)
+      REDIRECT_TYPES.any? { |t| response.is_a? t }
+    end
+
+    def with_object_timing
+      download_start_time = Time.now
+      downloaded          = yield
+      timing              = downloaded ? (Time.now - download_start_time).duration : 'up to date'
+      print "#{@key} (#{@content_length.ibi} => #{timing})\n"
     end
 
   end

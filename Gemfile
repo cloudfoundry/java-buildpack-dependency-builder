@@ -9,3 +9,16 @@ group :development do
   gem 'rake'
   gem 'rubocop'
 end
+
+group :test do
+  gem 'rspec', '>= 3.0.0.beta'
+  gem 'codeclimate-test-reporter'
+  gem 'simplecov'
+  gem 'tee'
+  gem 'webmock'
+end
+
+group :debug do
+  gem 'ruby-debug-base19x', '>= 0.11.30.pre'
+  gem 'ruby-debug-ide'
+end

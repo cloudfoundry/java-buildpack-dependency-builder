@@ -1,10 +1,15 @@
 ---
 language: ruby
 rvm:
-  - 2.0.0
-  - 1.9.3
+  - 2.1.1
+  - 1.9.3-p545
+before_script: "if [[ $TRAVIS_RUBY_VERSION != '1.9.3-p545' || $TRAVIS_SECURE_ENV_VARS != 'true' ]]; then unset CODECLIMATE_REPO_TOKEN; fi"
+install: bundle install --deployment --without debug
 notifications:
   webhooks:
     urls:
       - http://build-monitor.cfapps.io/projects/BLDR/webhook
     on_start: true
+env:
+  global:
+    secure: ZKHsD1wEfqZaYRvXjTe0lN277mrOmJF8hCIA+0BtAWSbRN3gd3PirAdQ5w9SVSTvHoNjdO/ZOMObG7IZP8v21XwgmFGg1JEp7sW2Lj5M2TwwXuWyGiLlkEZEKBYSMLKTGOtXK8FoEmM8Ti39MRh40DkDPrHME/TMDK03ONIUJN4= #CODECLIMATE_REPO_TOKEN

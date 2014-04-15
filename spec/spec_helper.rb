@@ -1,5 +1,5 @@
 # Encoding: utf-8
-# Copyright 2013 the original author or authors.
+# Copyright (c) 2013 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,13 +13,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'rake/clean'
+require 'simplecov'
+SimpleCov.start do
+  add_filter 'spec'
+end
 
-require 'rspec/core/rake_task'
-RSpec::Core::RakeTask.new
-CLEAN.include 'coverage'
+require 'codeclimate-test-reporter'
+CodeClimate::TestReporter.start
 
-require 'rubocop/rake_task'
-Rubocop::RakeTask.new
+require 'webmock/rspec'
+WebMock.disable_net_connect!(allow: 'codeclimate.com')
 
-task default: %w(rubocop spec)
+RSpec.configure do |config|
+  config.run_all_when_everything_filtered = true
+  config.filter_run :focus
+end
