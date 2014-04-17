@@ -4,8 +4,10 @@
       <w>buildpack's</w>
       <w>centos</w>
       <w>changeit</w>
+      <w>cloner</w>
       <w>coreix</w>
       <w>cpus</w>
+      <w>csplit</w>
       <w>czvf</w>
       <w>dbbd</w>
       <w>ebcc</w>
@@ -16,6 +18,7 @@
       <w>hgrc</w>
       <w>hotspot</w>
       <w>importcert</w>
+      <w>invalidator</w>
       <w>ioend</w>
       <w>keystore</w>
       <w>keytool</w>
@@ -25,11 +28,14 @@
       <w>modifyvm</w>
       <w>ncpu</w>
       <w>nokogiri</w>
+      <w>noop</w>
       <w>noprompt</w>
       <w>nproc</w>
       <w>obuild</w>
       <w>obuildfactory</w>
+      <w>oraclelicense</w>
       <w>rubygems</w>
+      <w>securebackup</w>
       <w>sessionid</w>
       <w>sqljdbc</w>
       <w>storepass</w>

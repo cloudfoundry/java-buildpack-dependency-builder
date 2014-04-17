@@ -3,7 +3,7 @@ AllCops:
   Include:
     - Rakefile
   Exclude:
-    - vendor/**
+    - vendor/**/*
 ClassLength:
   Max: 200
 Documentation:

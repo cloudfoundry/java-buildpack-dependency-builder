@@ -1,0 +1,9 @@
+---
+:access_key_id: test-access-key-id
+:secret_access_key: test-secret-access-key
+
+:bucket: test.bucket
+:repository_root: http://test.repository.root
+
+:app_dynamics_username: test-username
+:app_dynamics_password: test-password

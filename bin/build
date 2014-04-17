@@ -19,6 +19,6 @@ $stderr.sync = true
 
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
-require 'builders/root'
+require 'build/root'
 
-Builders::Root.start(ARGV)
+Build::Root.start(ARGV)

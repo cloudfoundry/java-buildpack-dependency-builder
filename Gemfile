@@ -1,7 +1,10 @@
 source 'https://rubygems.org'
 
 gem 'aws-sdk', '~> 1.15'
+gem 'atomic', '~> 1.1.16'
+gem 'mime-types', '~> 2.2'
 gem 'nokogiri', '~> 1.6.1'
+gem 'ruby-progressbar', '~> 1.4'
 gem 'thor', '~> 0.18'
 gem 'thread', '~> 0.1.1'
 
@@ -19,6 +22,6 @@ group :test do
 end
 
 group :debug do
-  gem 'ruby-debug-base19x', '>= 0.11.30.pre'
+  gem 'debase'
   gem 'ruby-debug-ide'
 end
