@@ -14,13 +14,13 @@
 # limitations under the License.
 
 require 'build/dependency'
-require 'build/dependency/base_release_only'
+require 'build/dependency/base'
 require 'build/maven'
 
 module Build
   module Dependency
 
-    class TomcatLifecycleSupport < BaseReleaseOnly
+    class TomcatLifecycleSupport < Base
       include Build::Maven
 
       def initialize(options)
@@ -29,8 +29,12 @@ module Build
 
       protected
 
-      def release_specific
-        ->(v) { release GO_PIVOTAL_RELEASE, 'org.cloudfoundry', 'tomcat-lifecycle-support', v }
+      def version_specific(version)
+        if version =~ /RELEASE/
+          ->(v) { release GO_PIVOTAL_RELEASE, 'org.cloudfoundry', 'tomcat-lifecycle-support', v }
+        else
+          fail "Unable to process version '#{version}'"
+        end
       end
 
     end

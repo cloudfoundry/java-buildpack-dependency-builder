@@ -14,13 +14,13 @@
 # limitations under the License.
 
 require 'build/dependency'
-require 'build/dependency/base_mmm'
+require 'build/dependency/base'
 require 'build/maven'
 
 module Build
   module Dependency
 
-    class NewRelic < BaseMMM
+    class NewRelic < Base
       include Build::Maven
 
       def initialize(options)
@@ -29,8 +29,12 @@ module Build
 
       protected
 
-      def mmm_specific
-        ->(v) { release MAVEN_CENTRAL, 'com.newrelic.agent.java', 'newrelic-agent', v }
+      def version_specific(version)
+        if version =~ /[\d]\.[\d]\.[\d]/
+          ->(v) { release MAVEN_CENTRAL, 'com.newrelic.agent.java', 'newrelic-agent', v }
+        else
+          fail "Unable to process version '#{version}'"
+        end
       end
 
     end

@@ -14,12 +14,12 @@
 # limitations under the License.
 
 require 'build/dependency'
-require 'build/dependency/base_mmm'
+require 'build/dependency/base'
 
 module Build
   module Dependency
 
-    class MariaDbJDBC < BaseMMM
+    class MariaDbJDBC < Base
 
       def initialize(options)
         super 'mariadb-jdbc', 'jar', options
@@ -27,8 +27,12 @@ module Build
 
       protected
 
-      def mmm_specific
-        ->(v) { "http://mirrors.coreix.net/mariadb/client-java-#{v}/mariadb-java-client-#{v}.jar" }
+      def version_specific(version)
+        if version =~ /[\d]\.[\d]\.[\d]/
+          ->(v) { "http://mirrors.coreix.net/mariadb/client-java-#{v}/mariadb-java-client-#{v}.jar" }
+        else
+          fail "Unable to process version '#{version}'"
+        end
       end
 
     end
