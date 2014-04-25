@@ -28,7 +28,7 @@ module Replicate
       @last_modified = root + "#{name}.last_modified"
     end
 
-    def content(&block)
+    def content
       if block_given?
         FileUtils.mkdir_p @content.dirname
         @content.open(File::CREAT | File::WRONLY) do |f|

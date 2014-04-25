@@ -13,6 +13,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# A module encapsulating the replicator for the Java Buildpack's dependencies
 module Replicate
 end
