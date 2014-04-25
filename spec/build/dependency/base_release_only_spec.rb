@@ -13,27 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'build/dependency'
-require 'build/dependency/base_mmm'
-require 'build/maven'
+require 'spec_helper'
+require 'build/dependency/dependency_helper'
+require 'build/dependency/base_release_only'
 
-module Build
-  module Dependency
+describe Build::Dependency::BaseReleaseOnly do
+  include_context 'dependency_helper'
 
-    class NewRelic < BaseMMM
-      include Build::Maven
+  let(:dependency) { described_class.new('test-name', 'test-type', options) }
 
-      def initialize(options)
-        super 'new-relic', 'jar', options
-      end
+  it 'should create RELEASE URI' do
+    expect(dependency).to receive(:release_specific).and_return(->(_v) { 'test-uri' })
 
-      protected
-
-      def mmm_specific
-        ->(v) { release MAVEN_CENTRAL, 'com.newrelic.agent.java', 'newrelic-agent', v }
-      end
-
-    end
-
+    expect_version_uri '3.5.1.RELEASE', 'test-uri'
   end
+
+  it 'should fail if release_specific is not implemented' do
+    expect { dependency.send :release_specific }.to raise_error("Method 'release_specific' must be defined")
+  end
+
 end

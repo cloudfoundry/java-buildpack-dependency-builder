@@ -15,13 +15,13 @@
 
 require 'build/dependency'
 require 'build/dependency/base'
-require 'build/mmmq_normalizer'
+require 'build/maven'
 
 module Build
   module Dependency
 
     class PlayJPAPlugin < Base
-      include Build::MMMQNormalizer
+      include Build::Maven
 
       def initialize(options)
         super 'play-jpa-plugin', 'jar', options
@@ -31,11 +31,11 @@ module Build
 
       def version_specific(version)
         if version =~ /BUILD/
-          ->(v) { "http://maven.gopivotal.com.s3.amazonaws.com/snapshot/org/cloudfoundry/play-jpa-plugin/#{non_qualifier_version v}.BUILD-SNAPSHOT/play-jpa-plugin-#{v}.jar" }
+          ->(v) { snapshot GO_PIVOTAL_SNAPSHOT, 'org.cloudfoundry', 'play-jpa-plugin', v }
         elsif version =~ /RELEASE/
-          ->(v) { "http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/play-jpa-plugin/#{v}/play-jpa-plugin-#{v}.jar" }
+          ->(v) { release GO_PIVOTAL_RELEASE, 'org.cloudfoundry', 'play-jpa-plugin', v }
         elsif version =~ /[\d]\.[\d]\.[\d]/
-          ->(v) { "http://maven.springframework.org.s3.amazonaws.com/milestone/org/cloudfoundry/play-jpa-plugin/#{v}/play-jpa-plugin-#{v}.jar" }
+          ->(v) { release SPRING_MILESTONE, 'org.cloudfoundry', 'play-jpa-plugin', v }
         else
           fail "Unable to process version '#{version}'"
         end

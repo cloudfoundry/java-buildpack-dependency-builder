@@ -15,32 +15,24 @@
 
 require 'build/dependency'
 require 'build/dependency/base'
-require 'build/maven'
 
 module Build
   module Dependency
 
-    class PostgreSQLJDBC < Base
-      include Build::Maven
-
-      def initialize(options)
-        super 'postgresql-jdbc', 'jar', options
-      end
+    class BaseReleaseOnly < Base
 
       protected
 
-      def normalize(raw)
-        raw.sub(/-/, '.').sub(/-/, '_')
-      end
-
       def version_specific(version)
-        if version =~ /^[\d\.-]+$/ && version > '9.2'
-          ->(v) { release MAVEN_CENTRAL, 'org.postgresql', 'postgresql', "#{v}-jdbc4" }
-        elsif version =~ /^8/ || version =~ /^9.0/ || version =~ /^9.1/
-          ->(v) { release MAVEN_CENTRAL, 'postgresql', 'postgresql', "#{v}.jdbc4" }
+        if version =~ /RELEASE/
+          release_specific
         else
           fail "Unable to process version '#{version}'"
         end
+      end
+
+      def release_specific
+        fail "Method 'release_specific' must be defined"
       end
 
     end

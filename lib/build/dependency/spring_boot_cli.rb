@@ -15,13 +15,13 @@
 
 require 'build/dependency'
 require 'build/dependency/base'
-require 'build/mmmq_normalizer'
+require 'build/maven'
 
 module Build
   module Dependency
 
     class SpringBootCLI < Base
-      include Build::MMMQNormalizer
+      include Build::Maven
 
       def initialize(options)
         super 'spring-boot-cli', 'tar.gz', options
@@ -31,11 +31,11 @@ module Build
 
       def version_specific(version)
         if version =~ /BUILD/
-          ->(v) { "http://repo.spring.io/libs-snapshot-local/org/springframework/boot/spring-boot-cli/#{non_qualifier_version v}.BUILD-SNAPSHOT/spring-boot-cli-#{v}-bin.tar.gz" }
+          ->(v) { snapshot SPRING_IO_SNAPSHOT, 'org.springframework.boot', 'spring-boot-cli', v, '-bin.tar.gz' }
         elsif version =~ /\.M/ || version =~ /\.RC/
-          ->(v) { "http://repo.spring.io/milestone/org/springframework/boot/spring-boot-cli/#{v}/spring-boot-cli-#{v}-bin.tar.gz" }
+          ->(v) { milestone SPRING_IO_MILESTONE, 'org.springframework.boot', 'spring-boot-cli', v, '-bin.tar.gz' }
         elsif version =~ /\.RELEASE/
-          ->(v) { "http://repo.spring.io/release/org/springframework/boot/spring-boot-cli/#{v}/spring-boot-cli-#{v}-bin.tar.gz" }
+          ->(v) { release SPRING_IO_RELEASE, 'org.springframework.boot', 'spring-boot-cli', v, '-bin.tar.gz' }
         else
           fail "Unable to process version '#{version}'"
         end

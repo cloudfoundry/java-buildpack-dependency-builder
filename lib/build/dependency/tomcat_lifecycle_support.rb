@@ -14,14 +14,14 @@
 # limitations under the License.
 
 require 'build/dependency'
-require 'build/dependency/base'
-require 'build/mmmq_normalizer'
+require 'build/dependency/base_release_only'
+require 'build/maven'
 
 module Build
   module Dependency
 
-    class TomcatLifecycleSupport < Base
-      include Build::MMMQNormalizer
+    class TomcatLifecycleSupport < BaseReleaseOnly
+      include Build::Maven
 
       def initialize(options)
         super 'tomcat-lifecycle-support', 'jar', options
@@ -29,13 +29,8 @@ module Build
 
       protected
 
-      def version_specific(version)
-        if version =~ /RELEASE/
-          ->(v) { "http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/tomcat-lifecycle-support/#{v}/tomcat-lifecycle-support-#{v}.jar" }
-        else
-          fail "Unable to process version '#{version}'"
-        end
-
+      def release_specific
+        ->(v) { release GO_PIVOTAL_RELEASE, 'org.cloudfoundry', 'tomcat-lifecycle-support', v }
       end
 
     end

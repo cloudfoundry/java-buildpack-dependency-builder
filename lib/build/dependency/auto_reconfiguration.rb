@@ -15,13 +15,13 @@
 
 require 'build/dependency'
 require 'build/dependency/base'
-require 'build/mmmq_normalizer'
+require 'build/maven'
 
 module Build
   module Dependency
 
     class AutoReconfiguration < Base
-      include Build::MMMQNormalizer
+      include Build::Maven
 
       def initialize(options)
         super 'auto-reconfiguration', 'jar', options
@@ -31,11 +31,11 @@ module Build
 
       def version_specific(version)
         if version =~ /BUILD/
-          ->(v) { "http://maven.gopivotal.com.s3.amazonaws.com/snapshot/org/cloudfoundry/auto-reconfiguration/#{non_qualifier_version v}.BUILD-SNAPSHOT/auto-reconfiguration-#{v}.jar" }
+          ->(v) { snapshot GO_PIVOTAL_SNAPSHOT, 'org.cloudfoundry', 'auto-reconfiguration', v }
         elsif version =~ /RELEASE/
-          ->(v) { "http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/auto-reconfiguration/#{v}/auto-reconfiguration-#{v}.jar" }
+          ->(v) { release GO_PIVOTAL_RELEASE, 'org.cloudfoundry', 'auto-reconfiguration', v }
         elsif version =~ /[\d]\.[\d]\.[\d]/
-          ->(v) { "http://maven.springframework.org.s3.amazonaws.com/milestone/org/cloudfoundry/auto-reconfiguration/#{v}/auto-reconfiguration-#{v}.jar" }
+          ->(v) { release SPRING_MILESTONE, 'org.cloudfoundry', 'auto-reconfiguration', v }
         else
           fail "Unable to process version '#{version}'"
         end

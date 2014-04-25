@@ -21,7 +21,7 @@ describe Build::Dependency::SpringBootCLI do
   include_context 'dependency_helper'
 
   it 'should create Spring Boot CLI BUILD URI' do
-    expect_version_uri '1.0.0.BUILD-123', 'http://repo.spring.io/libs-snapshot-local/org/springframework/boot/spring-boot-cli/1.0.0.BUILD-SNAPSHOT/spring-boot-cli-1.0.0.BUILD-123-bin.tar.gz'
+    expect_version_uri '1.0.0.BUILD-123', 'http://repo.spring.io/snapshot/org/springframework/boot/spring-boot-cli/1.0.0.BUILD-SNAPSHOT/spring-boot-cli-1.0.0.BUILD-123-bin.tar.gz'
   end
 
   it 'should create Spring Boot CLI M URI' do

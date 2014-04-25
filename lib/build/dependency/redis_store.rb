@@ -15,13 +15,13 @@
 
 require 'build/dependency'
 require 'build/dependency/base'
-require 'build/mmmq_normalizer'
+require 'build/maven'
 
 module Build
   module Dependency
 
     class RedisStore < Base
-      include Build::MMMQNormalizer
+      include Build::Maven
 
       def initialize(options)
         super 'redis-store', 'jar', options
@@ -31,9 +31,9 @@ module Build
 
       def version_specific(version)
         if version =~ /BUILD/
-          ->(v) { "http://maven.gopivotal.com.s3.amazonaws.com/snapshot/com/gopivotal/manager/redis-store/#{non_qualifier_version v}.BUILD-SNAPSHOT/redis-store-#{v}.jar" }
+          ->(v) { snapshot GO_PIVOTAL_SNAPSHOT, 'com.gopivotal.manager', 'redis-store', v }
         elsif version =~ /RELEASE/
-          ->(v) { "http://maven.gopivotal.com.s3.amazonaws.com/release/com/gopivotal/manager/redis-store/#{v}/redis-store-#{v}.jar" }
+          ->(v) { release GO_PIVOTAL_RELEASE, 'com.gopivotal.manager', 'redis-store', v }
         else
           fail "Unable to process version '#{version}'"
         end

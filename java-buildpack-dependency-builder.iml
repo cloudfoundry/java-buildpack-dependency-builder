@@ -9,6 +9,9 @@
       <sourceFolder url="file://$MODULE_DIR$/spec/build" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/coverage" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/openjdk/source/jdk7u" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/openjdk/source/jdk8" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/openjdk/source/jdk8u" />
     </content>
     <orderEntry type="jdk" jdkName="rbenv: 2.1.1" jdkType="RUBY_SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
