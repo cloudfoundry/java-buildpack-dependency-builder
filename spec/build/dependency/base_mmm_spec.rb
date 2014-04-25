@@ -13,25 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'build/dependency'
+require 'spec_helper'
+require 'build/dependency/dependency_helper'
 require 'build/dependency/base_mmm'
 
-module Build
-  module Dependency
+describe Build::Dependency::BaseMMM do
+  include_context 'dependency_helper'
 
-    class NewRelic < BaseMMM
+  let(:dependency) { described_class.new('test-name', 'test-type', options) }
 
-      def initialize(options)
-        super 'new-relic', 'jar', options
-      end
+  it 'should create MMM URI' do
+    expect(dependency).to receive(:mmm_specific).and_return(->(_v) { 'test-uri' })
 
-      protected
-
-      def mmm_specific
-        ->(v) { "http://central.maven.org/maven2/com/newrelic/agent/java/newrelic-agent/#{v}/newrelic-agent-#{v}.jar" }
-      end
-
-    end
-
+    expect_version_uri '3.5.1', 'test-uri'
   end
+
+  it 'should fail if mmm_specific is not implemented' do
+    expect { dependency.send :mmm_specific }.to raise_error("Method 'mmm_specific' must be defined")
+  end
+
 end

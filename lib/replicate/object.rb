@@ -51,24 +51,16 @@ module Replicate
       downloaded = false
 
       proxy.start(location.host, location.port) do |http|
-        request                      = Net::HTTP::Get.new(location.path)
-        request['If-None-Match']     = replicated_file.etag if replicated_file.etag?
-        request['If-Modified-Since'] = replicated_file.last_modified if replicated_file.last_modified?
-
-        http.request request do |response|
-          status_code = response.code
-
+        http.request(request(location, replicated_file)) do |response|
           if response.is_a? Net::HTTPOK
-            replicated_file.content { |f| response.read_body { |chunk| f.write chunk } }
-            replicated_file.etag          = @etag
-            replicated_file.last_modified = @last_modified
-            downloaded                    = true
+            write replicated_file, response
+            downloaded = true
           elsif response.is_a? Net::HTTPNotModified
             downloaded = false
           elsif redirect?(response)
             downloaded = download URI(response['Location']), replicated_file
           else
-            fail "Unable to download from '#{location}'.  Received '#{status_code}'."
+            fail "Unable to download from '#{location}'.  Received '#{response.code}'."
           end
         end
       end
@@ -85,11 +77,24 @@ module Replicate
       REDIRECT_TYPES.any? { |t| response.is_a? t }
     end
 
+    def request(location, replicated_file)
+      request                      = Net::HTTP::Get.new(location.path)
+      request['If-None-Match']     = replicated_file.etag if replicated_file.etag?
+      request['If-Modified-Since'] = replicated_file.last_modified if replicated_file.last_modified?
+      request
+    end
+
     def with_object_timing
       download_start_time = Time.now
       downloaded          = yield
       timing              = downloaded ? (Time.now - download_start_time).duration : 'up to date'
       print "#{@key} (#{@content_length.ibi} => #{timing})\n"
+    end
+
+    def write(replicated_file, response)
+      replicated_file.content { |f| response.read_body { |chunk| f.write chunk } }
+      replicated_file.etag          = @etag
+      replicated_file.last_modified = @last_modified
     end
 
   end

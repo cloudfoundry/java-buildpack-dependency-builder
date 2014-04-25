@@ -14,21 +14,25 @@
 # limitations under the License.
 
 require 'build/dependency'
-require 'build/dependency/base_mmm'
+require 'build/dependency/base'
 
 module Build
   module Dependency
 
-    class NewRelic < BaseMMM
-
-      def initialize(options)
-        super 'new-relic', 'jar', options
-      end
+    class BaseMMM < Base
 
       protected
 
+      def version_specific(version)
+        if version =~ /[\d]\.[\d]\.[\d]/
+          mmm_specific
+        else
+          fail "Unable to process version '#{version}'"
+        end
+      end
+
       def mmm_specific
-        ->(v) { "http://central.maven.org/maven2/com/newrelic/agent/java/newrelic-agent/#{v}/newrelic-agent-#{v}.jar" }
+        fail "Method 'mmm_specific' must be defined"
       end
 
     end
