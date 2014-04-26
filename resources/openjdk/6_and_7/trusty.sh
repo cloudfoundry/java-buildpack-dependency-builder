@@ -22,6 +22,7 @@ PACKAGES=" \
 	libfreetype6-dev \
 	libmotif-dev \
 	libxml2-dev \
+	libxrender-dev \
 	libxslt-dev \
 	libxt-dev \
 	libxtst-dev \

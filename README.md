@@ -144,5 +144,5 @@ This table shows the mappings between versions, build numbers, and repository ta
 | `1.8.0_M7`  | `b91`        | `jdk8-b91`    | ✓       | ✓     | ✓             | ✓       |        |
 | `1.8.0_M8`  | `b106`       | `jdk8-b106`   | ✓       | ✓     | ✓             | ✓       |        |
 | `1.8.0_RC1` | `b128`       | `jdk8-b128`   | ✓       | ✓     | ✓             | ✓       |        |
-| `1.8.0`     | `b132`       | `jdk8-b132`   | ✓       | ✓     | ✓             | ✓       |        |
+| `1.8.0`     | `b132`       | `jdk8-b132`   | ✓       | ✓     | ✓             | ✓       | ✓      |
 | `1.8.0_05`  | `b13`        | `jdk8u5-b13`  | ✓       | ✓     | ✓             | ✓       | ✓      |
