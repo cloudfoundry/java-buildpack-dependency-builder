@@ -34,9 +34,18 @@ describe Build::Dependency::PlatformDetails do
     expect(stub.alt_bootdir).to eq('test-java6-home')
   end
 
+  it 'should return trusty alt_bootdir' do
+    expect(stub).to receive(:centos?).and_return(false)
+    expect(stub).to receive(:macosx?).and_return(false)
+    expect(stub).to receive(:trusty?).and_return(true)
+
+    expect(stub.alt_bootdir).to eq('/usr/lib/jvm/java-6-openjdk-amd64')
+  end
+
   it 'should return ubuntu alt_bootdir' do
     expect(stub).to receive(:centos?).and_return(false)
     expect(stub).to receive(:macosx?).and_return(false)
+    expect(stub).to receive(:trusty?).and_return(false)
     expect(stub).to receive(:ubuntu?).and_return(true)
 
     expect(stub.alt_bootdir).to eq('/usr/lib/jvm/java-6-openjdk')
@@ -45,6 +54,7 @@ describe Build::Dependency::PlatformDetails do
   it 'should fail for an unknown alt_bootdir' do
     expect(stub).to receive(:centos?).and_return(false)
     expect(stub).to receive(:macosx?).and_return(false)
+    expect(stub).to receive(:trusty?).and_return(false)
     expect(stub).to receive(:ubuntu?).and_return(false)
 
     expect { stub.alt_bootdir }.to raise_error('Unable to determine ALT_BOOTDIR')
@@ -107,7 +117,7 @@ describe Build::Dependency::PlatformDetails do
     expect(stub).to receive(:centos?).and_return(false)
     expect(stub).to receive(:macosx?).and_return(false)
     expect(stub).to receive(:ubuntu?).and_return(true)
-    expect(stub).to receive(:`).with('sysctl -n hw.ncpu').and_return('test-cpu-count')
+    expect(stub).to receive(:`).with('grep -c "processor" /proc/cpuinfo').and_return('test-cpu-count')
 
     expect(stub.cpu_count).to eq('test-cpu-count')
   end
@@ -142,6 +152,24 @@ describe Build::Dependency::PlatformDetails do
     expect(stub).to receive(:`).with('uname -s').and_return('other')
 
     expect(stub.macosx?).not_to be
+  end
+
+  it 'should detect trusty' do
+    expect(stub).to receive(:centos?).and_return(false)
+    expect(stub).to receive(:macosx?).and_return(false)
+    expect(stub).to receive(:ubuntu?).and_return(true)
+    expect(stub).to receive(:`).with('lsb_release -cs').and_return('trusty')
+
+    expect(stub.trusty?).to be
+  end
+
+  it 'should not detect trusty' do
+    expect(stub).to receive(:centos?).and_return(false)
+    expect(stub).to receive(:macosx?).and_return(false)
+    expect(stub).to receive(:ubuntu?).and_return(true)
+    expect(stub).to receive(:`).with('lsb_release -cs').and_return('test-codename')
+
+    expect(stub.trusty?).not_to be
   end
 
   it 'should detect ubuntu' do

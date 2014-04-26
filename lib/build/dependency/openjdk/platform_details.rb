@@ -24,6 +24,8 @@ module Build
           '/usr/lib/jvm/java-1.6.0-openjdk.x86_64'
         elsif macosx?
           ENV['JAVA6_HOME']
+        elsif trusty?
+          '/usr/lib/jvm/java-6-openjdk-amd64'
         elsif ubuntu?
           '/usr/lib/jvm/java-6-openjdk'
         else
@@ -50,8 +52,10 @@ module Build
       def cpu_count
         if centos?
           `nproc`.strip
-        elsif macosx? || ubuntu?
+        elsif macosx?
           `sysctl -n hw.ncpu`.strip
+        elsif ubuntu?
+          `grep -c "processor" /proc/cpuinfo`.strip
         else
           fail 'Unable to determine cpu count'
         end
@@ -63,6 +67,10 @@ module Build
 
       def macosx?
         `uname -s` =~ /Darwin/
+      end
+
+      def trusty?
+        codename =~ /trusty/
       end
 
       def ubuntu?
