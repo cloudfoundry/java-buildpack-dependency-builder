@@ -66,6 +66,7 @@ module Build
         option :development,
                desc:     'Whether to build from the development repository',
                aliases:  '-d',
+               type:    :boolean,
                required: false
       end
     end

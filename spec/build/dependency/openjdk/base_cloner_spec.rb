@@ -64,8 +64,8 @@ describe Build::Dependency::BaseCloner do
 
     expect(File).to receive(:exist?).with(source_location).and_return(true)
     expect(Dir).to receive(:chdir).with(source_location).and_yield
-    expect(cloner).to receive(:system).with('hg purge --all')
-    expect(cloner).to receive(:system).with('hg update')
+    expect(cloner).to receive(:system).with('make/scripts/hgforest.sh purge --all')
+    expect(cloner).to receive(:system).with('make/scripts/hgforest.sh update --clean')
 
     expect(Dir).to receive(:chdir).with(source_location).and_yield
     expect(cloner).to receive(:system).with('chmod +x get_source.sh make/scripts/hgforest.sh')

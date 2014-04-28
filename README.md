@@ -49,7 +49,7 @@ The list of available versions for each dependency can be found at the following
 | Groovy | [`universal`](http://download.run.pivotal.io/groovy/index.yml)
 | JBoss AS | [`universal`](http://download.run.pivotal.io/jboss-as/index.yml)
 | MariaDB JDBC | [`universal`](http://download.run.pivotal.io/mariadb-jdbc/index.yml)
-| OpenJDK | [`centos6`](http://download.run.pivotal.io/openjdk/centos6/x86_64/index.yml), [`lucid`](http://download.run.pivotal.io/openjdk/lucid/x86_64/index.yml), [`mountainlion`](http://download.run.pivotal.io/openjdk/mountainlion/x86_64/index.yml), [`precise`](http://download.run.pivotal.io/openjdk/precise/x86_64/index.yml)
+| OpenJDK | [`centos6`](http://download.run.pivotal.io/openjdk/centos6/x86_64/index.yml), [`lucid`](http://download.run.pivotal.io/openjdk/lucid/x86_64/index.yml), [`mountainlion`](http://download.run.pivotal.io/openjdk/mountainlion/x86_64/index.yml), [`precise`](http://download.run.pivotal.io/openjdk/precise/x86_64/index.yml), [`trusty`](http://download.run.pivotal.io/openjdk/trusty/x86_64/index.yml)
 | New Relic | [`universal`](http://download.run.pivotal.io/new-relic/index.yml)
 | Play JPA Plugin | [`universal`](http://download.run.pivotal.io/play-jpa-plugin/index.yml)
 | PostgreSQL JDBC | [`universal`](http://download.run.pivotal.io/postgresql-jdbc/index.yml)
@@ -135,14 +135,14 @@ This table shows the mappings between versions, build numbers, and repository ta
 | `1.7.0_17`  | `b31`        | `jdk7u17-b31` | ✓       | ✓     | ✓             | ✓       |        |
 | `1.7.0_21`  | `b30`        | `jdk7u21-b30` | ✓       | ✓     | ✓             | ✓       |        |
 | `1.7.0_25`  | `b11`        | `jdk7u25-b11` | ✓       | ✓     | ✓             | ✓       |        |
-| `1.7.0_40`  | `b43`        | `jdk7u40-b43` | ✓       | ✓     | ✓             | ✓       |        |
+| `1.7.0_40`  | `b43`        | `jdk7u40-b43` | ✓       | ✓     | ✓             | ✓       | ✓      |
 | `1.7.0_45`  | `b31`        | `jdk7u45-b31` | ✓       | ✓     | ✓             | ✓       |        |
-| `1.7.0_51`  | `b31`        | `jdk7u51-b31` | ✓       | ✓     | ✓             | ✓       |        |
-| `1.7.0_55`  | `b13`        | `jdk7u55-b13` | ✓       | ✓     | ✓             | ✓       |        |
+| `1.7.0_51`  | `b31`        | `jdk7u51-b31` | ✓       | ✓     | ✓             | ✓       | ✓      |
+| `1.7.0_55`  | `b13`        | `jdk7u55-b13` | ✓       | ✓     | ✓             | ✓       | ✓      |
 |             |              |               |         |       |               |         |        |
 | `1.8.0_M6`  | `b75`        | `jdk8-b75`    | ✓       | ✓     | ✓             | ✓       |        |
 | `1.8.0_M7`  | `b91`        | `jdk8-b91`    | ✓       | ✓     | ✓             | ✓       |        |
 | `1.8.0_M8`  | `b106`       | `jdk8-b106`   | ✓       | ✓     | ✓             | ✓       |        |
-| `1.8.0_RC1` | `b128`       | `jdk8-b128`   | ✓       | ✓     | ✓             | ✓       |        |
+| `1.8.0_RC1` | `b128`       | `jdk8-b128`   | ✓       | ✓     | ✓             | ✓       | ✓      |
 | `1.8.0`     | `b132`       | `jdk8-b132`   | ✓       | ✓     | ✓             | ✓       | ✓      |
 | `1.8.0_05`  | `b13`        | `jdk8u5-b13`  | ✓       | ✓     | ✓             | ✓       | ✓      |
