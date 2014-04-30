@@ -15,15 +15,16 @@ To use the script, issue the following commands from the root directory of a clo
 
 ```bash
 bundle install
-bundle exec bin/replicate --host-name <new hostname> --output <directory path>
+bundle exec bin/replicate [--base-uri <BASE-URU> | --host-name <HOST-NAME>] --output <OUTPUT>
 ```
 
-where:
-* `<new hostname>` is the hostname which will serve the rehosted artifacts. The script will replace the host in each downloaded index file.
-* `<directory path>` is the path to a directory for the downloaded artifacts and `index.yml` files.
+| Option | Description |
+| ------ | ----------- |
+| `-b`, `--base-uri <BASE-URI>` | A URI to replace `http://download.run.pivotal.io` with, in `index.yml` files.  This value should be the network location that the repository is replicated to (e.g. `https://internal-repository:8000/dependencies`).  Either this option or `--host-name`, but not both, **must** be specified.
+| `-h`, `--host-name <HOST-NAME>` | A host name to replace `download.run.pivotal.io` with, in `index.yml` files.  This value should be the network host that the repository is replicated to (e.g. `internal-repository`).  Either this option or `--base-uri`, but not both, **must** be specified.
+| `-o`, `--output <OUTPUT>` | A filesystem location to replicate the repository to.  This option **must** be specified.
 
-
-## Usage
+## Building Dependencies
 To run the builder, issue the following commands from the root directory of a clone of this repository:
 
 ```bash

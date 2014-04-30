@@ -30,10 +30,15 @@ module Replicate
 
     desc '[OPTIONS]', 'Replicate the Java Buildpack Dependency Cache to the local filesystem'
 
+    option :base_uri,
+           desc:     'The base uri to use inside index.yml files',
+           aliases:  '-b',
+           required: false
+
     option :host_name,
-           desc:     'The hostname to use inside index.yml files',
+           desc:     'The host name to use inside index.yml files',
            aliases:  '-h',
-           required: true
+           required: false
 
     option :number_of_downloads,
            desc:    'The number of parallel downloads',
@@ -50,7 +55,7 @@ module Replicate
       super(args, local_options, config)
 
       @pool          = Thread.pool(options[:number_of_downloads])
-      @index_updater = IndexUpdater.new(options[:host_name])
+      @index_updater = IndexUpdater.new(options[:base_uri], options[:host_name])
     end
 
     def replicate
