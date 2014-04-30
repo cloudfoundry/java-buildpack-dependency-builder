@@ -14,29 +14,40 @@
 # limitations under the License.
 
 require 'replicate'
+require 'thor/error'
 
 module Replicate
 
   class IndexUpdater
 
-    def initialize(host_name)
-      @host_name = host_name
+    def initialize(base_uri, host_name)
+      if base_uri && host_name
+        fail Thor::MalformattedArgumentError,
+             "Only value can be provided for one of required options '--base-uri', '--host-name'"
+      elsif base_uri
+        @base_uri = base_uri
+      elsif host_name
+        @base_uri = "http://#{host_name}"
+      else
+        fail Thor::MalformattedArgumentError,
+             "No value provided for one of required options '--base-uri', '--host-name'"
+      end
     end
 
     def update(replicated_file)
       if candidate?(replicated_file)
-        content = replicated_file.content.gsub(/#{HOST_NAME}/, @host_name)
+        content = replicated_file.content.gsub(/#{BASE_URI}/, @base_uri)
         replicated_file.content { |f| f.write content }
       end
     end
 
     private
 
-    HOST_NAME = 'download.run.pivotal.io'.freeze
+    BASE_URI = 'http://download.run.pivotal.io'.freeze
 
     INDEX_FILE = 'index.yml'.freeze
 
-    private_constant :HOST_NAME, :INDEX_FILE
+    private_constant :BASE_URI, :INDEX_FILE
 
     def candidate?(replicated_file)
       replicated_file.path.basename.to_s == INDEX_FILE
