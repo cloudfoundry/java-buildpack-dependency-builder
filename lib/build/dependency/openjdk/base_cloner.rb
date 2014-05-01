@@ -38,17 +38,18 @@ module Build
           Dir.chdir(@source_location) do
             system 'make/scripts/hgforest.sh purge --all'
             system 'make/scripts/hgforest.sh update --clean'
+            system 'chmod +x make/scripts/hgforest.sh'
           end
         else
           puts "Cloning #{@repository} to #{@source_location}..."
 
           FileUtils.mkdir_p @source_location
           system "hg clone #{@repository} #{@source_location}"
-        end
 
-        Dir.chdir @source_location do
-          system 'chmod +x get_source.sh make/scripts/hgforest.sh'
-          system './get_source.sh'
+          Dir.chdir @source_location do
+            system 'chmod +x get_source.sh make/scripts/hgforest.sh'
+            system './get_source.sh'
+          end
         end
 
         abort unless $CHILD_STATUS == 0
@@ -57,8 +58,7 @@ module Build
       def checkout_tag(tag)
         puts "Checking out #{tag}..."
         Dir.chdir @source_location do
-          system 'make/scripts/hgforest.sh purge --all'
-          system "make/scripts/hgforest.sh checkout #{tag}"
+          system "make/scripts/hgforest.sh checkout --clean #{tag}"
         end
 
         abort unless $CHILD_STATUS == 0

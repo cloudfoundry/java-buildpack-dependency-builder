@@ -66,18 +66,14 @@ describe Build::Dependency::BaseCloner do
     expect(Dir).to receive(:chdir).with(source_location).and_yield
     expect(cloner).to receive(:system).with('make/scripts/hgforest.sh purge --all')
     expect(cloner).to receive(:system).with('make/scripts/hgforest.sh update --clean')
-
-    expect(Dir).to receive(:chdir).with(source_location).and_yield
-    expect(cloner).to receive(:system).with('chmod +x get_source.sh make/scripts/hgforest.sh')
-    expect(cloner).to receive(:system).with('./get_source.sh')
+    expect(cloner).to receive(:system).with('chmod +x make/scripts/hgforest.sh')
 
     cloner.clone
   end
 
   it 'should checkout a tag' do
     expect(Dir).to receive(:chdir).with(source_location).and_yield
-    expect(cloner).to receive(:system).with('make/scripts/hgforest.sh purge --all')
-    expect(cloner).to receive(:system).with('make/scripts/hgforest.sh checkout test-tag')
+    expect(cloner).to receive(:system).with('make/scripts/hgforest.sh checkout --clean test-tag')
 
     cloner.checkout_tag 'test-tag'
   end
