@@ -32,13 +32,44 @@ bundle install
 bundle exec bin/build [DEPENDENCY] [OPTIONS]
 ```
 
+### Configuration File
+All components require a configuration file in order to be published.  This YAML file contains credentials for various servers used during publishing.  If unspecified with the `--configuration` switch, it is expected to be at `~/.java_buildpack_dependency_builder.yml`.  An example file looks like the following:
+
+```yaml
+---
+# Values are for default repository
+:bucket: download.pivotal.io
+:repository_root: http://download.run.pivotal.io
+
+# Required AWS credentials
+:access_key_id: <ACCESS_KEY_ID>
+:secret_access_key: <SECRET_ACCESS_KEY>
+
+# Optional CloudFront Distribution Id
+:distribution_id: <DISTRIBUTION_ID>
+
+# Optional AppDynamics download credentials
+:app_dynamics_username: <USERNAME>
+:app_dynamics_password: <PASSWORD>
+```
+
+| Key | Description
+| --- | -----------
+| `:access_key_id` | AWS Access Key Id for the destination bucket and optional CloudFront distribution
+| `:app_dynamics_password` | **(Optional)** AppDynamics agent download password
+| `:app_dynamics_username` | **(Optional)** AppDynamics agent download username
+| `:bucket` | Publishing destination S3 bucket
+| `:distribution_id` | **(Optional)** The CloudFront distribution id for the destination bucket
+| `:respository_root` | The repository root URI that dependencies will be available at
+| `:secret_access_key` | AWS Secret Access Key for the destination bucket and optional CloudFront distribution
+
+
+_Pivotal employees should contact Ben Hale for AWS and AppDynamics credentials if they have not already been issued and are needed._
+
 ### Building OpenJDK
 In order to build OpenJDK for the linuxes you will need [Vagrant][] and [VirtualBox][].  Follow the default installation instructions for these applications.
 
 In order to build OpenJDK for OS X you will need [VMware Fusion][] and the [build VM][].
-
-### Credentials
-Pivotal employees should contact Ben Hale for AWS and AppDynamics credentials if they have not already been issued.
 
 ## Available Artifacts
 The list of available versions for each dependency can be found at the following locations.
