@@ -15,7 +15,7 @@ To use the script, issue the following commands from the root directory of a clo
 
 ```bash
 bundle install
-bundle exec bin/replicate [--base-uri <BASE-URU> | --host-name <HOST-NAME>] --output <OUTPUT>
+bundle exec bin/replicate [--base-uri <BASE-URI> | --host-name <HOST-NAME>] --output <OUTPUT>
 ```
 
 | Option | Description |
