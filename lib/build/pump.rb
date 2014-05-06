@@ -116,7 +116,7 @@ module Build
 
     def download_from_uri(location, file, progress_bar)
       proxy(location).start(location.host, location.port) do |http|
-        http.request_get(location.path, @source_headers) do |response|
+        http.request_get(location.request_uri, @source_headers) do |response|
           if response.is_a? Net::HTTPOK
             response.read_body do |chunk|
               file.write chunk
