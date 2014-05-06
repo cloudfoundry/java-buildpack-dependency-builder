@@ -122,7 +122,7 @@ describe Replicate::Object do
       object.replicate Replicate::ReplicatedFile.new(root, object.key)
 
       expect_replicated_files root
-      expect(stdout.string).to match(/index.yml \(6.0 MiB => 0.0s\)/)
+      expect(stdout.string).to match(/index.yml \(6.0 MiB =>/)
     end
   end
 
