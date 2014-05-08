@@ -14,11 +14,11 @@
 
 Vagrant.configure('2') do |config|
 
-  config.vm.synced_folder '../../../', '/java-buildpack-dependency-builder'
+  config.vm.synced_folder '../../', '/java-buildpack-dependency-builder'
 
-  config.vm.provider :virtualbox do |vb|
-    vb.customize ['modifyvm', :id, '--memory', '4096', '--cpus', `sysctl -n hw.ncpu`.strip]
-  end
+ config.vm.provider :virtualbox do |vb|
+   vb.customize ['modifyvm', :id, '--memory', '4096', '--cpus', `sysctl -n hw.ncpu`.strip]
+ end
 
   config.vm.define :centos6 do |centos6|
     centos6.vm.box = 'centos664'
@@ -29,19 +29,19 @@ Vagrant.configure('2') do |config|
   config.vm.define :lucid do |lucid|
     lucid.vm.box = 'lucid64'
     lucid.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/lucid64.box'
-    lucid.vm.provision :shell, :path => 'lucid_and_precise.sh'
+    lucid.vm.provision :shell, :path => 'lucid.sh'
   end
 
   config.vm.define :precise do |precise|
     precise.vm.box = 'precise64'
     precise.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/precise64.box'
-    precise.vm.provision :shell, :path => 'lucid_and_precise.sh'
+    precise.vm.provision :shell, :path => 'precise_and_trusty.sh'
   end
 
   config.vm.define :trusty do |trusty|
     trusty.vm.box = 'trusty64'
     trusty.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/trusty64.box'
-    trusty.vm.provision :shell, :path => 'trusty.sh'
+    trusty.vm.provision :shell, :path => 'precise_and_trusty.sh'
   end
 
 end

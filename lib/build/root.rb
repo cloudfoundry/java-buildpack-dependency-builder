@@ -20,6 +20,8 @@ require 'build/dependency/groovy'
 require 'build/dependency/jboss_as'
 require 'build/dependency/mariadb_jdbc'
 require 'build/dependency/new_relic'
+require 'build/dependency/node/node'
+require 'build/dependency/node/node_inner'
 require 'build/dependency/openjdk/openjdk'
 require 'build/dependency/openjdk/openjdk_inner'
 require 'build/dependency/play_jpa_plugin'
@@ -49,6 +51,13 @@ module Build
         option :version,
                desc:     'The version to publish',
                aliases:  '-v',
+               required: true
+      end
+
+      def node_options
+        option :tag,
+               desc:     'The repository tag to build from',
+               aliases:  '-t',
                required: true
       end
 
@@ -112,12 +121,34 @@ module Build
       Dependency::MariaDbJDBC.new(options).build
     end
 
+    desc 'node', 'Publish a version of NodeJS'
+    common_options
+    node_options
+
+    option :platforms,
+           desc:    'A list of the platforms the version should be built on',
+           aliases: '-p',
+           type:    :array,
+           default: %w(centos6 lucid osx precise trusty)
+
+    def node
+      Dependency::Node.new(options).build
+    end
+
+    desc 'node-inner', 'Publish a version of NodeJS', hide: true
+    common_options
+    node_options
+
+    def node_inner
+      Dependency::NodeInner.new(options).build
+    end
+
     desc 'openjdk', 'Publish a version of OpenJDK'
     common_options
     openjdk_options
 
     option :platforms,
-           desc:    'An list of the platforms the version should be built on',
+           desc:    'A list of the platforms the version should be built on',
            aliases: '-p',
            type:    :array,
            default: %w(centos6 lucid precise trusty)

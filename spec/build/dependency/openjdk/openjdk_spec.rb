@@ -16,7 +16,7 @@
 require 'spec_helper'
 require 'build/dependency/openjdk/local_platform'
 require 'build/dependency/openjdk/openjdk'
-require 'build/dependency/openjdk/vagrant_platform'
+require 'build/dependency/openjdk/openjdk_vagrant_platform'
 
 describe Build::Dependency::OpenJDK do
 
@@ -28,7 +28,7 @@ describe Build::Dependency::OpenJDK do
   let(:dependency) { described_class.new(options) }
 
   it 'should execute on specified platforms' do
-    expect_any_instance_of(Build::Dependency::VagrantPlatform)
+    expect_any_instance_of(Build::Dependency::OpenJDKVagrantPlatform)
     .to receive(:exec).with('bundle exec bin/build openjdk-inner ' \
                             '--configuration vendor/openjdk/java_buildpack_dependency_builder.yml ' \
                             '--version test-version ' \

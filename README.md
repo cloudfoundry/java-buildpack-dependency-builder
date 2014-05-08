@@ -81,6 +81,7 @@ The list of available versions for each dependency can be found at the following
 | Groovy | [`universal`](http://download.run.pivotal.io/groovy/index.yml)
 | JBoss AS | [`universal`](http://download.run.pivotal.io/jboss-as/index.yml)
 | MariaDB JDBC | [`universal`](http://download.run.pivotal.io/mariadb-jdbc/index.yml)
+| NodeJS | [`centos6`](http://download.run.pivotal.io/node/centos6/x86_64/index.yml), [`lucid`](http://download.run.pivotal.io/node/lucid/x86_64/index.yml), [`mountainlion`](http://download.run.pivotal.io/node/mountainlion/x86_64/index.yml), [`precise`](http://download.run.pivotal.io/node/precise/x86_64/index.yml), [`trusty`](http://download.run.pivotal.io/node/trusty/x86_64/index.yml)
 | OpenJDK | [`centos6`](http://download.run.pivotal.io/openjdk/centos6/x86_64/index.yml), [`lucid`](http://download.run.pivotal.io/openjdk/lucid/x86_64/index.yml), [`mountainlion`](http://download.run.pivotal.io/openjdk/mountainlion/x86_64/index.yml), [`precise`](http://download.run.pivotal.io/openjdk/precise/x86_64/index.yml), [`trusty`](http://download.run.pivotal.io/openjdk/trusty/x86_64/index.yml)
 | New Relic | [`universal`](http://download.run.pivotal.io/new-relic/index.yml)
 | Play JPA Plugin | [`universal`](http://download.run.pivotal.io/play-jpa-plugin/index.yml)
@@ -121,13 +122,14 @@ This table shows locations to check for new releases of cached dependencies.  It
 | Dependency | Location
 | ---------- | --------
 | App Dynamics | [`release`](http://download.appdynamics.com/browse/zone/3/)
-| Auto Reconfiguration | [`release`](http://maven.springframework.org.s3.amazonaws.com/milestone/org/cloudfoundry/auto-reconfiguration/maven-metadata.xml)
+| Auto Reconfiguration | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/auto-reconfiguration/maven-metadata.xml)
 | Groovy | [`release`](http://groovy.codehaus.org/Download?nc)
 | JBoss AS | [`release`](http://www.jboss.org/jbossas/downloads)
 | MariaDB JDBC | [`release`](https://downloads.mariadb.org/client-java/)
-| OpenJDK | [`oracle`](http://www.oracle.com/technetwork/java/javase/downloads/index.html), [`jdk8u`](http://hg.openjdk.java.net/jdk8u/jdk8u), [`jdk7u`](http://hg.openjdk.java.net/jdk7u/jdk7u), [`jdk6`](http://hg.openjdk.java.net/jdk6/jdk6)
 | New Relic | [`release`](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.newrelic.agent.java%22%20AND%20a%3A%22newrelic-agent%22)
-| Play JPA Plugin | [`release`](http://maven.springframework.org.s3.amazonaws.com/milestone/org/cloudfoundry/play-jpa-plugin/maven-metadata.xml)
+| NodeJS | [`release`](http://nodejs.org/dist/)
+| OpenJDK | [`oracle`](http://www.oracle.com/technetwork/java/javase/downloads/index.html), [`jdk8u`](http://hg.openjdk.java.net/jdk8u/jdk8u), [`jdk7u`](http://hg.openjdk.java.net/jdk7u/jdk7u), [`jdk6`](http://hg.openjdk.java.net/jdk6/jdk6)
+| Play JPA Plugin | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/play-jpa-plugin/maven-metadata.xml)
 | PostgreSQL JDBC | [`release`](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.postgresql%22%20AND%20a%3A%22postgresql%22)
 | RedisStore | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/com/gopivotal/manager/redis-store/maven-metadata.xml)
 | Spring Boot CLI | [`release`](http://repo.springsource.org/release/org/springframework/boot/spring-boot-cli/)
@@ -139,42 +141,128 @@ This table shows locations to check for new releases of cached dependencies.  It
 ## Open JDK Build Details
 This table shows the mappings between versions, build numbers, and repository tags for OpenJDK releases.  It is used primarily by Pivotal employees to keep track of exactly what was built and should not be considered authoritative.
 
-| JDK Version | Build Number | Tag           | Centos6 | Lucid | Mountain Lion | Precise | Trusty |
-| ----------- | ------------ | ------------- | :-----: | :---: | :-----------: | :-----: | :----: |
-| `1.6.0_21`  | `b21`        | `jdk6-b21`    |         | ✓     |               |         |        |
-| `1.6.0_22`  | `b22`        | `jdk6-b22`    |         | ✓     |               |         |        |
-| `1.6.0_23`  | `b23`        | `jdk6-b23`    |         | ✓     |               |         |        |
-| `1.6.0_24`  | `b24`        | `jdk6-b24`    |         | ✓     |               |         |        |
-| `1.6.0_25`  | `b25`        | `jdk6-b25`    |         | ✓     |               |         |        |
-| `1.6.0_26`  | `b26`        | `jdk6-b26`    |         | ✓     |               |         |        |
-| `1.6.0_27`  | `b27`        | `jdk6-b27`    |         | ✓     |               |         |        |
-|             |              |               |         |       |               |         |        |
-| `1.7.0_01`  | `b08`        | `jdk7u1-b08`  | ✓       | ✓     |               | ✓       |        |
-| `1.7.0_02`  | `b21`        | `jdk7u2-b21`  | ✓       | ✓     |               | ✓       |        |
-| `1.7.0_03`  | `b04`        | `jdk7u3-b04`  | ✓       | ✓     |               | ✓       |        |
-| `1.7.0_04`  | `b31`        | `jdk7u4-b31`  | ✓       | ✓     | ✓             | ✓       |        |
-| `1.7.0_05`  | `b30`        | `jdk7u5-b30`  | ✓       | ✓     | ✓             | ✓       |        |
-| `1.7.0_06`  | `b31`        | `jdk7u6-b31`  | ✓       | ✓     | ✓             | ✓       | ✓      |
-| `1.7.0_07`  | `b31`        | `jdk7u7-b31`  | ✓       | ✓     | ✓             | ✓       | ✓      |
-| `1.7.0_08`  | `b05`        | `jdk7u8-b05`  | ✓       | ✓     | ✓             | ✓       | ✓      |
-| `1.7.0_09`  | `b32`        | `jdk7u9-b32`  | ✓       | ✓     | ✓             | ✓       | ✓      |
-| `1.7.0_10`  | `b31`        | `jdk7u10-b31` | ✓       | ✓     | ✓             | ✓       | ✓      |
-| `1.7.0_11`  | `b33`        | `jdk7u11-b33` | ✓       | ✓     | ✓             | ✓       | ✓      |
-| `1.7.0_12`  | `b09`        | `jdk7u12-b09` | ✓       | ✓     | ✓             | ✓       | ✓      |
-| `1.7.0_13`  | `b30`        | `jdk7u13-b30` | ✓       | ✓     | ✓             | ✓       | ✓      |
-| `1.7.0_14`  | `b22`        | `jdk7u14-b22` | ✓       | ✓     | ✓             | ✓       | ✓      |
-| `1.7.0_15`  | `b33`        | `jdk7u15-b33` | ✓       | ✓     | ✓             | ✓       | ✓      |
-| `1.7.0_17`  | `b31`        | `jdk7u17-b31` | ✓       | ✓     | ✓             | ✓       | ✓      |
-| `1.7.0_21`  | `b30`        | `jdk7u21-b30` | ✓       | ✓     | ✓             | ✓       | ✓      |
-| `1.7.0_25`  | `b11`        | `jdk7u25-b11` | ✓       | ✓     | ✓             | ✓       | ✓      |
-| `1.7.0_40`  | `b43`        | `jdk7u40-b43` | ✓       | ✓     | ✓             | ✓       | ✓      |
-| `1.7.0_45`  | `b31`        | `jdk7u45-b31` | ✓       | ✓     | ✓             | ✓       | ✓      |
-| `1.7.0_51`  | `b31`        | `jdk7u51-b31` | ✓       | ✓     | ✓             | ✓       | ✓      |
-| `1.7.0_55`  | `b13`        | `jdk7u55-b13` | ✓       | ✓     | ✓             | ✓       | ✓      |
-|             |              |               |         |       |               |         |        |
-| `1.8.0_M6`  | `b75`        | `jdk8-b75`    | ✓       | ✓     | ✓             | ✓       |        |
-| `1.8.0_M7`  | `b91`        | `jdk8-b91`    | ✓       | ✓     | ✓             | ✓       |        |
-| `1.8.0_M8`  | `b106`       | `jdk8-b106`   | ✓       | ✓     | ✓             | ✓       |        |
-| `1.8.0_RC1` | `b128`       | `jdk8-b128`   | ✓       | ✓     | ✓             | ✓       | ✓      |
-| `1.8.0`     | `b132`       | `jdk8-b132`   | ✓       | ✓     | ✓             | ✓       | ✓      |
-| `1.8.0_05`  | `b13`        | `jdk8u5-b13`  | ✓       | ✓     | ✓             | ✓       | ✓      |
+| JDK Version | Build Number | Tag           | Centos6 | Lucid | OS X | Precise | Trusty |
+| ----------- | ------------ | ------------- | :-----: | :---: | :--: | :-----: | :----: |
+| `1.6.0_21`  | `b21`        | `jdk6-b21`    |         | ✓     |      |         |        |
+| `1.6.0_22`  | `b22`        | `jdk6-b22`    |         | ✓     |      |         |        |
+| `1.6.0_23`  | `b23`        | `jdk6-b23`    |         | ✓     |      |         |        |
+| `1.6.0_24`  | `b24`        | `jdk6-b24`    |         | ✓     |      |         |        |
+| `1.6.0_25`  | `b25`        | `jdk6-b25`    |         | ✓     |      |         |        |
+| `1.6.0_26`  | `b26`        | `jdk6-b26`    |         | ✓     |      |         |        |
+| `1.6.0_27`  | `b27`        | `jdk6-b27`    |         | ✓     |      |         |        |
+|             |              |               |         |       |      |         |        |
+| `1.7.0_01`  | `b08`        | `jdk7u1-b08`  | ✓       | ✓     |      | ✓       |        |
+| `1.7.0_02`  | `b21`        | `jdk7u2-b21`  | ✓       | ✓     |      | ✓       |        |
+| `1.7.0_03`  | `b04`        | `jdk7u3-b04`  | ✓       | ✓     |      | ✓       |        |
+| `1.7.0_04`  | `b31`        | `jdk7u4-b31`  | ✓       | ✓     | ✓    | ✓       |        |
+| `1.7.0_05`  | `b30`        | `jdk7u5-b30`  | ✓       | ✓     | ✓    | ✓       |        |
+| `1.7.0_06`  | `b31`        | `jdk7u6-b31`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `1.7.0_07`  | `b31`        | `jdk7u7-b31`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `1.7.0_08`  | `b05`        | `jdk7u8-b05`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `1.7.0_09`  | `b32`        | `jdk7u9-b32`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `1.7.0_10`  | `b31`        | `jdk7u10-b31` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `1.7.0_11`  | `b33`        | `jdk7u11-b33` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `1.7.0_12`  | `b09`        | `jdk7u12-b09` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `1.7.0_13`  | `b30`        | `jdk7u13-b30` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `1.7.0_14`  | `b22`        | `jdk7u14-b22` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `1.7.0_15`  | `b33`        | `jdk7u15-b33` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `1.7.0_17`  | `b31`        | `jdk7u17-b31` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `1.7.0_21`  | `b30`        | `jdk7u21-b30` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `1.7.0_25`  | `b11`        | `jdk7u25-b11` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `1.7.0_40`  | `b43`        | `jdk7u40-b43` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `1.7.0_45`  | `b31`        | `jdk7u45-b31` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `1.7.0_51`  | `b31`        | `jdk7u51-b31` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `1.7.0_55`  | `b13`        | `jdk7u55-b13` | ✓       | ✓     | ✓    | ✓       | ✓      |
+|             |              |               |         |       |      |         |        |
+| `1.8.0_M6`  | `b75`        | `jdk8-b75`    | ✓       | ✓     | ✓    | ✓       |        |
+| `1.8.0_M7`  | `b91`        | `jdk8-b91`    | ✓       | ✓     | ✓    | ✓       |        |
+| `1.8.0_M8`  | `b106`       | `jdk8-b106`   | ✓       | ✓     | ✓    | ✓       |        |
+| `1.8.0_RC1` | `b128`       | `jdk8-b128`   | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `1.8.0`     | `b132`       | `jdk8-b132`   | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `1.8.0_05`  | `b13`        | `jdk8u5-b13`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+
+## NodeJS Build Details
+This table shows the mappings between version, and tags for NodeJS releases.  It is used primarily by Pivotal employees to keep track of exactly what was built and should not be considered authoritative.
+
+| NodeJS Version | Tag        | Centos6 | Lucid | OS X | Precise | Trusty |
+| -------------- | ---------- | :-----: | :---: | :--: | :-----: | :----: |
+| `0.8.6`        | `v0.8.6`   | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.8.7`        | `v0.8.7`   | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.8.8`        | `v0.8.8`   | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.8.9`        | `v0.8.9 `  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.8.10`       | `v0.8.10`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.8.11`       | `v0.8.11`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.8.12`       | `v0.8.12`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.8.13`       | `v0.8.13`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.8.14`       | `v0.8.14`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.8.15`       | `v0.8.15`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.8.16`       | `v0.8.16`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.8.17`       | `v0.8.17`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.8.18`       | `v0.8.18`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.8.19`       | `v0.8.19`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.8.20`       | `v0.8.20`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.8.21`       | `v0.8.21`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.8.22`       | `v0.8.22`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.8.23`       | `v0.8.23`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.8.24`       | `v0.8.24`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.8.25`       | `v0.8.25`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.8.26`       | `v0.8.26`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+|                |            |         |       |      |         |        |
+| `0.9.0`        | `v0.9.0`   | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.9.1`        | `v0.9.1`   | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.9.2`        | `v0.9.2`   | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.9.3`        | `v0.9.3`   | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.9.4`        | `v0.9.4`   | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.9.5`        | `v0.9.5`   | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.9.6`        | `v0.9.6`   | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.9.7`        | `v0.9.7`   | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.9.8`        | `v0.9.8`   | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.9.9`        | `v0.9.9`   | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.9.10`       | `v0.9.10`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.9.11`       | `v0.9.11`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.9.12`       | `v0.9.12`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+|                |            |         |       |      |         |        |
+| `0.10.0`       | `v0.10.0`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.1`       | `v0.10.1`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.2`       | `v0.10.2`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.3`       | `v0.10.3`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.4`       | `v0.10.4`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.5`       | `v0.10.5`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.6`       | `v0.10.6`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.7`       | `v0.10.7`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.8`       | `v0.10.8`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.9`       | `v0.10.9`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.10`      | `v0.10.10` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.11`      | `v0.10.11` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.12`      | `v0.10.12` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.13`      | `v0.10.13` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.14`      | `v0.10.14` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.15`      | `v0.10.15` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.16`      | `v0.10.16` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.17`      | `v0.10.17` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.18`      | `v0.10.18` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.19`      | `v0.10.19` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.20`      | `v0.10.20` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.21`      | `v0.10.21` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.22`      | `v0.10.22` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.23`      | `v0.10.23` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.24`      | `v0.10.24` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.25`      | `v0.10.25` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.26`      | `v0.10.26` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.27`      | `v0.10.27` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.10.28`      | `v0.10.28` | ✓       | ✓     | ✓    | ✓       | ✓      |
+|                |            |         |       |      |         |        |
+| `0.11.0`       | `v0.11.0`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.11.1`       | `v0.11.1`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.11.2`       | `v0.11.2`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.11.3`       | `v0.11.3`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.11.4`       | `v0.11.4`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.11.5`       | `v0.11.5`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.11.6`       | `v0.11.6`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.11.7`       | `v0.11.7`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.11.8`       | `v0.11.8`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.11.9`       | `v0.11.9`  | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.11.10`      | `v0.11.10` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.11.11`      | `v0.11.11` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.11.12`      | `v0.11.12` | ✓       | ✓     | ✓    | ✓       | ✓      |
+| `0.11.13`      | `v0.11.13` | ✓       | ✓     | ✓    | ✓       | ✓      |

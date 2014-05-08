@@ -14,10 +14,10 @@
 # limitations under the License.
 
 require 'spec_helper'
-require 'build/dependency/openjdk/vagrant_platform'
+require 'build/dependency/openjdk/openjdk_vagrant_platform'
 require 'English'
 
-describe Build::Dependency::VagrantPlatform do
+describe Build::Dependency::OpenJDKVagrantPlatform do
 
   let(:platform) { described_class.new('test-name', version) }
 

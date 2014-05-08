@@ -14,38 +14,20 @@
 # limitations under the License.
 
 require 'build/dependency'
-require 'build/dependency/openjdk/openjdk_resources'
-require 'English'
+require 'build/dependency/node/node_resources'
+require 'build/dependency/util/base_vagrant_platform'
 
 module Build
   module Dependency
 
-    class VagrantPlatform
-      include OpenJDKResources
+    class NodeVagrantPlatform < BaseVagrantPlatform
+      include NodeResources
 
-      def initialize(name, version)
-        @name    = name
-        @version = version
-      end
-
-      def exec(command)
-        Dir.chdir version_specific(@version) do
-          system "vagrant up #{@name}"
-
-          system "vagrant ssh #{@name} --command 'cd /java-buildpack-dependency-builder && #{command}'"
-
-          abort 'FAILURE' unless $CHILD_STATUS == 0
-          system "vagrant destroy -f #{@name}"
-        end
-      end
-
-      private
+      protected
 
       def version_specific(version)
-        if version =~ /^1.6/ || version =~ /^1.7/
-          File.join(RESOURCES_DIR, '6_and_7')
-        elsif version =~ /^1.8/
-          File.join(RESOURCES_DIR, '8')
+        if version =~ /[\d]+\.[\d]+\.[\d]+/
+          RESOURCES_DIR
         else
           fail "Unable to process version '#{version}'"
         end

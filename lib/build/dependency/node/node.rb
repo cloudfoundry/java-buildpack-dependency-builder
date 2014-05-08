@@ -14,16 +14,16 @@
 # limitations under the License.
 
 require 'build/dependency'
-require 'build/dependency/openjdk/openjdk_vagrant_platform'
+require 'build/dependency/node/node_vagrant_platform'
 require 'build/dependency/base_vagrant'
 
 module Build
   module Dependency
 
-    class OpenJDK < BaseVagrant
+    class Node < BaseVagrant
 
       def initialize(options)
-        super 'openjdk-inner', OpenJDKVagrantPlatform, options
+        super 'node-inner', NodeVagrantPlatform, options
       end
 
       protected
@@ -31,9 +31,7 @@ module Build
       def arguments
         [
           "--version #{@version}",
-          "--build-number #{@build_number}",
-          "--tag #{@tag}",
-          "--development #{@development ? 'true' : 'false'}"
+          "--tag #{@tag}"
         ]
       end
 
