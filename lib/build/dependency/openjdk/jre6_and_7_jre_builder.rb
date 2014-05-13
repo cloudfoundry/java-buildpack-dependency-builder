@@ -14,7 +14,8 @@
 # limitations under the License.
 
 require 'build/dependency'
-require 'build/dependency/openjdk/platform_details'
+require 'build/dependency/openjdk/openjdk_platform_details'
+require 'build/dependency/util/platform_details'
 require 'English'
 require 'tempfile'
 
@@ -22,6 +23,7 @@ module Build
   module Dependency
 
     class JRE6And7JREBuilder
+      include OpenJDKPlatformDetails
       include PlatformDetails
 
       attr_reader :package

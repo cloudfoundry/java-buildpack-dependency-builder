@@ -14,36 +14,27 @@
 # limitations under the License.
 
 require 'build/dependency'
-require 'build/dependency/openjdk/openjdk_resources'
 require 'build/dependency/util/platform_details'
-require 'fileutils'
 
 module Build
   module Dependency
+    module OpenJDKPlatformDetails
+      include Build::Dependency::PlatformDetails
 
-    class JDK8BootstrapJDKBuilder
-      include OpenJDKResources
-      include PlatformDetails
-
-      def build
-        unless File.exist?(root) || macosx?
-          puts 'Downloading bootstrap JDK...'
-          FileUtils.mkdir_p root
-          system "curl -Ls --header 'Cookie: oraclelicense=accept-securebackup-cookie' #{BOOSTRAP_JDK_URI} | tar xz --strip 1 -C #{root}"
+      def alt_bootdir
+        if centos?
+          '/usr/lib/jvm/java-1.6.0-openjdk.x86_64'
+        elsif macosx?
+          ENV['JAVA6_HOME']
+        elsif trusty?
+          '/usr/lib/jvm/java-6-openjdk-amd64'
+        elsif ubuntu?
+          '/usr/lib/jvm/java-6-openjdk'
+        else
+          fail 'Unable to determine ALT_BOOTDIR'
         end
       end
 
-      def root
-        BOOSTRAP_JDK_ROOT
-      end
-
-      BOOSTRAP_JDK_ROOT = File.join VENDOR_DIR, 'bootstrap-jdk'
-
-      BOOSTRAP_JDK_URI = 'http://download.oracle.com/otn-pub/java/jdk/7u51-b13/jdk-7u51-linux-x64.tar.gz'
-
-      private_constant :BOOSTRAP_JDK_ROOT, :BOOSTRAP_JDK_URI
-
     end
-
   end
 end

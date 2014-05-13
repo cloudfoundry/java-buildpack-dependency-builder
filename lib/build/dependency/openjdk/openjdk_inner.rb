@@ -24,7 +24,7 @@ require 'build/dependency/openjdk/jre6_and_7_jre_builder'
 require 'build/dependency/openjdk/jre8_jre_builder'
 require 'build/dependency/openjdk/openjdk_resources'
 require 'build/dependency/openjdk/noop_bootstrap_jdk_builder'
-require 'build/dependency/openjdk/platform_details'
+require 'build/dependency/util/platform_details'
 
 module Build
   module Dependency

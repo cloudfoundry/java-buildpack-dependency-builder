@@ -25,9 +25,10 @@ module Build
         VAGRANT_PLATFORMS.include? platform
       end
 
-      def initialize(name, version)
-        @name    = name
-        @version = version
+      def initialize(name, version, shutdown)
+        @name     = name
+        @version  = version
+        @shutdown = shutdown
       end
 
       def exec(command)
@@ -37,7 +38,7 @@ module Build
           system "vagrant ssh #{@name} --command 'cd /java-buildpack-dependency-builder && #{command}'"
 
           abort 'FAILURE' unless $CHILD_STATUS == 0
-          system "vagrant destroy -f #{@name}"
+          system "vagrant destroy -f #{@name}" if @shutdown
         end
       end
 

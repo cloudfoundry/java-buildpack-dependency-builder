@@ -14,7 +14,7 @@
 # limitations under the License.
 
 require 'build/dependency'
-require 'build/dependency/openjdk/platform_details'
+require 'build/dependency/util/platform_details'
 require 'English'
 require 'tempfile'
 

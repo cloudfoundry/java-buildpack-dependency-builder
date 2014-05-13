@@ -28,7 +28,11 @@ module Build
 
         @command   = command
         @platforms = options[:platforms].map do |platform|
-          BaseVagrantPlatform.vagrant?(platform) ? vagrant_platform_type.new(platform, @version) : LocalPlatform.new
+          if BaseVagrantPlatform.vagrant?(platform)
+            vagrant_platform_type.new(platform, @version, @shutdown)
+          else
+            LocalPlatform.new
+          end
         end
       end
 

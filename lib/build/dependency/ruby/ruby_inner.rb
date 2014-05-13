@@ -15,19 +15,21 @@
 
 require 'build/dependency'
 require 'build/dependency/base'
-require 'build/dependency/node/node_resources'
+require 'build/dependency/ruby/ruby_resources'
+require 'build/dependency/ruby/ruby_platform_details'
 require 'build/dependency/util/platform_details'
 require 'tempfile'
 
 module Build
   module Dependency
 
-    class NodeInner < Base
-      include NodeResources
+    class RubyInner < Base
+      include RubyPlatformDetails
+      include RubyResources
       include PlatformDetails
 
       def initialize(options)
-        super 'node', 'tar.gz', options
+        super 'ruby', 'tar.gz', options
 
         @source_location = File.join(VENDOR_DIR, 'source')
       end
@@ -35,18 +37,21 @@ module Build
       protected
 
       def base_path
-        "node/#{codename}/#{architecture}"
+        "ruby/#{codename}/#{architecture}"
+      end
+
+      def normalize(raw)
+        raw.sub(/-/, '_')
       end
 
       def source
         clone
-        checkout_tag @tag
         compile
       end
 
       private
 
-      REPOSITORY = 'https://github.com/joyent/node.git'.freeze
+      REPOSITORY = 'https://github.com/sstephenson/ruby-build.git'.freeze
 
       private_constant :REPOSITORY
 
@@ -66,25 +71,13 @@ module Build
         abort unless $CHILD_STATUS == 0
       end
 
-      def checkout_tag(tag)
-        puts "Checking out #{tag}..."
-        Dir.chdir @source_location do
-          system "git checkout #{tag}"
-        end
-
-        abort unless $CHILD_STATUS == 0
-      end
-
       def compile
         package = Tempfile.new('node')
 
         Dir.mktmpdir('node-staging') do |staging_dir|
           Dir.chdir(@source_location) do
             system <<-EOF
-./configure --prefix #{staging_dir}
-make -j #{cpu_count}
-make install
-
+bin/ruby-build #{@version} #{staging_dir}#{openssl_dir}
 tar czvf #{package.path} -C #{staging_dir} .
             EOF
           end

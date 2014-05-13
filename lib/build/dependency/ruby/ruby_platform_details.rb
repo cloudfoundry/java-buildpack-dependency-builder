@@ -14,36 +14,28 @@
 # limitations under the License.
 
 require 'build/dependency'
-require 'build/dependency/openjdk/openjdk_resources'
 require 'build/dependency/util/platform_details'
-require 'fileutils'
 
 module Build
   module Dependency
+    module RubyPlatformDetails
+      include Build::Dependency::PlatformDetails
 
-    class JDK8BootstrapJDKBuilder
-      include OpenJDKResources
-      include PlatformDetails
+      def openssl_dir
+        if macosx?
+          cellar, version = nil
 
-      def build
-        unless File.exist?(root) || macosx?
-          puts 'Downloading bootstrap JDK...'
-          FileUtils.mkdir_p root
-          system "curl -Ls --header 'Cookie: oraclelicense=accept-securebackup-cookie' #{BOOSTRAP_JDK_URI} | tar xz --strip 1 -C #{root}"
+          Bundler.with_clean_env do
+            cellar = `brew --cellar openssl`.chomp
+            version = `brew list --versions openssl | cut -d ' ' -f 2`.chomp
+          end
+
+          " --with-openssl-dir=#{cellar}/#{version}"
+        else
+          ''
         end
       end
 
-      def root
-        BOOSTRAP_JDK_ROOT
-      end
-
-      BOOSTRAP_JDK_ROOT = File.join VENDOR_DIR, 'bootstrap-jdk'
-
-      BOOSTRAP_JDK_URI = 'http://download.oracle.com/otn-pub/java/jdk/7u51-b13/jdk-7u51-linux-x64.tar.gz'
-
-      private_constant :BOOSTRAP_JDK_ROOT, :BOOSTRAP_JDK_URI
-
     end
-
   end
 end
