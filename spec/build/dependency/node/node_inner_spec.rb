@@ -16,6 +16,7 @@
 require 'spec_helper'
 require 'build/dependency/node/node_inner'
 require 'console_helper'
+require 'fileutils'
 
 describe Build::Dependency::NodeInner do
   include_context 'console_helper'
@@ -27,6 +28,7 @@ describe Build::Dependency::NodeInner do
   let(:source_location) { File.expand_path('vendor/node/source') }
 
   before { `pwd` }
+  before { FileUtils.mkdir_p source_location }
 
   it 'should create codename and architecture qualified base_path' do
     expect(dependency).to receive(:codename).and_return('test-codename')
@@ -36,6 +38,7 @@ describe Build::Dependency::NodeInner do
   end
 
   it 'should clone if the repository does not exist' do
+
     expect(File).to receive(:exist?).with(source_location).and_return false
     expect(Dir).to receive(:chdir).with(source_location).twice.and_call_original
     expect(dependency).to receive(:system).with("git clone https://github.com/joyent/node.git #{source_location}")

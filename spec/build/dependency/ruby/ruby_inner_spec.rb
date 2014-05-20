@@ -27,6 +27,7 @@ describe Build::Dependency::RubyInner do
   let(:source_location) { File.expand_path('vendor/ruby/source') }
 
   before { `pwd` }
+  before { FileUtils.mkdir_p source_location }
 
   it 'should create codename and architecture qualified base_path' do
     expect(dependency).to receive(:codename).and_return('test-codename')
