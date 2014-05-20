@@ -32,12 +32,12 @@ module Build
         @package = Tempfile.new('jre')
       end
 
-      def build(version, build_number, _bootstrap_jdk_root, cacerts, source_location)
+      def build(version, build_number, bootstrap_jdk_root, cacerts, source_location)
         puts "Building #{@name} #{version}..."
         Dir.chdir source_location do
           system <<-EOF
 unset JAVA_HOME
-export LANG=C ALT_BOOTDIR=#{alt_bootdir} ALT_CACERTS_FILE=#{cacerts} PATH=/usr/bin:$PATH
+export LANG=C ALT_BOOTDIR=#{alt_bootdir} ALT_CACERTS_FILE=#{cacerts} PATH=/usr/bin:$PATH ALT_JDK_IMPORT_PATH=#{bootstrap_jdk_root}
 make MILESTONE=fcs JDK_VERSION=#{version} BUILD_NUMBER=#{build_number} ALLOW_DOWNLOADS=true NO_DOCS=true PARALLEL_COMPILE_JOBS=#{cpu_count} HOTSPOT_BUILD_JOBS=#{cpu_count}
 
 tar czvf #{@package.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build_dir}/j2re-image .

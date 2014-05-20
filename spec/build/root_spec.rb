@@ -21,10 +21,15 @@ require 'build/dependency/groovy'
 require 'build/dependency/jboss_as'
 require 'build/dependency/mariadb_jdbc'
 require 'build/dependency/new_relic'
+require 'build/dependency/node/node'
+require 'build/dependency/node/node_inner'
 require 'build/dependency/openjdk/openjdk'
+require 'build/dependency/openjdk/openjdk_inner'
 require 'build/dependency/play_jpa_plugin'
 require 'build/dependency/postgresql_jdbc'
 require 'build/dependency/redis_store'
+require 'build/dependency/ruby/ruby'
+require 'build/dependency/ruby/ruby_inner'
 require 'build/dependency/spring_boot_cli'
 require 'build/dependency/tc_server'
 require 'build/dependency/tomcat'
@@ -50,6 +55,29 @@ describe Build::Root do
       expect(instance).to receive(:build)
 
       Build::Root.start([dependency, '--version', 'test-version'])
+    end
+
+  end
+
+  shared_examples 'node' do
+
+    it 'should display error message if version is not specified' do
+      Build::Root.start([dependency])
+
+      expect(stderr.string).to match('--version')
+    end
+
+    it 'should display error message if tag is not specified' do
+      Build::Root.start([dependency])
+
+      expect(stderr.string).to match('--tag')
+    end
+
+    it 'should not display error message if version and tag are specified' do
+      expect(type).to receive(:new).and_return(instance)
+      expect(instance).to receive(:build)
+
+      Build::Root.start([dependency, '--version', 'test-version', '--tag', 'test-tag'])
     end
 
   end
@@ -126,6 +154,20 @@ describe Build::Root do
   end
 
   context do
+    include_examples 'node' do
+      let(:dependency) { 'node' }
+      let(:type) { Build::Dependency::Node }
+    end
+  end
+
+  context do
+    include_examples 'node' do
+      let(:dependency) { 'node-inner' }
+      let(:type) { Build::Dependency::NodeInner }
+    end
+  end
+
+  context do
     include_examples 'openjdk' do
       let(:dependency) { 'openjdk' }
       let(:type) { Build::Dependency::OpenJDK }
@@ -164,6 +206,20 @@ describe Build::Root do
     include_examples 'dependency' do
       let(:dependency) { 'redis-store' }
       let(:type) { Build::Dependency::RedisStore }
+    end
+  end
+
+  context do
+    include_examples 'dependency' do
+      let(:dependency) { 'ruby' }
+      let(:type) { Build::Dependency::Ruby }
+    end
+  end
+
+  context do
+    include_examples 'dependency' do
+      let(:dependency) { 'ruby-inner' }
+      let(:type) { Build::Dependency::RubyInner }
     end
   end
 

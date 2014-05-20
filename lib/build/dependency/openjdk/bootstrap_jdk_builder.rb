@@ -21,7 +21,7 @@ require 'fileutils'
 module Build
   module Dependency
 
-    class JDK8BootstrapJDKBuilder
+    class BootstrapJDKBuilder
       include OpenJDKResources
       include PlatformDetails
 

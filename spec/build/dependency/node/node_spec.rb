@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+# Encoding: utf-8
 # Copyright (c) 2013 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,16 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-PACKAGES=" \
-	git \
-	subversion"
+require 'spec_helper'
+require 'build/dependency/node/node'
 
-yum update -y
-yum install -y $PACKAGES
+describe Build::Dependency::Node do
 
-rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.rpm
+  let(:dependency) { described_class.new(options) }
 
-curl -sL https://get.rvm.io | bash -s stable
-source /etc/profile.d/rvm.sh
-rvm install 2.1.1
-bundle install --gemfile /java-buildpack-dependency-builder/Gemfile
+  let(:options) { { version: 'test-version', tag: 'test-tag', platforms: [] } }
+
+  it 'should execute without development' do
+    expect(dependency.send(:arguments)).to include('--version test-version', '--tag test-tag')
+  end
+
+end

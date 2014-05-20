@@ -14,18 +14,20 @@
 # limitations under the License.
 
 require 'spec_helper'
-require 'build/dependency/openjdk/noop_bootstrap_jdk_builder'
+require 'build/dependency/ruby/ruby_resources'
 
-describe Build::Dependency::NoOpBootstrapJDKBuilder do
+describe Build::Dependency::RubyResources do
 
-  let(:builder) { described_class.new }
-
-  it 'should do nothing during build' do
-    builder.build
+  it 'should calculate RESOURCES_DIR' do
+    expect(StubRubyResources::RESOURCES_DIR).to eq(File.expand_path('resources/ruby'))
   end
 
-  it 'should return nil for the root' do
-    expect(builder.build).not_to be
+  it 'should calculate VENDOR_DIR' do
+    expect(StubRubyResources::VENDOR_DIR).to eq(File.expand_path('vendor/ruby'))
+  end
+
+  class StubRubyResources
+    include Build::Dependency::RubyResources
   end
 
 end

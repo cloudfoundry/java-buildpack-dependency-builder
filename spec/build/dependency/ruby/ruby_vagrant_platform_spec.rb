@@ -13,21 +13,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'build/dependency'
+require 'spec_helper'
+require 'build/dependency/ruby/ruby_vagrant_platform'
 
-module Build
-  module Dependency
+describe Build::Dependency::RubyVagrantPlatform do
 
-    class NoOpBootstrapJDKBuilder
+  let(:platform) { described_class.new 'test-name', 'test-version', false }
 
-      def build
-      end
-
-      def root
-        nil
-      end
-
-    end
-
+  it 'should return resources directory for 3 digit version' do
+    expect(platform.send(:version_specific, '2.1.2')).to eq(File.expand_path 'resources/ruby')
   end
+
+  it 'should raise error for unknown version' do
+    expect { platform.send(:version_specific, '2.1') }.to raise_error("Unable to process version '2.1'")
+  end
+
 end

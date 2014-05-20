@@ -18,7 +18,7 @@ require 'build/mmmq_normalizer'
 
 describe Build::MMMQNormalizer do
 
-  let(:stub) { Stub.new }
+  let(:stub) { StubMMQNormalizer.new }
 
   it 'should remove qualifier from version with qualifier' do
     expect(stub.non_qualifier_version '1.2.3.QUALIFIER').to eq('1.2.3')
@@ -44,7 +44,7 @@ describe Build::MMMQNormalizer do
     expect(stub.normalize '1.2').to eq('1.2')
   end
 
-  class Stub
+  class StubMMQNormalizer
     include Build::MMMQNormalizer
   end
 

@@ -16,7 +16,8 @@
 PACKAGES=" \
 	build-essential \
 	curl \
-	git-core"
+	git-core \
+	subversion"
 
 apt-get update
 apt-get install -y $PACKAGES

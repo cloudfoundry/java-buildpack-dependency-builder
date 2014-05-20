@@ -14,51 +14,11 @@
 # limitations under the License.
 
 require 'spec_helper'
-require 'build/dependency/openjdk/platform_details'
+require 'build/dependency/util/platform_details'
 
 describe Build::Dependency::PlatformDetails do
 
-  let(:stub) { Stub.new }
-
-  it 'should return centos alt_bootdir' do
-    expect(stub).to receive(:centos?).and_return(true)
-
-    expect(stub.alt_bootdir).to eq('/usr/lib/jvm/java-1.6.0-openjdk.x86_64')
-  end
-
-  it 'should return macosx alt_bootdir' do
-    expect(stub).to receive(:centos?).and_return(false)
-    expect(stub).to receive(:macosx?).and_return(true)
-    expect(ENV).to receive(:[]).with('JAVA6_HOME').and_return('test-java6-home')
-
-    expect(stub.alt_bootdir).to eq('test-java6-home')
-  end
-
-  it 'should return trusty alt_bootdir' do
-    expect(stub).to receive(:centos?).and_return(false)
-    expect(stub).to receive(:macosx?).and_return(false)
-    expect(stub).to receive(:trusty?).and_return(true)
-
-    expect(stub.alt_bootdir).to eq('/usr/lib/jvm/java-6-openjdk-amd64')
-  end
-
-  it 'should return ubuntu alt_bootdir' do
-    expect(stub).to receive(:centos?).and_return(false)
-    expect(stub).to receive(:macosx?).and_return(false)
-    expect(stub).to receive(:trusty?).and_return(false)
-    expect(stub).to receive(:ubuntu?).and_return(true)
-
-    expect(stub.alt_bootdir).to eq('/usr/lib/jvm/java-6-openjdk')
-  end
-
-  it 'should fail for an unknown alt_bootdir' do
-    expect(stub).to receive(:centos?).and_return(false)
-    expect(stub).to receive(:macosx?).and_return(false)
-    expect(stub).to receive(:trusty?).and_return(false)
-    expect(stub).to receive(:ubuntu?).and_return(false)
-
-    expect { stub.alt_bootdir }.to raise_error('Unable to determine ALT_BOOTDIR')
-  end
+  let(:stub) { StubPlatformDetails.new }
 
   it 'should return the architecture' do
     expect(stub).to receive(:`).with('uname -m').and_return('test-architecture')
@@ -184,7 +144,7 @@ describe Build::Dependency::PlatformDetails do
     expect(stub.ubuntu?).not_to be
   end
 
-  class Stub
+  class StubPlatformDetails
     include Build::Dependency::PlatformDetails
   end
 

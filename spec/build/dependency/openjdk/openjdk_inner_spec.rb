@@ -18,11 +18,10 @@ require 'build/dependency/openjdk/ca_certs_builder'
 require 'build/dependency/openjdk/jdk6_cloner'
 require 'build/dependency/openjdk/jdk7_cloner'
 require 'build/dependency/openjdk/jdk8_cloner'
-require 'build/dependency/openjdk/jdk8_bootstrap_jdk_builder'
+require 'build/dependency/openjdk/bootstrap_jdk_builder'
 require 'build/dependency/openjdk/jre6_and_7_jre_builder'
 require 'build/dependency/openjdk/jre8_jre_builder'
 require 'build/dependency/openjdk/openjdk_inner'
-require 'build/dependency/openjdk/noop_bootstrap_jdk_builder'
 
 describe Build::Dependency::OpenJDKInner do
 
@@ -47,7 +46,7 @@ describe Build::Dependency::OpenJDKInner do
     end
 
     it 'should build a 1.6 JRE' do
-      expect_any_instance_of(Build::Dependency::NoOpBootstrapJDKBuilder).to receive(:build)
+      expect_any_instance_of(Build::Dependency::BootstrapJDKBuilder).to receive(:build)
       expect_any_instance_of(Build::Dependency::CACertsBuilder).to receive(:build)
       expect_any_instance_of(Build::Dependency::JDK6Cloner).to receive(:clone)
       expect_any_instance_of(Build::Dependency::JDK6Cloner).to receive(:checkout_tag).with('test-tag')
@@ -65,7 +64,7 @@ describe Build::Dependency::OpenJDKInner do
     end
 
     it 'should build a 1.7 JRE' do
-      expect_any_instance_of(Build::Dependency::NoOpBootstrapJDKBuilder).to receive(:build)
+      expect_any_instance_of(Build::Dependency::BootstrapJDKBuilder).to receive(:build)
       expect_any_instance_of(Build::Dependency::CACertsBuilder).to receive(:build)
       expect_any_instance_of(Build::Dependency::JDK7Cloner).to receive(:clone)
       expect_any_instance_of(Build::Dependency::JDK7Cloner).to receive(:checkout_tag).with('test-tag')
@@ -83,7 +82,7 @@ describe Build::Dependency::OpenJDKInner do
     end
 
     it 'should build a 1.8 JRE' do
-      expect_any_instance_of(Build::Dependency::JDK8BootstrapJDKBuilder).to receive(:build)
+      expect_any_instance_of(Build::Dependency::BootstrapJDKBuilder).to receive(:build)
       expect_any_instance_of(Build::Dependency::CACertsBuilder).to receive(:build)
       expect_any_instance_of(Build::Dependency::JDK8Cloner).to receive(:clone)
       expect_any_instance_of(Build::Dependency::JDK8Cloner).to receive(:checkout_tag).with('test-tag')

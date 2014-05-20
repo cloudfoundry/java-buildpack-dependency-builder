@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+# Encoding: utf-8
 # Copyright (c) 2013 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,16 +13,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-PACKAGES=" \
-	git \
-	subversion"
+require 'spec_helper'
+require 'build/dependency/node/node_vagrant_platform'
 
-yum update -y
-yum install -y $PACKAGES
+describe Build::Dependency::NodeVagrantPlatform do
 
-rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.rpm
+  let(:platform) { described_class.new 'test-name', 'test-version', false }
 
-curl -sL https://get.rvm.io | bash -s stable
-source /etc/profile.d/rvm.sh
-rvm install 2.1.1
-bundle install --gemfile /java-buildpack-dependency-builder/Gemfile
+  it 'should return resources directory for 3 digit version' do
+    expect(platform.send(:version_specific, '0.11.0')).to eq(File.expand_path 'resources/node')
+  end
+
+  it 'should raise error for unknown version' do
+    expect { platform.send(:version_specific, '0.10') }.to raise_error("Unable to process version '0.10'")
+  end
+
+end

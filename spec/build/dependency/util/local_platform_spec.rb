@@ -14,7 +14,7 @@
 # limitations under the License.
 
 require 'spec_helper'
-require 'build/dependency/openjdk/local_platform'
+require 'build/dependency/util/local_platform'
 
 describe Build::Dependency::LocalPlatform do
 

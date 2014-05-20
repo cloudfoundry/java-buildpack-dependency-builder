@@ -19,20 +19,6 @@ module Build
   module Dependency
     module PlatformDetails
 
-      def alt_bootdir
-        if centos?
-          '/usr/lib/jvm/java-1.6.0-openjdk.x86_64'
-        elsif macosx?
-          ENV['JAVA6_HOME']
-        elsif trusty?
-          '/usr/lib/jvm/java-6-openjdk-amd64'
-        elsif ubuntu?
-          '/usr/lib/jvm/java-6-openjdk'
-        else
-          fail 'Unable to determine ALT_BOOTDIR'
-        end
-      end
-
       def architecture
         `uname -m`.strip
       end

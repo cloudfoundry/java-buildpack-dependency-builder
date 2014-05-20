@@ -20,7 +20,7 @@ require 'build/dependency/util/base_vagrant_platform'
 module Build
   module Dependency
 
-    class OpenJDKVagrantPlatform
+    class OpenJDKVagrantPlatform < BaseVagrantPlatform
       include OpenJDKResources
 
       protected

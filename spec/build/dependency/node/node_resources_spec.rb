@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+# Encoding: utf-8
 # Copyright (c) 2013 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,16 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-PACKAGES=" \
-	git \
-	subversion"
+require 'spec_helper'
+require 'build/dependency/node/node_resources'
 
-yum update -y
-yum install -y $PACKAGES
+describe Build::Dependency::NodeResources do
 
-rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.rpm
+  it 'should calculate RESOURCES_DIR' do
+    expect(StubNodeResources::RESOURCES_DIR).to eq(File.expand_path('resources/node'))
+  end
 
-curl -sL https://get.rvm.io | bash -s stable
-source /etc/profile.d/rvm.sh
-rvm install 2.1.1
-bundle install --gemfile /java-buildpack-dependency-builder/Gemfile
+  it 'should calculate VENDOR_DIR' do
+    expect(StubNodeResources::VENDOR_DIR).to eq(File.expand_path('vendor/node'))
+  end
+
+  class StubNodeResources
+    include Build::Dependency::NodeResources
+  end
+
+end

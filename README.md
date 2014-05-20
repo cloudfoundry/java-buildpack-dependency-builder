@@ -81,9 +81,9 @@ The list of available versions for each dependency can be found at the following
 | Groovy | [`universal`](http://download.run.pivotal.io/groovy/index.yml)
 | JBoss AS | [`universal`](http://download.run.pivotal.io/jboss-as/index.yml)
 | MariaDB JDBC | [`universal`](http://download.run.pivotal.io/mariadb-jdbc/index.yml)
+| New Relic | [`universal`](http://download.run.pivotal.io/new-relic/index.yml)
 | NodeJS | [`centos6`](http://download.run.pivotal.io/node/centos6/x86_64/index.yml), [`lucid`](http://download.run.pivotal.io/node/lucid/x86_64/index.yml), [`mountainlion`](http://download.run.pivotal.io/node/mountainlion/x86_64/index.yml), [`precise`](http://download.run.pivotal.io/node/precise/x86_64/index.yml), [`trusty`](http://download.run.pivotal.io/node/trusty/x86_64/index.yml)
 | OpenJDK | [`centos6`](http://download.run.pivotal.io/openjdk/centos6/x86_64/index.yml), [`lucid`](http://download.run.pivotal.io/openjdk/lucid/x86_64/index.yml), [`mountainlion`](http://download.run.pivotal.io/openjdk/mountainlion/x86_64/index.yml), [`precise`](http://download.run.pivotal.io/openjdk/precise/x86_64/index.yml), [`trusty`](http://download.run.pivotal.io/openjdk/trusty/x86_64/index.yml)
-| New Relic | [`universal`](http://download.run.pivotal.io/new-relic/index.yml)
 | Play JPA Plugin | [`universal`](http://download.run.pivotal.io/play-jpa-plugin/index.yml)
 | PostgreSQL JDBC | [`universal`](http://download.run.pivotal.io/postgresql-jdbc/index.yml)
 | RedisStore | [`universal`](http://download.run.pivotal.io/redis-store/index.yml)
@@ -133,7 +133,7 @@ This table shows locations to check for new releases of cached dependencies.  It
 | Play JPA Plugin | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/play-jpa-plugin/maven-metadata.xml)
 | PostgreSQL JDBC | [`release`](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.postgresql%22%20AND%20a%3A%22postgresql%22)
 | RedisStore | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/com/gopivotal/manager/redis-store/maven-metadata.xml)
-| Ruby | [`release`](https://github.com/sstephenson/ruby-build/releases)
+| Ruby | [`release`](https://github.com/sstephenson/ruby-build/tree/master/share/ruby-build)
 | Spring Boot CLI | [`release`](http://repo.springsource.org/release/org/springframework/boot/spring-boot-cli/)
 | tc Server | [`release`](http://gopivotal.com/pivotal-products/pivotal-vfabric)
 | Tomcat | [`8.x`](http://tomcat.apache.org/download-80.cgi), [`7.x`](http://tomcat.apache.org/download-70.cgi), [`6.x`](http://tomcat.apache.org/download-60.cgi)
@@ -285,6 +285,7 @@ This table shows the mappings between version and tags for Ruby releases.  It is
 | `2.0.0-p195` |         | ✓     | ✓    | ✓       |        |
 | `2.0.0-p0`   |         | ✓     | ✓    | ✓       |        |
 |              |         |       |      |         |        |
+| `1.9.3-p547` | ✓       | ✓     | ✓    | ✓       | ✓      |
 | `1.9.3-p545` | ✓       | ✓     | ✓    | ✓       | ✓      |
 | `1.9.3-p484` | ✓       | ✓     | ✓    | ✓       | ✓      |
 | `1.9.3-p448` |         | ✓     | ✓    | ✓       | ✓      |
@@ -298,6 +299,7 @@ This table shows the mappings between version and tags for Ruby releases.  It is
 | `1.9.3-p194` |         | ✓     | ✓    | ✓       | ✓      |
 | `1.9.3-p125` |         | ✓     | ✓    | ✓       | ✓      |
 |              |         |       |      |         |        |
+| `1.9.2-p326` |
 | `1.9.2-p320` |         | ✓     | ✓    | ✓       | ✓      |
 | `1.9.2-p318` |         | ✓     | ✓    | ✓       | ✓      |
 | `1.9.2-p290` |         | ✓     | ✓    | ✓       | ✓      |
@@ -306,6 +308,7 @@ This table shows the mappings between version and tags for Ruby releases.  It is
 | `1.9.1-p430` |         | ✓     | ✓    |         |        |
 | `1.9.1-p378` |         | ✓     | ✓    |         |        |
 |              |         |       |      |         |        |
+| `1.8.7-p375` |
 | `1.8.7-p374` |         | ✓     | ✓    | ✓       | ✓      |
 | `1.8.7-p371` |         | ✓     | ✓    | ✓       | ✓      |
 | `1.8.7-p370` |         | ✓     | ✓    | ✓       | ✓      |

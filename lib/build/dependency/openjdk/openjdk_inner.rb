@@ -19,11 +19,10 @@ require 'build/dependency/openjdk/ca_certs_builder'
 require 'build/dependency/openjdk/jdk6_cloner'
 require 'build/dependency/openjdk/jdk7_cloner'
 require 'build/dependency/openjdk/jdk8_cloner'
-require 'build/dependency/openjdk/jdk8_bootstrap_jdk_builder'
+require 'build/dependency/openjdk/bootstrap_jdk_builder'
 require 'build/dependency/openjdk/jre6_and_7_jre_builder'
 require 'build/dependency/openjdk/jre8_jre_builder'
 require 'build/dependency/openjdk/openjdk_resources'
-require 'build/dependency/openjdk/noop_bootstrap_jdk_builder'
 require 'build/dependency/util/platform_details'
 
 module Build
@@ -46,7 +45,7 @@ module Build
       def source
         version_details = version_specific @version, @development
 
-        bootstrap_jdk_builder = version_details[:bootstrap_jdk_builder]
+        bootstrap_jdk_builder = BootstrapJDKBuilder.new
         bootstrap_jdk_builder.build
 
         cacerts_builder = CACertsBuilder.new
@@ -69,21 +68,18 @@ module Build
       def version_specific(version, development)
         if version =~ /^1.6/
           {
-            bootstrap_jdk_builder: NoOpBootstrapJDKBuilder.new,
-            cloner:                JDK6Cloner.new(development),
-            jre_builder:           JRE6And7JREBuilder.new
+            cloner:      JDK6Cloner.new(development),
+            jre_builder: JRE6And7JREBuilder.new
           }
         elsif version =~ /^1.7/
           {
-            bootstrap_jdk_builder: NoOpBootstrapJDKBuilder.new,
-            cloner:                JDK7Cloner.new(development),
-            jre_builder:           JRE6And7JREBuilder.new
+            cloner:      JDK7Cloner.new(development),
+            jre_builder: JRE6And7JREBuilder.new
           }
         elsif version =~ /^1.8/
           {
-            bootstrap_jdk_builder: JDK8BootstrapJDKBuilder.new,
-            cloner:                JDK8Cloner.new(development),
-            jre_builder:           JRE8JREBuilder.new
+            cloner:      JDK8Cloner.new(development),
+            jre_builder: JRE8JREBuilder.new
           }
         else
           fail "Unable to process version '#{version}'"
