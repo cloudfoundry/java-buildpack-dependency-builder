@@ -48,7 +48,7 @@ GEM
       ruby-progressbar (~> 1.4)
     ruby-debug-ide (0.4.22)
       rake (>= 0.8.1)
-    ruby-progressbar (1.4.2)
+    ruby-progressbar (1.5.1)
     safe_yaml (1.0.3)
     simplecov (0.8.2)
       docile (~> 1.1.0)
@@ -77,7 +77,7 @@ DEPENDENCIES
   rspec (>= 3.0.0.beta)
   rubocop
   ruby-debug-ide
-  ruby-progressbar (~> 1.4.2)
+  ruby-progressbar (~> 1.5.1)
   simplecov
   tee
   thor (~> 0.18)
