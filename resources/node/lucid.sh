@@ -1,4 +1,4 @@
-# Encoding: utf-8
+#!/usr/bin/env bash
 # Copyright (c) 2013 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,31 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'build/dependency'
-require 'build/dependency/openjdk/openjdk_vagrant_platform'
-require 'build/dependency/base_vagrant'
+PACKAGES=" \
+	build-essential \
+	curl \
+	git-core"
 
-module Build
-  module Dependency
+apt-get update
+apt-get install -y $PACKAGES
 
-    class OpenJDK < BaseVagrant
-
-      def initialize(options)
-        super 'openjdk-inner', OpenJDKVagrantPlatform, options
-      end
-
-      protected
-
-      def arguments
-        [
-          "--version #{@version}",
-          "--build-number #{@build_number}",
-          "--tag #{@tag}",
-          "--development #{@development ? 'true' : 'false'}"
-        ]
-      end
-
-    end
-
-  end
-end
+curl -sL https://get.rvm.io | bash -s stable
+source /etc/profile.d/rvm.sh
+rvm install 2.1.1
+bundle install --gemfile /java-buildpack-dependency-builder/Gemfile

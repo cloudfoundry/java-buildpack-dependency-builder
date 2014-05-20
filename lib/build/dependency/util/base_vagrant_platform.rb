@@ -14,18 +14,21 @@
 # limitations under the License.
 
 require 'build/dependency'
-require 'build/dependency/openjdk/openjdk_resources'
 require 'English'
 
 module Build
   module Dependency
 
-    class VagrantPlatform
-      include OpenJDKResources
+    class BaseVagrantPlatform
 
-      def initialize(name, version)
-        @name    = name
-        @version = version
+      def self.vagrant?(platform)
+        VAGRANT_PLATFORMS.include? platform
+      end
+
+      def initialize(name, version, shutdown)
+        @name     = name
+        @version  = version
+        @shutdown = shutdown
       end
 
       def exec(command)
@@ -35,21 +38,19 @@ module Build
           system "vagrant ssh #{@name} --command 'cd /java-buildpack-dependency-builder && #{command}'"
 
           abort 'FAILURE' unless $CHILD_STATUS == 0
-          system "vagrant destroy -f #{@name}"
+          system "vagrant destroy -f #{@name}" if @shutdown
         end
       end
 
-      private
+      protected
 
-      def version_specific(version)
-        if version =~ /^1.6/ || version =~ /^1.7/
-          File.join(RESOURCES_DIR, '6_and_7')
-        elsif version =~ /^1.8/
-          File.join(RESOURCES_DIR, '8')
-        else
-          fail "Unable to process version '#{version}'"
-        end
+      def version_specific(_version)
+        fail "Method 'version_specific(version)' must be defined"
       end
+
+      VAGRANT_PLATFORMS = %w(centos6 lucid precise trusty).freeze
+
+      private_constant :VAGRANT_PLATFORMS
 
     end
   end

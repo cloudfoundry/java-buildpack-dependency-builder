@@ -14,30 +14,15 @@
 # limitations under the License.
 
 require 'build/dependency'
-require 'build/dependency/openjdk/openjdk_vagrant_platform'
-require 'build/dependency/base_vagrant'
 
 module Build
   module Dependency
+    module NodeResources
 
-    class OpenJDK < BaseVagrant
+      RESOURCES_DIR = File.expand_path('../../../../../resources/node', __FILE__).freeze
 
-      def initialize(options)
-        super 'openjdk-inner', OpenJDKVagrantPlatform, options
-      end
-
-      protected
-
-      def arguments
-        [
-          "--version #{@version}",
-          "--build-number #{@build_number}",
-          "--tag #{@tag}",
-          "--development #{@development ? 'true' : 'false'}"
-        ]
-      end
+      VENDOR_DIR = File.expand_path('../../../../../vendor/node', __FILE__).freeze
 
     end
-
   end
 end

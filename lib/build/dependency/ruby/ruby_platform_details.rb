@@ -14,30 +14,28 @@
 # limitations under the License.
 
 require 'build/dependency'
-require 'build/dependency/openjdk/openjdk_vagrant_platform'
-require 'build/dependency/base_vagrant'
+require 'build/dependency/util/platform_details'
 
 module Build
   module Dependency
+    module RubyPlatformDetails
+      include Build::Dependency::PlatformDetails
 
-    class OpenJDK < BaseVagrant
+      def openssl_dir
+        if macosx?
+          cellar, version = nil
 
-      def initialize(options)
-        super 'openjdk-inner', OpenJDKVagrantPlatform, options
-      end
+          Bundler.with_clean_env do
+            cellar = `brew --cellar openssl`.chomp
+            version = `brew list --versions openssl | cut -d ' ' -f 2`.chomp
+          end
 
-      protected
-
-      def arguments
-        [
-          "--version #{@version}",
-          "--build-number #{@build_number}",
-          "--tag #{@tag}",
-          "--development #{@development ? 'true' : 'false'}"
-        ]
+          " --with-openssl-dir=#{cellar}/#{version}"
+        else
+          ''
+        end
       end
 
     end
-
   end
 end

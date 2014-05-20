@@ -14,30 +14,27 @@
 # limitations under the License.
 
 require 'build/dependency'
-require 'build/dependency/openjdk/openjdk_vagrant_platform'
-require 'build/dependency/base_vagrant'
+require 'build/dependency/util/platform_details'
 
 module Build
   module Dependency
+    module OpenJDKPlatformDetails
+      include Build::Dependency::PlatformDetails
 
-    class OpenJDK < BaseVagrant
-
-      def initialize(options)
-        super 'openjdk-inner', OpenJDKVagrantPlatform, options
-      end
-
-      protected
-
-      def arguments
-        [
-          "--version #{@version}",
-          "--build-number #{@build_number}",
-          "--tag #{@tag}",
-          "--development #{@development ? 'true' : 'false'}"
-        ]
+      def alt_bootdir
+        if centos?
+          '/usr/lib/jvm/java-1.6.0-openjdk.x86_64'
+        elsif macosx?
+          ENV['JAVA6_HOME']
+        elsif trusty?
+          '/usr/lib/jvm/java-6-openjdk-amd64'
+        elsif ubuntu?
+          '/usr/lib/jvm/java-6-openjdk'
+        else
+          fail 'Unable to determine ALT_BOOTDIR'
+        end
       end
 
     end
-
   end
 end

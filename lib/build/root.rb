@@ -20,11 +20,15 @@ require 'build/dependency/groovy'
 require 'build/dependency/jboss_as'
 require 'build/dependency/mariadb_jdbc'
 require 'build/dependency/new_relic'
+require 'build/dependency/node/node'
+require 'build/dependency/node/node_inner'
 require 'build/dependency/openjdk/openjdk'
 require 'build/dependency/openjdk/openjdk_inner'
 require 'build/dependency/play_jpa_plugin'
 require 'build/dependency/postgresql_jdbc'
 require 'build/dependency/redis_store'
+require 'build/dependency/ruby/ruby'
+require 'build/dependency/ruby/ruby_inner'
 require 'build/dependency/spring_boot_cli'
 require 'build/dependency/tc_server'
 require 'build/dependency/tomcat'
@@ -52,6 +56,13 @@ module Build
                required: true
       end
 
+      def node_options
+        option :tag,
+               desc:     'The repository tag to build from',
+               aliases:  '-t',
+               required: true
+      end
+
       def openjdk_options
         option :build_number,
                desc:     'The builder number of OpenJDK to create',
@@ -66,8 +77,16 @@ module Build
         option :development,
                desc:     'Whether to build from the development repository',
                aliases:  '-d',
-               type:    :boolean,
+               type:     :boolean,
                required: false
+      end
+
+      def vagrant_options
+        option :shutdown,
+               desc:    "Whether to shutdown the Vagrant instances after they're finished",
+               aliases: '-s',
+               type:    :boolean,
+               default: true
       end
     end
 
@@ -112,12 +131,36 @@ module Build
       Dependency::MariaDbJDBC.new(options).build
     end
 
+    desc 'node', 'Publish a version of NodeJS'
+    common_options
+    node_options
+    vagrant_options
+
+    option :platforms,
+           desc:    'A list of the platforms the version should be built on',
+           aliases: '-p',
+           type:    :array,
+           default: %w(centos6 lucid osx precise trusty)
+
+    def node
+      Dependency::Node.new(options).build
+    end
+
+    desc 'node-inner', 'Publish a version of NodeJS', hide: true
+    common_options
+    node_options
+
+    def node_inner
+      Dependency::NodeInner.new(options).build
+    end
+
     desc 'openjdk', 'Publish a version of OpenJDK'
     common_options
     openjdk_options
+    vagrant_options
 
     option :platforms,
-           desc:    'An list of the platforms the version should be built on',
+           desc:    'A list of the platforms the version should be built on',
            aliases: '-p',
            type:    :array,
            default: %w(centos6 lucid precise trusty)
@@ -160,6 +203,27 @@ module Build
 
     def redis_store
       Dependency::RedisStore.new(options).build
+    end
+
+    desc 'ruby', 'Publish a version of Ruby'
+    common_options
+    vagrant_options
+
+    option :platforms,
+           desc:    'A list of the platforms the version should be built on',
+           aliases: '-p',
+           type:    :array,
+           default: %w(centos6 lucid osx precise trusty)
+
+    def ruby
+      Dependency::Ruby.new(options).build
+    end
+
+    desc 'ruby-inner', 'Publish a version of Ruby', hide: true
+    common_options
+
+    def ruby_inner
+      Dependency::RubyInner.new(options).build
     end
 
     desc 'spring-boot-cli', 'Publish a version of Spring Boot'

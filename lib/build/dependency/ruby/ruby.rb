@@ -14,17 +14,22 @@
 # limitations under the License.
 
 require 'build/dependency'
+require 'build/dependency/ruby/ruby_vagrant_platform'
+require 'build/dependency/base_vagrant'
 
 module Build
   module Dependency
 
-    class NoOpBootstrapJDKBuilder
+    class Ruby < BaseVagrant
 
-      def build
+      def initialize(options)
+        super 'ruby-inner', RubyVagrantPlatform, options
       end
 
-      def root
-        nil
+      protected
+
+      def arguments
+        ["--version #{@version}"]
       end
 
     end

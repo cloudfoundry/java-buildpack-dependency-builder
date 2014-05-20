@@ -13,31 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'build/dependency'
-require 'build/dependency/openjdk/openjdk_vagrant_platform'
-require 'build/dependency/base_vagrant'
+require 'spec_helper'
+require 'build/dependency/ruby/ruby'
 
-module Build
-  module Dependency
+describe Build::Dependency::Ruby do
 
-    class OpenJDK < BaseVagrant
+  let(:dependency) { described_class.new(options) }
 
-      def initialize(options)
-        super 'openjdk-inner', OpenJDKVagrantPlatform, options
-      end
+  let(:options) { { version: 'test-version', platforms: [] } }
 
-      protected
-
-      def arguments
-        [
-          "--version #{@version}",
-          "--build-number #{@build_number}",
-          "--tag #{@tag}",
-          "--development #{@development ? 'true' : 'false'}"
-        ]
-      end
-
-    end
-
+  it 'should execute without development' do
+    expect(dependency.send(:arguments)).to include('--version test-version')
   end
+
 end

@@ -14,55 +14,32 @@
 # limitations under the License.
 
 require 'spec_helper'
-require 'build/dependency/openjdk/local_platform'
 require 'build/dependency/openjdk/openjdk'
-require 'build/dependency/openjdk/vagrant_platform'
+require 'build/dependency/util/local_platform'
 
 describe Build::Dependency::OpenJDK do
 
-  let(:options) do
-    { configuration: 'spec/fixture/test_configuration.yml', version: 'test-version',
-      build_number:  'test-build-number', tag: 'test-tag', platforms: %w(lucid osx) }
-  end
-
   let(:dependency) { described_class.new(options) }
 
-  it 'should execute on specified platforms' do
-    expect_any_instance_of(Build::Dependency::VagrantPlatform)
-    .to receive(:exec).with('bundle exec bin/build openjdk-inner ' \
-                            '--configuration vendor/openjdk/java_buildpack_dependency_builder.yml ' \
-                            '--version test-version ' \
-                            '--build-number test-build-number ' \
-                            '--tag test-tag ' \
-                            '--development false')
-    expect_any_instance_of(Build::Dependency::LocalPlatform)
-    .to receive(:exec).with('bundle exec bin/build openjdk-inner ' \
-                            '--configuration vendor/openjdk/java_buildpack_dependency_builder.yml ' \
-                            '--version test-version ' \
-                            '--build-number test-build-number ' \
-                            '--tag test-tag ' \
-                            '--development false')
+  context do
+    let(:options) do
+      { version: 'test-version', build_number: 'test-build-number', tag: 'test-tag', platforms: [] }
+    end
 
-    dependency.build
+    it 'should execute without development' do
+      expect(dependency.send(:arguments)).to include('--version test-version', '--build-number test-build-number',
+                                                     '--tag test-tag', '--development false')
+    end
   end
 
   context do
-
     let(:options) do
-      { configuration: 'spec/fixture/test_configuration.yml', version: 'test-version',
-        build_number:  'test-build-number', tag: 'test-tag', platforms: %w(osx), development: 'true' }
+      { version: 'test-version', build_number: 'test-build-number', tag: 'test-tag', development: 'true', platforms: [] }
     end
 
     it 'should execute with development' do
-      expect_any_instance_of(Build::Dependency::LocalPlatform)
-      .to receive(:exec).with('bundle exec bin/build openjdk-inner ' \
-                            '--configuration vendor/openjdk/java_buildpack_dependency_builder.yml ' \
-                            '--version test-version ' \
-                            '--build-number test-build-number ' \
-                            '--tag test-tag ' \
-                            '--development true')
-
-      dependency.build
+      expect(dependency.send(:arguments)).to include('--version test-version', '--build-number test-build-number',
+                                                     '--tag test-tag', '--development true')
     end
   end
 

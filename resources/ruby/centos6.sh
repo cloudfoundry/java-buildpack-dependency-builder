@@ -1,4 +1,4 @@
-# Encoding: utf-8
+#!/usr/bin/env bash
 # Copyright (c) 2013 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,19 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'spec_helper'
-require 'build/dependency/openjdk/noop_bootstrap_jdk_builder'
+PACKAGES=" \
+	git \
+	subversion"
 
-describe Build::Dependency::NoOpBootstrapJDKBuilder do
+yum update -y
+yum install -y $PACKAGES
 
-  let(:builder) { described_class.new }
+rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.rpm
 
-  it 'should do nothing during build' do
-    builder.build
-  end
-
-  it 'should return nil for the root' do
-    expect(builder.build).not_to be
-  end
-
-end
+curl -sL https://get.rvm.io | bash -s stable
+source /etc/profile.d/rvm.sh
+rvm install 2.1.1
+bundle install --gemfile /java-buildpack-dependency-builder/Gemfile

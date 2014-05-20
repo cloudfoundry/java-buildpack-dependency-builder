@@ -21,7 +21,7 @@ require 'uri'
 describe Build::Proxy do
   include_context 'environment_helper'
 
-  let(:stub) { Stub.new }
+  let(:stub) { StubProxy.new }
 
   context do
 
@@ -71,7 +71,7 @@ describe Build::Proxy do
 
   end
 
-  class Stub
+  class StubProxy
     include Build::Proxy
   end
 

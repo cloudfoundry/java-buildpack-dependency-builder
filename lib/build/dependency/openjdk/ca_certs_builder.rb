@@ -15,7 +15,7 @@
 
 require 'build/dependency'
 require 'build/dependency/openjdk/openjdk_resources'
-require 'build/dependency/openjdk/platform_details'
+require 'build/dependency/util/platform_details'
 
 module Build
   module Dependency

@@ -13,31 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'build/dependency'
-require 'build/dependency/openjdk/openjdk_vagrant_platform'
-require 'build/dependency/base_vagrant'
+require 'spec_helper'
+require 'build/dependency/ruby/ruby_resources'
 
-module Build
-  module Dependency
+describe Build::Dependency::RubyResources do
 
-    class OpenJDK < BaseVagrant
-
-      def initialize(options)
-        super 'openjdk-inner', OpenJDKVagrantPlatform, options
-      end
-
-      protected
-
-      def arguments
-        [
-          "--version #{@version}",
-          "--build-number #{@build_number}",
-          "--tag #{@tag}",
-          "--development #{@development ? 'true' : 'false'}"
-        ]
-      end
-
-    end
-
+  it 'should calculate RESOURCES_DIR' do
+    expect(StubRubyResources::RESOURCES_DIR).to eq(File.expand_path('resources/ruby'))
   end
+
+  it 'should calculate VENDOR_DIR' do
+    expect(StubRubyResources::VENDOR_DIR).to eq(File.expand_path('vendor/ruby'))
+  end
+
+  class StubRubyResources
+    include Build::Dependency::RubyResources
+  end
+
 end

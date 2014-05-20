@@ -15,35 +15,26 @@
 
 require 'build/dependency'
 require 'build/dependency/openjdk/openjdk_resources'
-require 'build/dependency/openjdk/platform_details'
-require 'fileutils'
+require 'build/dependency/util/base_vagrant_platform'
 
 module Build
   module Dependency
 
-    class JDK8BootstrapJDKBuilder
+    class OpenJDKVagrantPlatform < BaseVagrantPlatform
       include OpenJDKResources
-      include PlatformDetails
 
-      def build
-        unless File.exist?(root) || macosx?
-          puts 'Downloading bootstrap JDK...'
-          FileUtils.mkdir_p root
-          system "curl -Ls --header 'Cookie: oraclelicense=accept-securebackup-cookie' #{BOOSTRAP_JDK_URI} | tar xz --strip 1 -C #{root}"
+      protected
+
+      def version_specific(version)
+        if version =~ /^1.6/ || version =~ /^1.7/
+          File.join(RESOURCES_DIR, '6_and_7')
+        elsif version =~ /^1.8/
+          File.join(RESOURCES_DIR, '8')
+        else
+          fail "Unable to process version '#{version}'"
         end
       end
 
-      def root
-        BOOSTRAP_JDK_ROOT
-      end
-
-      BOOSTRAP_JDK_ROOT = File.join VENDOR_DIR, 'bootstrap-jdk'
-
-      BOOSTRAP_JDK_URI = 'http://download.oracle.com/otn-pub/java/jdk/7u51-b13/jdk-7u51-linux-x64.tar.gz'
-
-      private_constant :BOOSTRAP_JDK_ROOT, :BOOSTRAP_JDK_URI
-
     end
-
   end
 end

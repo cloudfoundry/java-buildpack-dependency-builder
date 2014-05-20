@@ -13,31 +13,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'build/dependency'
-require 'build/dependency/openjdk/openjdk_vagrant_platform'
-require 'build/dependency/base_vagrant'
+require 'spec_helper'
+require 'build/dependency/node/node_vagrant_platform'
 
-module Build
-  module Dependency
+describe Build::Dependency::NodeVagrantPlatform do
 
-    class OpenJDK < BaseVagrant
+  let(:platform) { described_class.new 'test-name', 'test-version', false }
 
-      def initialize(options)
-        super 'openjdk-inner', OpenJDKVagrantPlatform, options
-      end
-
-      protected
-
-      def arguments
-        [
-          "--version #{@version}",
-          "--build-number #{@build_number}",
-          "--tag #{@tag}",
-          "--development #{@development ? 'true' : 'false'}"
-        ]
-      end
-
-    end
-
+  it 'should return resources directory for 3 digit version' do
+    expect(platform.send(:version_specific, '0.11.0')).to eq(File.expand_path 'resources/node')
   end
+
+  it 'should raise error for unknown version' do
+    expect { platform.send(:version_specific, '0.10') }.to raise_error("Unable to process version '0.10'")
+  end
+
 end

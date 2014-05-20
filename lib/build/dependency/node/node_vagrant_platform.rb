@@ -14,30 +14,25 @@
 # limitations under the License.
 
 require 'build/dependency'
-require 'build/dependency/openjdk/openjdk_vagrant_platform'
-require 'build/dependency/base_vagrant'
+require 'build/dependency/node/node_resources'
+require 'build/dependency/util/base_vagrant_platform'
 
 module Build
   module Dependency
 
-    class OpenJDK < BaseVagrant
-
-      def initialize(options)
-        super 'openjdk-inner', OpenJDKVagrantPlatform, options
-      end
+    class NodeVagrantPlatform < BaseVagrantPlatform
+      include NodeResources
 
       protected
 
-      def arguments
-        [
-          "--version #{@version}",
-          "--build-number #{@build_number}",
-          "--tag #{@tag}",
-          "--development #{@development ? 'true' : 'false'}"
-        ]
+      def version_specific(version)
+        if version =~ /[\d]+\.[\d]+\.[\d]+/
+          RESOURCES_DIR
+        else
+          fail "Unable to process version '#{version}'"
+        end
       end
 
     end
-
   end
 end

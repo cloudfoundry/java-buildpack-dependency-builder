@@ -19,14 +19,14 @@ require 'build/dependency/openjdk/openjdk_resources'
 describe Build::Dependency::OpenJDKResources do
 
   it 'should calculate RESOURCES_DIR' do
-    expect(Stub::RESOURCES_DIR).to eq(File.expand_path('resources/openjdk'))
+    expect(StubOpenJDKResources::RESOURCES_DIR).to eq(File.expand_path('resources/openjdk'))
   end
 
   it 'should calculate VENDOR_DIR' do
-    expect(Stub::VENDOR_DIR).to eq(File.expand_path('vendor/openjdk'))
+    expect(StubOpenJDKResources::VENDOR_DIR).to eq(File.expand_path('vendor/openjdk'))
   end
 
-  class Stub
+  class StubOpenJDKResources
     include Build::Dependency::OpenJDKResources
   end
 
