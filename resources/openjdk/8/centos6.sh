@@ -37,5 +37,5 @@ yum install -y $PACKAGES
 
 curl -sL https://get.rvm.io | bash -s stable
 source /etc/profile.d/rvm.sh
-rvm install 2.1.1
+rvm install 2.1.2
 bundle install --gemfile /java-buildpack-dependency-builder/Gemfile

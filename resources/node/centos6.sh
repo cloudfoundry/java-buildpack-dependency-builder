@@ -23,5 +23,5 @@ rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.r
 
 curl -sL https://get.rvm.io | bash -s stable
 source /etc/profile.d/rvm.sh
-rvm install 2.1.1
+rvm install 2.1.2
 bundle install --gemfile /java-buildpack-dependency-builder/Gemfile
