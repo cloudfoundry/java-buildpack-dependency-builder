@@ -35,10 +35,10 @@ module Replicate
     end
 
     def update(replicated_file)
-      if candidate?(replicated_file)
-        content = replicated_file.content.gsub(/#{BASE_URI}/, @base_uri)
-        replicated_file.content { |f| f.write content }
-      end
+      return unless candidate?(replicated_file)
+
+      content = replicated_file.content.gsub(/#{BASE_URI}/, @base_uri)
+      replicated_file.content { |f| f.write content }
     end
 
     private

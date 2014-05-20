@@ -25,24 +25,24 @@ module Build
       include PlatformDetails
 
       def build
-        unless File.exist? cacerts
-          puts 'Creating cacerts...'
+        return if File.exist? cacerts
 
-          Dir.mktmpdir do |root|
-            splitter = if macosx?
-                         "split -p '-----BEGIN CERTIFICATE-----' - #{root}/"
-                       else
-                         "csplit -s -f #{root}/ - '/-----BEGIN CERTIFICATE-----/' {*}"
-                       end
+        puts 'Creating cacerts...'
 
-            system <<-EOF
+        Dir.mktmpdir do |root|
+          splitter = if macosx?
+                       "split -p '-----BEGIN CERTIFICATE-----' - #{root}/"
+                     else
+                       "csplit -s -f #{root}/ - '/-----BEGIN CERTIFICATE-----/' {*}"
+                     end
+
+          system <<-EOF
 curl -s #{CACERTS_URI} | awk '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/{ print $0; }' | #{splitter}
 
 for I in $(find #{root} -type f) ; do
   keytool -importcert -noprompt -keystore #{cacerts} -storepass changeit -file $I -alias $(basename $I)
 done
-            EOF
-          end
+          EOF
         end
       end
 

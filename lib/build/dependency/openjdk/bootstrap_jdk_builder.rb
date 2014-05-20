@@ -26,11 +26,11 @@ module Build
       include PlatformDetails
 
       def build
-        unless File.exist?(root) || macosx?
-          puts 'Downloading bootstrap JDK...'
-          FileUtils.mkdir_p root
-          system "curl -Ls --header 'Cookie: oraclelicense=accept-securebackup-cookie' #{BOOSTRAP_JDK_URI} | tar xz --strip 1 -C #{root}"
-        end
+        return if File.exist?(root) || macosx?
+
+        puts 'Downloading bootstrap JDK...'
+        FileUtils.mkdir_p root
+        system "curl -Ls --header 'Cookie: oraclelicense=accept-securebackup-cookie' #{BOOSTRAP_JDK_URI} | tar xz --strip 1 -C #{root}"
       end
 
       def root

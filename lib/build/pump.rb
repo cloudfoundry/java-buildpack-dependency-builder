@@ -94,11 +94,11 @@ module Build
     end
 
     def download_from_aws(object, file, progress_bar)
-      if object.exists?
-        object.read do |chunk|
-          file.write chunk
-          progress_bar.progress += chunk.length
-        end
+      return unless object.exists?
+
+      object.read do |chunk|
+        file.write chunk
+        progress_bar.progress += chunk.length
       end
     end
 

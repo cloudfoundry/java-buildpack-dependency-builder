@@ -34,15 +34,13 @@ module Build
 
       yield
 
-      if exist_previously && @distribution_id
-        complete = Atomic.new false
+      return unless exist_previously && @distribution_id
 
-        [
-          Thread.new { cloudfront object, complete },
-          Thread.new { progress complete }
-        ].each { |t| t.join }
-      end
-
+      complete = Atomic.new false
+      [
+        Thread.new { cloudfront object, complete },
+        Thread.new { progress complete }
+      ].each { |t| t.join }
     end
 
     private
