@@ -152,6 +152,7 @@ This table shows the mappings between versions, build numbers, and repository ta
 | `1.8.0_M7`  | `b91`        | `jdk8-b91`    | ✓       | ✓     | ✓    | ✓       |        |
 | `1.8.0_M6`  | `b75`        | `jdk8-b75`    | ✓       | ✓     | ✓    | ✓       |        |
 |             |              |               |         |       |      |         |        |
+| `1.7.0_60`  | `b19`        | `jdk7u60-b19` | ✓       | ✓     | ✓    | ✓       | ✓      |
 | `1.7.0_55`  | `b13`        | `jdk7u55-b13` | ✓       | ✓     | ✓    | ✓       | ✓      |
 | `1.7.0_51`  | `b31`        | `jdk7u51-b31` | ✓       | ✓     | ✓    | ✓       | ✓      |
 | `1.7.0_45`  | `b31`        | `jdk7u45-b31` | ✓       | ✓     | ✓    | ✓       | ✓      |
