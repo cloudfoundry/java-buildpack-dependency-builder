@@ -20,6 +20,6 @@ RSpec::Core::RakeTask.new
 CLEAN.include 'coverage'
 
 require 'rubocop/rake_task'
-Rubocop::RakeTask.new
+RuboCop::RakeTask.new
 
 task default: %w(rubocop spec)
