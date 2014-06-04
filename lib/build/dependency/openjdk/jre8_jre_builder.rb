@@ -30,7 +30,7 @@ module Build
         @package = Tempfile.new('jre')
       end
 
-      def build(version, build_number, bootstrap_jdk_root, cacerts, source_location)
+      def build(version, build_number, bootstrap_jdk_root, cacerts, source_location, package_jdk)
         puts "Building #{@name} #{version}..."
         Dir.chdir source_location do
           system <<-EOF
@@ -38,7 +38,7 @@ export LANG=C PATH=#{bootstrap_jdk_root}/bin:$PATH
 bash ./configure --with-cacerts-file=#{cacerts}
 make MILESTONE= JDK_VERSION=#{version} JDK_BUILD_NUMBER=#{build_number} ALLOW_DOWNLOADS=true GENERATE_DOCS=false PARALLEL_COMPILE_JOBS=#{cpu_count} HOTSPOT_BUILD_JOBS=#{cpu_count} all
 
-tar czvf #{@package.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build_dir}/images/j2re-image .
+tar czvf #{@package.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build_dir}/images/#{package_dir package_jdk} .
           EOF
         end
 
@@ -49,6 +49,10 @@ tar czvf #{@package.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build
 
       def build_dir
         macosx? ? 'macosx-x86_64-normal-server-release' : 'linux-x86_64-normal-server-release'
+      end
+
+      def package_dir(package_jdk)
+        package_jdk ? 'j2sdk-image' : 'j2re-image'
       end
 
     end

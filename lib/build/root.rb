@@ -79,6 +79,11 @@ module Build
                aliases:  '-d',
                type:     :boolean,
                required: false
+
+        option :jdk,
+               desc:     'Whether to package the JDK instead of the JRE',
+               type:     :boolean,
+               required: false
       end
 
       def vagrant_options

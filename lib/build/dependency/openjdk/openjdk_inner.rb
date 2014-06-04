@@ -58,7 +58,7 @@ module Build
 
         jre_builder = version_details[:jre_builder]
         jre_builder.build(@version, @build_number,
-                          bootstrap_jdk_builder.root, cacerts_builder.cacerts, cloner.source_location)
+                          bootstrap_jdk_builder.root, cacerts_builder.cacerts, cloner.source_location, @jdk)
 
         jre_builder.package
       end
