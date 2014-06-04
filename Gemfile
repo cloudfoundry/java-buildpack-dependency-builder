@@ -10,12 +10,15 @@ gem 'thread', '~> 0.1.1'
 
 group :development do
   gem 'codeclimate-test-reporter'
-  gem 'debase'
   gem 'rake'
   gem 'rspec'
   gem 'rubocop'
-  gem 'ruby-debug-ide'
   gem 'simplecov'
   gem 'tee'
   gem 'webmock'
+end
+
+group :debug do
+  gem 'debase'
+  gem 'ruby-debug-ide'
 end
