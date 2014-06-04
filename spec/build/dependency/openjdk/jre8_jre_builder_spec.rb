@@ -35,7 +35,8 @@ describe Build::Dependency::JRE8JREBuilder do
     expect(builder).to receive(:macosx?).and_return(true)
     expect(builder).to receive(:system).with(/macosx-x86_64-normal-server-release/)
 
-    builder.build 'test-version', 'test-build-number', 'test-bootstrap-jdk-root', 'test-cacerts', 'test-source-location'
+    builder.build 'test-version', 'test-build-number', 'test-bootstrap-jdk-root', 'test-cacerts',
+                  'test-source-location', false
   end
 
   it 'should create on non-OS X' do
@@ -44,7 +45,8 @@ describe Build::Dependency::JRE8JREBuilder do
     expect(builder).to receive(:macosx?).and_return(false)
     expect(builder).to receive(:system).with(/linux-x86_64-normal-server-release/)
 
-    builder.build 'test-version', 'test-build-number', 'test-bootstrap-jdk-root', 'test-cacerts', 'test-source-location'
+    builder.build 'test-version', 'test-build-number', 'test-bootstrap-jdk-root', 'test-cacerts',
+                  'test-source-location', false
   end
 
 end

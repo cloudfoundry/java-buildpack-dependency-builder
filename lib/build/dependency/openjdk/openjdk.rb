@@ -33,7 +33,8 @@ module Build
           "--version #{@version}",
           "--build-number #{@build_number}",
           "--tag #{@tag}",
-          "--development #{@development ? 'true' : 'false'}"
+          "--development #{@development ? 'true' : 'false'}",
+          "--jdk #{@jdk ? 'true' : 'false'}"
         ]
       end
 
