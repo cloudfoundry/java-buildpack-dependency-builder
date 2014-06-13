@@ -128,7 +128,7 @@ This table shows locations to check for new releases of cached dependencies.  It
 | JBoss AS | [`release`](http://www.jboss.org/jbossas/downloads)
 | MariaDB JDBC | [`release`](https://downloads.mariadb.org/client-java/)
 | New Relic | [`release`](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.newrelic.agent.java%22%20AND%20a%3A%22newrelic-agent%22)
-| NodeJS | [`release`](http://nodejs.org/dist/)
+| NodeJS | [`stable`](https://semver.io/node/stable), [`unstable`](https://semver.io/node/unstable)
 | OpenJDK | [`oracle`](http://www.oracle.com/technetwork/java/javase/downloads/index.html), [`jdk8u`](http://hg.openjdk.java.net/jdk8u/jdk8u), [`jdk7u`](http://hg.openjdk.java.net/jdk7u/jdk7u), [`jdk6`](http://hg.openjdk.java.net/jdk6/jdk6)
 | Play JPA Plugin | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/play-jpa-plugin/maven-metadata.xml)
 | PostgreSQL JDBC | [`release`](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.postgresql%22%20AND%20a%3A%22postgresql%22)
@@ -204,6 +204,7 @@ This table shows the mappings between version and tags for NodeJS releases.  It 
 | `0.11.1`       | `v0.11.1`  | ✓       | ✓     | ✓    | ✓       | ✓      |
 | `0.11.0`       | `v0.11.0`  | ✓       | ✓     | ✓    | ✓       | ✓      |
 |                |            |         |       |      |         |        |
+| `0.10.29`      | `v0.10.29` | ✓       | ✓     | ✓    | ✓       | ✓      |
 | `0.10.28`      | `v0.10.28` | ✓       | ✓     | ✓    | ✓       | ✓      |
 | `0.10.27`      | `v0.10.27` | ✓       | ✓     | ✓    | ✓       | ✓      |
 | `0.10.26`      | `v0.10.26` | ✓       | ✓     | ✓    | ✓       | ✓      |
