@@ -23,14 +23,44 @@ module Replicate
   class ObjectCollection < Array
 
     def initialize
-      concat contents.map { |contents| Object.new contents }.select { |object| object.key !~ /\/$/ }
+      marker = nil
+
+      loop do
+        document = document marker
+        objects  = objects document
+
+        concat objects.select { |object| object.key !~ /\/$/ }
+
+        break unless truncated? document
+        marker = marker objects
+      end
     end
 
     private
 
-    def contents
-      Nokogiri::XML(open('http://download.pivotal.io.s3.amazonaws.com/'))
-      .xpath('./xmlns:ListBucketResult/xmlns:Contents')
+    def document(marker)
+      Nokogiri::XML(open(uri(marker)))
+    end
+
+    def marker(objects)
+      objects.last.key
+    end
+
+    def objects(document)
+      document.xpath('./xmlns:ListBucketResult/xmlns:Contents').map { |contents| Object.new contents }
+    end
+
+    def truncated?(document)
+      is_truncated = document.xpath('./xmlns:ListBucketResult/xmlns:IsTruncated').first
+      return false unless is_truncated
+
+      is_truncated.content.casecmp('true').zero?
+    end
+
+    def uri(marker)
+      uri = 'http://download.pivotal.io.s3.amazonaws.com/'
+      uri += "?marker=#{marker}" if marker
+      uri
     end
 
   end
