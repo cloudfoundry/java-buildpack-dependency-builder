@@ -13,12 +13,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-PACKAGES=" \
-	build-essential \
-	curl \
-	git-core \
-	libssl-dev"
+VERSION="0.4.0"
 
-apt-get update
-apt-get dist-upgrade -y
-apt-get install -y $PACKAGES
+mkdir -p "$HOME/.rbenv"
+curl -sSL "https://github.com/sstephenson/rbenv/archive/v${VERSION}.tar.gz" | tar xzvf - --strip 1 -C "$HOME/.rbenv"
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> $HOME/.bash_profile
+echo 'eval "$(rbenv init -)"' >> $HOME/.bash_profile
+. $HOME/.bash_profile
+
+mkdir -p "$HOME/.rbenv/plugins/ruby-build"
+curl -sSL "https://github.com/sstephenson/ruby-build/archive/master.tar.gz" | tar xzvf - --strip 1 -C "$HOME/.rbenv/plugins/ruby-build"
+
+cd /java-buildpack-dependency-builder
+rbenv install
+gem install bundler --no-rdoc --no-ri
+rbenv rehash
+bundle install

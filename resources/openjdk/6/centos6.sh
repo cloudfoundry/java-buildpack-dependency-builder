@@ -26,6 +26,7 @@ PACKAGES=" \
 	libxslt-devel \
 	libXt-devel \
 	libXtst-devel \
+	openssl-devel \
 	unzip \
 	yum-utils \
 	zip"
@@ -34,9 +35,5 @@ rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.r
 rpm -Uvh http://pkgs.repoforge.org/mercurial/mercurial-2.2.2-1.el6.rfx.x86_64.rpm
 
 yum update -y
+yum groupinstall -y "Development Tools" --skip-broken
 yum install -y $PACKAGES
-
-curl -sL https://get.rvm.io | bash -s stable
-source /etc/profile.d/rvm.sh
-rvm install 2.1.2
-bundle install --gemfile /java-buildpack-dependency-builder/Gemfile

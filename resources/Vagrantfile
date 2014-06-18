@@ -1,0 +1,54 @@
+# Copyright (c) 2014 the original author or authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+Pathname.new(__FILE__).ascend do |p|
+  if (p + '.ruby-version').exist?
+    ROOT = p.freeze
+    break
+  end
+end
+
+VM_MEMORY = ENV.fetch('VM_MEMORY', 4 * 1024).to_i.freeze
+VM_CORES  = ENV.fetch('VM_CORES', `sysctl -n hw.ncpu`).to_i.freeze
+
+Vagrant.configure('2') do |config|
+  %w(centos6 lucid mountainlion precise trusty).each do |type|
+    config.vm.define type do |machine|
+      machine.vm.box = "#{type}64"
+      machine.vm.provision 'shell', path: "#{type}.sh"
+      machine.vm.provision 'shell', path: 'rbenv.sh', :privileged => false
+
+      machine.vm.provider('virtualbox') do |vb, override|
+        vb.cpus   = VM_CORES
+        vb.memory = VM_MEMORY
+
+        override.vm.box_url = "http://boxes.gopivotal.com.s3.amazonaws.com/#{type}64-virtualbox.box"
+
+        if type == 'mountainlion'
+          override.vm.synced_folder ROOT, '/java-buildpack-dependency-builder', type: 'rsync'
+        else
+          override.vm.synced_folder ROOT, '/java-buildpack-dependency-builder'
+        end
+      end
+
+      machine.vm.provider('vmware_fusion') do |vmw, override|
+        vmw.vmx["memsize"]  = VM_MEMORY
+        vmw.vmx['numvcpus'] = VM_CORES
+
+        override.vm.box_url = "http://boxes.gopivotal.com.s3.amazonaws.com/#{type}64-vmware_desktop.box"
+        override.vm.synced_folder ROOT, '/java-buildpack-dependency-builder'
+      end
+    end
+  end
+end

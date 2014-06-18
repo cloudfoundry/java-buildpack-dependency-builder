@@ -15,14 +15,9 @@
 
 PACKAGES=" \
 	git \
+	openssl-devel \
 	subversion"
 
 yum update -y
+yum groupinstall -y "Development Tools"
 yum install -y $PACKAGES
-
-rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.rpm
-
-curl -sL https://get.rvm.io | bash -s stable
-source /etc/profile.d/rvm.sh
-rvm install 2.1.2
-bundle install --gemfile /java-buildpack-dependency-builder/Gemfile
