@@ -21,6 +21,7 @@ PACKAGES=" \
 	libcups2-dev \
 	libfreetype6-dev \
 	libmotif-dev \
+	libssl-dev \
 	libxml2-dev \
 	libxrender-dev \
 	libxslt-dev \
@@ -35,9 +36,5 @@ apt-get update
 apt-get install -y python-software-properties
 add-apt-repository ppa:mercurial-ppa/releases
 apt-get update
+apt-get dist-upgrade -y
 apt-get install -y $PACKAGES
-
-curl -sL https://get.rvm.io | bash -s stable
-source /etc/profile.d/rvm.sh
-rvm install 2.1.2
-bundle install --gemfile /java-buildpack-dependency-builder/Gemfile

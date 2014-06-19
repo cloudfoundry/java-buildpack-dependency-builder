@@ -21,10 +21,10 @@ describe Build::Dependency::JDK6And7Cloner do
   it 'should return patch list' do
     patches = described_class.new('foo', false).send(:patches)
 
-    expect(patches).to include(File.expand_path('resources/openjdk/6_and_7/asound.diff'))
-    expect(patches).to include(File.expand_path('resources/openjdk/6_and_7/leaf.diff'))
-    expect(patches).to include(File.expand_path('resources/openjdk/6_and_7/sel.diff'))
-    expect(patches).to include(File.expand_path('resources/openjdk/6_and_7/stat64.diff'))
+    expect(patches).to include(File.expand_path('resources/openjdk/patches/asound.diff'))
+    expect(patches).to include(File.expand_path('resources/openjdk/patches/leaf.diff'))
+    expect(patches).to include(File.expand_path('resources/openjdk/patches/sel.diff'))
+    expect(patches).to include(File.expand_path('resources/openjdk/patches/stat64.diff'))
   end
 
 end

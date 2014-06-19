@@ -14,31 +14,12 @@
 # limitations under the License.
 
 PACKAGES=" \
-	ant \
 	build-essential \
 	curl \
-	libasound2-dev \
-	libcups2-dev \
-	libfreetype6-dev \
-	libmotif-dev \
-	libxml2-dev \
-	libxrender-dev \
-	libxslt-dev \
-	libxt-dev \
-	libxtst-dev \
-	mercurial \
-	openjdk-6-jdk \
-	ruby \
-	ruby-dev \
-	zip"
+	git \
+	libssl-dev \
+	subversion"
 
 apt-get update
-apt-get install -y python-software-properties
-add-apt-repository ppa:mercurial-ppa/releases
-apt-get update
+apt-get dist-upgrade -y
 apt-get install -y $PACKAGES
-
-curl -sL https://get.rvm.io | bash -s stable
-source /etc/profile.d/rvm.sh
-rvm install 2.1.2
-bundle install --gemfile /java-buildpack-dependency-builder/Gemfile

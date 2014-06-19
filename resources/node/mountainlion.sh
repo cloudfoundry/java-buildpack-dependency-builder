@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Copyright (c) 2013 the original author or authors.
+# Copyright (c) 2014 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,14 +14,9 @@
 # limitations under the License.
 
 PACKAGES=" \
-	build-essential \
-	curl \
-	git"
+	git \
+	openssl"
 
-apt-get update
-apt-get install -y $PACKAGES
-
-curl -sL https://get.rvm.io | bash -s stable
-source /etc/profile.d/rvm.sh
-rvm install 2.1.2
-bundle install --gemfile /java-buildpack-dependency-builder/Gemfile
+# softwareupdate --install --all -v
+brew update
+brew install -y $PACKAGES

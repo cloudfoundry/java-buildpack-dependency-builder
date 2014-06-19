@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Copyright (c) 2013 the original author or authors.
+# Copyright (c) 2014 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,31 +14,11 @@
 # limitations under the License.
 
 PACKAGES=" \
-	ant \
 	build-essential \
 	curl \
-	lesstif2-dev \
-	libasound2-dev \
-	libcups2-dev \
-	libfreetype6-dev \
-	libopenssl-ruby \
-	libxml2-dev \
-	libxrender-dev \
-	libxslt-dev \
-	libxtst-dev \
-	mercurial \
-	ruby \
-	ruby-dev \
-	rubygems \
-	zip"
+	git \
+	libssl-dev"
 
 apt-get update
-apt-get install -y python-software-properties
-add-apt-repository ppa:mercurial-ppa/releases
-apt-get update
+apt-get dist-upgrade -y
 apt-get install -y $PACKAGES
-
-curl -sL https://get.rvm.io | bash -s stable
-source /etc/profile.d/rvm.sh
-rvm install 2.1.2
-bundle install --gemfile /java-buildpack-dependency-builder/Gemfile

@@ -30,10 +30,10 @@ module Build
       end
 
       PATCHES = [
-        File.join(RESOURCES_DIR, '6_and_7/asound.diff'),
-        File.join(RESOURCES_DIR, '6_and_7/leaf.diff'),
-        File.join(RESOURCES_DIR, '6_and_7/sel.diff'),
-        File.join(RESOURCES_DIR, '6_and_7/stat64.diff')
+        File.join(RESOURCES_DIR, 'patches/asound.diff'),
+        File.join(RESOURCES_DIR, 'patches/leaf.diff'),
+        File.join(RESOURCES_DIR, 'patches/sel.diff'),
+        File.join(RESOURCES_DIR, 'patches/stat64.diff')
       ].freeze
 
       private_constant :PATCHES

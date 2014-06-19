@@ -14,25 +14,28 @@
 # limitations under the License.
 
 PACKAGES=" \
-	alsa-lib-devel \
 	ant \
-	ant-nodeps \
-	cups-devel \
-	freetype-devel \
-	java-1.7.0-openjdk \
-	libXi-devel \
-	libxml2-devel \
-	libXrender-devel \
-	libxslt-devel \
-	libXt-devel \
-	libXtst-devel \
-	openssl-devel \
-	unzip \
+	build-essential \
+	curl \
+	lesstif2-dev \
+	libasound2-dev \
+	libcups2-dev \
+	libfreetype6-dev \
+	libopenssl-ruby \
+	libssl-dev \
+	libxml2-dev \
+	libxrender-dev \
+	libxslt-dev \
+	libxtst-dev \
+	mercurial \
+	ruby \
+	ruby-dev \
+	rubygems \
 	zip"
 
-rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.rpm
-rpm -Uvh http://pkgs.repoforge.org/mercurial/mercurial-2.2.2-1.el6.rfx.x86_64.rpm
-
-yum update -y
-yum groupinstall -y "Development Tools" --skip-broken
-yum install -y $PACKAGES
+apt-get update
+apt-get install -y python-software-properties
+add-apt-repository ppa:mercurial-ppa/releases
+apt-get update
+apt-get dist-upgrade -y
+apt-get install -y $PACKAGES

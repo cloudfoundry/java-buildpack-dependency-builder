@@ -26,8 +26,10 @@ module Build
       protected
 
       def version_specific(version)
-        if version =~ /^1.6/ || version =~ /^1.7/
-          File.join(RESOURCES_DIR, '6_and_7')
+        if version =~ /^1.6/
+          File.join(RESOURCES_DIR, '6')
+        elsif version =~ /^1.7/
+          File.join(RESOURCES_DIR, '7')
         elsif version =~ /^1.8/
           File.join(RESOURCES_DIR, '8')
         else

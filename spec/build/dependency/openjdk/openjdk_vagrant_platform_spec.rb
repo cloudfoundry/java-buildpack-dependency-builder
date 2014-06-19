@@ -21,12 +21,12 @@ describe Build::Dependency::OpenJDKVagrantPlatform do
 
   let(:platform) { described_class.new 'test-name', 'test-version', false }
 
-  it 'should return 6_and_7 directory for 1.6' do
-    expect(platform.send(:version_specific, '1.6.0')).to eq(File.expand_path 'resources/openjdk/6_and_7')
+  it 'should return 6 directory for 1.6' do
+    expect(platform.send(:version_specific, '1.6.0')).to eq(File.expand_path 'resources/openjdk/6')
   end
 
-  it 'should return 6_and_7 directory for 1.7' do
-    expect(platform.send(:version_specific, '1.7.0')).to eq(File.expand_path 'resources/openjdk/6_and_7')
+  it 'should return 7 directory for 1.7' do
+    expect(platform.send(:version_specific, '1.7.0')).to eq(File.expand_path 'resources/openjdk/7')
   end
 
   it 'should return 8 directory for 1.8' do
