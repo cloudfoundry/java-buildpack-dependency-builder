@@ -15,7 +15,6 @@
 
 require 'build/dependency'
 require 'build/dependency/util/base_vagrant_platform'
-require 'build/dependency/util/local_platform'
 require 'fileutils'
 
 module Build
@@ -28,11 +27,7 @@ module Build
 
         @command   = command
         @platforms = options[:platforms].map do |platform|
-          if BaseVagrantPlatform.vagrant?(platform)
-            vagrant_platform_type.new(platform, @version, @shutdown)
-          else
-            LocalPlatform.new
-          end
+          vagrant_platform_type.new(platform, @version, @shutdown)
         end
       end
 

@@ -23,32 +23,112 @@ VM_MEMORY = ENV.fetch('VM_MEMORY', 4 * 1024).to_i.freeze
 VM_CORES  = ENV.fetch('VM_CORES', `sysctl -n hw.ncpu`).to_i.freeze
 
 Vagrant.configure('2') do |config|
-  %w(centos6 lucid mountainlion precise trusty).each do |type|
-    config.vm.define type do |machine|
-      machine.vm.box = "#{type}64"
-      machine.vm.provision 'shell', path: "#{type}.sh"
-      machine.vm.provision 'shell', path: 'rbenv.sh', :privileged => false
 
-      machine.vm.provider('virtualbox') do |vb, override|
-        vb.cpus   = VM_CORES
-        vb.memory = VM_MEMORY
+  config.vm.define 'centos6' do |c|
+    c.vm.box = 'centos664'
+    c.vm.provision 'shell', path: 'centos6.sh'
+    c.vm.provision 'shell', path: 'rbenv.sh', :privileged => false
+    c.vm.synced_folder ROOT, '/java-buildpack-dependency-builder'
 
-        override.vm.box_url = "http://boxes.gopivotal.com.s3.amazonaws.com/#{type}64-virtualbox.box"
+    c.vm.provider('virtualbox') do |vb, override|
+      vb.cpus   = VM_CORES
+      vb.memory = VM_MEMORY
 
-        if type == 'mountainlion'
-          override.vm.synced_folder ROOT, '/java-buildpack-dependency-builder', type: 'rsync'
-        else
-          override.vm.synced_folder ROOT, '/java-buildpack-dependency-builder'
-        end
-      end
+      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/centos664-virtualbox.box'
+    end
 
-      machine.vm.provider('vmware_fusion') do |vmw, override|
-        vmw.vmx["memsize"]  = VM_MEMORY
-        vmw.vmx['numvcpus'] = VM_CORES
+    c.vm.provider('vmware_fusion') do |vmw, override|
+      vmw.vmx['memsize']  = VM_MEMORY
+      vmw.vmx['numvcpus'] = VM_CORES
 
-        override.vm.box_url = "http://boxes.gopivotal.com.s3.amazonaws.com/#{type}64-vmware_desktop.box"
-        override.vm.synced_folder ROOT, '/java-buildpack-dependency-builder'
-      end
+      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/centos664-vmware_desktop.box'
     end
   end
+
+  config.vm.define 'lucid' do |l|
+    l.vm.box = 'lucid64'
+    l.vm.provision 'shell', path: 'lucid.sh'
+    l.vm.provision 'shell', path: 'rbenv.sh', :privileged => false
+    l.vm.synced_folder ROOT, '/java-buildpack-dependency-builder'
+
+    l.vm.provider('virtualbox') do |vb, override|
+      vb.cpus   = VM_CORES
+      vb.memory = VM_MEMORY
+
+      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/lucid64-virtualbox.box'
+    end
+
+    l.vm.provider('vmware_fusion') do |vmw, override|
+      vmw.vmx['memsize']  = VM_MEMORY
+      vmw.vmx['numvcpus'] = VM_CORES
+
+      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/lucid64-vmware_desktop.box'
+    end
+  end
+
+  config.vm.define 'mountainlion' do |m|
+    m.vm.box = 'mountainlion64'
+    m.vm.provision 'shell', path: 'xquartz.sh'
+    m.vm.provision 'shell', path: 'mountainlion.sh', :privileged => false
+    m.vm.provision 'shell', path: 'rbenv.sh', :privileged => false
+    m.vm.synced_folder ROOT, '/java-buildpack-dependency-builder', type: 'rsync'
+
+    m.vm.provider('virtualbox') do |vb, override|
+      vb.cpus   = VM_CORES
+      vb.memory = VM_MEMORY
+
+      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/mountainlion64-virtualbox.box'
+    end
+
+    m.vm.provider('vmware_fusion') do |vmw, override|
+      vmw.vmx['memsize']  = VM_MEMORY
+      vmw.vmx['numvcpus'] = VM_CORES
+
+      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/mountainlion64-vmware_desktop.box'
+    end
+
+  end
+
+  config.vm.define 'precise' do |p|
+    p.vm.box = 'precise64'
+    p.vm.provision 'shell', path: 'precise.sh'
+    p.vm.provision 'shell', path: 'rbenv.sh', :privileged => false
+    p.vm.synced_folder ROOT, '/java-buildpack-dependency-builder'
+
+    p.vm.provider('virtualbox') do |vb, override|
+      vb.cpus   = VM_CORES
+      vb.memory = VM_MEMORY
+
+      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/precise64-virtualbox.box'
+    end
+
+    p.vm.provider('vmware_fusion') do |vmw, override|
+      vmw.vmx['memsize']  = VM_MEMORY
+      vmw.vmx['numvcpus'] = VM_CORES
+
+      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/precise64-vmware_desktop.box'
+    end
+  end
+
+  config.vm.define 'trusty' do |t|
+    t.vm.box = 'trusty64'
+    t.vm.provision 'shell', path: 'trusty.sh'
+    t.vm.provision 'shell', path: 'rbenv.sh', :privileged => false
+    t.vm.synced_folder ROOT, '/java-buildpack-dependency-builder'
+
+    t.vm.provider('virtualbox') do |vb, override|
+      vb.cpus   = VM_CORES
+      vb.memory = VM_MEMORY
+
+      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/trusty64-virtualbox.box'
+    end
+
+    t.vm.provider('vmware_fusion') do |vmw, override|
+      vmw.vmx['memsize']  = VM_MEMORY
+      vmw.vmx['numvcpus'] = VM_CORES
+
+      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/trusty64-vmware_desktop.box'
+    end
+  end
+
 end

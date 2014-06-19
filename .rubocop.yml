@@ -15,6 +15,6 @@ LineLength:
 MethodLength:
   Max: 25
 ParameterLists:
-  Max: 6
+  Max: 7
 TrivialAccessors:
   ExactNameMatch: true

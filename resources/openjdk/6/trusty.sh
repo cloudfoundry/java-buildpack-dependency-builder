@@ -13,8 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+set -e
+
 PACKAGES=" \
-	ant \
 	build-essential \
 	curl \
 	gawk \
@@ -29,14 +30,12 @@ PACKAGES=" \
 	libxt-dev \
 	libxtst-dev \
 	mercurial \
-	openjdk-6-jdk \
 	ruby \
 	ruby-dev \
 	zip"
 
 apt-get update
-apt-get install -y python-software-properties
+apt-get install -y software-properties-common
 add-apt-repository ppa:mercurial-ppa/releases
 apt-get update
-apt-get dist-upgrade -y
 apt-get install -y $PACKAGES

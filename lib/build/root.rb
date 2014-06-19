@@ -88,6 +88,12 @@ module Build
       end
 
       def vagrant_options
+        option :platforms,
+               desc:    'A list of the platforms the version should be built on',
+               aliases: '-p',
+               type:    :array,
+               default: %w(centos6 lucid mountainlion precise trusty)
+
         option :shutdown,
                desc:    "Whether to shutdown the Vagrant instances after they're finished",
                aliases: '-s',
@@ -142,12 +148,6 @@ module Build
     node_options
     vagrant_options
 
-    option :platforms,
-           desc:    'A list of the platforms the version should be built on',
-           aliases: '-p',
-           type:    :array,
-           default: %w(centos6 lucid osx precise trusty)
-
     def node
       Dependency::Node.new(options).build
     end
@@ -164,12 +164,6 @@ module Build
     common_options
     openjdk_options
     vagrant_options
-
-    option :platforms,
-           desc:    'A list of the platforms the version should be built on',
-           aliases: '-p',
-           type:    :array,
-           default: %w(centos6 lucid precise trusty)
 
     def openjdk
       Dependency::OpenJDK.new(options).build
@@ -214,12 +208,6 @@ module Build
     desc 'ruby', 'Publish a version of Ruby'
     common_options
     vagrant_options
-
-    option :platforms,
-           desc:    'A list of the platforms the version should be built on',
-           aliases: '-p',
-           type:    :array,
-           default: %w(centos6 lucid osx precise trusty)
 
     def ruby
       Dependency::Ruby.new(options).build

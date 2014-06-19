@@ -26,22 +26,16 @@ module Build
       include PlatformDetails
 
       def build
-        return if File.exist?(root) || macosx?
+        return if File.exist?(root)
 
         puts 'Downloading bootstrap JDK...'
         FileUtils.mkdir_p root
-        system "curl -Ls --header 'Cookie: oraclelicense=accept-securebackup-cookie' #{BOOSTRAP_JDK_URI} | tar xz --strip 1 -C #{root}"
+        system "curl -ssL http://boxes.gopivotal.com.s3.amazonaws.com/#{codename}64-openjdk-1.7.0_60.tar.gz | tar xz --strip 1 -C #{root}"
       end
 
       def root
-        BOOSTRAP_JDK_ROOT
+        File.join VENDOR_DIR, 'bootstrap-jdk', codename
       end
-
-      BOOSTRAP_JDK_ROOT = File.join VENDOR_DIR, 'bootstrap-jdk'
-
-      BOOSTRAP_JDK_URI = 'http://download.oracle.com/otn-pub/java/jdk/7u51-b13/jdk-7u51-linux-x64.tar.gz'
-
-      private_constant :BOOSTRAP_JDK_ROOT, :BOOSTRAP_JDK_URI
 
     end
 

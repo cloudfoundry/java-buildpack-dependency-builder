@@ -48,7 +48,7 @@ module Build
         fail "Method 'version_specific(version)' must be defined"
       end
 
-      VAGRANT_PLATFORMS = %w(centos6 lucid precise trusty).freeze
+      VAGRANT_PLATFORMS = %w(centos6 lucid mountainlion precise trusty).freeze
 
       private_constant :VAGRANT_PLATFORMS
 
