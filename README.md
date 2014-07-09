@@ -91,6 +91,7 @@ The list of available versions for each dependency can be found at the following
 | Spring Boot CLI | [`universal`](http://download.run.pivotal.io/spring-boot-cli/index.yml)
 | tc Server| [`universal`](http://download.run.pivotal.io/tc-server/index.yml)
 | Tomcat | [`universal`](http://download.run.pivotal.io/tomcat/index.yml)
+| Tomcat Access Logging Support | [`universal`](http://download.run.pivotal.io/tomcat-access-logging-support/index.yml)
 | Tomcat Lifecycle Support | [`universal`](http://download.run.pivotal.io/tomcat-lifecycle-support/index.yml)
 | Tomcat Logging Support | [`universal`](http://download.run.pivotal.io/tomcat-logging-support/index.yml)
 
@@ -137,6 +138,7 @@ This table shows locations to check for new releases of cached dependencies.  It
 | Spring Boot CLI | [`release`](http://repo.springsource.org/release/org/springframework/boot/spring-boot-cli/)
 | tc Server | [`release`](http://gopivotal.com/pivotal-products/pivotal-vfabric)
 | Tomcat | [`8.x`](http://tomcat.apache.org/download-80.cgi), [`7.x`](http://tomcat.apache.org/download-70.cgi), [`6.x`](http://tomcat.apache.org/download-60.cgi)
+| Tomcat Access Logging Support | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/tomcat-access-logging-support/maven-metadata.xml)
 | Tomcat Lifecycle Support | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/tomcat-lifecycle-support/maven-metadata.xml)
 | Tomcat Logging Support | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/tomcat-logging-support/maven-metadata.xml)
 
