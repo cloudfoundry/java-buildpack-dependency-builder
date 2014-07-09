@@ -33,6 +33,7 @@ require 'build/dependency/ruby/ruby_inner'
 require 'build/dependency/spring_boot_cli'
 require 'build/dependency/tc_server'
 require 'build/dependency/tomcat'
+require 'build/dependency/tomcat_access_logging_support'
 require 'build/dependency/tomcat_lifecycle_support'
 require 'build/dependency/tomcat_logging_support'
 require 'build/root'
@@ -241,6 +242,13 @@ describe Build::Root do
     include_examples 'dependency' do
       let(:dependency) { 'tomcat' }
       let(:type) { Build::Dependency::Tomcat }
+    end
+  end
+
+  context do
+    include_examples 'dependency' do
+      let(:dependency) { 'tomcat-access-logging-support' }
+      let(:type) { Build::Dependency::TomcatAccessLoggingSupport }
     end
   end
 

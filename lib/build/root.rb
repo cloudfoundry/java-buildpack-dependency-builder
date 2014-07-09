@@ -32,6 +32,7 @@ require 'build/dependency/ruby/ruby_inner'
 require 'build/dependency/spring_boot_cli'
 require 'build/dependency/tc_server'
 require 'build/dependency/tomcat'
+require 'build/dependency/tomcat_access_logging_support'
 require 'build/dependency/tomcat_lifecycle_support'
 require 'build/dependency/tomcat_logging_support'
 require 'thor'
@@ -250,6 +251,13 @@ module Build
 
     def tomcat
       Dependency::Tomcat.new(options).build
+    end
+
+    desc 'tomcat-access-logging-support', 'Publish a version of tomcat-access-logging-support'
+    common_options
+
+    def tomcat_access_logging_support
+      Dependency::TomcatAccessLoggingSupport.new(options).build
     end
 
     desc 'tomcat-lifecycle-support', 'Publish a version of tomcat-lifecycle-support'
