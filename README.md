@@ -66,10 +66,15 @@ All components require a configuration file in order to be published.  This YAML
 
 _Pivotal employees should contact Ben Hale for AWS and AppDynamics credentials if they have not already been issued and are needed._
 
-### Building OpenJDK
-In order to build OpenJDK for the linuxes you will need [Vagrant][] and [VirtualBox][].  Follow the default installation instructions for these applications.
+### Building Node, OpenJDK, and Ruby
+In order to build Node, OpenJDK, and Ruby you will need [Vagrant][] and [VirtualBox][] or [VMware Fusion][].  Follow the default installation instructions for these applications.  If you choose to use VMware Fusion, make sure that you also have a license for, and have installed the [Vagrant VMware Provider][].
 
-In order to build OpenJDK for OS X you will need [VMware Fusion][] and the [build VM][].
+```bash
+$ vagrant plugin install vagrant-vmware-fusion
+$ vagrant plugin license vagrant-vmware-fusion license.lic
+```
+
+
 
 ## Available Artifacts
 The list of available versions for each dependency can be found at the following locations.
@@ -113,6 +118,7 @@ The Builder is released under version 2.0 of the [Apache License][].
 [build VM]: http://boxes.gopivotal.com.s3.amazonaws.com/mac-osx-10.8.tar.gz
 [contributor guidelines]: CONTRIBUTING.md
 [Pull requests]: http://help.github.com/send-pull-requests
+[Vagrant VMware Provider]: http://www.vagrantup.com/vmware
 [Vagrant]: http://www.vagrantup.com
 [VirtualBox]: https://www.virtualbox.org
 [VMware Fusion]: http://www.vmware.com/products/fusion

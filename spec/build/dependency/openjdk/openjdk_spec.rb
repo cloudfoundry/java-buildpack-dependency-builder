@@ -15,7 +15,6 @@
 
 require 'spec_helper'
 require 'build/dependency/openjdk/openjdk'
-require 'build/dependency/util/local_platform'
 
 describe Build::Dependency::OpenJDK do
 

@@ -15,6 +15,7 @@
 
 require 'build/dependency'
 require 'build/dependency/base'
+require 'build/dependency/openjdk/ant_builder'
 require 'build/dependency/openjdk/ca_certs_builder'
 require 'build/dependency/openjdk/jdk6_cloner'
 require 'build/dependency/openjdk/jdk7_cloner'
@@ -45,6 +46,9 @@ module Build
       def source
         version_details = version_specific @version, @development
 
+        ant_builder = AntBuilder.new
+        ant_builder.build
+
         bootstrap_jdk_builder = BootstrapJDKBuilder.new
         bootstrap_jdk_builder.build
 
@@ -58,7 +62,8 @@ module Build
 
         jre_builder = version_details[:jre_builder]
         jre_builder.build(@version, @build_number,
-                          bootstrap_jdk_builder.root, cacerts_builder.cacerts, cloner.source_location, @jdk)
+                          ant_builder.root, bootstrap_jdk_builder.root, cacerts_builder.cacerts,
+                          cloner.source_location, @jdk)
 
         jre_builder.package
       end

@@ -13,13 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+set -e
+
 PACKAGES=" \
 	alsa-lib-devel \
-	ant \
-	ant-nodeps \
 	cups-devel \
 	freetype-devel \
-	java-1.7.0-openjdk \
 	libXi-devel \
 	libxml2-devel \
 	libXrender-devel \

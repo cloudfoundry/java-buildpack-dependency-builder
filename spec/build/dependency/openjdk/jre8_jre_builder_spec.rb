@@ -31,21 +31,40 @@ describe Build::Dependency::JRE8JREBuilder do
 
   it 'should create on OS X' do
     expect(Dir).to receive(:chdir).with('test-source-location').and_yield
-    expect(builder).to receive(:cpu_count).and_return('test-cpu-count').twice
-    expect(builder).to receive(:macosx?).and_return(true)
-    expect(builder).to receive(:system).with(/macosx-x86_64-normal-server-release/)
+    allow(builder).to receive(:cpu_count).and_return('test-cpu-count')
+    allow(builder).to receive(:macosx?).and_return(true)
+    allow(builder).to receive(:trusty?).and_return(false)
+    expect(builder).to receive(:system) do |arg|
+      expect(arg).to match(/macosx-x86_64-normal-server-release/)
+      expect(arg).to match(%r{--with-freetype-include=/usr/local/include/freetype2 --with-freetype-lib=/usr/local/lib})
+    end
 
-    builder.build 'test-version', 'test-build-number', 'test-bootstrap-jdk-root', 'test-cacerts',
+    builder.build 'test-version', 'test-build-number', 'test-ant-home', 'test-bootstrap-jdk-root', 'test-cacerts',
+                  'test-source-location', false
+  end
+
+  it 'should create on trusty' do
+    expect(Dir).to receive(:chdir).with('test-source-location').and_yield
+    allow(builder).to receive(:cpu_count).and_return('test-cpu-count')
+    allow(builder).to receive(:macosx?).and_return(false)
+    allow(builder).to receive(:trusty?).and_return(true)
+    expect(builder).to receive(:system) do |arg|
+      expect(arg).to match(/linux-x86_64-normal-server-release/)
+      expect(arg).to match(%r{--with-freetype-include=/usr/include/freetype2 --with-freetype-lib=/usr/lib/x86_64-linux-gnu})
+    end
+
+    builder.build 'test-version', 'test-build-number', 'test-ant-home', 'test-bootstrap-jdk-root', 'test-cacerts',
                   'test-source-location', false
   end
 
   it 'should create on non-OS X' do
     expect(Dir).to receive(:chdir).with('test-source-location').and_yield
-    expect(builder).to receive(:cpu_count).and_return('test-cpu-count').twice
-    expect(builder).to receive(:macosx?).and_return(false)
+    allow(builder).to receive(:cpu_count).and_return('test-cpu-count')
+    allow(builder).to receive(:macosx?).and_return(false)
+    allow(builder).to receive(:trusty?).and_return(false)
     expect(builder).to receive(:system).with(/linux-x86_64-normal-server-release/)
 
-    builder.build 'test-version', 'test-build-number', 'test-bootstrap-jdk-root', 'test-cacerts',
+    builder.build 'test-version', 'test-build-number', 'test-ant-home', 'test-bootstrap-jdk-root', 'test-cacerts',
                   'test-source-location', false
   end
 

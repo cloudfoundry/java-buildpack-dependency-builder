@@ -1,5 +1,5 @@
-# Encoding: utf-8
-# Copyright (c) 2013 the original author or authors.
+#!/usr/bin/env bash
+# Copyright (c) 2014 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,24 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'build/dependency'
+set -e
 
-module Build
-  module Dependency
+PACKAGES=" \
+	freetype \
+	mercurial \
+	openssl"
 
-    class LocalPlatform
+echo export PATH='/usr/local/bin:$PATH' >> ~/.bash_profile
+sudo xcode-select -switch /usr/bin
 
-      def exec(command)
-        Dir.chdir ROOT_DIR do
-          system command
-        end
-      end
-
-      ROOT_DIR = File.expand_path('../../../../../', __FILE__).freeze
-
-      private_constant :ROOT_DIR
-
-    end
-
-  end
-end
+brew update
+brew install -y $PACKAGES

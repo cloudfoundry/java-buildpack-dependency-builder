@@ -15,11 +15,9 @@
 
 set -e
 
-PACKAGES=" \
-	build-essential \
-	curl \
-	git \
-	libssl-dev"
+VERSION="2.7.6"
 
-apt-get update
-apt-get install -y $PACKAGES
+curl -sSL "http://boxes.gopivotal.com.s3.amazonaws.com/mountainlion64-XQuartz-${VERSION}.dmg" > "${TMPDIR}/xquartz.dmg"
+hdiutil mount "${TMPDIR}/xquartz.dmg"
+installer -package "/Volumes/XQuartz-${VERSION}/XQuartz.pkg" -target "/Volumes/Macintosh HD"
+hdiutil unmount "/Volumes/XQuartz-${VERSION}"

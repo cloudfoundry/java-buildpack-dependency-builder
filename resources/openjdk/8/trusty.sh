@@ -13,8 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+set -e
+
 PACKAGES=" \
-	ant \
 	build-essential \
 	curl \
 	libasound2-dev \
@@ -33,8 +34,7 @@ PACKAGES=" \
 	zip"
 
 apt-get update
-apt-get install -y python-software-properties
+apt-get install -y software-properties-common
 add-apt-repository ppa:mercurial-ppa/releases
 apt-get update
-apt-get dist-upgrade -y
 apt-get install -y $PACKAGES

@@ -36,6 +36,7 @@ module Build
         if File.exist? @source_location
           puts "Updating #{@source_location} from #{@repository}..."
           Dir.chdir(@source_location) do
+            system 'chmod +x make/scripts/hgforest.sh'
             system 'make/scripts/hgforest.sh purge --all'
             system 'make/scripts/hgforest.sh update --clean'
             system 'chmod +x make/scripts/hgforest.sh'

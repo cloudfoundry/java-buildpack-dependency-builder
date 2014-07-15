@@ -21,7 +21,7 @@ describe Build::Dependency::BaseVagrant do
 
   let(:base_vagrant) { described_class.new 'test-command', Build::Dependency::BaseVagrantPlatform, options }
 
-  let(:options) { { configuration: 'spec/fixture/test_configuration.yml', platforms: %w(lucid osx) } }
+  let(:options) { { configuration: 'spec/fixture/test_configuration.yml', platforms: %w(lucid) } }
 
   it 'should raise error if arguments() is not implemented' do
     expect { base_vagrant.send(:arguments) }.to raise_error("Method 'arguments' must be defined")
@@ -34,9 +34,6 @@ describe Build::Dependency::BaseVagrant do
     expect(base_vagrant).to receive(:arguments).and_return(%w(test arguments))
 
     expect_any_instance_of(Build::Dependency::BaseVagrantPlatform)
-    .to receive(:exec).with('bundle exec bin/build test-command ' \
-                            '--configuration vendor/java_buildpack_dependency_builder.yml test arguments')
-    expect_any_instance_of(Build::Dependency::LocalPlatform)
     .to receive(:exec).with('bundle exec bin/build test-command ' \
                             '--configuration vendor/java_buildpack_dependency_builder.yml test arguments')
 

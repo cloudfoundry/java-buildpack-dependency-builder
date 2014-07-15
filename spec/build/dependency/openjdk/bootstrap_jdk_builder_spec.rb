@@ -16,6 +16,7 @@
 require 'spec_helper'
 require 'console_helper'
 require 'build/dependency/openjdk/bootstrap_jdk_builder'
+require 'build/dependency/util/platform_details'
 require 'English'
 
 describe Build::Dependency::BootstrapJDKBuilder do
@@ -23,7 +24,13 @@ describe Build::Dependency::BootstrapJDKBuilder do
 
   let(:builder) { described_class.new }
 
-  let(:root) { File.expand_path('vendor/openjdk/bootstrap-jdk') }
+  let(:root) do
+    File.expand_path('vendor/openjdk/bootstrap-jdk/test-code-name')
+  end
+
+  before do
+    allow(builder).to receive(:codename).and_return('test-code-name')
+  end
 
   it 'should return a root location' do
     expect(builder.root).to eq(root)
@@ -36,17 +43,8 @@ describe Build::Dependency::BootstrapJDKBuilder do
     builder.build
   end
 
-  it 'should not download if on macosx' do
-    expect(File).to receive(:exist?).with(root).and_return(false)
-    expect(builder).to receive(:macosx?).and_return(true)
-    expect(builder).not_to receive(:system)
-
-    builder.build
-  end
-
   it 'should download from internet' do
     expect(File).to receive(:exist?).with(root).and_return(false)
-    expect(builder).to receive(:macosx?).and_return(false)
     expect(FileUtils).to receive(:mkdir_p).with(root)
     expect(builder).to receive(:system)
 

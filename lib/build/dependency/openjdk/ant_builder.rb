@@ -14,27 +14,29 @@
 # limitations under the License.
 
 require 'build/dependency'
+require 'build/dependency/openjdk/openjdk_resources'
 require 'build/dependency/util/platform_details'
+require 'fileutils'
 
 module Build
   module Dependency
-    module OpenJDKPlatformDetails
-      include Build::Dependency::PlatformDetails
 
-      def alt_bootdir
-        if centos?
-          '/usr/lib/jvm/java-1.6.0-openjdk.x86_64'
-        elsif macosx?
-          ENV['JAVA6_HOME']
-        elsif trusty?
-          '/usr/lib/jvm/java-6-openjdk-amd64'
-        elsif ubuntu?
-          '/usr/lib/jvm/java-6-openjdk'
-        else
-          fail 'Unable to determine ALT_BOOTDIR'
-        end
+    class AntBuilder
+      include OpenJDKResources
+
+      def build
+        return if File.exist?(root)
+
+        puts 'Downloading Ant...'
+        FileUtils.mkdir_p root
+        system "curl -ssL http://boxes.gopivotal.com.s3.amazonaws.com/apache-ant-1.9.4-bin.tar.gz | tar xz --strip 1 -C #{root}"
+      end
+
+      def root
+        File.join VENDOR_DIR, 'ant'
       end
 
     end
+
   end
 end

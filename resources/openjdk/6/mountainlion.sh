@@ -1,5 +1,5 @@
-# Encoding: utf-8
-# Copyright (c) 2013 the original author or authors.
+#!/usr/bin/env bash
+# Copyright (c) 2014 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,18 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'spec_helper'
-require 'build/dependency/util/local_platform'
+set -e
 
-describe Build::Dependency::LocalPlatform do
+PACKAGES=" \
+	mercurial \
+	openssl"
 
-  let(:platform) { described_class.new }
+echo export PATH='/usr/local/bin:$PATH' >> ~/.bash_profile
+sudo xcode-select -switch /usr/bin
 
-  it 'should change directory and execute command' do
-    expect(Dir).to receive(:chdir).with(File.expand_path('.')).and_call_original
-    expect(platform).to receive(:system).with('test-command')
-
-    platform.exec('test-command')
-  end
-
-end
+brew update
+brew install -y $PACKAGES

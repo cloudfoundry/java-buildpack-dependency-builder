@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+set -e
+
 PACKAGES=" \
 	build-essential \
 	curl \
@@ -20,5 +22,4 @@ PACKAGES=" \
 	libssl-dev"
 
 apt-get update
-apt-get dist-upgrade -y
 apt-get install -y $PACKAGES

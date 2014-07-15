@@ -14,7 +14,6 @@
 # limitations under the License.
 
 require 'build/dependency'
-require 'build/dependency/openjdk/openjdk_platform_details'
 require 'build/dependency/util/platform_details'
 require 'English'
 require 'tempfile'
@@ -23,7 +22,6 @@ module Build
   module Dependency
 
     class JRE6And7JREBuilder
-      include OpenJDKPlatformDetails
       include PlatformDetails
 
       attr_reader :package
@@ -32,12 +30,12 @@ module Build
         @package = Tempfile.new('jre')
       end
 
-      def build(version, build_number, bootstrap_jdk_root, cacerts, source_location, package_jdk)
+      def build(version, build_number, ant_home, bootstrap_jdk_root, cacerts, source_location, package_jdk)
         puts "Building #{@name} #{version}..."
         Dir.chdir source_location do
           system <<-EOF
-unset JAVA_HOME
-export LANG=C ALT_BOOTDIR=#{alt_bootdir} ALT_CACERTS_FILE=#{cacerts} PATH=/usr/bin:$PATH ALT_JDK_IMPORT_PATH=#{bootstrap_jdk_root}
+export LANG=C PATH=#{bootstrap_jdk_root}/bin:$PATH ANT_HOME=#{ant_home}
+export ALT_BOOTDIR=#{bootstrap_jdk_root} ALT_CACERTS_FILE=#{cacerts} ALT_JDK_IMPORT_PATH=#{bootstrap_jdk_root}
 make MILESTONE=fcs JDK_VERSION=#{version} BUILD_NUMBER=#{build_number} ALLOW_DOWNLOADS=true NO_DOCS=true PARALLEL_COMPILE_JOBS=#{cpu_count} HOTSPOT_BUILD_JOBS=#{cpu_count}
 
 tar czvf #{@package.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build_dir}/#{package_dir package_jdk} .
