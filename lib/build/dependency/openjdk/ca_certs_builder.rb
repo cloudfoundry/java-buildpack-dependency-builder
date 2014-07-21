@@ -24,7 +24,7 @@ module Build
       include OpenJDKResources
       include PlatformDetails
 
-      def build
+      def build(bootstrap_jdk_root)
         return if File.exist? cacerts
 
         puts 'Creating cacerts...'
@@ -40,7 +40,7 @@ module Build
 curl -s #{CACERTS_URI} | awk '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/{ print $0; }' | #{splitter}
 
 for I in $(find #{root} -type f) ; do
-  keytool -importcert -noprompt -keystore #{cacerts} -storepass changeit -file $I -alias $(basename $I)
+  #{bootstrap_jdk_root}/bin/keytool -importcert -noprompt -keystore #{cacerts} -storepass changeit -file $I -alias $(basename $I)
 done
           EOF
         end

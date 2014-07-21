@@ -53,7 +53,7 @@ module Build
         bootstrap_jdk_builder.build
 
         cacerts_builder = CACertsBuilder.new
-        cacerts_builder.build
+        cacerts_builder.build bootstrap_jdk_builder.root
 
         cloner = version_details[:cloner]
         cloner.clone

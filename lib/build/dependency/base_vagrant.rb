@@ -33,6 +33,7 @@ module Build
 
       def build
         FileUtils.rm_f cached_configuration
+        FileUtils.mkdir_p VENDOR_DIR
         FileUtils.cp File.expand_path(@configuration), cached_configuration
 
         command = ['bundle', 'exec', 'bin/build', @command, "--configuration vendor/#{CONFIGURATION}"]
