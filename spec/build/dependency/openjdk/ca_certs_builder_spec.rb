@@ -33,7 +33,7 @@ describe Build::Dependency::CACertsBuilder do
     expect(File).to receive(:exist?).with(cacerts).and_return(true)
     expect(described_class).not_to receive(:system)
 
-    builder.build
+    builder.build 'test-bootstrap-jdk-root'
   end
 
   it 'should create on OS X' do
@@ -41,7 +41,7 @@ describe Build::Dependency::CACertsBuilder do
     expect(builder).to receive(:macosx?).and_return(true)
     expect(builder).to receive(:system).with(/split -p/)
 
-    builder.build
+    builder.build 'test-bootstrap-jdk-root'
   end
 
   it 'should create on non-OS X' do
@@ -49,7 +49,7 @@ describe Build::Dependency::CACertsBuilder do
     expect(builder).to receive(:macosx?).and_return(false)
     expect(builder).to receive(:system).with(/csplit -s -f/)
 
-    builder.build
+    builder.build 'test-bootstrap-jdk-root'
   end
 
 end
