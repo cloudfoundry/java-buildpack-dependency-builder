@@ -30,10 +30,12 @@ module Build
       protected
 
       def version_specific(version)
+        prefix = version =~ /2\.[\d]+\.[\d]+/ ? 'vfabric' : 'pivotal'
+
         if version =~ /CI/
-          ->(v) { "http://dist.springsource.com.s3.amazonaws.com/snapshot/TCS/vfabric-tc-server-standard-#{v}.tar.gz" }
+          ->(v) { "http://dist.springsource.com.s3.amazonaws.com/snapshot/TCS/#{prefix}-tc-server-standard-#{v}.tar.gz" }
         elsif version =~ /RELEASE/ || version =~ /SR/
-          ->(v) { "http://dist.springsource.com.s3.amazonaws.com/release/TCS/vfabric-tc-server-standard-#{v}.tar.gz" }
+          ->(v) { "http://dist.springsource.com.s3.amazonaws.com/release/TCS/#{prefix}-tc-server-standard-#{v}.tar.gz" }
         else
           fail "Unable to process version '#{version}'"
         end
