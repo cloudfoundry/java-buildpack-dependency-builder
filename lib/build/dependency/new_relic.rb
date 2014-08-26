@@ -30,7 +30,7 @@ module Build
       protected
 
       def version_specific(version)
-        if version =~ /[\d]\.[\d]\.[\d]/
+        if version =~ /[\d]+\.[\d]+\.[\d]+/
           ->(v) { release MAVEN_CENTRAL, 'com.newrelic.agent.java', 'newrelic-agent', v }
         else
           fail "Unable to process version '#{version}'"

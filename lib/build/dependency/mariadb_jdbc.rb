@@ -28,7 +28,7 @@ module Build
       protected
 
       def version_specific(version)
-        if version =~ /[\d]\.[\d]\.[\d]/
+        if version =~ /[\d]+\.[\d]+\.[\d]+/
           ->(v) { "http://mirrors.coreix.net/mariadb/client-java-#{v}/mariadb-java-client-#{v}.jar" }
         else
           fail "Unable to process version '#{version}'"

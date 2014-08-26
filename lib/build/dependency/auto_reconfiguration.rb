@@ -34,7 +34,7 @@ module Build
           ->(v) { snapshot GO_PIVOTAL_SNAPSHOT, 'org.cloudfoundry', 'auto-reconfiguration', v }
         elsif version =~ /RELEASE/
           ->(v) { release GO_PIVOTAL_RELEASE, 'org.cloudfoundry', 'auto-reconfiguration', v }
-        elsif version =~ /[\d]\.[\d]\.[\d]/
+        elsif version =~ /[\d]+\.[\d]+\.[\d]+/
           ->(v) { release SPRING_MILESTONE, 'org.cloudfoundry', 'auto-reconfiguration', v }
         else
           fail "Unable to process version '#{version}'"

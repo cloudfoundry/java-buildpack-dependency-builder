@@ -28,9 +28,9 @@ module Build
       protected
 
       def version_specific(version)
-        if version =~ /[\d]\.[\d]\.[\d]/ && version > '2.2.0'
+        if version =~ /[\d]+\.[\d]+\.[\d]+/ && version > '2.2.0'
           ->(v) { "http://dl.bintray.com/groovy/maven/groovy-binary-#{v}.zip" }
-        elsif version =~ /[\d]\.[\d]\.[\d]/ && version > '1.4.0'
+        elsif version =~ /[\d]+\.[\d]+\.[\d]+/ && version > '1.4.0'
           ->(v) { "http://dist.groovy.codehaus.org/distributions/groovy-binary-#{v}.zip" }
         else
           fail "Unable to process version '#{version}'"
