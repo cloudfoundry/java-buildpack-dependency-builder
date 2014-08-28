@@ -27,7 +27,7 @@ describe Replicate::IndexUpdater do
 
   it 'should replace base uri in index file' do
     expect(replicated_file).to receive(:path).and_return(Pathname.new('index.yml'))
-    expect(replicated_file).to receive(:content).with(no_args).and_return('start http://download.run.pivotal.io end')
+    expect(replicated_file).to receive(:content).with(no_args).and_return('start https://download.run.pivotal.io end')
     expect(replicated_file).to receive(:content).with(no_args).and_yield(file)
     expect(file).to receive(:write).with('start http://test-host end')
 
@@ -55,7 +55,7 @@ describe Replicate::IndexUpdater do
 
     it 'should replace base uri in index file' do
       expect(replicated_file).to receive(:path).and_return(Pathname.new('index.yml'))
-      expect(replicated_file).to receive(:content).with(no_args).and_return('start http://download.run.pivotal.io end')
+      expect(replicated_file).to receive(:content).with(no_args).and_return('start https://download.run.pivotal.io end')
       expect(replicated_file).to receive(:content).with(no_args).and_yield(file)
       expect(file).to receive(:write).with('start https://test-host end')
 

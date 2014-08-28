@@ -70,9 +70,9 @@ describe Replicate::Root do
     it 'should replicate files' do
       stub_request(:get, 'http://download.pivotal.io.s3.amazonaws.com/')
       .to_return(status: 200, body: File.new('spec/fixture/object_collection_contents.xml'))
-      stub_request(:get, 'http://download.run.pivotal.io/index.yml')
-      .to_return(status: 200, body: 'start http://download.run.pivotal.io end')
-      stub_request(:get, 'http://download.run.pivotal.io/artifact.jar')
+      stub_request(:get, 'http://download.run.pivotal.io:443/index.yml')
+      .to_return(status: 200, body: 'start https://download.run.pivotal.io end')
+      stub_request(:get, 'http://download.run.pivotal.io:443/artifact.jar')
       .to_return(status: 200, body: 'test-content')
 
       trigger
@@ -85,9 +85,9 @@ describe Replicate::Root do
     it 'should destroy a file when replication fails' do
       stub_request(:get, 'http://download.pivotal.io.s3.amazonaws.com/')
       .to_return(status: 200, body: File.new('spec/fixture/object_collection_contents.xml'))
-      stub_request(:get, 'http://download.run.pivotal.io/index.yml')
-      .to_return(status: 200, body: 'start http://download.run.pivotal.io end')
-      stub_request(:get, 'http://download.run.pivotal.io/artifact.jar')
+      stub_request(:get, 'http://download.run.pivotal.io:443/index.yml')
+      .to_return(status: 200, body: 'start https://download.run.pivotal.io end')
+      stub_request(:get, 'http://download.run.pivotal.io:443/artifact.jar')
       .to_return(status: 400)
 
       trigger
@@ -95,7 +95,7 @@ describe Replicate::Root do
       expect(stdout.string).to match(/Complete /)
       expect_replicated_files root
       expect((Pathname.new(root) + 'artifact.jar')).not_to exist
-      expect(stdout.string).to match(%r{FAILURE \(artifact.jar\): Unable to download from 'http://download.run.pivotal.io/artifact.jar'.  Received '400'.})
+      expect(stdout.string).to match(%r{FAILURE \(artifact.jar\): Unable to download from 'https://download.run.pivotal.io/artifact.jar'.  Received '400'.})
     end
 
     it 'should force a pool shutdown on SignalException' do

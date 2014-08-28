@@ -43,7 +43,7 @@ module Replicate
 
     private
 
-    BASE_URI = 'http://download.run.pivotal.io'.freeze
+    BASE_URI = 'https://download.run.pivotal.io'.freeze
 
     INDEX_FILE = 'index.yml'.freeze
 

@@ -33,7 +33,7 @@ module Replicate
     end
 
     def replicate(replicated_file)
-      with_object_timing { download URI("http://download.run.pivotal.io/#{@key}"), replicated_file }
+      with_object_timing { download URI("https://download.run.pivotal.io/#{@key}"), replicated_file }
     end
 
     private
@@ -69,7 +69,7 @@ module Replicate
     end
 
     def proxy
-      proxy_uri = URI.parse(ENV['http_proxy'] || ENV['HTTP_PROXY'] || '')
+      proxy_uri = URI.parse(ENV['https_proxy'] || ENV['HTTPS_PROXY'] || '')
       Net::HTTP::Proxy(proxy_uri.host, proxy_uri.port, proxy_uri.user, proxy_uri.password)
     end
 
