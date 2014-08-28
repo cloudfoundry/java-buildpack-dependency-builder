@@ -20,7 +20,7 @@ bundle exec bin/replicate [--base-uri <BASE-URI> | --host-name <HOST-NAME>] --ou
 
 | Option | Description |
 | ------ | ----------- |
-| `-b`, `--base-uri <BASE-URI>` | A URI to replace `http://download.run.pivotal.io` with, in `index.yml` files.  This value should be the network location that the repository is replicated to (e.g. `https://internal-repository:8000/dependencies`).  Either this option or `--host-name`, but not both, **must** be specified.
+| `-b`, `--base-uri <BASE-URI>` | A URI to replace `https://download.run.pivotal.io` with, in `index.yml` files.  This value should be the network location that the repository is replicated to (e.g. `https://internal-repository:8000/dependencies`).  Either this option or `--host-name`, but not both, **must** be specified.
 | `-h`, `--host-name <HOST-NAME>` | A host name to replace `download.run.pivotal.io` with, in `index.yml` files.  This value should be the network host that the repository is replicated to (e.g. `internal-repository`).  Either this option or `--base-uri`, but not both, **must** be specified.
 | `-o`, `--output <OUTPUT>` | A filesystem location to replicate the repository to.  This option **must** be specified.
 
@@ -39,7 +39,7 @@ All components require a configuration file in order to be published.  This YAML
 ---
 # Values are for default repository
 :bucket: download.pivotal.io
-:repository_root: http://download.run.pivotal.io
+:repository_root: https://download.run.pivotal.io
 
 # Required AWS credentials
 :access_key_id: <ACCESS_KEY_ID>
@@ -81,24 +81,24 @@ The list of available versions for each dependency can be found at the following
 
 | Dependency | Location
 | ---------- | ---------
-| App Dynamics | [`universal`](http://download.run.pivotal.io/app-dynamics/index.yml)
-| Auto Reconfiguration | [`universal`](http://download.run.pivotal.io/auto-reconfiguration/index.yml)
-| Groovy | [`universal`](http://download.run.pivotal.io/groovy/index.yml)
-| JBoss AS | [`universal`](http://download.run.pivotal.io/jboss-as/index.yml)
-| MariaDB JDBC | [`universal`](http://download.run.pivotal.io/mariadb-jdbc/index.yml)
-| New Relic | [`universal`](http://download.run.pivotal.io/new-relic/index.yml)
-| NodeJS | [`centos6`](http://download.run.pivotal.io/node/centos6/x86_64/index.yml), [`lucid`](http://download.run.pivotal.io/node/lucid/x86_64/index.yml), [`mountainlion`](http://download.run.pivotal.io/node/mountainlion/x86_64/index.yml), [`precise`](http://download.run.pivotal.io/node/precise/x86_64/index.yml), [`trusty`](http://download.run.pivotal.io/node/trusty/x86_64/index.yml)
-| OpenJDK | [`centos6`](http://download.run.pivotal.io/openjdk/centos6/x86_64/index.yml), [`lucid`](http://download.run.pivotal.io/openjdk/lucid/x86_64/index.yml), [`mountainlion`](http://download.run.pivotal.io/openjdk/mountainlion/x86_64/index.yml), [`precise`](http://download.run.pivotal.io/openjdk/precise/x86_64/index.yml), [`trusty`](http://download.run.pivotal.io/openjdk/trusty/x86_64/index.yml)
-| Play JPA Plugin | [`universal`](http://download.run.pivotal.io/play-jpa-plugin/index.yml)
-| PostgreSQL JDBC | [`universal`](http://download.run.pivotal.io/postgresql-jdbc/index.yml)
-| RedisStore | [`universal`](http://download.run.pivotal.io/redis-store/index.yml)
-| Ruby | [`centos6`](http://download.run.pivotal.io/ruby/centos6/x86_64/index.yml), [`lucid`](http://download.run.pivotal.io/ruby/lucid/x86_64/index.yml), [`mountainlion`](http://download.run.pivotal.io/ruby/mountainlion/x86_64/index.yml), [`precise`](http://download.run.pivotal.io/ruby/precise/x86_64/index.yml), [`trusty`](http://download.run.pivotal.io/ruby/trusty/x86_64/index.yml)
-| Spring Boot CLI | [`universal`](http://download.run.pivotal.io/spring-boot-cli/index.yml)
-| tc Server| [`universal`](http://download.run.pivotal.io/tc-server/index.yml)
-| Tomcat | [`universal`](http://download.run.pivotal.io/tomcat/index.yml)
-| Tomcat Access Logging Support | [`universal`](http://download.run.pivotal.io/tomcat-access-logging-support/index.yml)
-| Tomcat Lifecycle Support | [`universal`](http://download.run.pivotal.io/tomcat-lifecycle-support/index.yml)
-| Tomcat Logging Support | [`universal`](http://download.run.pivotal.io/tomcat-logging-support/index.yml)
+| App Dynamics | [`universal`](https://download.run.pivotal.io/app-dynamics/index.yml)
+| Auto Reconfiguration | [`universal`](https://download.run.pivotal.io/auto-reconfiguration/index.yml)
+| Groovy | [`universal`](https://download.run.pivotal.io/groovy/index.yml)
+| JBoss AS | [`universal`](https://download.run.pivotal.io/jboss-as/index.yml)
+| MariaDB JDBC | [`universal`](https://download.run.pivotal.io/mariadb-jdbc/index.yml)
+| New Relic | [`universal`](https://download.run.pivotal.io/new-relic/index.yml)
+| NodeJS | [`centos6`](https://download.run.pivotal.io/node/centos6/x86_64/index.yml), [`lucid`](https://download.run.pivotal.io/node/lucid/x86_64/index.yml), [`mountainlion`](https://download.run.pivotal.io/node/mountainlion/x86_64/index.yml), [`precise`](https://download.run.pivotal.io/node/precise/x86_64/index.yml), [`trusty`](https://download.run.pivotal.io/node/trusty/x86_64/index.yml)
+| OpenJDK | [`centos6`](https://download.run.pivotal.io/openjdk/centos6/x86_64/index.yml), [`lucid`](https://download.run.pivotal.io/openjdk/lucid/x86_64/index.yml), [`mountainlion`](https://download.run.pivotal.io/openjdk/mountainlion/x86_64/index.yml), [`precise`](https://download.run.pivotal.io/openjdk/precise/x86_64/index.yml), [`trusty`](https://download.run.pivotal.io/openjdk/trusty/x86_64/index.yml)
+| Play JPA Plugin | [`universal`](https://download.run.pivotal.io/play-jpa-plugin/index.yml)
+| PostgreSQL JDBC | [`universal`](https://download.run.pivotal.io/postgresql-jdbc/index.yml)
+| RedisStore | [`universal`](https://download.run.pivotal.io/redis-store/index.yml)
+| Ruby | [`centos6`](https://download.run.pivotal.io/ruby/centos6/x86_64/index.yml), [`lucid`](https://download.run.pivotal.io/ruby/lucid/x86_64/index.yml), [`mountainlion`](https://download.run.pivotal.io/ruby/mountainlion/x86_64/index.yml), [`precise`](https://download.run.pivotal.io/ruby/precise/x86_64/index.yml), [`trusty`](https://download.run.pivotal.io/ruby/trusty/x86_64/index.yml)
+| Spring Boot CLI | [`universal`](https://download.run.pivotal.io/spring-boot-cli/index.yml)
+| tc Server| [`universal`](https://download.run.pivotal.io/tc-server/index.yml)
+| Tomcat | [`universal`](https://download.run.pivotal.io/tomcat/index.yml)
+| Tomcat Access Logging Support | [`universal`](https://download.run.pivotal.io/tomcat-access-logging-support/index.yml)
+| Tomcat Lifecycle Support | [`universal`](https://download.run.pivotal.io/tomcat-lifecycle-support/index.yml)
+| Tomcat Logging Support | [`universal`](https://download.run.pivotal.io/tomcat-logging-support/index.yml)
 
 ## Running Tests
 To run the tests, issue the following commands from the root directory of a clone of this repository:
