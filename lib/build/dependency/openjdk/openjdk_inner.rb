@@ -40,7 +40,7 @@ module Build
       protected
 
       def base_path
-        "openjdk/#{codename}/#{architecture}"
+        "openjdk#{'-jdk' if @jdk}/#{codename}/#{architecture}"
       end
 
       def source
