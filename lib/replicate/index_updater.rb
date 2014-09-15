@@ -27,7 +27,7 @@ module Replicate
       elsif base_uri
         @base_uri = base_uri
       elsif host_name
-        @base_uri = "http://#{host_name}"
+        @base_uri = "https://#{host_name}"
       else
         fail Thor::MalformattedArgumentError,
              "No value provided for one of required options '--base-uri', '--host-name'"
