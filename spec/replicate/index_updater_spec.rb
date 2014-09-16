@@ -29,7 +29,7 @@ describe Replicate::IndexUpdater do
     expect(replicated_file).to receive(:path).and_return(Pathname.new('index.yml'))
     expect(replicated_file).to receive(:content).with(no_args).and_return('start https://download.run.pivotal.io end')
     expect(replicated_file).to receive(:content).with(no_args).and_yield(file)
-    expect(file).to receive(:write).with('start http://test-host end')
+    expect(file).to receive(:write).with('start https://test-host end')
 
     index_updater.update replicated_file
   end

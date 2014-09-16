@@ -50,7 +50,7 @@ module Replicate
     def download(location, replicated_file)
       downloaded = false
 
-      proxy.start(location.host, location.port) do |http|
+      proxy.start(location.host, location.port, use_ssl: true) do |http|
         http.request(request(location, replicated_file)) do |response|
           if response.is_a? Net::HTTPOK
             write replicated_file, response
@@ -58,6 +58,7 @@ module Replicate
           elsif response.is_a? Net::HTTPNotModified
             downloaded = false
           elsif redirect?(response)
+
             downloaded = download URI(response['Location']), replicated_file
           else
             fail "Unable to download from '#{location}'.  Received '#{response.code}'."

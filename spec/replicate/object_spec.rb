@@ -5,7 +5,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+#      https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,7 +32,7 @@ describe Replicate::Object do
 
   it 'should replicate file' do
     Dir.mktmpdir do |root|
-      stub_request(:get, 'http://download.run.pivotal.io:443/index.yml')
+      stub_request(:get, 'https://download.run.pivotal.io:443/index.yml')
       .to_return(status: 200, body: 'test-content')
 
       object.replicate Replicate::ReplicatedFile.new(root, object.key)
@@ -43,7 +43,7 @@ describe Replicate::Object do
 
   it 'should attempt to 304 if etag and last_modified exist' do
     Dir.mktmpdir do |root|
-      stub_request(:get, 'http://download.run.pivotal.io:443/index.yml')
+      stub_request(:get, 'https://download.run.pivotal.io:443/index.yml')
       .with(headers: { 'If-None-Match' => 'old-etag', 'If-Modified-Since' => '2013-01-01 00:00:00 UTC' })
       .to_return(status: 200, body: 'test-content')
 
@@ -58,7 +58,7 @@ describe Replicate::Object do
 
   it 'should not update if 304 returned' do
     Dir.mktmpdir do |root|
-      stub_request(:get, 'http://download.run.pivotal.io:443/index.yml')
+      stub_request(:get, 'https://download.run.pivotal.io:443/index.yml')
       .with(headers: { 'If-None-Match' => 'old-etag', 'If-Modified-Since' => '2013-01-01 00:00:00 UTC' })
       .to_return(status: 304)
 
@@ -72,9 +72,9 @@ describe Replicate::Object do
 
   it 'should follow redirect if 301 returned' do
     Dir.mktmpdir do |root|
-      stub_request(:get, 'http://download.run.pivotal.io:443/index.yml')
-      .to_return(status: 301, headers: { Location: 'http://test-host/test-path' })
-      stub_request(:get, 'http://test-host/test-path')
+      stub_request(:get, 'https://download.run.pivotal.io:443/index.yml')
+      .to_return(status: 301, headers: { Location: 'https://test-host/test-path' })
+      stub_request(:get, 'https://test-host/test-path')
       .to_return(status: 200, body: 'test-content')
 
       object.replicate Replicate::ReplicatedFile.new(root, object.key)
@@ -86,9 +86,9 @@ describe Replicate::Object do
 
   it 'should follow redirect if 302 returned' do
     Dir.mktmpdir do |root|
-      stub_request(:get, 'http://download.run.pivotal.io:443/index.yml')
-      .to_return(status: 302, headers: { Location: 'http://test-host/test-path' })
-      stub_request(:get, 'http://test-host/test-path')
+      stub_request(:get, 'https://download.run.pivotal.io:443/index.yml')
+      .to_return(status: 302, headers: { Location: 'https://test-host/test-path' })
+      stub_request(:get, 'https://test-host/test-path')
       .to_return(status: 200, body: 'test-content')
 
       object.replicate Replicate::ReplicatedFile.new(root, object.key)
@@ -100,9 +100,9 @@ describe Replicate::Object do
 
   it 'should follow redirect if 303 returned' do
     Dir.mktmpdir do |root|
-      stub_request(:get, 'http://download.run.pivotal.io:443/index.yml')
-      .to_return(status: 303, headers: { Location: 'http://test-host/test-path' })
-      stub_request(:get, 'http://test-host/test-path')
+      stub_request(:get, 'https://download.run.pivotal.io:443/index.yml')
+      .to_return(status: 303, headers: { Location: 'https://test-host/test-path' })
+      stub_request(:get, 'https://test-host/test-path')
       .to_return(status: 200, body: 'test-content')
 
       object.replicate Replicate::ReplicatedFile.new(root, object.key)
@@ -114,9 +114,9 @@ describe Replicate::Object do
 
   it 'should follow redirect if 307 returned' do
     Dir.mktmpdir do |root|
-      stub_request(:get, 'http://download.run.pivotal.io:443/index.yml')
-      .to_return(status: 307, headers: { Location: 'http://test-host/test-path' })
-      stub_request(:get, 'http://test-host/test-path')
+      stub_request(:get, 'https://download.run.pivotal.io:443/index.yml')
+      .to_return(status: 307, headers: { Location: 'https://test-host/test-path' })
+      stub_request(:get, 'https://test-host/test-path')
       .to_return(status: 200, body: 'test-content')
 
       object.replicate Replicate::ReplicatedFile.new(root, object.key)
@@ -128,7 +128,7 @@ describe Replicate::Object do
 
   it 'should fail if anything else is returned' do
     Dir.mktmpdir do |root|
-      stub_request(:get, 'http://download.run.pivotal.io:443/index.yml')
+      stub_request(:get, 'https://download.run.pivotal.io:443/index.yml')
       .to_return(status: 400)
 
       expect { object.replicate Replicate::ReplicatedFile.new(root, object.key) }
@@ -142,7 +142,7 @@ describe Replicate::Object do
 
     it 'should use https_proxy if specified' do
       Dir.mktmpdir do |root|
-        stub_request(:get, 'http://download.run.pivotal.io:443/index.yml')
+        stub_request(:get, 'https://download.run.pivotal.io:443/index.yml')
         .to_return(status: 200, body: 'test-content')
 
         allow(Net::HTTP).to receive(:Proxy).and_call_original
@@ -160,7 +160,7 @@ describe Replicate::Object do
 
     it 'should use HTTPS_PROXY if specified' do
       Dir.mktmpdir do |root|
-        stub_request(:get, 'http://download.run.pivotal.io:443/index.yml')
+        stub_request(:get, 'https://download.run.pivotal.io:443/index.yml')
         .to_return(status: 200, body: 'test-content')
 
         allow(Net::HTTP).to receive(:Proxy).and_call_original
