@@ -22,6 +22,7 @@ require 'replicate/index_updater'
 require 'replicate/object_collection'
 require 'replicate/replicated_file'
 require 'thor'
+require 'thread/future'
 require 'thread/pool'
 
 module Replicate
@@ -60,12 +61,13 @@ module Replicate
 
     def replicate
       with_timing do
-        ObjectCollection.new.each { |object| @pool.process { process object } }
+        futures = ObjectCollection.new.map { |object| @pool.future { process object } }
+        futures.each(&:~)
         @pool.shutdown
       end
-    rescue SignalException
-      puts "\nInterrupted"
+    rescue SignalException, StandardError
       @pool.shutdown!
+      abort "\nIncomplete\n"
     end
 
     private
@@ -85,7 +87,8 @@ module Replicate
       yield
     rescue => e
       replicated_file.destroy
-      print "FAILURE (#{object.key}): #{e}\n"
+      $stderr.print "FAILURE (#{object.key}): #{e}\n"
+      raise e
     end
 
     def with_timing

@@ -58,7 +58,6 @@ module Replicate
           elsif response.is_a? Net::HTTPNotModified
             downloaded = false
           elsif redirect?(response)
-
             downloaded = download URI(response['Location']), replicated_file
           else
             fail "Unable to download from '#{location}'.  Received '#{response.code}'."
