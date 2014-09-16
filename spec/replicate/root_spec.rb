@@ -67,7 +67,7 @@ describe Replicate::Root do
     before { FileUtils.mkdir_p root }
     after { FileUtils.rm_rf root }
 
-    it 'should replicate files', :show_output do
+    it 'should replicate files' do
       stub_request(:get, 'http://download.pivotal.io.s3.amazonaws.com/')
       .to_return(status: 200, body: File.new('spec/fixture/object_collection_contents.xml'))
       stub_request(:get, 'https://download.run.pivotal.io:443/index.yml')
@@ -90,12 +90,12 @@ describe Replicate::Root do
       stub_request(:get, 'https://download.run.pivotal.io:443/artifact.jar')
       .to_return(status: 400)
 
-      trigger
+      expect { trigger }.to raise_error SystemExit
 
-      expect(stdout.string).to match(/Complete /)
       expect_replicated_files root
       expect((Pathname.new(root) + 'artifact.jar')).not_to exist
-      expect(stdout.string).to match(%r{FAILURE \(artifact.jar\): Unable to download from 'https://download.run.pivotal.io/artifact.jar'.  Received '400'.})
+      expect(stderr.string).to match(%r{FAILURE \(artifact.jar\): Unable to download from 'https://download.run.pivotal.io/artifact.jar'.  Received '400'.})
+      expect(stderr.string).to match(/Incomplete/)
     end
 
     it 'should force a pool shutdown on SignalException' do
@@ -108,9 +108,9 @@ describe Replicate::Root do
       allow_any_instance_of(Thread::Pool).to receive(:shutdown).and_raise(SignalException.new('HUP'))
       expect_any_instance_of(Thread::Pool).to receive(:shutdown!)
 
-      trigger
+      expect { trigger }.to raise_error SystemExit
 
-      expect(stdout.string).to match(/Interrupted/)
+      expect(stderr.string).to match(/Incomplete/)
     end
   end
 

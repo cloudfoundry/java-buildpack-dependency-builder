@@ -40,7 +40,7 @@ module Build
       [
         Thread.new { cloudfront object, complete },
         Thread.new { progress complete }
-      ].each { |t| t.join }
+      ].each(&:join)
     end
 
     private
