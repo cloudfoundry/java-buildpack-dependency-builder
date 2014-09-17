@@ -115,7 +115,7 @@ module Build
     end
 
     def download_from_uri(location, file, progress_bar)
-      proxy(location).start(location.host, location.port) do |http|
+      proxy(location).start(location.host, location.port, use_ssl: secure?(location)) do |http|
         http.request_get(location.request_uri, @source_headers) do |response|
           if response.is_a? Net::HTTPOK
             response.read_body do |chunk|
@@ -154,7 +154,7 @@ module Build
     def source_size_from_uri(location)
       size = nil
 
-      proxy(location).start(location.host, location.port) do |http|
+      proxy(location).start(location.host, location.port, use_ssl: secure?(location)) do |http|
         http.request_head(location.path, @source_headers) do |response|
           if response.is_a? Net::HTTPOK
             size = response['Content-Length'].to_i
