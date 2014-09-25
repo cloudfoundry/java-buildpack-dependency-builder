@@ -18,7 +18,7 @@ group :development do
   gem 'webmock'
 end
 
-group :debug do
-  gem 'debase'
-  gem 'ruby-debug-ide'
-end
+# group :debug do
+#   gem 'debase'
+#   gem 'ruby-debug-ide'
+# end
