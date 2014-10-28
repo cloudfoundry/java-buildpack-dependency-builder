@@ -77,16 +77,15 @@ module Replicate
     def process(object)
       replicated_file = ReplicatedFile.new options[:output], object.key
 
-      with_cleanup(object, replicated_file) do
+      with_cleanup(object) do
         object.replicate replicated_file
         @index_updater.update replicated_file
       end
     end
 
-    def with_cleanup(object, replicated_file)
+    def with_cleanup(object)
       yield
     rescue => e
-      replicated_file.destroy
       $stderr.print "FAILURE (#{object.key}): #{e}\n"
       raise e
     end

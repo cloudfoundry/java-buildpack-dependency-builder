@@ -16,6 +16,7 @@
 require 'fileutils'
 require 'pathname'
 require 'replicate'
+require 'tempfile'
 
 module Replicate
   class ReplicatedFile
@@ -30,19 +31,15 @@ module Replicate
 
     def content
       if block_given?
-        FileUtils.mkdir_p @content.dirname
-        @content.open(File::CREAT | File::WRONLY) do |f|
-          f.truncate 0
-          yield f
-          f.fsync
+        Tempfile.open('replicate') do |t|
+          yield t
+          t.fsync
+          FileUtils.mkdir_p @content.dirname
+          FileUtils.mv t, @content, force: true
         end
       else
         @content.read
       end
-    end
-
-    def destroy
-      [@content, @etag, @last_modified].each { |f| f.delete if f.exist? }
     end
 
     def etag
