@@ -66,22 +66,6 @@ describe Replicate::ReplicatedFile do
     end
   end
 
-  it 'should destroy cached and metadata files' do
-    Dir.mktmpdir do |root|
-      replicated_file = described_class.new root, 'foo'
-
-      replicated_file.content { |f| f.write 'test-content' }
-      replicated_file.etag          = 'test-etag'
-      replicated_file.last_modified = 'test-last-modified'
-
-      replicated_file.destroy
-
-      expect(Pathname.new(root) + 'foo').not_to exist
-      expect(Pathname.new(root) + 'foo.etag').not_to exist
-      expect(Pathname.new(root) + 'foo.last_modified').not_to exist
-    end
-  end
-
   def expect_file_content(root, name, content)
     expect((Pathname.new(root) + name).read).to match(content)
   end
