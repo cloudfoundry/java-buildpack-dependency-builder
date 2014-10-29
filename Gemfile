@@ -17,8 +17,3 @@ group :development do
   gem 'tee'
   gem 'webmock'
 end
-
-# group :debug do
-#   gem 'debase'
-#   gem 'ruby-debug-ide'
-# end
