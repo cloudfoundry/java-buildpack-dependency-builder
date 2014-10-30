@@ -16,27 +16,21 @@
 require 'fileutils'
 require 'pathname'
 require 'replicate'
-require 'tempfile'
 
 module Replicate
   class ReplicatedFile
+    include FileUtils
 
     def initialize(root, name)
-      root = Pathname.new(root)
-
+      root           = Pathname.new(root)
       @content       = root + name
       @etag          = root + "#{name}.etag"
       @last_modified = root + "#{name}.last_modified"
     end
 
-    def content
+    def content(&block)
       if block_given?
-        Tempfile.open('replicate') do |t|
-          yield t
-          t.fsync
-          FileUtils.mkdir_p @content.dirname
-          FileUtils.mv t, @content, force: true
-        end
+        write_file @content, &block
       else
         @content.read
       end
@@ -47,7 +41,7 @@ module Replicate
     end
 
     def etag=(value)
-      FileUtils.mkdir_p @etag.dirname
+      mkdir_p @etag.dirname
       write @etag, value
     end
 
@@ -60,7 +54,7 @@ module Replicate
     end
 
     def last_modified=(value)
-      FileUtils.mkdir_p @last_modified.dirname
+      mkdir_p @last_modified.dirname
       write @last_modified, value
     end
 
@@ -74,11 +68,22 @@ module Replicate
 
     private
 
+    def temp_file(file)
+      Pathname.new(file.to_s + '.tmp')
+    end
+
     def write(file, value)
-      file.open(File::CREAT | File::WRONLY) do |f|
-        f.truncate 0
-        f.write value
-        f.fsync
+      write_file(file) { |f| f.write value }
+    end
+
+    def write_file(file)
+      mkdir_p file.dirname unless file.dirname.exist?
+
+      temp_file(file).open(File::CREAT | File::WRONLY) do |temp|
+        temp.truncate 0
+        yield temp
+        temp.fsync
+        mv temp, file, force: true
       end
     end
 
