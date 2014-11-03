@@ -71,7 +71,7 @@ Vagrant.configure('2') do |config|
     m.vm.provision 'shell', path: 'xquartz.sh'
     m.vm.provision 'shell', path: 'mountainlion.sh', :privileged => false
     m.vm.provision 'shell', path: 'rbenv.sh', :privileged => false
-    m.vm.synced_folder ROOT, '/java-buildpack-dependency-builder'
+    m.vm.synced_folder ROOT, '/java-buildpack-dependency-builder', type: 'rsync'
 
     m.vm.provider('virtualbox') do |vb, override|
       vb.cpus   = VM_CORES

@@ -77,6 +77,7 @@ module Build
         Dir.mktmpdir('node-staging') do |staging_dir|
           Dir.chdir(@source_location) do
             system <<-EOF
+#{'export RUBY_CONFIGURE_OPTS="--with-setjmp-type=_setjmp"' if macosx?}
 bin/ruby-build #{@version} #{staging_dir}#{openssl_dir}
 tar czvf #{package.path} -C #{staging_dir} .
             EOF
