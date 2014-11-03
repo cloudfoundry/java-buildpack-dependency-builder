@@ -153,7 +153,7 @@ This table shows the mappings between versions, build numbers, and repository ta
 
 | JRE Version | Build Number | Tag           | CentOS 6 | Lucid | OS X | Precise | Trusty |
 | ----------- | ------------ | ------------- | :------: | :---: | :--: | :-----: | :----: |
-| `1.8.0_25`  | `b17`        | `jdk8u20-b17` | ✓        | ✓     |      | ✓       | ✓      |
+| `1.8.0_25`  | `b17`        | `jdk8u20-b17` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `1.8.0_20`  | `b23`        | `jdk8u20-b23` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `1.8.0_11`  | `b12`        | `jdk8u11-b12` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `1.8.0_05`  | `b13`        | `jdk8u5-b13`  | ✓        | ✓     | ✓    | ✓       | ✓      |
