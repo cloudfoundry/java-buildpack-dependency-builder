@@ -27,6 +27,7 @@ mkdir -p "$HOME/.rbenv/plugins/ruby-build"
 curl -sSL "https://github.com/sstephenson/ruby-build/archive/master.tar.gz" | tar xzvf - --strip 1 -C "$HOME/.rbenv/plugins/ruby-build"
 
 cd /java-buildpack-dependency-builder
+export RUBY_CONFIGURE_OPTS="--with-setjmp-type=_setjmp"
 rbenv install
 gem install bundler --no-rdoc --no-ri
 rbenv rehash
