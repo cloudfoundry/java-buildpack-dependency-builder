@@ -142,7 +142,7 @@ This table shows locations to check for new releases of cached dependencies.  It
 | RedisStore | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/com/gopivotal/manager/redis-store/maven-metadata.xml)
 | Ruby | [`release`](https://github.com/sstephenson/ruby-build/tree/master/share/ruby-build)
 | Spring Boot CLI | [`release`](http://repo.springsource.org/release/org/springframework/boot/spring-boot-cli/)
-| tc Server | [`release`](http://gopivotal.com/pivotal-products/pivotal-vfabric)
+| tc Server | [`release`](https://network.pivotal.io/products/pivotal-tcserver)
 | Tomcat | [`8.x`](http://tomcat.apache.org/download-80.cgi), [`7.x`](http://tomcat.apache.org/download-70.cgi), [`6.x`](http://tomcat.apache.org/download-60.cgi)
 | Tomcat Access Logging Support | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/tomcat-access-logging-support/maven-metadata.xml)
 | Tomcat Lifecycle Support | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/tomcat-lifecycle-support/maven-metadata.xml)
