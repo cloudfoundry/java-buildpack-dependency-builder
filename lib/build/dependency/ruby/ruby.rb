@@ -19,9 +19,7 @@ require 'build/dependency/base_vagrant'
 
 module Build
   module Dependency
-
     class Ruby < BaseVagrant
-
       def initialize(options)
         super 'ruby-inner', RubyVagrantPlatform, options
       end
@@ -31,8 +29,6 @@ module Build
       def arguments
         ["--version #{@version}"]
       end
-
     end
-
   end
 end

@@ -19,7 +19,6 @@ require 'build/maven'
 
 module Build
   module Dependency
-
     class SpringBootCLI < Base
       include Build::Maven
 
@@ -40,8 +39,6 @@ module Build
           fail "Unable to process version '#{version}'"
         end
       end
-
     end
-
   end
 end

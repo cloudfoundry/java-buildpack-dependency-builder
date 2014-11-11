@@ -67,7 +67,7 @@ describe Build::Dependency::Base do
       dependency.build
 
       expect(YAML.load_file file)
-      .to eq('test-version' => 'http://test.repository.root/test-name/test-name-test-version.test-type')
+        .to eq('test-version' => 'http://test.repository.root/test-name/test-name-test-version.test-type')
     end
   end
 

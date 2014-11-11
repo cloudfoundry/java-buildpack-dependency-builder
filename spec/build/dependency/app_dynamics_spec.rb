@@ -35,8 +35,8 @@ describe Build::Dependency::AppDynamics do
 
   it 'should return SSO cookie in header' do
     stub_request(:post, 'https://login.appdynamics.com/sso/login/')
-    .with(body: { 'password' => 'test-password', 'username' => 'test-username' })
-    .to_return(status: 200, headers: { 'Set-Cookie' => 'sso-sessionid=test-sso-sessionid' })
+      .with(body: { 'password' => 'test-password', 'username' => 'test-username' })
+      .to_return(status: 200, headers: { 'Set-Cookie' => 'sso-sessionid=test-sso-sessionid' })
 
     expect(dependency.send(:headers)).to eq('Cookie' => 'sso-sessionid=test-sso-sessionid')
   end

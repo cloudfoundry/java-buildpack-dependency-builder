@@ -20,7 +20,6 @@ require 'tempfile'
 
 module Build
   module Dependency
-
     class JRE6And7JREBuilder
       include PlatformDetails
 
@@ -54,8 +53,6 @@ tar czvf #{@package.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build
       def package_dir(package_jdk)
         package_jdk ? 'j2sdk-image' : 'j2re-image'
       end
-
     end
-
   end
 end

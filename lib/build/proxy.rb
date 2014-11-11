@@ -18,7 +18,6 @@ require 'net/http'
 
 module Build
   module Proxy
-
     def proxy(uri)
       proxy_uri = if secure?(uri)
                     URI.parse(ENV['https_proxy'] || ENV['HTTPS_PROXY'] || '')
@@ -32,6 +31,5 @@ module Build
     def secure?(uri)
       uri.scheme == 'https'
     end
-
   end
 end

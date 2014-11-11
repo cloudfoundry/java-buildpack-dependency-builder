@@ -14,7 +14,6 @@
 # limitations under the License.
 
 class Numeric
-
   def duration
     remainder = self
 
@@ -44,5 +43,4 @@ class Numeric
   MINUTE = (60 * SECOND).freeze
 
   HOUR = (60 * MINUTE).freeze
-
 end

@@ -19,9 +19,7 @@ require 'fileutils'
 
 module Build
   module Dependency
-
     class BaseVagrant
-
       def initialize(command, vagrant_platform_type, options)
         options.each { |key, value| instance_variable_set("@#{key}", value) }
 
@@ -61,8 +59,6 @@ module Build
       def cached_configuration
         File.join(VENDOR_DIR, CONFIGURATION)
       end
-
     end
-
   end
 end

@@ -22,7 +22,7 @@ describe Replicate::ObjectCollection do
 
   it 'should create a collection with two elements' do
     stub_request(:get, 'http://download.pivotal.io.s3.amazonaws.com/')
-    .to_return(status: 200, body: File.new('spec/fixture/object_collection_contents.xml'))
+      .to_return(status: 200, body: File.new('spec/fixture/object_collection_contents.xml'))
 
     expect(object_collection[0].key).to eq 'index.yml'
     expect(object_collection[1].key).to eq 'artifact.jar'
@@ -30,9 +30,9 @@ describe Replicate::ObjectCollection do
 
   it 'should create a collection from truncated listing' do
     stub_request(:get, 'http://download.pivotal.io.s3.amazonaws.com/')
-    .to_return(status: 200, body: File.new('spec/fixture/object_collection_truncated_contents_1.xml'))
+      .to_return(status: 200, body: File.new('spec/fixture/object_collection_truncated_contents_1.xml'))
     stub_request(:get, 'http://download.pivotal.io.s3.amazonaws.com/?marker=index.yml')
-    .to_return(status: 200, body: File.new('spec/fixture/object_collection_truncated_contents_2.xml'))
+      .to_return(status: 200, body: File.new('spec/fixture/object_collection_truncated_contents_2.xml'))
 
     expect(object_collection[0].key).to eq 'index.yml'
     expect(object_collection[1].key).to eq 'artifact.jar'

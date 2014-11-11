@@ -27,7 +27,7 @@ Vagrant.configure('2') do |config|
   config.vm.define 'centos6' do |c|
     c.vm.box = 'centos664-2'
     c.vm.provision 'shell', path: 'centos6.sh'
-    c.vm.provision 'shell', path: 'rbenv.sh', :privileged => false
+    c.vm.provision 'shell', path: 'rbenv.sh', privileged: false
     c.vm.synced_folder ROOT, '/java-buildpack-dependency-builder'
 
     c.vm.provider('virtualbox') do |vb, override|
@@ -48,7 +48,7 @@ Vagrant.configure('2') do |config|
   config.vm.define 'lucid' do |l|
     l.vm.box = 'lucid64-2'
     l.vm.provision 'shell', path: 'lucid.sh'
-    l.vm.provision 'shell', path: 'rbenv.sh', :privileged => false
+    l.vm.provision 'shell', path: 'rbenv.sh', privileged: false
     l.vm.synced_folder ROOT, '/java-buildpack-dependency-builder'
 
     l.vm.provider('virtualbox') do |vb, override|
@@ -69,8 +69,8 @@ Vagrant.configure('2') do |config|
   config.vm.define 'mountainlion' do |m|
     m.vm.box = 'mountainlion64-2'
     m.vm.provision 'shell', path: 'xquartz.sh'
-    m.vm.provision 'shell', path: 'mountainlion.sh', :privileged => false
-    m.vm.provision 'shell', path: 'rbenv.sh', :privileged => false
+    m.vm.provision 'shell', path: 'mountainlion.sh', privileged: false
+    m.vm.provision 'shell', path: 'rbenv.sh', privileged: false
     m.vm.synced_folder ROOT, '/java-buildpack-dependency-builder', type: 'rsync'
 
     m.vm.provider('virtualbox') do |vb, override|
@@ -92,7 +92,7 @@ Vagrant.configure('2') do |config|
   config.vm.define 'precise' do |p|
     p.vm.box = 'precise64-2'
     p.vm.provision 'shell', path: 'precise.sh'
-    p.vm.provision 'shell', path: 'rbenv.sh', :privileged => false
+    p.vm.provision 'shell', path: 'rbenv.sh', privileged: false
     p.vm.synced_folder ROOT, '/java-buildpack-dependency-builder'
 
     p.vm.provider('virtualbox') do |vb, override|
@@ -113,7 +113,7 @@ Vagrant.configure('2') do |config|
   config.vm.define 'trusty' do |t|
     t.vm.box = 'trusty64-2'
     t.vm.provision 'shell', path: 'trusty.sh'
-    t.vm.provision 'shell', path: 'rbenv.sh', :privileged => false
+    t.vm.provision 'shell', path: 'rbenv.sh', privileged: false
     t.vm.synced_folder ROOT, '/java-buildpack-dependency-builder'
 
     t.vm.provider('virtualbox') do |vb, override|

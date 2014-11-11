@@ -86,6 +86,5 @@ module Replicate
         mv temp, file, force: true
       end
     end
-
   end
 end

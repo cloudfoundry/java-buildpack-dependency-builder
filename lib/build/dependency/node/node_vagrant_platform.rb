@@ -19,7 +19,6 @@ require 'build/dependency/util/base_vagrant_platform'
 
 module Build
   module Dependency
-
     class NodeVagrantPlatform < BaseVagrantPlatform
       include NodeResources
 
@@ -32,7 +31,6 @@ module Build
           fail "Unable to process version '#{version}'"
         end
       end
-
     end
   end
 end

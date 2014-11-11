@@ -19,7 +19,6 @@ require 'build/dependency/util/platform_details'
 
 module Build
   module Dependency
-
     class CACertsBuilder
       include OpenJDKResources
       include PlatformDetails
@@ -55,8 +54,6 @@ done
       CACERTS_URI = 'http://curl.haxx.se/ca/cacert.pem'.freeze
 
       private_constant :CACERTS_FILE, :CACERTS_URI
-
     end
-
   end
 end

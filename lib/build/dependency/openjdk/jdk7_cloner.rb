@@ -18,13 +18,10 @@ require 'build/dependency/openjdk/jdk6_and_7_cloner'
 
 module Build
   module Dependency
-
     class JDK7Cloner < JDK6And7Cloner
-
       def initialize(development = false)
         super 'http://hg.openjdk.java.net/jdk7u/jdk7u', development
       end
     end
-
   end
 end

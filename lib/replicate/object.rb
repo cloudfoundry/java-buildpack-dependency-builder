@@ -20,9 +20,7 @@ require 'time'
 require 'uri'
 
 module Replicate
-
   class Object
-
     attr_reader :key
 
     def initialize(contents)
@@ -96,7 +94,5 @@ module Replicate
       replicated_file.etag          = @etag
       replicated_file.last_modified = @last_modified
     end
-
   end
-
 end

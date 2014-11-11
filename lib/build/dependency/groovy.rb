@@ -18,9 +18,7 @@ require 'build/dependency/base'
 
 module Build
   module Dependency
-
     class Groovy < Base
-
       def initialize(options)
         super 'groovy', 'zip', options
       end
@@ -36,8 +34,6 @@ module Build
           fail "Unable to process version '#{version}'"
         end
       end
-
     end
-
   end
 end

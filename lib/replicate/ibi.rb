@@ -14,7 +14,6 @@
 # limitations under the License.
 
 class Numeric
-
   def ibi
     if self >= GIBI
       format('%.1f GiB', (self / GIBI))
@@ -34,5 +33,4 @@ class Numeric
   MIBI = (1024 * KIBI).freeze
 
   GIBI = (1024 * MIBI).freeze
-
 end

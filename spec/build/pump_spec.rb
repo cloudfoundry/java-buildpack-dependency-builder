@@ -34,9 +34,9 @@ describe Build::Pump do
 
   it 'should pump from a URI' do
     stub_request(:head, 'http://test.host/test-path')
-    .to_return(status: 200, headers: { 'Content-Length' => '100' })
+      .to_return(status: 200, headers: { 'Content-Length' => '100' })
     stub_request(:get, 'http://test.host/test-path')
-    .to_return(status: 200, body: 'test-body')
+      .to_return(status: 200, body: 'test-body')
     expect(destination).to receive(:write).with(content_length: 9, content_type: 'text/x-yaml').and_yield(buffer, 1000)
     expect(buffer).to receive(:write).with('test-body')
 
@@ -45,11 +45,11 @@ describe Build::Pump do
 
   it 'should follow redirects for download if 301 returned' do
     stub_request(:head, 'http://test.host/test-path')
-    .to_return(status: 200, headers: { 'Content-Length' => '100' })
+      .to_return(status: 200, headers: { 'Content-Length' => '100' })
     stub_request(:get, 'http://test.host/test-path')
-    .to_return(status: 301, headers: { 'Location' => 'http://alternate.test.host/test-path' })
+      .to_return(status: 301, headers: { 'Location' => 'http://alternate.test.host/test-path' })
     stub_request(:get, 'http://alternate.test.host/test-path')
-    .to_return(status: 200, body: 'test-body')
+      .to_return(status: 200, body: 'test-body')
     expect(destination).to receive(:write).with(content_length: 9, content_type: 'text/x-yaml').and_yield(buffer, 1000)
     expect(buffer).to receive(:write).with('test-body')
 
@@ -58,11 +58,11 @@ describe Build::Pump do
 
   it 'should follow redirects for download if 302 returned' do
     stub_request(:head, 'http://test.host/test-path')
-    .to_return(status: 200, headers: { 'Content-Length' => '100' })
+      .to_return(status: 200, headers: { 'Content-Length' => '100' })
     stub_request(:get, 'http://test.host/test-path')
-    .to_return(status: 302, headers: { 'Location' => 'http://alternate.test.host/test-path' })
+      .to_return(status: 302, headers: { 'Location' => 'http://alternate.test.host/test-path' })
     stub_request(:get, 'http://alternate.test.host/test-path')
-    .to_return(status: 200, body: 'test-body')
+      .to_return(status: 200, body: 'test-body')
     expect(destination).to receive(:write).with(content_length: 9, content_type: 'text/x-yaml').and_yield(buffer, 1000)
     expect(buffer).to receive(:write).with('test-body')
 
@@ -71,11 +71,11 @@ describe Build::Pump do
 
   it 'should follow redirects for download if 303 returned' do
     stub_request(:head, 'http://test.host/test-path')
-    .to_return(status: 200, headers: { 'Content-Length' => '100' })
+      .to_return(status: 200, headers: { 'Content-Length' => '100' })
     stub_request(:get, 'http://test.host/test-path')
-    .to_return(status: 303, headers: { 'Location' => 'http://alternate.test.host/test-path' })
+      .to_return(status: 303, headers: { 'Location' => 'http://alternate.test.host/test-path' })
     stub_request(:get, 'http://alternate.test.host/test-path')
-    .to_return(status: 200, body: 'test-body')
+      .to_return(status: 200, body: 'test-body')
     expect(destination).to receive(:write).with(content_length: 9, content_type: 'text/x-yaml').and_yield(buffer, 1000)
     expect(buffer).to receive(:write).with('test-body')
 
@@ -84,11 +84,11 @@ describe Build::Pump do
 
   it 'should follow redirects for download if 307 returned' do
     stub_request(:head, 'http://test.host/test-path')
-    .to_return(status: 200, headers: { 'Content-Length' => '100' })
+      .to_return(status: 200, headers: { 'Content-Length' => '100' })
     stub_request(:get, 'http://test.host/test-path')
-    .to_return(status: 307, headers: { 'Location' => 'http://alternate.test.host/test-path' })
+      .to_return(status: 307, headers: { 'Location' => 'http://alternate.test.host/test-path' })
     stub_request(:get, 'http://alternate.test.host/test-path')
-    .to_return(status: 200, body: 'test-body')
+      .to_return(status: 200, body: 'test-body')
     expect(destination).to receive(:write).with(content_length: 9, content_type: 'text/x-yaml').and_yield(buffer, 1000)
     expect(buffer).to receive(:write).with('test-body')
 
@@ -97,11 +97,11 @@ describe Build::Pump do
 
   it 'should follow redirect for size if 301 returned' do
     stub_request(:head, 'http://test.host/test-path')
-    .to_return(status: 301, headers: { 'Location' => 'http://alternate.test.host/test-path' })
+      .to_return(status: 301, headers: { 'Location' => 'http://alternate.test.host/test-path' })
     stub_request(:head, 'http://alternate.test.host/test-path')
-    .to_return(status: 200, headers: { 'Content-Length' => '100' })
+      .to_return(status: 200, headers: { 'Content-Length' => '100' })
     stub_request(:get, 'http://test.host/test-path')
-    .to_return(status: 200, body: 'test-body')
+      .to_return(status: 200, body: 'test-body')
     expect(destination).to receive(:write).with(content_length: 9, content_type: 'text/x-yaml').and_yield(buffer, 1000)
     expect(buffer).to receive(:write).with('test-body')
 
@@ -110,11 +110,11 @@ describe Build::Pump do
 
   it 'should follow redirect for size if 302 returned' do
     stub_request(:head, 'http://test.host/test-path')
-    .to_return(status: 302, headers: { 'Location' => 'http://alternate.test.host/test-path' })
+      .to_return(status: 302, headers: { 'Location' => 'http://alternate.test.host/test-path' })
     stub_request(:head, 'http://alternate.test.host/test-path')
-    .to_return(status: 200, headers: { 'Content-Length' => '100' })
+      .to_return(status: 200, headers: { 'Content-Length' => '100' })
     stub_request(:get, 'http://test.host/test-path')
-    .to_return(status: 200, body: 'test-body')
+      .to_return(status: 200, body: 'test-body')
     expect(destination).to receive(:write).with(content_length: 9, content_type: 'text/x-yaml').and_yield(buffer, 1000)
     expect(buffer).to receive(:write).with('test-body')
 
@@ -123,11 +123,11 @@ describe Build::Pump do
 
   it 'should follow redirect for size if 303 returned' do
     stub_request(:head, 'http://test.host/test-path')
-    .to_return(status: 303, headers: { 'Location' => 'http://alternate.test.host/test-path' })
+      .to_return(status: 303, headers: { 'Location' => 'http://alternate.test.host/test-path' })
     stub_request(:head, 'http://alternate.test.host/test-path')
-    .to_return(status: 200, headers: { 'Content-Length' => '100' })
+      .to_return(status: 200, headers: { 'Content-Length' => '100' })
     stub_request(:get, 'http://test.host/test-path')
-    .to_return(status: 200, body: 'test-body')
+      .to_return(status: 200, body: 'test-body')
     expect(destination).to receive(:write).with(content_length: 9, content_type: 'text/x-yaml').and_yield(buffer, 1000)
     expect(buffer).to receive(:write).with('test-body')
 
@@ -136,11 +136,11 @@ describe Build::Pump do
 
   it 'should follow redirect for size if 307 returned' do
     stub_request(:head, 'http://test.host/test-path')
-    .to_return(status: 307, headers: { 'Location' => 'http://alternate.test.host/test-path' })
+      .to_return(status: 307, headers: { 'Location' => 'http://alternate.test.host/test-path' })
     stub_request(:head, 'http://alternate.test.host/test-path')
-    .to_return(status: 200, headers: { 'Content-Length' => '100' })
+      .to_return(status: 200, headers: { 'Content-Length' => '100' })
     stub_request(:get, 'http://test.host/test-path')
-    .to_return(status: 200, body: 'test-body')
+      .to_return(status: 200, body: 'test-body')
     expect(destination).to receive(:write).with(content_length: 9, content_type: 'text/x-yaml').and_yield(buffer, 1000)
     expect(buffer).to receive(:write).with('test-body')
 
@@ -149,16 +149,16 @@ describe Build::Pump do
 
   it 'should raise an error for a failed size' do
     stub_request(:head, 'http://test.host/test-path')
-    .to_return(status: 400)
+      .to_return(status: 400)
 
     expect { pump.pump }.to raise_error("Unable to get size from 'http://test.host/test-path'.  Received '400'.")
   end
 
   it 'should raise an error for a failed download' do
     stub_request(:head, 'http://test.host/test-path')
-    .to_return(status: 200, headers: { 'Content-Length' => '100' })
+      .to_return(status: 200, headers: { 'Content-Length' => '100' })
     stub_request(:get, 'http://test.host/test-path')
-    .to_return(status: 400)
+      .to_return(status: 400)
 
     expect { pump.pump }.to raise_error("Unable to download from 'http://test.host/test-path'.  Received '400'.")
   end
@@ -216,9 +216,9 @@ describe Build::Pump do
 
   it 'should call provided block' do
     stub_request(:head, 'http://test.host/test-path')
-    .to_return(status: 200, headers: { 'Content-Length' => '100' })
+      .to_return(status: 200, headers: { 'Content-Length' => '100' })
     stub_request(:get, 'http://test.host/test-path')
-    .to_return(status: 200, body: 'test-body')
+      .to_return(status: 200, body: 'test-body')
     expect(destination).to receive(:write).with(content_length: 9, content_type: 'text/x-yaml').and_yield(buffer, 1000)
     expect(buffer).to receive(:write).with('test-body')
 
@@ -231,11 +231,11 @@ describe Build::Pump do
 
     it 'should utilize provided headers' do
       stub_request(:head, 'http://test.host/test-path')
-      .with(headers: { 'alpha' => 'bravo' })
-      .to_return(status: 200, headers: { 'Content-Length' => '100' })
+        .with(headers: { 'alpha' => 'bravo' })
+        .to_return(status: 200, headers: { 'Content-Length' => '100' })
       stub_request(:get, 'http://test.host/test-path')
-      .with(headers: { 'alpha' => 'bravo' })
-      .to_return(status: 200, body: 'test-body')
+        .with(headers: { 'alpha' => 'bravo' })
+        .to_return(status: 200, body: 'test-body')
       expect(destination).to receive(:write).with(content_length: 9, content_type: 'text/x-yaml').and_yield(buffer, 1000)
       expect(buffer).to receive(:write).with('test-body')
 

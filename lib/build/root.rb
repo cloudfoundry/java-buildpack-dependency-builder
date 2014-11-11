@@ -38,9 +38,7 @@ require 'build/dependency/tomcat_logging_support'
 require 'thor'
 
 module Build
-
   class Root < Thor
-
     class << self
       private
 
@@ -255,7 +253,5 @@ module Build
     def tomcat_logging_support
       Dependency::TomcatLoggingSupport.new(options).build
     end
-
   end
-
 end

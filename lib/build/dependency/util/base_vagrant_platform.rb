@@ -18,9 +18,7 @@ require 'English'
 
 module Build
   module Dependency
-
     class BaseVagrantPlatform
-
       def self.vagrant?(platform)
         VAGRANT_PLATFORMS.include? platform
       end
@@ -51,7 +49,6 @@ module Build
       VAGRANT_PLATFORMS = %w(centos6 lucid mountainlion precise trusty).freeze
 
       private_constant :VAGRANT_PLATFORMS
-
     end
   end
 end

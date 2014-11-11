@@ -19,9 +19,7 @@ require 'build/dependency/base_vagrant'
 
 module Build
   module Dependency
-
     class OpenJDK < BaseVagrant
-
       def initialize(options)
         super 'openjdk-inner', OpenJDKVagrantPlatform, options
       end
@@ -37,8 +35,6 @@ module Build
           "--jdk #{@jdk ? 'true' : 'false'}"
         ]
       end
-
     end
-
   end
 end

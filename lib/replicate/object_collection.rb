@@ -19,9 +19,7 @@ require 'replicate'
 require 'replicate/object'
 
 module Replicate
-
   class ObjectCollection < Array
-
     def initialize
       marker = nil
 
@@ -62,7 +60,5 @@ module Replicate
       uri += "?marker=#{marker}" if marker
       uri
     end
-
   end
-
 end

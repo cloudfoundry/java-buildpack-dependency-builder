@@ -19,7 +19,6 @@ require 'build/dependency/openjdk/openjdk_resources'
 
 module Build
   module Dependency
-
     class JDK6And7Cloner < BaseCloner
       include OpenJDKResources
 
@@ -37,8 +36,6 @@ module Build
       ].freeze
 
       private_constant :PATCHES
-
     end
-
   end
 end

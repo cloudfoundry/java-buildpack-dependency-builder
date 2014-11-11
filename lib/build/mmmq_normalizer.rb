@@ -17,7 +17,6 @@ require 'build'
 
 module Build
   module MMMQNormalizer
-
     def non_qualifier_version(version)
       version.split('.')[0..2].join('.')
     end
@@ -29,6 +28,5 @@ module Build
       new_q      = q && q.length > 0 ? '_' + q.join('.') : nil
       mmm.join('.') + (new_q ? new_q : '')
     end
-
   end
 end

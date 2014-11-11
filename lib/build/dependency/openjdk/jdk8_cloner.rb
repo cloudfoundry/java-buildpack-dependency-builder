@@ -18,13 +18,10 @@ require 'build/dependency/openjdk/base_cloner'
 
 module Build
   module Dependency
-
     class JDK8Cloner < BaseCloner
-
       def initialize(development = false)
         super 'http://hg.openjdk.java.net/jdk8u/jdk8u', development
       end
     end
-
   end
 end

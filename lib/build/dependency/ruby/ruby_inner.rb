@@ -22,7 +22,6 @@ require 'tempfile'
 
 module Build
   module Dependency
-
     class RubyInner < Base
       include RubyPlatformDetails
       include RubyResources
@@ -87,8 +86,6 @@ tar czvf #{package.path} -C #{staging_dir} .
         abort unless $CHILD_STATUS == 0
         package
       end
-
     end
-
   end
 end

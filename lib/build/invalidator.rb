@@ -20,9 +20,7 @@ require 'securerandom'
 require 'thread'
 
 module Build
-
   class Invalidator
-
     def initialize(cloudfront, distribution_id, progress_stream = nil)
       @cloudfront      = cloudfront
       @distribution_id = distribution_id
@@ -74,7 +72,5 @@ module Build
 
       progress_bar.total = progress_bar.progress # rubocop:disable UselessSetterCall
     end
-
   end
-
 end

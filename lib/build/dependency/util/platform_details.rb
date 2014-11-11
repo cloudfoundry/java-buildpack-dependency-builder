@@ -18,7 +18,6 @@ require 'build/dependency'
 module Build
   module Dependency
     module PlatformDetails
-
       def architecture
         `uname -m`.strip
       end
@@ -62,7 +61,6 @@ module Build
       def ubuntu?
         !`which lsb_release 2> /dev/null`.empty?
       end
-
     end
   end
 end

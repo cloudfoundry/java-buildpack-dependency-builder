@@ -18,11 +18,9 @@ require 'build/dependency'
 module Build
   module Dependency
     module RubyResources
-
       RESOURCES_DIR = File.expand_path('../../../../../resources/ruby', __FILE__).freeze
 
       VENDOR_DIR = File.expand_path('../../../../../vendor/ruby', __FILE__).freeze
-
     end
   end
 end

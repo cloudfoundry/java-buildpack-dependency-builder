@@ -22,7 +22,6 @@ require 'ruby-progressbar'
 require 'tempfile'
 
 module Build
-
   class Pump
     include Build::Proxy
 
@@ -179,5 +178,4 @@ module Build
       end
     end
   end
-
 end

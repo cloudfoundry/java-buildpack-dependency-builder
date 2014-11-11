@@ -23,9 +23,7 @@ require 'yaml'
 
 module Build
   module Dependency
-
     class Base
-
       def initialize(name, type, options)
         options.each { |key, value| instance_variable_set("@#{key}", value) }
         @configuration = YAML.load_file File.expand_path(options[:configuration])
@@ -105,8 +103,6 @@ module Build
       def uri(version)
         "#{@repository_root}/#{key version}"
       end
-
     end
-
   end
 end

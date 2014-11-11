@@ -18,11 +18,9 @@ require 'build/dependency'
 module Build
   module Dependency
     module OpenJDKResources
-
       RESOURCES_DIR = File.expand_path('../../../../../resources/openjdk', __FILE__).freeze
 
       VENDOR_DIR = File.expand_path('../../../../../vendor/openjdk', __FILE__).freeze
-
     end
   end
 end

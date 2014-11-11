@@ -17,9 +17,7 @@ require 'replicate'
 require 'thor/error'
 
 module Replicate
-
   class IndexUpdater
-
     def initialize(base_uri, host_name)
       if base_uri && host_name
         fail Thor::MalformattedArgumentError,
@@ -52,7 +50,5 @@ module Replicate
     def candidate?(replicated_file)
       replicated_file.path.basename.to_s == INDEX_FILE
     end
-
   end
-
 end

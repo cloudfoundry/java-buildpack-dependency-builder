@@ -22,7 +22,6 @@ require 'net/https'
 
 module Build
   module Dependency
-
     class AppDynamics < Base
       include Build::MMMQNormalizer
       include Build::Proxy
@@ -64,6 +63,5 @@ module Build
         end
       end
     end
-
   end
 end

@@ -19,7 +19,6 @@ require 'build/mmmq_normalizer'
 
 module Build
   module Dependency
-
     class JBossAS < Base
       include Build::MMMQNormalizer
 
@@ -36,8 +35,6 @@ module Build
           fail "Unable to process version '#{version}'"
         end
       end
-
     end
-
   end
 end

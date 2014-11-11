@@ -22,32 +22,32 @@ describe Build::Maven do
 
   it 'should build snapshot URI for JAR' do
     expect(stub.snapshot StubMaven::MAVEN_CENTRAL, 'test.group.id', 'test-artifact-id', 'test-version')
-    .to eq('http://central.maven.org/maven2/test/group/id/test-artifact-id/test-version.BUILD-SNAPSHOT/test-artifact-id-test-version.jar')
+      .to eq('http://central.maven.org/maven2/test/group/id/test-artifact-id/test-version.BUILD-SNAPSHOT/test-artifact-id-test-version.jar')
   end
 
   it 'should build snapshot URI for non-JAR' do
     expect(stub.snapshot StubMaven::MAVEN_CENTRAL, 'test.group.id', 'test-artifact-id', 'test-version', '.zip')
-    .to eq('http://central.maven.org/maven2/test/group/id/test-artifact-id/test-version.BUILD-SNAPSHOT/test-artifact-id-test-version.zip')
+      .to eq('http://central.maven.org/maven2/test/group/id/test-artifact-id/test-version.BUILD-SNAPSHOT/test-artifact-id-test-version.zip')
   end
 
   it 'should build milestone URI for JAR' do
     expect(stub.milestone StubMaven::MAVEN_CENTRAL, 'test.group.id', 'test-artifact-id', 'test-version')
-    .to eq('http://central.maven.org/maven2/test/group/id/test-artifact-id/test-version/test-artifact-id-test-version.jar')
+      .to eq('http://central.maven.org/maven2/test/group/id/test-artifact-id/test-version/test-artifact-id-test-version.jar')
   end
 
   it 'should build milestone URI for non-JAR' do
     expect(stub.milestone StubMaven::MAVEN_CENTRAL, 'test.group.id', 'test-artifact-id', 'test-version', '.zip')
-    .to eq('http://central.maven.org/maven2/test/group/id/test-artifact-id/test-version/test-artifact-id-test-version.zip')
+      .to eq('http://central.maven.org/maven2/test/group/id/test-artifact-id/test-version/test-artifact-id-test-version.zip')
   end
 
   it 'should build release URI for JAR' do
     expect(stub.release StubMaven::MAVEN_CENTRAL, 'test.group.id', 'test-artifact-id', 'test-version')
-    .to eq('http://central.maven.org/maven2/test/group/id/test-artifact-id/test-version/test-artifact-id-test-version.jar')
+      .to eq('http://central.maven.org/maven2/test/group/id/test-artifact-id/test-version/test-artifact-id-test-version.jar')
   end
 
   it 'should build release URI for non-JAR' do
     expect(stub.release StubMaven::MAVEN_CENTRAL, 'test.group.id', 'test-artifact-id', 'test-version', '.zip')
-  .to eq('http://central.maven.org/maven2/test/group/id/test-artifact-id/test-version/test-artifact-id-test-version.zip')
+      .to eq('http://central.maven.org/maven2/test/group/id/test-artifact-id/test-version/test-artifact-id-test-version.zip')
   end
 
   class StubMaven

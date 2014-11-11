@@ -20,7 +20,6 @@ require 'fileutils'
 
 module Build
   module Dependency
-
     class BootstrapJDKBuilder
       include OpenJDKResources
       include PlatformDetails
@@ -36,8 +35,6 @@ module Build
       def root
         File.join VENDOR_DIR, 'bootstrap-jdk', codename
       end
-
     end
-
   end
 end

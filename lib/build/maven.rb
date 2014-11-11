@@ -49,6 +49,5 @@ module Build
     def to_path(group_id)
       group_id.gsub('.', '/')
     end
-
   end
 end

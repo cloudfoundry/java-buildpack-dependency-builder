@@ -2,43 +2,58 @@
   <dictionary name="bhale">
     <words>
       <w>bdae</w>
+      <w>bootdir</w>
+      <w>buildpack</w>
       <w>buildpack's</w>
+      <w>cacerts</w>
       <w>casecmp</w>
       <w>centos</w>
       <w>changeit</w>
       <w>cloner</w>
+      <w>cloudfront</w>
       <w>coreix</w>
       <w>cpuinfo</w>
       <w>cpus</w>
       <w>csplit</w>
       <w>czvf</w>
       <w>dbbd</w>
+      <w>debuginfo</w>
       <w>ebcc</w>
       <w>freetype</w>
       <w>fwww</w>
+      <w>gibi</w>
       <w>gibibytes</w>
       <w>hgforest</w>
       <w>hgrc</w>
       <w>homebrew</w>
       <w>hotspot</w>
+      <w>httpok</w>
       <w>importcert</w>
       <w>invalidator</w>
       <w>ioend</w>
       <w>keystore</w>
       <w>keytool</w>
+      <w>kibi</w>
       <w>kibibytes</w>
       <w>malformatted</w>
       <w>mariadb</w>
+      <w>memsize</w>
+      <w>mibi</w>
+      <w>mktmpdir</w>
       <w>mmmq</w>
       <w>modifyvm</w>
+      <w>mountainlion</w>
       <w>ncpu</w>
       <w>nokogiri</w>
       <w>noop</w>
       <w>noprompt</w>
       <w>nproc</w>
+      <w>numvcpus</w>
       <w>obuild</w>
       <w>obuildfactory</w>
       <w>oraclelicense</w>
+      <w>rbenv</w>
+      <w>rsync</w>
       <w>rubygems</w>
       <w>securebackup</w>
       <w>sessionid</w>
@@ -47,7 +62,9 @@
       <w>sysctl</w>
       <w>vfabric</w>
       <w>virtualbox</w>
+      <w>vmware</w>
       <w>xbuild</w>
+      <w>xquartz</w>
       <w>xuse</w>
     </words>
   </dictionary>

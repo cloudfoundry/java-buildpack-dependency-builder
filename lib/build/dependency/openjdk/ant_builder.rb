@@ -20,7 +20,6 @@ require 'fileutils'
 
 module Build
   module Dependency
-
     class AntBuilder
       include OpenJDKResources
 
@@ -35,8 +34,6 @@ module Build
       def root
         File.join VENDOR_DIR, 'ant'
       end
-
     end
-
   end
 end

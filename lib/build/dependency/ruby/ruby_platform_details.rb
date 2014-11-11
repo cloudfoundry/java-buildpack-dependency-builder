@@ -26,7 +26,7 @@ module Build
           cellar, version = nil
 
           Bundler.with_clean_env do
-            cellar = `brew --cellar openssl`.chomp
+            cellar  = `brew --cellar openssl`.chomp
             version = `brew list --versions openssl | cut -d ' ' -f 2`.chomp
           end
 
@@ -35,7 +35,6 @@ module Build
           ''
         end
       end
-
     end
   end
 end

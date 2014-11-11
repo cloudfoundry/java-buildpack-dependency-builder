@@ -19,9 +19,7 @@ require 'build/dependency/base_vagrant'
 
 module Build
   module Dependency
-
     class Node < BaseVagrant
-
       def initialize(options)
         super 'node-inner', NodeVagrantPlatform, options
       end
@@ -34,8 +32,6 @@ module Build
           "--tag #{@tag}"
         ]
       end
-
     end
-
   end
 end

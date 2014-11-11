@@ -34,7 +34,7 @@ describe Build::Dependency::BaseVagrant do
     expect(base_vagrant).to receive(:arguments).and_return(%w(test arguments))
 
     expect_any_instance_of(Build::Dependency::BaseVagrantPlatform)
-    .to receive(:exec).with('bundle exec bin/build test-command ' \
+      .to receive(:exec).with('bundle exec bin/build test-command ' \
                             '--configuration vendor/java_buildpack_dependency_builder.yml test arguments')
 
     base_vagrant.build

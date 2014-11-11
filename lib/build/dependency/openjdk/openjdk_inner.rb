@@ -28,7 +28,6 @@ require 'build/dependency/util/platform_details'
 
 module Build
   module Dependency
-
     class OpenJDKInner < Base
       include OpenJDKResources
       include PlatformDetails
@@ -90,8 +89,6 @@ module Build
           fail "Unable to process version '#{version}'"
         end
       end
-
     end
-
   end
 end

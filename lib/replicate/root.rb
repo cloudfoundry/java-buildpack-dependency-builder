@@ -26,9 +26,7 @@ require 'thread/future'
 require 'thread/pool'
 
 module Replicate
-
   class Root < Thor
-
     desc '[OPTIONS]', 'Replicate the Java Buildpack Dependency Cache to the local filesystem'
 
     option :base_uri,
@@ -95,7 +93,5 @@ module Replicate
       yield
       print "\nComplete (#{(Time.now - download_start_time).duration})\n"
     end
-
   end
-
 end

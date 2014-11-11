@@ -69,11 +69,11 @@ describe Replicate::Root do
 
     it 'should replicate files' do
       stub_request(:get, 'http://download.pivotal.io.s3.amazonaws.com/')
-      .to_return(status: 200, body: File.new('spec/fixture/object_collection_contents.xml'))
+        .to_return(status: 200, body: File.new('spec/fixture/object_collection_contents.xml'))
       stub_request(:get, 'https://download.run.pivotal.io:443/index.yml')
-      .to_return(status: 200, body: 'start https://download.run.pivotal.io end')
+        .to_return(status: 200, body: 'start https://download.run.pivotal.io end')
       stub_request(:get, 'https://download.run.pivotal.io:443/artifact.jar')
-      .to_return(status: 200, body: 'test-content')
+        .to_return(status: 200, body: 'test-content')
 
       trigger
 
@@ -84,11 +84,11 @@ describe Replicate::Root do
 
     it 'should destroy a file when replication fails' do
       stub_request(:get, 'http://download.pivotal.io.s3.amazonaws.com/')
-      .to_return(status: 200, body: File.new('spec/fixture/object_collection_contents.xml'))
+        .to_return(status: 200, body: File.new('spec/fixture/object_collection_contents.xml'))
       stub_request(:get, 'https://download.run.pivotal.io:443/index.yml')
-      .to_return(status: 200, body: 'start https://download.run.pivotal.io end')
+        .to_return(status: 200, body: 'start https://download.run.pivotal.io end')
       stub_request(:get, 'https://download.run.pivotal.io:443/artifact.jar')
-      .to_return(status: 400)
+        .to_return(status: 400)
 
       expect { trigger }.to raise_error SystemExit
 
@@ -100,11 +100,11 @@ describe Replicate::Root do
 
     it 'should force a pool shutdown on SignalException' do
       stub_request(:get, 'http://download.pivotal.io.s3.amazonaws.com/')
-      .to_return(status: 200, body: File.new('spec/fixture/object_collection_contents.xml'))
+        .to_return(status: 200, body: File.new('spec/fixture/object_collection_contents.xml'))
       stub_request(:get, 'https://download.run.pivotal.io/index.yml')
-      .to_return(status: 200, body: 'start https://download.run.pivotal.io end')
+        .to_return(status: 200, body: 'start https://download.run.pivotal.io end')
       stub_request(:get, 'https://download.run.pivotal.io/artifact.jar')
-      .to_return(status: 200, body: 'test-content')
+        .to_return(status: 200, body: 'test-content')
       allow_any_instance_of(Thread::Pool).to receive(:shutdown).and_raise(SignalException.new('HUP'))
       expect_any_instance_of(Thread::Pool).to receive(:shutdown!)
 

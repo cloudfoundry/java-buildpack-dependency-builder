@@ -18,9 +18,7 @@ require 'build/dependency/base'
 
 module Build
   module Dependency
-
     class Tomcat < Base
-
       def initialize(options)
         super 'tomcat', 'tar.gz', options
       end
@@ -38,8 +36,6 @@ module Build
           fail "Unable to process version '#{version}'"
         end
       end
-
     end
-
   end
 end

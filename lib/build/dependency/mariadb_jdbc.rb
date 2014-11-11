@@ -18,9 +18,7 @@ require 'build/dependency/base'
 
 module Build
   module Dependency
-
     class MariaDbJDBC < Base
-
       def initialize(options)
         super 'mariadb-jdbc', 'jar', options
       end
@@ -34,8 +32,6 @@ module Build
           fail "Unable to process version '#{version}'"
         end
       end
-
     end
-
   end
 end

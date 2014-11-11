@@ -19,7 +19,6 @@ require 'build/dependency/util/base_vagrant_platform'
 
 module Build
   module Dependency
-
     class OpenJDKVagrantPlatform < BaseVagrantPlatform
       include OpenJDKResources
 
@@ -36,7 +35,6 @@ module Build
           fail "Unable to process version '#{version}'"
         end
       end
-
     end
   end
 end

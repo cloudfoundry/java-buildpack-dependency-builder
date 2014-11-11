@@ -18,7 +18,6 @@ require 'build/dependency/openjdk/openjdk_resources'
 
 module Build
   module Dependency
-
     class BaseCloner
       include OpenJDKResources
 
@@ -75,8 +74,6 @@ module Build
       def patches
         []
       end
-
     end
-
   end
 end

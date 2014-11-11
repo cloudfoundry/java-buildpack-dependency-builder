@@ -18,11 +18,9 @@ require 'build/dependency'
 module Build
   module Dependency
     module NodeResources
-
       RESOURCES_DIR = File.expand_path('../../../../../resources/node', __FILE__).freeze
 
       VENDOR_DIR = File.expand_path('../../../../../vendor/node', __FILE__).freeze
-
     end
   end
 end

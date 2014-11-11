@@ -21,7 +21,6 @@ require 'tempfile'
 
 module Build
   module Dependency
-
     class NodeInner < Base
       include NodeResources
       include PlatformDetails
@@ -93,8 +92,6 @@ tar czvf #{package.path} -C #{staging_dir} .
         abort unless $CHILD_STATUS == 0
         package
       end
-
     end
-
   end
 end
