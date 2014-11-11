@@ -105,12 +105,6 @@ module Build
     desc 'app-dynamics', 'Publish a version of AppDynamics'
     common_options
 
-    option :latest,
-           desc:    'Whether the version is the latest version of the plugin',
-           aliases: '-l',
-           type:    :boolean,
-           default: true
-
     def app_dynamics
       Dependency::AppDynamics.new(options).build
     end

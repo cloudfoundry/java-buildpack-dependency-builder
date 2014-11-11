@@ -25,16 +25,6 @@ describe Build::Dependency::AppDynamics do
 
   let(:pump) { double('pump') }
 
-  context do
-
-    let(:options) { super().merge(latest: true) }
-
-    it 'should create AppDynamics latest URI' do
-      expect_version_uri '3.8.0.1', 'https://download.appdynamics.com/onpremise/public/latest/AppServerAgent.zip'
-    end
-
-  end
-
   it 'should create AppDynamics URI' do
     expect_version_uri '3.8.0.1', 'https://download.appdynamics.com/onpremise/public/archives/3.8.0.1/AppServerAgent-3.8.0.1.zip'
   end

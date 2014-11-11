@@ -41,9 +41,7 @@ module Build
       end
 
       def version_specific(version)
-        if @latest
-          ->(_v) { 'https://download.appdynamics.com/onpremise/public/latest/AppServerAgent.zip' }
-        elsif version =~ /^[\d\.]+$/
+        if version =~ /^[\d\.]+$/
           ->(v) { "https://download.appdynamics.com/onpremise/public/archives/#{v}/AppServerAgent-#{v}.zip" }
         else
           fail "Unable to process version '#{version}'"

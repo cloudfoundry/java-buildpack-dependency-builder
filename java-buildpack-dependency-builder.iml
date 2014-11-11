@@ -28,6 +28,7 @@
     <orderEntry type="library" scope="PROVIDED" name="crack (v0.4.2, rbenv: 2.1.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="diff-lcs (v1.2.5, rbenv: 2.1.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="docile (v1.1.5, rbenv: 2.1.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="json (v1.8.1, rbenv: 2.1.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mime-types (v2.4.3, rbenv: 2.1.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mini_portile (v0.6.0, rbenv: 2.1.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="multi_json (v1.10.1, rbenv: 2.1.4) [gem]" level="application" />
@@ -57,4 +58,3 @@
     <I18N_FOLDERS number="0" />
   </component>
 </module>
-
