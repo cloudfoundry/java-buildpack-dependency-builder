@@ -131,7 +131,7 @@ This table shows locations to check for new releases of cached dependencies.  It
 | ---------- | --------
 | App Dynamics | [`release`](http://download.appdynamics.com/browse/zone/3/)
 | Auto Reconfiguration | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/auto-reconfiguration/maven-metadata.xml)
-| Groovy | [`release`](http://groovy.codehaus.org/Download?nc)
+| Groovy | [`release`](http://groovy-lang.org/download.html)
 | JBoss AS | [`release`](http://www.jboss.org/jbossas/downloads)
 | MariaDB JDBC | [`release`](https://downloads.mariadb.org/client-java/)
 | New Relic | [`release`](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.newrelic.agent.java%22%20AND%20a%3A%22newrelic-agent%22)
