@@ -11,5 +11,9 @@ Metrics/ParameterLists:
   Max: 7
 Style/Documentation:
   Enabled: false
+Style/EmptyLinesAroundBlockBody:
+  Exclude:
+    - 'spec/**/*'
+    - '**/Vagrantfile'
 Style/TrivialAccessors:
   ExactNameMatch: true
