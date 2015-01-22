@@ -16,6 +16,10 @@
 require 'build'
 require 'build/dependency/auto_reconfiguration'
 require 'build/dependency/app_dynamics'
+require 'build/dependency/gem_fire'
+require 'build/dependency/gem_fire_modules'
+require 'build/dependency/gem_fire_modules_tomcat7'
+require 'build/dependency/gem_fire_security'
 require 'build/dependency/groovy'
 require 'build/dependency/jboss_as'
 require 'build/dependency/mariadb_jdbc'
@@ -29,6 +33,8 @@ require 'build/dependency/postgresql_jdbc'
 require 'build/dependency/redis_store'
 require 'build/dependency/ruby/ruby'
 require 'build/dependency/ruby/ruby_inner'
+require 'build/dependency/slf4j_jdk14'
+require 'build/dependency/slf4j_api'
 require 'build/dependency/spring_boot_cli'
 require 'build/dependency/tc_server'
 require 'build/dependency/tomcat'
@@ -112,6 +118,34 @@ module Build
 
     def auto_reconfiguration
       Dependency::AutoReconfiguration.new(options).build
+    end
+
+    desc 'gem-fire', 'Publish a version of GemFire'
+    common_options
+
+    def gem_fire
+      Dependency::GemFire.new(options).build
+    end
+
+    desc 'gem-fire-modules', 'Publish a version of GemFire Modules'
+    common_options
+
+    def gem_fire_modules
+      Dependency::GemFireModules.new(options).build
+    end
+
+    desc 'gem-fire-modules-tomcat7', 'Publish a version of GemFire Modules Tomcat 7'
+    common_options
+
+    def gem_fire_modules_tomcat7
+      Dependency::GemFireModulesTomcat7.new(options).build
+    end
+
+    desc 'gem-fire-security', 'Publish a version of GemFire Security'
+    common_options
+
+    def gem_fire_security
+      Dependency::GemFireSecurity.new(options).build
     end
 
     desc 'groovy', 'Publish a version of Groovy'
@@ -210,6 +244,20 @@ module Build
 
     def ruby_inner
       Dependency::RubyInner.new(options).build
+    end
+
+    desc 'slf4j-api', 'Publish a version of Slf4j Api', hide: true
+    common_options
+
+    def slf4j_api
+      Dependency::Slf4jApi.new(options).build
+    end
+
+    desc 'slf4j-jdk14', 'Publish a version of Slf4j Jdk14', hide: true
+    common_options
+
+    def slf4j_jdk14
+      Dependency::Slf4jJdk14.new(options).build
     end
 
     desc 'spring-boot-cli', 'Publish a version of Spring Boot'

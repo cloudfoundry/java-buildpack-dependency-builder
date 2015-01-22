@@ -20,6 +20,8 @@ module Build
   module Maven
     include Build::MMMQNormalizer
 
+    GEMFIRE_RELEASE = 'http://dist.gemstone.com.s3.amazonaws.com/maven/release'.freeze
+
     GO_PIVOTAL_RELEASE = 'http://maven.gopivotal.com.s3.amazonaws.com/release'.freeze
 
     GO_PIVOTAL_SNAPSHOT = 'http://maven.gopivotal.com.s3.amazonaws.com/snapshot'.freeze
