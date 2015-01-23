@@ -151,8 +151,8 @@ This table shows locations to check for new releases of cached dependencies.  It
 | PostgreSQL JDBC | [`release`](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.postgresql%22%20AND%20a%3A%22postgresql%22)
 | RedisStore | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/com/gopivotal/manager/redis-store/maven-metadata.xml)
 | Ruby | [`release`](https://github.com/sstephenson/ruby-build/tree/master/share/ruby-build)
-| Slf4j API | [`release`](http://search.maven.org/#search|ga|1|a%3A%22slf4j-api%22)
-| Slf4j JDK14 | [`release`](http://search.maven.org/#search|ga|1|a%3A%22slf4j-jdk14%22)
+| Slf4j API | [`release`](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.slf4j%22%20AND%20a%3A%22slf4j-api%22)
+| Slf4j JDK14 | [`release`](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.slf4j%22%20AND%20a%3A%22slf4j-jdk14%22)
 | Spring Boot CLI | [`release`](http://repo.springsource.org/release/org/springframework/boot/spring-boot-cli/)
 | tc Server | [`release`](https://network.pivotal.io/products/pivotal-tcserver)
 | Tomcat | [`8.x`](http://tomcat.apache.org/download-80.cgi), [`7.x`](http://tomcat.apache.org/download-70.cgi), [`6.x`](http://tomcat.apache.org/download-60.cgi)
@@ -165,7 +165,8 @@ This table shows the mappings between versions, build numbers, and repository ta
 
 | JRE Version | Build Number | Tag           | CentOS 6 | Lucid | OS X | Precise | Trusty |
 | ----------- | ------------ | ------------- | :------: | :---: | :--: | :-----: | :----: |
-| `1.8.0_25`  | `b17`        | `jdk8u20-b17` | ✓        | ✓     | ✓    | ✓       | ✓      |
+| `1.8.0_31`  | `b13`        | `jdk8u31-b13` | ✓        | ✓     |      | ✓       |        |
+| `1.8.0_25`  | `b17`        | `jdk8u25-b17` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `1.8.0_20`  | `b23`        | `jdk8u20-b23` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `1.8.0_11`  | `b12`        | `jdk8u11-b12` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `1.8.0_05`  | `b13`        | `jdk8u5-b13`  | ✓        | ✓     | ✓    | ✓       | ✓      |
@@ -175,6 +176,7 @@ This table shows the mappings between versions, build numbers, and repository ta
 | `1.8.0_M7`  | `b91`        | `jdk8-b91`    | ✓        | ✓     | ✓    | ✓       |        |
 | `1.8.0_M6`  | `b75`        | `jdk8-b75`    | ✓        | ✓     | ✓    | ✓       |        |
 |             |              |               |          |       |      |         |        |
+| `1.7.0_75`  | `b13`        | `jdk7u75-b13` |          |       |      |         |        |
 | `1.7.0_71`  | `b14`        | `jdk7u71-b14` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `1.7.0_65`  | `b17`        | `jdk7u65-b17` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `1.7.0_60`  | `b19`        | `jdk7u60-b19` | ✓        | ✓     | ✓    | ✓       | ✓      |
