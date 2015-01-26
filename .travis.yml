@@ -1,12 +1,13 @@
----
 language: ruby
 rvm:
-  - 2.1.5
+- 2.1.5
 install: bundle install --deployment --without debug
 notifications:
+  slack:
+    secure: V8CqQIkTCcpOOb/COLIRxKe71X0jU1k5S+dhzREenJ6tvv3fGHprcsL8A8uYdLO89TC4Y/kXRxo71sIew2afzpB4xTenxGd0tjaCbXqOS2ulOmGp3swGseEi3CDUjZB7wUzL8mOoT/NmmKxe9PfVV1WIo7FQIfHlZA4Q2HMSgLw=
   webhooks:
     urls:
-      - http://build-monitor.cfapps.io/projects/BLDR/webhook
+    - http://build-monitor.cfapps.io/projects/BLDR/webhook
     on_start: true
 env:
   global:
