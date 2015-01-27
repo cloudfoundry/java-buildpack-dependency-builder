@@ -80,6 +80,7 @@ module Build
         Dir.mktmpdir('node-staging') do |staging_dir|
           Dir.chdir(@source_location) do
             system <<-EOF
+set -e
 ./configure --prefix #{staging_dir}
 make -j #{cpu_count}
 make install
