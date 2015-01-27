@@ -33,6 +33,7 @@ module Build
         puts "Building #{@name} #{version}..."
         Dir.chdir source_location do
           system <<-EOF
+set -e
 export LANG=C PATH=#{bootstrap_jdk_root}/bin:$PATH ANT_HOME=#{ant_home}
 export ALT_BOOTDIR=#{bootstrap_jdk_root} ALT_CACERTS_FILE=#{cacerts} ALT_JDK_IMPORT_PATH=#{bootstrap_jdk_root}
 make MILESTONE=fcs JDK_VERSION=#{version} BUILD_NUMBER=#{build_number} ALLOW_DOWNLOADS=true NO_DOCS=true PARALLEL_COMPILE_JOBS=#{cpu_count} HOTSPOT_BUILD_JOBS=#{cpu_count}

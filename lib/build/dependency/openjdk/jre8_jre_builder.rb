@@ -33,6 +33,7 @@ module Build
         puts "Building #{@name} #{version}..."
         Dir.chdir source_location do
           system <<-EOF
+set -e
 export LANG=C PATH=#{bootstrap_jdk_root}/bin:$PATH ANT_HOME=#{ant_home}
 bash ./configure --with-cacerts-file=#{cacerts} #{freetype_flags}
 make MILESTONE= JDK_VERSION=#{version} JDK_BUILD_NUMBER=#{build_number} ALLOW_DOWNLOADS=true GENERATE_DOCS=false PARALLEL_COMPILE_JOBS=#{cpu_count} HOTSPOT_BUILD_JOBS=#{cpu_count} all
