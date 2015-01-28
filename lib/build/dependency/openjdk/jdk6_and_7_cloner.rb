@@ -32,7 +32,8 @@ module Build
         File.join(RESOURCES_DIR, 'patches/asound.diff'),
         File.join(RESOURCES_DIR, 'patches/leaf.diff'),
         File.join(RESOURCES_DIR, 'patches/sel.diff'),
-        File.join(RESOURCES_DIR, 'patches/stat64.diff')
+        File.join(RESOURCES_DIR, 'patches/stat64.diff'),
+        File.join(RESOURCES_DIR, 'patches/currency.diff')
       ].freeze
 
       private_constant :PATCHES

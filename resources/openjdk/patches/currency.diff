@@ -1,0 +1,25 @@
+--- jdk/make/tools/src/build/tools/generatecurrencydata/GenerateCurrencyData.java
++++ jdk/make/tools/src/build/tools/generatecurrencydata/GenerateCurrencyData.java
+@@ -281,8 +281,8 @@
+             checkCurrencyCode(newCurrency);
+             String timeString = currencyInfo.substring(4, length - 4);
+             long time = format.parse(timeString).getTime();
+-            if (Math.abs(time - System.currentTimeMillis()) > ((long) 10) * 365 * 24 * 60 * 60 * 1000) {
+-                throw new RuntimeException("time is more than 10 years from present: " + time);
++            if (Math.abs(time - System.currentTimeMillis()) > ((long) 20) * 365 * 24 * 60 * 60 * 1000) {
++                throw new RuntimeException("time is more than 10 years from present: " + time + " " + timeString + " " + currencyInfo);
+             }
+             specialCaseCutOverTimes[specialCaseCount] = time;
+             specialCaseOldCurrencies[specialCaseCount] = oldCurrency;
+
+--- jdk/src/share/classes/java/util/CurrencyData.properties
++++ jdk/src/share/classes/java/util/CurrencyData.properties
+@@ -532,7 +532,7 @@
+ # TUNISIA
+ TN=TND
+ # TURKEY
+-TR=TRL;2004-12-31-22-00-00;TRY
++TR=TRY
+ # TURKMENISTAN
+ TM=TMT
+ # TURKS AND CAICOS ISLANDS
