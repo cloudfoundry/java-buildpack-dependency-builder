@@ -7,7 +7,7 @@
 This project automates the building and publication of Java Buildpack dependency artifacts.
 
 ## Replicating Repository
-To host the Java Buildpack dependency artifacts on your own server, first download the artifacts and `index.yml` files as described below, make them available at suitable locations on a web server, and then fork the Java buildpack and update its [repository configuration](https://github.com/cloudfoundry/java-buildpack/blob/master/README.md#configuration-and-extension) to point at the web server.
+To host the Java Buildpack dependency artifacts on your own server, first download the artifacts and `index.yml` files as described below, make them available at suitable locations on a web server, and then fork the Java buildpack and update its [repository configuration](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/extending-repositories.md#configuration) to point at the web server.
 
 All the artifacts and `index.yml` files may be downloaded using the [`replicate`](bin/replicate) script.
 
