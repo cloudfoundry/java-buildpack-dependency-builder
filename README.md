@@ -216,6 +216,7 @@ This table shows the mappings between version and tags for NodeJS releases.  It 
 
 | NodeJS Version | Tag        | CentOS 6 | Lucid | OS X | Precise | Trusty |
 | -------------- | ---------- | :------: | :---: | :--: | :-----: | :----: |
+| `0.11.16`      | `v0.11.16` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `0.11.15`      | `v0.11.15` |          |       | ✓    | ✓       | ✓      |
 | `0.11.14`      | `v0.11.14` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `0.11.13`      | `v0.11.13` | ✓        | ✓     | ✓    | ✓       | ✓      |
