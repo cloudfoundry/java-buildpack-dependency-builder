@@ -1,4 +1,8 @@
 ---
+AllCops:
+  Exclude:
+  - 'vendor/**/*'
+  - '**/.vagrant/**/*'
 Metrics/AbcSize:
   Max: 25
 Metrics/ClassLength:
@@ -13,7 +17,7 @@ Style/Documentation:
   Enabled: false
 Style/EmptyLinesAroundBlockBody:
   Exclude:
-    - 'spec/**/*'
-    - '**/Vagrantfile'
+  - 'spec/**/*'
+  - '**/Vagrantfile'
 Style/TrivialAccessors:
   ExactNameMatch: true
