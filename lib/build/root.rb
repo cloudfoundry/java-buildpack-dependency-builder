@@ -22,6 +22,7 @@ require 'build/dependency/gem_fire_modules_tomcat7'
 require 'build/dependency/gem_fire_security'
 require 'build/dependency/groovy'
 require 'build/dependency/jboss_as'
+require 'build/dependency/jrebel'
 require 'build/dependency/mariadb_jdbc'
 require 'build/dependency/new_relic'
 require 'build/dependency/node/node'
@@ -160,6 +161,13 @@ module Build
 
     def jboss_as
       Dependency::JBossAS.new(options).build
+    end
+
+    desc 'jrebel', 'Publish a version of JRebel'
+    common_options
+
+    def jrebel
+      Dependency::JRebel.new(options).build
     end
 
     desc 'mariadb-jdbc', 'Publish a version of MariaDB JDBC'
