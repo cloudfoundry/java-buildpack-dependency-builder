@@ -128,6 +128,34 @@ describe Build::Root do
 
   context do
     include_examples 'dependency' do
+      let(:dependency) { 'gem-fire' }
+      let(:type) { Build::Dependency::GemFire }
+    end
+  end
+
+  context do
+    include_examples 'dependency' do
+      let(:dependency) { 'gem-fire-modules' }
+      let(:type) { Build::Dependency::GemFireModules }
+    end
+  end
+
+  context do
+    include_examples 'dependency' do
+      let(:dependency) { 'gem-fire-modules-tomcat7' }
+      let(:type) { Build::Dependency::GemFireModulesTomcat7 }
+    end
+  end
+
+  context do
+    include_examples 'dependency' do
+      let(:dependency) { 'gem-fire-security' }
+      let(:type) { Build::Dependency::GemFireSecurity }
+    end
+  end
+
+  context do
+    include_examples 'dependency' do
       let(:dependency) { 'auto-reconfiguration' }
       let(:type) { Build::Dependency::AutoReconfiguration }
     end
@@ -144,6 +172,13 @@ describe Build::Root do
     include_examples 'dependency' do
       let(:dependency) { 'jboss-as' }
       let(:type) { Build::Dependency::JBossAS }
+    end
+  end
+
+  context do
+    include_examples 'dependency' do
+      let(:dependency) { 'jrebel' }
+      let(:type) { Build::Dependency::JRebel }
     end
   end
 
@@ -221,6 +256,20 @@ describe Build::Root do
     include_examples 'dependency' do
       let(:dependency) { 'ruby-inner' }
       let(:type) { Build::Dependency::RubyInner }
+    end
+  end
+
+  context do
+    include_examples 'dependency' do
+      let(:dependency) { 'slf4j-api' }
+      let(:type) { Build::Dependency::Slf4jApi }
+    end
+  end
+
+  context do
+    include_examples 'dependency' do
+      let(:dependency) { 'slf4j-jdk14' }
+      let(:type) { Build::Dependency::Slf4jJdk14 }
     end
   end
 
