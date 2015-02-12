@@ -218,6 +218,8 @@ This table shows the mappings between version and tags for NodeJS releases.  It 
 
 | NodeJS Version | Tag        | CentOS 6 | Lucid | OS X | Precise | Trusty |
 | -------------- | ---------- | :------: | :---: | :--: | :-----: | :----: |
+| `0.12.0`       | `v0.12.0 ` | ✓        | ✓     | ✓    | ✓       | ✓      |
+|                |            |          |       |      |         |        |
 | `0.11.16`      | `v0.11.16` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `0.11.15`      | `v0.11.15` |          |       | ✓    | ✓       | ✓      |
 | `0.11.14`      | `v0.11.14` | ✓        | ✓     | ✓    | ✓       | ✓      |
@@ -236,6 +238,7 @@ This table shows the mappings between version and tags for NodeJS releases.  It 
 | `0.11.1`       | `v0.11.1`  | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `0.11.0`       | `v0.11.0`  | ✓        | ✓     | ✓    | ✓       | ✓      |
 |                |            |          |       |      |         |        |
+| `0.10.36`      | `v0.10.36` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `0.10.35`      | `v0.10.35` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `0.10.33`      | `v0.10.33` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `0.10.32`      | `v0.10.32` | ✓        | ✓     | ✓    | ✓       | ✓      |
@@ -314,6 +317,7 @@ This table shows the mappings between version and tags for Ruby releases.  It is
 
 | Ruby Version | CentOS 6 | Lucid | OS X | Precise | Trusty |
 | -------------| :------: | :---: | :--: | :-----: | :----: |
+| `2.2.0`      | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `2.1.5`      | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `2.1.4`      | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `2.1.3`      | ✓        | ✓     | ✓    | ✓       | ✓      |
