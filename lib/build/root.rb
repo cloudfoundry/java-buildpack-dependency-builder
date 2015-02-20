@@ -23,6 +23,8 @@ require 'build/dependency/gem_fire_security'
 require 'build/dependency/groovy'
 require 'build/dependency/jboss_as'
 require 'build/dependency/jrebel'
+require 'build/dependency/log4j_api'
+require 'build/dependency/log4j_core'
 require 'build/dependency/mariadb_jdbc'
 require 'build/dependency/new_relic'
 require 'build/dependency/node/node'
@@ -45,6 +47,7 @@ require 'build/dependency/tomcat_logging_support'
 require 'thor'
 
 module Build
+  # rubocop:disable ClassLength
   class Root < Thor
     class << self
       private
@@ -168,6 +171,20 @@ module Build
 
     def jrebel
       Dependency::JRebel.new(options).build
+    end
+
+    desc 'log4j-api', 'Publish a version of Log4j API'
+    common_options
+
+    def log4j_api
+      Dependency::Log4jApi.new(options).build
+    end
+
+    desc 'log4j-core', 'Publish a version of Log4j Core'
+    common_options
+
+    def log4j_core
+      Dependency::Log4jCore.new(options).build
     end
 
     desc 'mariadb-jdbc', 'Publish a version of MariaDB JDBC'
