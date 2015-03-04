@@ -19,6 +19,7 @@ PACKAGES=" \
 	build-essential \
 	curl \
 	git \
+    libffi-dev \
 	libssl-dev \
 	subversion"
 

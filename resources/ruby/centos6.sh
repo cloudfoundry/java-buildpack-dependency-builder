@@ -17,6 +17,7 @@ set -e
 
 PACKAGES=" \
 	git \
+	libffi-devel \
 	openssl-devel \
 	subversion"
 
