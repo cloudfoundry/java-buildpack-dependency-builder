@@ -38,7 +38,7 @@ export LANG=C PATH=#{bootstrap_jdk_root}/bin:$PATH ANT_HOME=#{ant_home}
 export ALT_BOOTDIR=#{bootstrap_jdk_root} ALT_CACERTS_FILE=#{cacerts} ALT_JDK_IMPORT_PATH=#{bootstrap_jdk_root}
 make MILESTONE=fcs JDK_VERSION=#{version} BUILD_NUMBER=#{build_number} ALLOW_DOWNLOADS=true NO_DOCS=true PARALLEL_COMPILE_JOBS=#{cpu_count} HOTSPOT_BUILD_JOBS=#{cpu_count}
 
-tar czvf #{@package.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build_dir}/#{package_dir package_jdk} .
+tar czvf #{@package.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build_dir}/#{package_dir package_jdk} . -C ../j2sdk-image ./bin/jcmd ./bin/jmap ./bin/jstack ./man/man1/jcmd.1 ./man/man1/jmap.1 ./man/man1/jstack.1
           EOF
         end
 
