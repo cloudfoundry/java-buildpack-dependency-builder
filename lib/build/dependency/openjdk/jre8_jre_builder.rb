@@ -38,7 +38,7 @@ export LANG=C PATH=#{bootstrap_jdk_root}/bin:$PATH ANT_HOME=#{ant_home}
 bash ./configure --with-cacerts-file=#{cacerts} #{freetype_flags}
 make MILESTONE= JDK_VERSION=#{version} JDK_BUILD_NUMBER=#{build_number} ALLOW_DOWNLOADS=true GENERATE_DOCS=false PARALLEL_COMPILE_JOBS=#{cpu_count} HOTSPOT_BUILD_JOBS=#{cpu_count} all
 
-tar czvf #{@package.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build_dir}/images/#{package_dir package_jdk} . -C ../j2sdk-image ./lib/tools.jar ./bin/jcmd ./bin/jmap ./bin/jstack ./man/man1/jcmd.1 ./man/man1/jmap.1 ./man/man1/jstack.1 -C ./jre ./lib/amd64/libattach.so 
+tar czvf #{@package.path} --exclude=*.debuginfo --exclude=*.diz -C build/#{build_dir}/images/#{package_dir package_jdk} . -C ../j2sdk-image ./lib/tools.jar ./bin/jcmd ./bin/jmap ./bin/jstack ./man/man1/jcmd.1 ./man/man1/jmap.1 ./man/man1/jstack.1 -C ./jre ./lib/amd64/libattach.so
           EOF
         end
 
