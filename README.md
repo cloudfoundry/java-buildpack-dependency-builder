@@ -171,6 +171,7 @@ This table shows the mappings between versions, build numbers, and repository ta
 
 | JRE Version | Build Number | Tag           | CentOS 6 | Lucid | OS X | Precise | Trusty |
 | ----------- | ------------ | ------------- | :------: | :---: | :--: | :-----: | :----: |
+| `1.8.0_45`  | `b14`        | `jdk8u45-b14` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `1.8.0_40`  | `b25`        | `jdk8u40-b25` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `1.8.0_31`  | `b13`        | `jdk8u31-b13` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `1.8.0_25`  | `b17`        | `jdk8u25-b17` | ✓        | ✓     | ✓    | ✓       | ✓      |
@@ -183,6 +184,7 @@ This table shows the mappings between versions, build numbers, and repository ta
 | `1.8.0_M7`  | `b91`        | `jdk8-b91`    | ✓        | ✓     | ✓    | ✓       |        |
 | `1.8.0_M6`  | `b75`        | `jdk8-b75`    | ✓        | ✓     | ✓    | ✓       |        |
 |             |              |               |          |       |      |         |        |
+| `1.7.0_79`  | `b15`        | `jdk7u79-b15` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `1.7.0_75`  | `b13`        | `jdk7u75-b13` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `1.7.0_71`  | `b14`        | `jdk7u71-b14` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `1.7.0_65`  | `b17`        | `jdk7u65-b17` | ✓        | ✓     | ✓    | ✓       | ✓      |
