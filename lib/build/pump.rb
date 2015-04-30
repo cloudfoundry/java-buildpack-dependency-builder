@@ -37,15 +37,21 @@ module Build
       progress_bar = ProgressBar.create(format: PROGRESS_BAR_FORMAT, title: @title, output: @progress_stream)
 
       begin
-        size               = source_size
-        progress_bar.total = block_given? ? (size + 1) : (2 * size) # Index file display problems (1/2)
+        size = source_size
+        progress_bar.total = size ? (size + 1) : nil
 
         Tempfile.open('builder') do |file|
           download file, progress_bar
 
           if block_given?
             yield file
-            progress_bar.total += (file.size - 1) # Index file display problems (2/2)
+          end
+
+          if progress_bar.total
+            progress_bar.total += (file.size - 1)
+          else
+            progress_bar.progress = 0
+            progress_bar.total = file.size
           end
 
           upload file, progress_bar
@@ -119,7 +125,12 @@ module Build
           if response.is_a? Net::HTTPOK
             response.read_body do |chunk|
               file.write chunk
-              progress_bar.progress += chunk.length
+
+              if progress_bar.total
+                progress_bar.progress += chunk.length
+              else
+                progress_bar.increment
+              end
             end
           elsif redirect?(response)
             download_from_uri URI(response['Location']), file, progress_bar
@@ -135,14 +146,16 @@ module Build
     end
 
     def source_size
-      if @source.is_a? URI
+      if @source.is_a?(URI) && @source.host =~ /github\.com/
+        nil
+      elsif @source.is_a? URI
         source_size_from_uri @source
       elsif @source.is_a? AWS::S3::S3Object
         source_size_from_aws @source
       elsif @source.is_a? Tempfile
         @source.size
       else
-        0
+        nil
       end
     end
 
@@ -170,6 +183,8 @@ module Build
 
     def upload(file, progress_bar)
       File.open(file, 'rb') do |f|
+        @foo = 0
+
         @destination.write(content_length: file.size, content_type: content_type) do |buffer, bytes|
           content = f.read bytes
           buffer.write content

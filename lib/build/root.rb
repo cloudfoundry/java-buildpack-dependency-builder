@@ -26,6 +26,7 @@ require 'build/dependency/jrebel'
 require 'build/dependency/log4j_api'
 require 'build/dependency/log4j_core'
 require 'build/dependency/mariadb_jdbc'
+require 'build/dependency/memory_calculator'
 require 'build/dependency/new_relic'
 require 'build/dependency/node/node'
 require 'build/dependency/node/node_inner'
@@ -95,12 +96,16 @@ module Build
                required: false
       end
 
-      def vagrant_options
+      def platform_specific_options
         option :platforms,
                desc:    'A list of the platforms the version should be built on',
                aliases: '-p',
                type:    :array,
                default: %w(centos6 lucid mountainlion precise trusty)
+      end
+
+      def vagrant_options
+        platform_specific_options
 
         option :shutdown,
                desc:    "Whether to shutdown the Vagrant instances after they're finished",
@@ -192,6 +197,14 @@ module Build
 
     def mariadb_jdbc
       Dependency::MariaDbJDBC.new(options).build
+    end
+
+    desc 'memory-calculator', 'Publish a version of the JRE Memory Calculator'
+    common_options
+    platform_specific_options
+
+    def memory_calculator
+      Dependency::MemoryCalculator.new(options).build
     end
 
     desc 'node', 'Publish a version of NodeJS'

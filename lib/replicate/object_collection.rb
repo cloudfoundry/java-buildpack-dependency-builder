@@ -27,7 +27,7 @@ module Replicate
         document = document marker
         objects  = objects document
 
-        concat objects.select { |object| object.key !~ /\/$/ && object.key !~ /^assets\// }
+        concat objects.select { |object| object.key !~ %r{/$} && object.key !~ %r{^assets/} }
 
         break unless truncated? document
         marker = marker objects

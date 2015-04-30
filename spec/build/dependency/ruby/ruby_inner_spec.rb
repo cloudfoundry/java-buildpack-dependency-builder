@@ -46,7 +46,7 @@ describe Build::Dependency::RubyInner do
     expect(Dir).to receive(:chdir).with(source_location).and_call_original
     expect(dependency).to receive(:system).with("git clone https://github.com/sstephenson/ruby-build.git #{source_location}")
     expect(dependency).to receive(:openssl_dir).and_return('test-openssl-dir')
-    expect(dependency).to receive(:system).with(/bin\/ruby-build/)
+    expect(dependency).to receive(:system).with(%r{bin/ruby-build})
 
     expect(dependency.send(:source)).to be
   end
@@ -58,7 +58,7 @@ describe Build::Dependency::RubyInner do
     expect(dependency).to receive(:system).with('git clean -fdx')
     expect(dependency).to receive(:system).with('git reset --hard origin/master')
     expect(dependency).to receive(:openssl_dir).and_return('test-openssl-dir')
-    expect(dependency).to receive(:system).with(/bin\/ruby-build/)
+    expect(dependency).to receive(:system).with(%r{bin/ruby-build})
 
     expect(dependency.send(:source)).to be
   end
