@@ -73,7 +73,9 @@ module Build
       end
 
       def artifact(version)
-        "#{@name}-#{version}.#{@type}"
+        artifact = "#{@name}-#{version}"
+        artifact += ".#{@type}" if @type
+        artifact
       end
 
       def index_key
