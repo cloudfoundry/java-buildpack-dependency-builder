@@ -37,21 +37,19 @@ module Build
       progress_bar = ProgressBar.create(format: PROGRESS_BAR_FORMAT, title: @title, output: @progress_stream)
 
       begin
-        size = source_size
+        size               = source_size
         progress_bar.total = size ? (size + 1) : nil
 
         Tempfile.open('builder') do |file|
           download file, progress_bar
 
-          if block_given?
-            yield file
-          end
+          yield file if block_given?
 
           if progress_bar.total
             progress_bar.total += (file.size - 1)
           else
             progress_bar.progress = 0
-            progress_bar.total = file.size
+            progress_bar.total    = file.size
           end
 
           upload file, progress_bar
@@ -154,8 +152,6 @@ module Build
         source_size_from_aws @source
       elsif @source.is_a? Tempfile
         @source.size
-      else
-        nil
       end
     end
 

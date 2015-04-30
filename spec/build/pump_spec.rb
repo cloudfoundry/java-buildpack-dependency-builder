@@ -167,7 +167,7 @@ describe Build::Pump do
     let(:source) { double('source', key: 'index.yml', content_length: 100, exists?: true) }
 
     it 'should pump from an S3 object' do
-      expect(source).to receive(:is_a?).with(URI).twice.and_return(false)
+      expect(source).to receive(:is_a?).with(URI).thrice.and_return(false)
       expect(source).to receive(:is_a?).with(AWS::S3::S3Object).twice.and_return(true)
       expect(source).to receive(:read).and_yield('test-body')
       expect(destination).to receive(:write).with(content_length: 9, content_type: 'text/x-yaml').and_yield(buffer, 1000)
@@ -182,7 +182,7 @@ describe Build::Pump do
     let(:source) { double('source', key: 'index.yml', exists?: false) }
 
     it 'should not pump from a non-existent S3 object' do
-      expect(source).to receive(:is_a?).with(URI).twice.and_return(false)
+      expect(source).to receive(:is_a?).with(URI).thrice.and_return(false)
       expect(source).to receive(:is_a?).with(AWS::S3::S3Object).twice.and_return(true)
       expect(destination).to receive(:write).with(content_length: 0, content_type: 'text/x-yaml').and_yield(buffer, 1000)
       expect(buffer).to receive(:write).with(nil)
@@ -203,7 +203,7 @@ describe Build::Pump do
     let(:source) { 'spec/fixture/source_tempfile' }
 
     it 'should pump from a Tempfile object' do
-      expect(source).to receive(:is_a?).with(URI).twice.and_return(false)
+      expect(source).to receive(:is_a?).with(URI).thrice.and_return(false)
       expect(source).to receive(:is_a?).with(AWS::S3::S3Object).twice.and_return(false)
       expect(source).to receive(:is_a?).with(Tempfile).twice.and_return(true)
       expect(destination).to receive(:write).with(content_length: 9, content_type: 'text/x-yaml').and_yield(buffer, 1000)
