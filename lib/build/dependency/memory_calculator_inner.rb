@@ -15,10 +15,13 @@
 
 require 'build/dependency'
 require 'build/dependency/base'
+require 'build/mmmq_normalizer'
 
 module Build
   module Dependency
     class MemoryCalculatorInner < Base
+      include Build::MMMQNormalizer
+
       def initialize(options)
         super 'memory-calculator', nil, options
       end
