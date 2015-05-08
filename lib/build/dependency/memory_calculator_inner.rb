@@ -46,7 +46,7 @@ module Build
       private
 
       def platform_qualifier
-        @platform == 'mountainlion' ? 'osx' : 'linux'
+        @platform == 'mountainlion' ? 'darwin' : 'linux'
       end
     end
   end
