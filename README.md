@@ -328,7 +328,10 @@ This table shows the mappings between version and tags for Ruby releases.  It is
 
 | Ruby Version | CentOS 6 | Lucid | OS X | Precise | Trusty |
 | -------------| :------: | :---: | :--: | :-----: | :----: |
+| `2.2.2`      | ✓        | ✓     | ✓    | ✓       | ✓      |
+| `2.2.1`      | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `2.2.0`      | ✓        | ✓     | ✓    | ✓       | ✓      |
+| `2.1.6`      | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `2.1.5`      | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `2.1.4`      | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `2.1.3`      | ✓        | ✓     | ✓    | ✓       | ✓      |
@@ -336,6 +339,8 @@ This table shows the mappings between version and tags for Ruby releases.  It is
 | `2.1.1`      | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `2.1.0`      | ✓        | ✓     | ✓    | ✓       | ✓      |
 |              |          |       |      |         |        |
+| `2.0.0-p645` | ✓        | ✓     | ✓    | ✓       | ✓      |
+| `2.0.0-p643` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `2.0.0-p598` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `2.0.0-p594` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `2.0.0-p576` | ✓        | ✓     | ✓    | ✓       | ✓      |
