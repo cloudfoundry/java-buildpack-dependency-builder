@@ -19,6 +19,8 @@ require 'build/dependency/base'
 module Build
   module Dependency
     class MariaDbJDBC < Base
+      include Build::Maven
+
       def initialize(options)
         super 'mariadb-jdbc', 'jar', options
       end
@@ -26,7 +28,9 @@ module Build
       protected
 
       def version_specific(version)
-        if version =~ /[\d]+\.[\d]+\.[\d]+/
+        if version =~ /[\d]+\.[\d]+\.[\d]+/ && version > '1.1.8'
+          ->(v) { release MAVEN_CENTRAL, 'org.mariadb.jdbc', 'mariadb-java-client', v }
+        elsif version =~ /[\d]+\.[\d]+\.[\d]+/ && version <= '1.1.8'
           ->(v) { "http://mirrors.coreix.net/mariadb/client-java-#{v}/mariadb-java-client-#{v}.jar" }
         else
           fail "Unable to process version '#{version}'"
