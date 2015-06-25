@@ -33,7 +33,7 @@ module Build
         prefix = version =~ /2\.[\d]+\.[\d]+/ ? 'vfabric' : 'pivotal'
         new_location = version > '3.1.1' || (version > '3.0.4' && version < '3.1.0')
         if new_location
-          ->(v) { "http://repo.eng.pivotal.io/artifactory/simple/tcserver-releases/tcserver/standard/pivotal-tc-server-standard/#{v}/pivotal-tc-server-standard-#{v}.zip" }
+          ->(v) { "http://repo.eng.pivotal.io/artifactory/simple/tcserver-releases/tcserver/standard/pivotal-tc-server-standard/#{v}/pivotal-tc-server-standard-#{v}.tar.gz" }
         elsif version =~ /CI/
           ->(v) { "http://dist.springsource.com.s3.amazonaws.com/snapshot/TCS/#{prefix}-tc-server-standard-#{v}.tar.gz" }
         elsif version =~ /RELEASE/ || version =~ /SR/
