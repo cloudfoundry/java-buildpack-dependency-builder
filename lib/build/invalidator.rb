@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'atomic'
+require 'concurrent'
 require 'build'
 require 'ruby-progressbar'
 require 'securerandom'
@@ -34,7 +34,7 @@ module Build
 
       return unless exist_previously && @distribution_id
 
-      complete = Atomic.new false
+      complete = Concurrent::Atomic.new false
       [
         Thread.new { cloudfront object, complete },
         Thread.new { progress complete }
@@ -70,7 +70,7 @@ module Build
         sleep 0.5
       end
 
-      progress_bar.total = progress_bar.progress # rubocop:disable UselessSetterCall
+      progress_bar.total = progress_bar.progress
     end
   end
 end

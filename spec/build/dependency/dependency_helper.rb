@@ -23,7 +23,7 @@ shared_context 'dependency_helper' do
   let(:dependency) { described_class.new(options) }
 
   it 'should fail with an unknown version' do
-    expect { dependency.send(:version_specific, 'unknown-version') }.to raise_error
+    expect { dependency.send(:version_specific, 'unknown-version') }.to raise_error RuntimeError
   end
 
   def expect_version_uri(version, uri)
