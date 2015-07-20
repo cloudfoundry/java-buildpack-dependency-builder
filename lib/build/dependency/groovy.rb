@@ -26,7 +26,9 @@ module Build
       protected
 
       def version_specific(version)
-        if version =~ /[\d]+\.[\d]+\.[\d]+/ && version > '2.2.0'
+        if version =~ /[\d]+\.[\d]+\.[\d]+/ && version > '2.4.3'
+            ->(v) { "http://dl.bintray.com/groovy/maven/apache-groovy-binary-#{v}.zip" }
+        elsif version =~ /[\d]+\.[\d]+\.[\d]+/ && version > '2.2.0'
           ->(v) { "http://dl.bintray.com/groovy/maven/groovy-binary-#{v}.zip" }
         elsif version =~ /[\d]+\.[\d]+\.[\d]+/ && version > '1.4.0'
           ->(v) { "http://dist.groovy.codehaus.org/distributions/groovy-binary-#{v}.zip" }
