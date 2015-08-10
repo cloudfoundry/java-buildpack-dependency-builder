@@ -22,6 +22,7 @@ PACKAGES=" \
 	libcups2-dev \
 	libfreetype6-dev \
 	libmotif-dev \
+    libreadline-dev \
 	libssl-dev \
 	libxml2-dev \
 	libxrender-dev \
