@@ -32,11 +32,17 @@ module Build
         "#{@name}/#{@platform}/x86_64"
       end
 
+      def type_specific(version)
+        return 'tar.gz' if version >= '2.0.0.RELEASE'
+        nil
+      end
+
       def version_specific(version)
         if version =~ /RELEASE/ || version =~ /\.M/
+          extension = version >= '2.0.0.RELEASE' ? '.tar.gz' : nil
           lambda do |v|
             "https://github.com/cloudfoundry/java-buildpack-memory-calculator/releases/download/v#{v}/" \
-            "java-buildpack-memory-calculator-#{platform_qualifier}"
+              "java-buildpack-memory-calculator-#{platform_qualifier}#{extension}"
           end
         else
           fail "Unable to process version '#{version}'"

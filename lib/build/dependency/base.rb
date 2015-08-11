@@ -64,6 +64,10 @@ module Build
         fail "Method 'version_specific(version)' must be defined"
       end
 
+      def type_specific(_version)
+        nil
+      end
+
       private
 
       def add_version(file)
@@ -74,6 +78,7 @@ module Build
 
       def artifact(version)
         artifact = "#{@name}-#{version}"
+        @type = type_specific(version) if type_specific(version)
         artifact += ".#{@type}" if @type
         artifact
       end
