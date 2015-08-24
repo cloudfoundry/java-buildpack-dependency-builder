@@ -19,8 +19,9 @@ PACKAGES=" \
 	build-essential \
 	curl \
 	git \
-    libffi-dev \
+  libffi-dev \
 	libssl-dev \
+	libreadline-dev \
 	subversion"
 
 apt-get update

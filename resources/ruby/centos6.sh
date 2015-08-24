@@ -19,6 +19,7 @@ PACKAGES=" \
 	git \
 	libffi-devel \
 	openssl-devel \
+	readline-devel \
 	subversion"
 
 yum update -y
