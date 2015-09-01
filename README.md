@@ -173,6 +173,7 @@ This table shows the mappings between versions, build numbers, and repository ta
 
 | JRE Version | Build Number | Tag           | CentOS 6 | Lucid | OS X | Precise | Trusty |
 | ----------- | ------------ | ------------- | :------: | :---: | :--: | :-----: | :----: |
+| `1.8.0_60`  | `b27`        | `jdk8u60-b27` | ✓        | ✓     |      | ✓       | ✓      |
 | `1.8.0_51`  | `b16`        | `jdk8u51-b16` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `1.8.0_45`  | `b14`        | `jdk8u45-b14` | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `1.8.0_40`  | `b25`        | `jdk8u40-b25` | ✓        | ✓     | ✓    | ✓       | ✓      |
@@ -338,6 +339,7 @@ This table shows the mappings between version and tags for Ruby releases.  It is
 | `2.2.2`      | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `2.2.1`      | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `2.2.0`      | ✓        | ✓     | ✓    | ✓       | ✓      |
+| `2.1.7`      | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `2.1.6`      | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `2.1.5`      | ✓        | ✓     | ✓    | ✓       | ✓      |
 | `2.1.4`      | ✓        | ✓     | ✓    | ✓       | ✓      |
