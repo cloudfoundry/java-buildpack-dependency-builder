@@ -21,7 +21,6 @@ PACKAGES=" \
 	openssl"
 
 echo export PATH='/usr/local/bin:$PATH' >> ~/.bash_profile
-sudo xcode-select -switch /usr/bin
 
 brew update
 brew install -y $PACKAGES

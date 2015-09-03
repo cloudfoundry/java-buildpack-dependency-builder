@@ -23,6 +23,7 @@ PACKAGES=" \
 	libcups2-dev \
 	libfreetype6-dev \
 	libopenssl-ruby \
+	libreadline-dev \
 	libssl-dev \
 	libxml2-dev \
 	libxrender-dev \

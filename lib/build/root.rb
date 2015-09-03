@@ -101,7 +101,7 @@ module Build
                desc:    'A list of the platforms the version should be built on',
                aliases: '-p',
                type:    :array,
-               default: %w(centos6 lucid mountainlion precise trusty)
+               default: %w(mountainlion precise trusty)
       end
 
       def vagrant_options
