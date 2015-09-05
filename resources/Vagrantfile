@@ -24,50 +24,8 @@ VM_CORES  = ENV.fetch('VM_CORES', `sysctl -n hw.ncpu`).to_i.freeze
 
 Vagrant.configure('2') do |config|
 
-  config.vm.define 'centos6' do |c|
-    c.vm.box = 'centos664-2'
-    c.vm.provision 'shell', path: 'centos6.sh'
-    c.vm.provision 'shell', path: 'rbenv.sh', privileged: false
-    c.vm.synced_folder ROOT, '/java-buildpack-dependency-builder'
-
-    c.vm.provider('virtualbox') do |vb, override|
-      vb.cpus   = VM_CORES
-      vb.memory = VM_MEMORY
-
-      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/centos664-virtualbox-2.box'
-    end
-
-    c.vm.provider('vmware_fusion') do |vmw, override|
-      vmw.vmx['memsize']  = VM_MEMORY
-      vmw.vmx['numvcpus'] = VM_CORES
-
-      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/centos664-vmware_desktop-2.box'
-    end
-  end
-
-  config.vm.define 'lucid' do |l|
-    l.vm.box = 'lucid64-2'
-    l.vm.provision 'shell', path: 'lucid.sh'
-    l.vm.provision 'shell', path: 'rbenv.sh', privileged: false
-    l.vm.synced_folder ROOT, '/java-buildpack-dependency-builder'
-
-    l.vm.provider('virtualbox') do |vb, override|
-      vb.cpus   = VM_CORES
-      vb.memory = VM_MEMORY
-
-      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/lucid64-virtualbox-2.box'
-    end
-
-    l.vm.provider('vmware_fusion') do |vmw, override|
-      vmw.vmx['memsize']  = VM_MEMORY
-      vmw.vmx['numvcpus'] = VM_CORES
-
-      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/lucid64-vmware_desktop-2.box'
-    end
-  end
-
   config.vm.define 'mountainlion' do |m|
-    m.vm.box = 'mountainlion64-2'
+    m.vm.box = 'mountainlion64-3'
     m.vm.provision 'shell', path: 'xquartz.sh'
     m.vm.provision 'shell', path: 'mountainlion.sh', privileged: false
     m.vm.provision 'shell', path: 'rbenv.sh', privileged: false
@@ -79,20 +37,20 @@ Vagrant.configure('2') do |config|
       vb.cpus   = VM_CORES
       vb.memory = VM_MEMORY
 
-      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/mountainlion64-virtualbox-2.box'
+      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/mountainlion64-virtualbox-3.box'
     end
 
     m.vm.provider('vmware_fusion') do |vmw, override|
       vmw.vmx['memsize']  = VM_MEMORY
       vmw.vmx['numvcpus'] = VM_CORES
 
-      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/mountainlion64-vmware_desktop-2.box'
+      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/mountainlion64-vmware_desktop-3.box'
     end
 
   end
 
   config.vm.define 'precise' do |p|
-    p.vm.box = 'precise64-2'
+    p.vm.box = 'precise64-3'
     p.vm.provision 'shell', path: 'precise.sh'
     p.vm.provision 'shell', path: 'rbenv.sh', privileged: false
     p.vm.synced_folder ROOT, '/java-buildpack-dependency-builder'
@@ -101,19 +59,19 @@ Vagrant.configure('2') do |config|
       vb.cpus   = VM_CORES
       vb.memory = VM_MEMORY
 
-      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/precise64-virtualbox-2.box'
+      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/precise64-virtualbox-3.box'
     end
 
     p.vm.provider('vmware_fusion') do |vmw, override|
       vmw.vmx['memsize']  = VM_MEMORY
       vmw.vmx['numvcpus'] = VM_CORES
 
-      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/precise64-vmware_desktop-2.box'
+      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/precise64-vmware_desktop-3.box'
     end
   end
 
   config.vm.define 'trusty' do |t|
-    t.vm.box = 'trusty64-2'
+    t.vm.box = 'trusty64-3'
     t.vm.provision 'shell', path: 'trusty.sh'
     t.vm.provision 'shell', path: 'rbenv.sh', privileged: false
     t.vm.synced_folder ROOT, '/java-buildpack-dependency-builder'
@@ -122,14 +80,14 @@ Vagrant.configure('2') do |config|
       vb.cpus   = VM_CORES
       vb.memory = VM_MEMORY
 
-      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/trusty64-virtualbox-2.box'
+      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/trusty64-virtualbox-3.box'
     end
 
     t.vm.provider('vmware_fusion') do |vmw, override|
       vmw.vmx['memsize']  = VM_MEMORY
       vmw.vmx['numvcpus'] = VM_CORES
 
-      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/trusty64-vmware_desktop-2.box'
+      override.vm.box_url = 'http://boxes.gopivotal.com.s3.amazonaws.com/trusty64-vmware_desktop-3.box'
     end
   end
 
