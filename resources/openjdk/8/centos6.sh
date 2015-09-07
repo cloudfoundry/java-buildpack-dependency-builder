@@ -26,6 +26,7 @@ PACKAGES=" \
 	libXt-devel \
 	libXtst-devel \
 	openssl-devel \
+	readline-devel \
 	unzip \
 	zip"
 

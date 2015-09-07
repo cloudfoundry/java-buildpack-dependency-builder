@@ -17,7 +17,8 @@ set -e
 
 PACKAGES=" \
 	git \
-	openssl-devel"
+	openssl-devel  \
+	readline-devel"
 
 yum update -y
 yum groupinstall -y "Development Tools"
