@@ -19,6 +19,7 @@ PACKAGES=" \
 	build-essential \
 	curl \
 	git \
+	libreadline-dev \
 	libssl-dev"
 
 apt-get update

@@ -221,6 +221,8 @@ This table shows the mappings between version and tags for NodeJS releases.  It 
 
 | NodeJS Version | Tag        | OS X | Precise | Trusty |
 | -------------- | ---------- | :--: | :-----: | :----: |
+| `4.0.0`        | `v4.0.0 `  | ✓    |         | ✓      |
+|                |            |      |         |        |
 | `0.12.7`       | `v0.12.7 ` | ✓    | ✓       | ✓      |
 | `0.12.6`       | `v0.12.6 ` | ✓    | ✓       | ✓      |
 | `0.12.5`       | `v0.12.5 ` | ✓    | ✓       | ✓      |

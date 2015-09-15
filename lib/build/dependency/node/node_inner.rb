@@ -45,7 +45,7 @@ module Build
 
       private
 
-      REPOSITORY = 'https://github.com/joyent/node.git'.freeze
+      REPOSITORY = 'https://github.com/nodejs/node.git'.freeze
 
       private_constant :REPOSITORY
 
