@@ -41,7 +41,7 @@ describe Build::Dependency::NodeInner do
 
     expect(File).to receive(:exist?).with(source_location).and_return false
     expect(Dir).to receive(:chdir).with(source_location).twice.and_call_original
-    expect(dependency).to receive(:system).with("git clone https://github.com/joyent/node.git #{source_location}")
+    expect(dependency).to receive(:system).with("git clone https://github.com/nodejs/node.git #{source_location}")
     expect(dependency).to receive(:system).with('git checkout test-tag')
     expect(dependency).to receive(:cpu_count).and_return('test-cpu-count')
     expect(dependency).to receive(:system).with(/make install/)
