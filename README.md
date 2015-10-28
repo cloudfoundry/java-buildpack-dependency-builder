@@ -96,7 +96,7 @@ The list of available versions for each dependency can be found at the following
 | Memory Calculator | [`mountainlion`](https://download.run.pivotal.io/memory-calculator/mountainlion/x86_64/index.yml), [`precise`](https://download.run.pivotal.io/memory-calculator/precise/x86_64/index.yml), [`trusty`](https://download.run.pivotal.io/memory-calculator/trusty/x86_64/index.yml)
 | New Relic | [`universal`](https://download.run.pivotal.io/new-relic/index.yml)
 | NodeJS | [`mountainlion`](https://download.run.pivotal.io/node/mountainlion/x86_64/index.yml), [`precise`](https://download.run.pivotal.io/node/precise/x86_64/index.yml), [`trusty`](https://download.run.pivotal.io/node/trusty/x86_64/index.yml)
-| OpenJDK | [`mountainlion`](https://download.run.pivotal.io/openjdk/mountainlion/x86_64/index.yml), [`precise`](https://download.run.pivotal.io/openjdk/precise/x86_64/index.yml), [`trusty`](https://download.run.pivotal.io/openjdk/trusty/x86_64/index.yml)
+| OpenJDK JRE | [`mountainlion`](https://download.run.pivotal.io/openjdk/mountainlion/x86_64/index.yml), [`precise`](https://download.run.pivotal.io/openjdk/precise/x86_64/index.yml), [`trusty`](https://download.run.pivotal.io/openjdk/trusty/x86_64/index.yml)
 | Play JPA Plugin | [`universal`](https://download.run.pivotal.io/play-jpa-plugin/index.yml)
 | PostgreSQL JDBC | [`universal`](https://download.run.pivotal.io/postgresql-jdbc/index.yml)
 | RedisStore | [`universal`](https://download.run.pivotal.io/redis-store/index.yml)
