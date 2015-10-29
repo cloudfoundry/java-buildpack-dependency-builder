@@ -60,6 +60,7 @@
       <w>sqljdbc</w>
       <w>storepass</w>
       <w>sysctl</w>
+      <w>tomee</w>
       <w>vfabric</w>
       <w>virtualbox</w>
       <w>vmware</w>

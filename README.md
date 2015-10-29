@@ -109,6 +109,7 @@ The list of available versions for each dependency can be found at the following
 | Tomcat Access Logging Support | [`universal`](https://download.run.pivotal.io/tomcat-access-logging-support/index.yml)
 | Tomcat Lifecycle Support | [`universal`](https://download.run.pivotal.io/tomcat-lifecycle-support/index.yml)
 | Tomcat Logging Support | [`universal`](https://download.run.pivotal.io/tomcat-logging-support/index.yml)
+| TomEE | [`universal`](https://download.run.pivotal.io/tomee/index.yml)
 
 ## Running Tests
 To run the tests, issue the following commands from the root directory of a clone of this repository:
@@ -167,6 +168,7 @@ This table shows locations to check for new releases of cached dependencies.  It
 | Tomcat Access Logging Support | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/tomcat-access-logging-support/maven-metadata.xml)
 | Tomcat Lifecycle Support | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/tomcat-lifecycle-support/maven-metadata.xml)
 | Tomcat Logging Support | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/tomcat-logging-support/maven-metadata.xml)
+| TomEE | [`release`](http://tomee.apache.org/downloads.html)
 
 ## OpenJDK Build Details
 This table shows the mappings between versions, build numbers, and repository tags for OpenJDK releases.  It is used primarily by Pivotal employees to keep track of exactly what was built and should not be considered authoritative.

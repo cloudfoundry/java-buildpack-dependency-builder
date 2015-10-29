@@ -45,6 +45,7 @@ require 'build/dependency/tomcat'
 require 'build/dependency/tomcat_access_logging_support'
 require 'build/dependency/tomcat_lifecycle_support'
 require 'build/dependency/tomcat_logging_support'
+require 'build/dependency/tomee'
 require 'thor'
 
 module Build
@@ -338,6 +339,13 @@ module Build
 
     def tomcat_logging_support
       Dependency::TomcatLoggingSupport.new(options).build
+    end
+
+    desc 'tomee', 'Publish a version of TomEE'
+    common_options
+
+    def tomee
+      Dependency::TomEE.new(options).build
     end
   end
 end
