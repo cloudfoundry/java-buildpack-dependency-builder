@@ -46,6 +46,7 @@ require 'build/dependency/tomcat_access_logging_support'
 require 'build/dependency/tomcat_lifecycle_support'
 require 'build/dependency/tomcat_logging_support'
 require 'build/dependency/tomee'
+require 'build/dependency/your_kit'
 require 'thor'
 
 module Build
@@ -346,6 +347,14 @@ module Build
 
     def tomee
       Dependency::TomEE.new(options).build
+    end
+
+    desc 'your-kit', 'Publish a version of YourKit'
+    common_options
+    platform_specific_options
+
+    def your_kit
+      Dependency::YourKit.new(options).build
     end
   end
 end

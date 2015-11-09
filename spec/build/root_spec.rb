@@ -36,6 +36,8 @@ require 'build/dependency/tomcat'
 require 'build/dependency/tomcat_access_logging_support'
 require 'build/dependency/tomcat_lifecycle_support'
 require 'build/dependency/tomcat_logging_support'
+require 'build/dependency/tomee'
+require 'build/dependency/your_kit'
 require 'build/root'
 
 describe Build::Root do
@@ -315,4 +317,17 @@ describe Build::Root do
     end
   end
 
+  context do
+    include_examples 'dependency' do
+      let(:dependency) { 'tomee' }
+      let(:type) { Build::Dependency::TomEE }
+    end
+  end
+
+  context do
+    include_examples 'dependency' do
+      let(:dependency) { 'your-kit' }
+      let(:type) { Build::Dependency::YourKit }
+    end
+  end
 end

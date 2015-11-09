@@ -1,4 +1,5 @@
 # Java Buildpack Dependency Builders
+
 [![Build Status](https://travis-ci.org/cloudfoundry/java-buildpack-dependency-builder.svg?branch=master)](https://travis-ci.org/cloudfoundry/java-buildpack-dependency-builder)
 [![Dependency Status](https://gemnasium.com/cloudfoundry/java-buildpack-dependency-builder.svg)](https://gemnasium.com/cloudfoundry/java-buildpack-dependency-builder)
 [![Code Climate](https://codeclimate.com/repos/52b84ef86956807cc400133a/badges/b442d613a128726bcbe8/gpa.svg)](https://codeclimate.com/repos/52b84ef86956807cc400133a/feed)
@@ -110,6 +111,7 @@ The list of available versions for each dependency can be found at the following
 | Tomcat Lifecycle Support | [`universal`](https://download.run.pivotal.io/tomcat-lifecycle-support/index.yml)
 | Tomcat Logging Support | [`universal`](https://download.run.pivotal.io/tomcat-logging-support/index.yml)
 | TomEE | [`universal`](https://download.run.pivotal.io/tomee/index.yml)
+| YourKit | [`mountainlion`](https://download.run.pivotal.io/your-kit/mountainlion/x86_64/index.yml), [`precise`](https://download.run.pivotal.io/your-kit/precise/x86_64/index.yml), [`trusty`](https://download.run.pivotal.io/your-kit/trusty/x86_64/index.yml)
 
 ## Running Tests
 To run the tests, issue the following commands from the root directory of a clone of this repository:
@@ -169,6 +171,7 @@ This table shows locations to check for new releases of cached dependencies.  It
 | Tomcat Lifecycle Support | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/tomcat-lifecycle-support/maven-metadata.xml)
 | Tomcat Logging Support | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/tomcat-logging-support/maven-metadata.xml)
 | TomEE | [`release`](http://tomee.apache.org/downloads.html)
+| YourKit | [`release`](https://www.yourkit.com/download)
 
 ## OpenJDK Build Details
 This table shows the mappings between versions, build numbers, and repository tags for OpenJDK releases.  It is used primarily by Pivotal employees to keep track of exactly what was built and should not be considered authoritative.
