@@ -42,7 +42,7 @@ describe 'format size' do
 
   private
 
-  BYTE = 1.freeze
+  BYTE = 1
 
   KIBI = (1024 * BYTE).freeze
 

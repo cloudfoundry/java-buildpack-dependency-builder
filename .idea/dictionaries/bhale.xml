@@ -31,10 +31,12 @@
       <w>importcert</w>
       <w>invalidator</w>
       <w>ioend</w>
+      <w>jvmkill</w>
       <w>keystore</w>
       <w>keytool</w>
       <w>kibi</w>
       <w>kibibytes</w>
+      <w>libjvmkill</w>
       <w>malformatted</w>
       <w>mariadb</w>
       <w>memsize</w>

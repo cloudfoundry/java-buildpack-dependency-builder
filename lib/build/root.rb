@@ -25,6 +25,8 @@ require 'build/dependency/jboss_as'
 require 'build/dependency/jrebel'
 require 'build/dependency/log4j_api'
 require 'build/dependency/log4j_core'
+require 'build/dependency/jvmkill/jvmkill'
+require 'build/dependency/jvmkill/jvmkill_inner'
 require 'build/dependency/mariadb_jdbc'
 require 'build/dependency/memory_calculator'
 require 'build/dependency/new_relic'
@@ -65,6 +67,13 @@ module Build
         option :version,
                desc:     'The version to publish',
                aliases:  '-v',
+               required: true
+      end
+
+      def jvmkill_options
+        option :tag,
+               desc:     'The repository tag to build from',
+               aliases:  '-t',
                required: true
       end
 
@@ -178,6 +187,23 @@ module Build
 
     def jrebel
       Dependency::JRebel.new(options).build
+    end
+
+    desc 'jvmkill', 'Publish a version of jvmkill'
+    common_options
+    jvmkill_options
+    vagrant_options
+
+    def jvmkill
+      Dependency::JvmKill.new(options).build
+    end
+
+    desc 'jvmkill-inner', 'Publish a version of jvmkill', hide: true
+    common_options
+    jvmkill_options
+
+    def jvmkill_inner
+      Dependency::JvmKillInner.new(options).build
     end
 
     desc 'log4j-api', 'Publish a version of Log4j API'

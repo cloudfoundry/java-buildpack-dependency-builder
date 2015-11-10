@@ -13,34 +13,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-class Numeric
-  def duration
-    remainder = self
+require 'build/dependency'
+require 'build/dependency/jvmkill/jvmkill_resources'
+require 'build/dependency/util/platform_details'
+require 'fileutils'
 
-    hours     = (remainder / HOUR).to_int
-    remainder -= HOUR * hours
+module Build
+  module Dependency
+    class JDKBuilder
+      include JvmKillResources
+      include PlatformDetails
 
-    minutes   = (remainder / MINUTE).to_int
-    remainder -= MINUTE * minutes
+      def build
+        return if File.exist?(root)
 
-    return "#{hours}h #{minutes}m" if hours > 0
+        puts 'Downloading JDK...'
+        FileUtils.mkdir_p root
+        system "curl -ssL http://boxes.gopivotal.com.s3.amazonaws.com/#{codename}64-openjdk-1.7.0_60.tar.gz | tar xz --strip 1 -C #{root}"
+      end
 
-    seconds   = (remainder / SECOND).to_int
-    remainder -= SECOND * seconds
-
-    return "#{minutes}m #{seconds}s" if minutes > 0
-
-    tenths = (remainder / TENTH).to_int
-    "#{seconds}.#{tenths}s"
+      def root
+        File.join VENDOR_DIR, 'jdk', codename
+      end
+    end
   end
-
-  MILLISECOND = 0.001
-
-  TENTH = (100 * MILLISECOND).freeze
-
-  SECOND = (10 * TENTH).freeze
-
-  MINUTE = (60 * SECOND).freeze
-
-  HOUR = (60 * MINUTE).freeze
 end

@@ -20,6 +20,8 @@ require 'build/dependency/app_dynamics'
 require 'build/dependency/groovy'
 require 'build/dependency/jboss_as'
 require 'build/dependency/mariadb_jdbc'
+require 'build/dependency/jvmkill/jvmkill'
+require 'build/dependency/jvmkill/jvmkill_inner'
 require 'build/dependency/new_relic'
 require 'build/dependency/node/node'
 require 'build/dependency/node/node_inner'
@@ -181,6 +183,13 @@ describe Build::Root do
     include_examples 'dependency' do
       let(:dependency) { 'jrebel' }
       let(:type) { Build::Dependency::JRebel }
+    end
+  end
+
+  context do
+    include_examples 'jvmkill' do
+      let(:dependency) { 'jvmkill' }
+      let(:type) { Build::Dependency::JvmKill }
     end
   end
 

@@ -49,7 +49,7 @@ module Build
     private
 
     def to_path(group_id)
-      group_id.gsub('.', '/')
+      group_id.tr('.', '/')
     end
   end
 end
