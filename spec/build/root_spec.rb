@@ -64,6 +64,29 @@ describe Build::Root do
 
   end
 
+  shared_examples 'jvmkill' do
+
+    it 'should display error message if version is not specified' do
+      Build::Root.start([dependency])
+
+      expect(stderr.string).to match('--version')
+    end
+
+    it 'should display error message if tag is not specified' do
+      Build::Root.start([dependency])
+
+      expect(stderr.string).to match('--tag')
+    end
+
+    it 'should not display error message if version and tag are specified' do
+      expect(type).to receive(:new).and_return(instance)
+      expect(instance).to receive(:build)
+
+      Build::Root.start([dependency, '--version', 'test-version', '--tag', 'test-tag'])
+    end
+
+  end
+
   shared_examples 'node' do
 
     it 'should display error message if version is not specified' do
@@ -190,6 +213,13 @@ describe Build::Root do
     include_examples 'jvmkill' do
       let(:dependency) { 'jvmkill' }
       let(:type) { Build::Dependency::JvmKill }
+    end
+  end
+
+  context do
+    include_examples 'jvmkill' do
+      let(:dependency) { 'jvmkill-inner' }
+      let(:type) { Build::Dependency::JvmKillInner }
     end
   end
 
