@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+# Encoding: utf-8
 # Copyright (c) 2013 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,16 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
+require 'build/dependency'
+require 'build/dependency/jvmkill/jvmkill_resources'
+require 'build/dependency/util/base_vagrant_platform'
 
-PACKAGES=" \
-	build-essential \
-	curl \
-	git \
-    libffi-dev \
-	libssl-dev \
-	libreadline-dev \
-	subversion"
+module Build
+  module Dependency
+    class JvmKillVagrantPlatform < BaseVagrantPlatform
+      include JvmKillResources
 
-apt-get update
-apt-get install -y $PACKAGES
+      protected
+
+      def version_specific(version)
+        if version =~ /[\d]+\.[\d]+/
+          RESOURCES_DIR
+        else
+          fail "Unable to process version '#{version}'"
+        end
+      end
+    end
+  end
+end

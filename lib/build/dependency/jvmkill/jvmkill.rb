@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+# Encoding: utf-8
 # Copyright (c) 2013 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,16 +13,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
+require 'build/dependency'
+require 'build/dependency/jvmkill/jvmkill_vagrant_platform'
+require 'build/dependency/base_vagrant'
 
-PACKAGES=" \
-	build-essential \
-	curl \
-	git \
-    libffi-dev \
-	libssl-dev \
-	libreadline-dev \
-	subversion"
+module Build
+  module Dependency
+    class JvmKill < BaseVagrant
+      def initialize(options)
+        super 'jvmkill-inner', JvmKillVagrantPlatform, options
+      end
 
-apt-get update
-apt-get install -y $PACKAGES
+      protected
+
+      def arguments
+        [
+          "--version #{@version}",
+          "--tag #{@tag}"
+        ]
+      end
+    end
+  end
+end

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Copyright (c) 2013 the original author or authors.
+# Copyright (c) 2014 the original author or authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,10 +19,8 @@ PACKAGES=" \
 	build-essential \
 	curl \
 	git \
-    libffi-dev \
-	libssl-dev \
 	libreadline-dev \
-	subversion"
+	libssl-dev"
 
 apt-get update
 apt-get install -y $PACKAGES
