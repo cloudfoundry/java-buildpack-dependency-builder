@@ -43,7 +43,7 @@ describe 'format duration' do
 
   private
 
-  MILLISECOND = 0.001.freeze
+  MILLISECOND = 0.001
 
   TENTH = (100 * MILLISECOND).freeze
 

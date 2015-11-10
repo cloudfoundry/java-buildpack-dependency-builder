@@ -64,7 +64,7 @@ module Build
 
     private
 
-    CHUNK_SIZE = 8192.freeze
+    CHUNK_SIZE = 8192
 
     PROGRESS_BAR_FORMAT = '%t |%B| %E'.freeze
 
