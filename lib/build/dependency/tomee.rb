@@ -27,7 +27,7 @@ module Build
 
       def version_specific(version)
         if version =~ /^1.7/
-          ->(v) { "http://archive.apache.org/dist/tomee/tomee-#{v}/apache-tomee-#{v}-webprofile.tar.gz" }
+          ->(v) { "http://archive.apache.org/dist/tomee/tomee-#{v}/apache-tomee-#{v}-jaxrs.tar.gz" }
         else
           fail "Unable to process version '#{version}'"
         end
