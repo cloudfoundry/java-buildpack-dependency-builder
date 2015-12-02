@@ -56,7 +56,7 @@ module Build
       end
 
       def version_specific(version)
-        if version =~ /\./
+        if version =~ /^[\d]+\.[\d]+$/
           lambda do |v|
             components = v.split('.')
             "https://www.yourkit.com/download/yjp-#{components[0]}-build-#{components[1]}.zip"
