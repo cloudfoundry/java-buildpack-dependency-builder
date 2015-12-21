@@ -342,10 +342,12 @@ This table shows the mappings between version and tags for Ruby releases.  It is
 
 | Ruby Version | OS X | Precise | Trusty |
 | -------------| :--: | :-----: | :----: |
+| `2.2.4`      | ✓    | ✓       | ✓      |
 | `2.2.3`      | ✓    | ✓       | ✓      |
 | `2.2.2`      | ✓    | ✓       | ✓      |
 | `2.2.1`      | ✓    | ✓       | ✓      |
 | `2.2.0`      | ✓    | ✓       | ✓      |
+| `2.1.8`      | ✓    | ✓       | ✓      |
 | `2.1.7`      | ✓    | ✓       | ✓      |
 | `2.1.6`      | ✓    | ✓       | ✓      |
 | `2.1.5`      | ✓    | ✓       | ✓      |
