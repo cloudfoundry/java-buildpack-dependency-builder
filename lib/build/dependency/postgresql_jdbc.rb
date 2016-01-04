@@ -33,7 +33,9 @@ module Build
       end
 
       def version_specific(version)
-        if version =~ /^[\d\.-]+$/ && version > '9.2'
+        if version =~ /^[\d\.-]+$/ && version > '9.4.1206'
+          ->(v) { release MAVEN_CENTRAL, 'org.postgresql', 'postgresql', "#{v}" }
+        elsif version > '9.2'
           ->(v) { release MAVEN_CENTRAL, 'org.postgresql', 'postgresql', "#{v}-jdbc4" }
         elsif version =~ /^8/ || version =~ /^9.0/ || version =~ /^9.1/
           ->(v) { release MAVEN_CENTRAL, 'postgresql', 'postgresql', "#{v}.jdbc4" }
