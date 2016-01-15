@@ -21,15 +21,15 @@ describe Build::Dependency::TcServer do
   include_context 'dependency_helper'
 
   it 'should create tc Server CI URI' do
-    expect_version_uri '2.9.5.CI-123', 'http://dist.springsource.com.s3.amazonaws.com/snapshot/TCS/vfabric-tc-server-standard-2.9.5.CI-123.tar.gz'
+    expect_version_uri '3.2.5.SR2', 'http://repo.eng.pivotal.io/artifactory/simple/tcserver-releases/tcserver/standard/pivotal-tc-server-standard/3.2.5.SR2/pivotal-tc-server-standard-3.2.5.SR2.tar.gz'
   end
 
   it 'should create tc Server RELEASE URI' do
-    expect_version_uri '2.9.5.RELEASE', 'http://dist.springsource.com.s3.amazonaws.com/release/TCS/vfabric-tc-server-standard-2.9.5.RELEASE.tar.gz'
+    expect_version_uri '2.9.5.RELEASE', 'http://repo.eng.pivotal.io/artifactory/simple/tcserver-releases/tcserver/standard/vfabric-tc-server-standard/2.9.5.RELEASE/vfabric-tc-server-standard-2.9.5.RELEASE.tar.gz'
   end
 
   it 'should create tc Server SR URI' do
-    expect_version_uri '2.9.5.SR1', 'http://dist.springsource.com.s3.amazonaws.com/release/TCS/vfabric-tc-server-standard-2.9.5.SR1.tar.gz'
+    expect_version_uri '2.9.5.SR1', 'http://repo.eng.pivotal.io/artifactory/simple/tcserver-releases/tcserver/standard/vfabric-tc-server-standard/2.9.5.SR1/vfabric-tc-server-standard-2.9.5.SR1.tar.gz'
   end
 
   it 'should return the MMMQ for normalized' do
