@@ -31,16 +31,7 @@ module Build
       def version_specific(version)
         fail "Unable to process version '#{version}'" unless version =~ /[\d]+\.[\d]+\.[\d]+/
         prefix = version =~ /2\.[\d]+\.[\d]+/ ? 'vfabric' : 'pivotal'
-        new_location = version > '3.1.1' || (version > '3.0.4' && version < '3.1.0')
-        if new_location
-          ->(v) { "http://repo.eng.pivotal.io/artifactory/simple/tcserver-releases/tcserver/standard/pivotal-tc-server-standard/#{v}/pivotal-tc-server-standard-#{v}.tar.gz" }
-        elsif version =~ /CI/
-          ->(v) { "http://dist.springsource.com.s3.amazonaws.com/snapshot/TCS/#{prefix}-tc-server-standard-#{v}.tar.gz" }
-        elsif version =~ /RELEASE/ || version =~ /SR/
-          ->(v) { "http://dist.springsource.com.s3.amazonaws.com/release/TCS/#{prefix}-tc-server-standard-#{v}.tar.gz" }
-        else
-          fail "Unable to process version '#{version}'"
-        end
+        ->(v) { "http://repo.eng.pivotal.io/artifactory/simple/tcserver-releases/tcserver/standard/#{prefix}-tc-server-standard/#{v}/#{prefix}-tc-server-standard-#{v}.tar.gz" }
       end
     end
   end
