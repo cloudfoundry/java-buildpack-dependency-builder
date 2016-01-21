@@ -48,6 +48,7 @@ require 'build/dependency/tomcat_access_logging_support'
 require 'build/dependency/tomcat_lifecycle_support'
 require 'build/dependency/tomcat_logging_support'
 require 'build/dependency/tomee'
+require 'build/dependency/tomee_resource_configuration'
 require 'build/dependency/your_kit'
 require 'thor'
 
@@ -373,6 +374,13 @@ module Build
 
     def tomee
       Dependency::TomEE.new(options).build
+    end
+
+    desc 'tomee-resource-configuration', 'Publish a version of tomee-resource-configuration'
+    common_options
+
+    def tomee_resource_configuration
+      Dependency::TomEEResourceConfiguration.new(options).build
     end
 
     desc 'your-kit', 'Publish a version of YourKit'
