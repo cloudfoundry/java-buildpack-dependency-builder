@@ -25,6 +25,9 @@ require 'build/dependency/jboss_as'
 require 'build/dependency/jrebel'
 require 'build/dependency/log4j_api'
 require 'build/dependency/log4j_core'
+require 'build/dependency/log4j_jcl'
+require 'build/dependency/log4j_jul'
+require 'build/dependency/log4j_slf4j_impl'
 require 'build/dependency/jvmkill/jvmkill'
 require 'build/dependency/jvmkill/jvmkill_inner'
 require 'build/dependency/mariadb_jdbc'
@@ -219,6 +222,27 @@ module Build
 
     def log4j_core
       Dependency::Log4jCore.new(options).build
+    end
+
+    desc 'log4j-jcl', 'Publish a version of Log4j Jcl'
+    common_options
+
+    def log4j_jcl
+      Dependency::Log4jJcl.new(options).build
+    end
+
+    desc 'log4j-jul', 'Publish a version of Log4j Jul'
+    common_options
+
+    def log4j_jul
+      Dependency::Log4jJul.new(options).build
+    end
+
+    desc 'log4j-slf4j-impl', 'Publish a version of Log4j Slf4j Impl'
+    common_options
+
+    def log4j_slf4j_impl
+      Dependency::Log4jSlf4jImpl.new(options).build
     end
 
     desc 'mariadb-jdbc', 'Publish a version of MariaDB JDBC'

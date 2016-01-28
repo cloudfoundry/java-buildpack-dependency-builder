@@ -19,11 +19,11 @@ require 'build/maven'
 
 module Build
   module Dependency
-    class Log4jApi < Base
+    class Log4jSlf4jImpl < Base
       include Build::Maven
 
       def initialize(options)
-        super 'log4j-api', 'jar', options
+        super 'log4j-slf4j-impl', 'jar', options
       end
 
       protected
@@ -38,7 +38,7 @@ module Build
 
       def version_specific(version)
         if version =~ /^[\d\.]+$/
-          ->(v) { release MAVEN_CENTRAL, 'org.apache.logging.log4j', 'log4j-api', v }
+          ->(v) { release MAVEN_CENTRAL, 'org.apache.logging.log4j', 'log4j-slf4j-impl', v }
         else
           fail "Unable to process version '#{version}'"
         end
