@@ -28,6 +28,14 @@ module Build
 
       protected
 
+      def normalize(raw)
+        if raw =~ /[\d]+\.[\d]+/
+          return "#{raw}.0"
+        else
+          return raw
+        end
+      end
+
       def version_specific(version)
         if version =~ /^[\d\.]+$/
           ->(v) { release MAVEN_CENTRAL, 'org.apache.logging.log4j', 'log4j-core', v }
