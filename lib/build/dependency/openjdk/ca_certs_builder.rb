@@ -36,7 +36,7 @@ module Build
                      end
 
           system <<-EOF
-curl -s #{CACERTS_URI} | awk '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/{ print $0; }' | #{splitter}
+curl -sSL #{CACERTS_URI} | awk '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/{ print $0; }' | #{splitter}
 
 for I in $(find #{root} -type f) ; do
   #{bootstrap_jdk_root}/bin/keytool -importcert -noprompt -keystore #{cacerts} -storepass changeit -file $I -alias $(basename $I)
@@ -51,7 +51,7 @@ done
 
       CACERTS_FILE = File.join(VENDOR_DIR, 'cacerts').freeze
 
-      CACERTS_URI = 'http://curl.haxx.se/ca/cacert.pem'.freeze
+      CACERTS_URI = 'https://curl.haxx.se/ca/cacert.pem'.freeze
 
       private_constant :CACERTS_FILE, :CACERTS_URI
     end
