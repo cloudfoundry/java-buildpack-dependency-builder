@@ -188,6 +188,7 @@ This table shows the mappings between versions, build numbers, and repository ta
 
 | JRE Version | Build Number | Tag           | OS X | Precise | Trusty |
 | ----------- | ------------ | ------------- | :--: | :-----: | :----: |
+| `1.8.0_73`  | `b02`        | `jdk8u73-b02` | ✓    | ✓       | ✓      |
 | `1.8.0_71`  | `b15`        | `jdk8u71-b15` | ✓    | ✓       | ✓      |
 | `1.8.0_65`  | `b17`        | `jdk8u65-b17` | ✓    | ✓       | ✓      |
 | `1.8.0_60`  | `b24`        | `jdk8u60-b24` | ✓    | ✓       | ✓      |
