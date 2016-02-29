@@ -56,10 +56,14 @@ module Build
       end
 
       def version_specific(version)
-        if version =~ /^[\d]+\.[\d]+$/
+        if version =~ /^[\d]+\.[\w|-]+$/
           lambda do |v|
             components = v.split('.')
-            "https://www.yourkit.com/download/yjp-#{components[0]}-build-#{components[1]}.zip"
+            if components[0] == '2016'
+              "https://www.yourkit.com/download/yjp-#{components[0]}.#{components[1]}.zip"
+            else
+              "https://www.yourkit.com/download/yjp-#{components[0]}-build-#{components[1]}.zip"
+            end
           end
         else
           fail "Unable to process version '#{version}'"
