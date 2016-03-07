@@ -32,7 +32,13 @@ module Build
       end
 
       def normalize(raw)
-        "#{raw}.0"
+        components = raw.split('.')
+        if components[0] == '2016'
+          build_part = components[1].split('-b')
+          "#{components[0]}.#{build_part[0]}.#{build_part[1]}"
+        else
+          "#{raw}.0"
+        end
       end
 
       def source
