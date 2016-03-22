@@ -15,6 +15,7 @@
 
 require 'build'
 require 'build/dependency/auto_reconfiguration'
+require 'build/dependency/container_customizer'
 require 'build/dependency/app_dynamics'
 require 'build/dependency/gem_fire'
 require 'build/dependency/gem_fire_modules'
@@ -142,6 +143,13 @@ module Build
 
     def auto_reconfiguration
       Dependency::AutoReconfiguration.new(options).build
+    end
+
+    desc 'container-customizer', 'Publish a version of java-buildpack-container-customizer'
+    common_options
+
+    def container_customizer
+      Dependency::ContainerCustomizer.new(options).build
     end
 
     desc 'gem-fire', 'Publish a version of GemFire'

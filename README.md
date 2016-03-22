@@ -84,6 +84,7 @@ The list of available versions for each dependency can be found at the following
 | ---------- | ---------
 | App Dynamics | [`universal`](https://download.run.pivotal.io/app-dynamics/index.yml)
 | Auto Reconfiguration | [`universal`](https://download.run.pivotal.io/auto-reconfiguration/index.yml)
+| Container Customizer | [`universal`](https://download.run.pivotal.io/container-customizer/index.yml)
 | GemFire Modules Tomcat 7| [`universal`](https://download.run.pivotal.io/gem-fire-modules-tomcat7/index.yml)
 | GemFire Modules | [`universal`](https://download.run.pivotal.io/gem-fire-modules/index.yml)
 | GemFire Security | [`universal`](https://download.run.pivotal.io/gem-fire-security/index.yml)
@@ -149,6 +150,7 @@ This table shows locations to check for new releases of cached dependencies.  It
 | ---------- | --------
 | App Dynamics | [`release`](http://download.appdynamics.com/browse/zone/3/)
 | Auto Reconfiguration | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/auto-reconfiguration/maven-metadata.xml)
+| Container Customizer | [`release`](https://repo.spring.io/webapp/#/artifacts/browse//search/quick/eyJzZWFyY2giOiJxdWljayIsInF1ZXJ5IjoiamF2YS1idWlsZHBhY2stY29udGFpbmVyLWN1c3RvbWl6ZXIiLCJzZWxlY3RlZFJlcG9zaXRvcmllcyI6W3sicmVwb0tleSI6ImxpYnMtcmVsZWFzZS1sb2NhbCIsInR5cGUiOiJsb2NhbCIsIl9pY29uQ2xhc3MiOiJpY29uIGljb24tbG9jYWwtcmVwbyJ9XX0=)
 | GemFire Modules Tomcat 7| [`release`](http://dist.gemstone.com.s3.amazonaws.com/)
 | GemFire Modules | [`release`](http://dist.gemstone.com.s3.amazonaws.com/)
 | GemFire Security | [`release`](http://dist.gemstone.com.s3.amazonaws.com/)
@@ -179,7 +181,7 @@ This table shows locations to check for new releases of cached dependencies.  It
 | Tomcat Lifecycle Support | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/tomcat-lifecycle-support/maven-metadata.xml)
 | Tomcat Logging Support | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/tomcat-logging-support/maven-metadata.xml)
 | Tomcat | [`8.x`](http://tomcat.apache.org/download-80.cgi), [`7.x`](http://tomcat.apache.org/download-70.cgi), [`6.x`](http://tomcat.apache.org/download-60.cgi)
-| TomEE Resource Configuration | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/tomee-resource-configuration/maven-metadata.xml)
+| TomEE Resource Configuration | [`release`](https://repo.spring.io/webapp/#/artifacts/browse//search/quick/eyJzZWFyY2giOiJxdWljayIsInF1ZXJ5IjoidG9tZWUtcmVzb3VyY2UtY29uZmlndXJhdGlvbiIsInNlbGVjdGVkUmVwb3NpdG9yaWVzIjpbeyJyZXBvS2V5IjoibGlicy1yZWxlYXNlLWxvY2FsIiwidHlwZSI6ImxvY2FsIiwiX2ljb25DbGFzcyI6Imljb24gaWNvbi1sb2NhbC1yZXBvIn1dfQ==)
 | TomEE | [`release`](http://tomee.apache.org/downloads.html)
 | YourKit | [`release`](https://www.yourkit.com/download)
 

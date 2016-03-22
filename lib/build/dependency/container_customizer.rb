@@ -19,18 +19,18 @@ require 'build/maven'
 
 module Build
   module Dependency
-    class TomEEResourceConfiguration < Base
+    class ContainerCustomizer < Base
       include Build::Maven
 
       def initialize(options)
-        super 'tomee-resource-configuration', 'jar', options
+        super 'container-customizer', 'jar', options
       end
 
       protected
 
       def version_specific(version)
         if version =~ /RELEASE/
-          ->(v) { release SPRING_IO_RELEASE, 'org.cloudfoundry', 'tomee-resource-configuration', v }
+          ->(v) { release SPRING_IO_RELEASE, 'org.cloudfoundry', 'java-buildpack-container-customizer', v }
         else
           fail "Unable to process version '#{version}'"
         end
