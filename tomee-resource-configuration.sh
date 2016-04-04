@@ -10,7 +10,7 @@ download_uri() {
     exit 1
   fi
 
-  echo $(spring_release-uri 'org.cloudfoundry' 'tomee-resource-configuration' $DOWNLOAD_VERSION)
+  echo $(spring_release_uri 'org.cloudfoundry' 'tomee-resource-configuration' $DOWNLOAD_VERSION)
 }
 
 upload_path() {
