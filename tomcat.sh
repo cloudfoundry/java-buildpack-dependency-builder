@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -e -x
 
 source $(dirname "$0")/common.sh
 
