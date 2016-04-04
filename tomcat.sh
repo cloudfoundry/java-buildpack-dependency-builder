@@ -38,5 +38,5 @@ UPLOAD_PATH=$(upload_path)
 INDEX_PATH="/tomcat/index.yml"
 
 transfer_direct $DOWNLOAD_URI $UPLOAD_PATH
-update_index $INDEX_PATH $VERSION $UPLOAD_PATH
+update_index $INDEX_PATH $UPLOAD_VERSION $UPLOAD_PATH
 invalidate_cache $INDEX_PATH $UPLOAD_PATH
