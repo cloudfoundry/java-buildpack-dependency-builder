@@ -12,6 +12,7 @@ fi
 
 aws s3 sync "s3://download.pivotal.io" "$DESTINATION" --exclude "*" \
   --include "groovy/*" \
+  --include "slf4j-jdk14/*" \
   --include "spring-boot-cli/*" \
   --include "tc-server/*" \
   --include "tomcat/*" \
