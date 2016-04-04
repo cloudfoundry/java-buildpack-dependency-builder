@@ -5,6 +5,8 @@ invalidate_cache() {
     exit 1
   fi
 
+  set -x
+
   aws configure set preview.cloudfront true
   INVALIDATION_ID=$(aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "$@" | jq -r '.Invalidation.Id')
 
