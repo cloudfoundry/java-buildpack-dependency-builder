@@ -10,7 +10,7 @@ download_uri() {
     exit 1
   fi
 
-  echo "http://repo.spring.io/release/org/cloudfoundry/tomee-resource-configuration/$DOWNLOAD_VERSION/tomee-resource-configuration-$DOWNLOAD_VERSION.jar"
+  echo $(spring_release-uri 'org.cloudfoundry' 'tomee-resource-configuration' $DOWNLOAD_VERSION)
 }
 
 upload_path() {

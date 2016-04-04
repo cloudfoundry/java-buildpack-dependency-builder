@@ -18,6 +18,17 @@ invalidate_cache() {
   echo
 }
 
+# $1: groupId
+# $2: artifactId
+# $3: version
+spring_release_uri() {
+  local group_id=$(echo $1 | tr '.' '/')
+  local artifact_id=$2
+  local version=$3
+
+  echo "http://repo.spring.io/release/$group_id/$artifact_id/$version/$artifact_id-$version.jar"
+}
+
 # $1: Download URI
 # $2: S3 path without bucket
 transfer_direct() {
