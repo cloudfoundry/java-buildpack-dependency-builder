@@ -10,7 +10,7 @@ download_uri() {
     exit 1
   fi
 
-  echo "http://archive.apache.org/dist/tomcat/tomcat-8/v$DOWNLOAD_VERSION/bin/apache-tomcat-$DOWNLOAD_VERSION.tar.gz"
+  echo "http://dl.bintray.com/groovy/maven/apache-groovy-binary-$DOWNLOAD_VERSION.zip"
 }
 
 upload_path() {
@@ -19,12 +19,12 @@ upload_path() {
     exit 1
   fi
 
-  echo "/tomcat/tomcat-$UPLOAD_VERSION.tar.gz"
+  echo "/groovy/groovy-$UPLOAD_VERSION.zip"
 }
 
 DOWNLOAD_URI=$(download_uri)
 UPLOAD_PATH=$(upload_path)
-INDEX_PATH="/tomcat/index.yml"
+INDEX_PATH="/groovy/index.yml"
 
 transfer_direct $DOWNLOAD_URI $UPLOAD_PATH
 update_index $INDEX_PATH $UPLOAD_VERSION $UPLOAD_PATH

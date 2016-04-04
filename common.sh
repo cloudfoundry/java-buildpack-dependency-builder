@@ -47,7 +47,7 @@ update_index() {
   local version=$2
   local download_uri="https://download.run.pivotal.io$3"
 
-  echo "$VERSION: $DOWNLOAD_URI -> $index_path"
+  echo "$version: $download_uri -> $index_path"
 
   (aws s3 cp $index_path - 2> /dev/null || echo '---') | printf -- "$(cat -)\n$version: $download_uri\n" | sort -u | aws s3 cp - $index_path --content-type 'text/x-yaml'
 
