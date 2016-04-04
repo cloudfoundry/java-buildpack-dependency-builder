@@ -1,1 +1,0 @@
-../xquartz.sh
