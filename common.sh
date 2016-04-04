@@ -6,11 +6,11 @@ invalidate_cache() {
   fi
 
   aws configure set preview.cloudfront true
-  INVALIDATION_ID=$(aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "$@" | jq -r '.Invalidation.Id')
+  local invalidation_id=$(aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "$@" | jq -r '.Invalidation.Id')
 
-  printf "Waiting for invalidation $INVALIDATION_ID"
+  printf "Waiting for invalidation $invalidation_id"
 
-  while [[ $(aws cloudfront get-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --id $INVALIDATION_ID | jq -r '.Invalidation.Status') == "InProgress" ]]; do
+  while [[ $(aws cloudfront get-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --id $invalidation_id | jq -r '.Invalidation.Status') == "InProgress" ]]; do
     printf "."
     sleep 10
   done
@@ -26,12 +26,12 @@ transfer_direct() {
     exit 1
   fi
 
-  SOURCE=$1
-  TARGET="s3://$S3_BUCKET$2"
+  local source=$1
+  local target="s3://$S3_BUCKET$2"
 
-  echo "$SOURCE -> $TARGET"
+  echo "$source -> $target"
 
-  curl --location $SOURCE | aws s3 cp - $TARGET
+  curl --location $source | aws s3 cp - $target
 }
 
 # $1: S3 index path without bucket
@@ -43,12 +43,12 @@ update_index() {
     exit 1
   fi
 
-  INDEX_PATH="s3://$S3_BUCKET$1"
-  VERSION=$2
-  DOWNLOAD_URI="https://download.run.pivotal.io$3"
+  local index_path="s3://$S3_BUCKET$1"
+  local version=$2
+  local download_uri="https://download.run.pivotal.io$3"
 
-  echo "$VERSION: $DOWNLOAD_URI -> $INDEX_PATH"
+  echo "$VERSION: $DOWNLOAD_URI -> $index_path"
 
-  (aws s3 cp $INDEX_PATH - 2> /dev/null || echo '---') | printf -- "$(cat -)\n$VERSION: $DOWNLOAD_URI\n" | aws s3 cp - $INDEX_PATH --content-type 'text/x-yaml'
+  (aws s3 cp $index_path - 2> /dev/null || echo '---') | printf -- "$(cat -)\n$version: $download_uri\n" | sort -u | aws s3 cp - $index_path --content-type 'text/x-yaml'
 
 }
