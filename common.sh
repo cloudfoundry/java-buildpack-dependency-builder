@@ -51,6 +51,6 @@ update_index() {
 
   echo "$VERSION: $DOWNLOAD_URI -> $INDEX_PATH"
 
-  (aws s3 cp $INDEX_PATH - 2> /dev/null || echo '---') | printf -- "$(cat -)\n$VERSION: $DOWNLOAD_URI\n" | aws s3 cp - $INDEX_PATH
+  (aws s3 cp $INDEX_PATH - 2> /dev/null || echo '---') | printf -- "$(cat -)\n$VERSION: $DOWNLOAD_URI\n" | aws s3 cp - $INDEX_PATH --content-type 'text/x-yaml'
 
 }
