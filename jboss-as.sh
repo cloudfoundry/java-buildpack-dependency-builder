@@ -24,7 +24,7 @@ upload_path() {
 
 DOWNLOAD_URI=$(download_uri)
 UPLOAD_PATH=$(upload_path)
-INDEX_PATH="/jbos-as/index.yml"
+INDEX_PATH="/jboss-as/index.yml"
 
 transfer_direct $DOWNLOAD_URI $UPLOAD_PATH
 update_index $INDEX_PATH $UPLOAD_VERSION $UPLOAD_PATH
