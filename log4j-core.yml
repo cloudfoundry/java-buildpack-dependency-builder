@@ -1,0 +1,23 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: cfje/java-buildpack-dependency-builder
+    tag: latest
+
+inputs:
+- name: java-buildpack-dependency-builder
+
+run:
+  path: java-buildpack-dependency-builder/log4j-core.sh
+
+params:
+  DOWNLOAD_VERSION: 2.5
+  UPLOAD_VERSION:   2.5.0
+
+  AWS_ACCESS_KEY_ID:
+  AWS_SECRET_ACCESS_KEY:
+  CLOUDFRONT_DISTRIBUTION_ID:
+  S3_BUCKET:
