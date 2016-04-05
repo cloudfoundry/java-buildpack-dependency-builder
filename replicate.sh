@@ -13,6 +13,7 @@ fi
 aws s3 sync "s3://download.pivotal.io" "$DESTINATION" --exclude "*" \
   --include "gem-fire/*" \
   --include "gem-fire-modules/*" \
+  --include "gem-fire-modules-tomcat7/*" \
   --include "gem-fire-security/*" \
   --include "groovy/*" \
   --include "jboss-as/*" \
