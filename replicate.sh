@@ -19,6 +19,7 @@ aws s3 sync "s3://download.pivotal.io" "$DESTINATION" --exclude "*" \
   --include "gem-fire-security/*" \
   --include "groovy/*" \
   --include "jboss-as/*" \
+  --include "jvmkill/*" \
   --include "log4j-api/*" \
   --include "log4j-core/*" \
   --include "log4j-jcl/*" \
