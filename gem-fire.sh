@@ -10,7 +10,7 @@ download_uri() {
     exit 1
   fi
 
-  echo $(gemfire_release_uri 'com.gemstone.gemfire', 'gemfire' $DOWNLOAD_VERSION)
+  echo $(gemfire_release_uri 'com.gemstone.gemfire' 'gemfire' $DOWNLOAD_VERSION)
 }
 
 upload_path() {
