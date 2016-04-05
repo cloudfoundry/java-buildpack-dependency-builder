@@ -11,6 +11,7 @@ if [[ -z "$DESTINATION" ]]; then
 fi
 
 aws s3 sync "s3://download.pivotal.io" "$DESTINATION" --exclude "*" \
+  --include "container-customizer/*" \
   --include "gem-fire/*" \
   --include "gem-fire-modules/*" \
   --include "gem-fire-modules-tomcat7/*" \
