@@ -27,6 +27,7 @@ aws s3 sync "s3://download.pivotal.io" "$DESTINATION" --exclude "*" \
   --include "memory-calculator/*" \
   --include "new-relic/*" \
   --include "postgresql-jdbc/*" \
+  --include "redis-store/*" \
   --include "slf4j-api/*" \
   --include "slf4j-jdk14/*" \
   --include "spring-boot-cli/*" \

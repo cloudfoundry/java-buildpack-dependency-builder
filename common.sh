@@ -30,6 +30,14 @@ gemfire_release_uri() {
 # $2: artifactId
 # $3: version
 # $4: suffix
+gopivotal_release_uri() {
+  echo $(maven_uri 'http://maven.gopivotal.com.s3.amazonaws.com/release' $1 $2 $3 $4)
+}
+
+# $1: groupId
+# $2: artifactId
+# $3: version
+# $4: suffix
 maven_central_uri() {
   echo $(maven_uri 'https://repo1.maven.org/maven2' $1 $2 $3 $4)
 }
