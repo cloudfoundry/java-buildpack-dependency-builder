@@ -36,6 +36,9 @@ aws s3 sync "s3://download.pivotal.io" "$DESTINATION" --exclude "*" \
   --include "tomcat-logging-support/*" \
   --include "tomee/*" \
   --include "tomee-resource-configuration/*" \
-  --exclude "*/lucid/*"
+  --include "your-kit/*" \
+  --exclude "*/centos6/*" \
+  --exclude "*/lucid/*" \
+  --exclude "*/precise/*"
 
 find $DESTINATION -name "index.yml" | xargs sed -ie "s|https://download.run.pivotal.io|$BASE_URI|g"

@@ -73,6 +73,33 @@ transfer_direct() {
   curl --location $source | aws s3 cp - $target
 }
 
+# $1: Download URI
+# $2: Destination path
+transfer_to_file() {
+  local source=$1
+  local target=$2
+
+  echo "$source -> $target"
+
+  curl --location $source -o $target
+}
+
+# $1: Source path
+# $2: S3 path without bucket
+transfer_to_s3() {
+  if [[ -z "$S3_BUCKET" ]]; then
+    echo "S3_BUCKET must be set" >&2
+    exit 1
+  fi
+
+  local source=$1
+  local target="s3://$S3_BUCKET$2"
+
+  echo "$source -> $target"
+
+  aws s3 cp --quiet $source $target
+}
+
 # $1: S3 index path without bucket
 # $2: Version
 # $3: S3 artifact path without bucket
