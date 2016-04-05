@@ -31,7 +31,7 @@ gemfire_release_uri() {
 # $3: version
 # $4: suffix
 maven_central_uri() {
-  echo $(maven_uri 'https://repo1.maven.org/maven2', $1 $2 $3 $4)
+  echo $(maven_uri 'https://repo1.maven.org/maven2' $1 $2 $3 $4)
 }
 
 # $1: prefix
@@ -54,7 +54,7 @@ maven_uri() {
 # $3: version
 # $4: suffix
 spring_release_uri() {
-  echo $(maven_uri 'https://repo.spring.io/release', $1 $2 $3 $4)
+  echo $(maven_uri 'https://repo.spring.io/release' $1 $2 $3 $4)
 }
 
 # $1: Download URI
