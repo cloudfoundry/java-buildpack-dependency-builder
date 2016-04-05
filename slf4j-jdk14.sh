@@ -10,7 +10,7 @@ download_uri() {
     exit 1
   fi
 
-  echo "https://repo1.maven.org/maven2/org/slf4j/slf4j-jdk14/$DOWNLOAD_VERSION/slf4j-jdk14-$DOWNLOAD_VERSION.jar"
+  echo $(maven_central_uri 'org.slf4j' 'slf4j-jdk14' $DOWNLOAD_VERSION)
 }
 
 upload_path() {

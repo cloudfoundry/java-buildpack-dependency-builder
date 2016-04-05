@@ -10,7 +10,7 @@ download_uri() {
     exit 1
   fi
 
-  echo "http://repo.spring.io/release/org/springframework/boot/spring-boot-cli/$DOWNLOAD_VERSION/spring-boot-cli-$DOWNLOAD_VERSION-bin.tar.gz"
+  echo $(spring_release_uri 'org.springframework.boot' 'spring-boot-cli' $DOWNLOAD_VERSION '-bin.tar.gz')
 }
 
 upload_path() {

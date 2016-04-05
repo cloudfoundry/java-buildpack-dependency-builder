@@ -21,12 +21,27 @@ invalidate_cache() {
 # $1: groupId
 # $2: artifactId
 # $3: version
+# $4: suffix
+maven_central_uri() {
+  local group_id=$(echo $1 | tr '.' '/')
+  local artifact_id=$2
+  local version=$3
+  local suffix=${4:-.jar}
+
+  echo "http://repo1.maven.org/maven2/$group_id/$artifact_id/$version/$artifact_id-$version$suffix"
+}
+
+# $1: groupId
+# $2: artifactId
+# $3: version
+# $4: suffix
 spring_release_uri() {
   local group_id=$(echo $1 | tr '.' '/')
   local artifact_id=$2
   local version=$3
+  local suffix=${4:-.jar}
 
-  echo "http://repo.spring.io/release/$group_id/$artifact_id/$version/$artifact_id-$version.jar"
+  echo "http://repo.spring.io/release/$group_id/$artifact_id/$version/$artifact_id-$version$suffix"
 }
 
 # $1: Download URI

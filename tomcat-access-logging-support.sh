@@ -10,7 +10,7 @@ download_uri() {
     exit 1
   fi
 
-  echo "http://repo.spring.io/release/org/cloudfoundry/tomcat-access-logging-support/$DOWNLOAD_VERSION/tomcat-access-logging-support-$DOWNLOAD_VERSION.jar"
+  echo $(spring_release_uri 'org.cloudfoundry' 'tomcat-access-logging-support' $DOWNLOAD_VERSION)
 }
 
 upload_path() {
