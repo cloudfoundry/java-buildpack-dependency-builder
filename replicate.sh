@@ -12,6 +12,7 @@ fi
 
 aws s3 sync "s3://download.pivotal.io" "$DESTINATION" --exclude "*" \
   --include "groovy/*" \
+  --include "log4j-jcl/*" \
   --include "log4j-jul/*" \
   --include "log4j-slf4j-impl/*" \
   --include "mariadb-jdbc/*" \
