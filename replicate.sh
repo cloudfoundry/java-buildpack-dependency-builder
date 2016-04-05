@@ -24,6 +24,7 @@ aws s3 sync "s3://download.pivotal.io" "$DESTINATION" --exclude "*" \
   --include "log4j-jul/*" \
   --include "log4j-slf4j-impl/*" \
   --include "mariadb-jdbc/*" \
+  --include "memory-calculator/*" \
   --include "new-relic/*" \
   --include "postgresql-jdbc/*" \
   --include "slf4j-api/*" \
