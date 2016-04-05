@@ -10,7 +10,7 @@ download_uri() {
     exit 1
   fi
 
-  echo $(go_pivotal_release 'com.gopivotal.manager' 'redis-store' $DOWNLOAD_VERSION)
+  echo $(gopivotal_release_uri 'com.gopivotal.manager' 'redis-store' $DOWNLOAD_VERSION)
 }
 
 upload_path() {
