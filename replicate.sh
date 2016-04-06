@@ -28,6 +28,8 @@ aws s3 sync "s3://download.pivotal.io" "$DESTINATION" --exclude "*" \
   --include "mariadb-jdbc/*" \
   --include "memory-calculator/*" \
   --include "new-relic/*" \
+  --include "openjdk/*" \
+  --include "openjdk-jdk/*" \
   --include "play-jpa-plugin/*" \
   --include "postgresql-jdbc/*" \
   --include "redis-store/*" \
