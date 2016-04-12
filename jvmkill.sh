@@ -31,6 +31,8 @@ upload_path() {
   echo "/jvmkill/$PLATFORM/x86_64/jvmkill-$UPLOAD_VERSION.so"
 }
 
+PATH=/usr/local/bin:$PATH
+
 UPLOAD_PATH=$(upload_path)
 INDEX_PATH="/jvmkill/$PLATFORM/x86_64/index.yml"
 
