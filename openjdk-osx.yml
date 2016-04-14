@@ -13,7 +13,8 @@ params:
   UPDATE_VERSION: 77
   UPLOAD_VERSION: 1.8.0_77
 
-  PLATFORM: mountainlion
+  PLATFORM:       mountainlion
+  XCODE_LOCATION: /Users/pivotalcf/concourse/Xcode4.app
 
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:

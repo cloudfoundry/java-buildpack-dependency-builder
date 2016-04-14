@@ -16,6 +16,8 @@ build() {
   fi
 
   unset JAVA_HOME
+  export MACOSX_DEPLOYMENT_TARGET=10.9
+
 
   pushd jdk8u
     ./configure \
@@ -23,15 +25,15 @@ build() {
       --disable-zip-debug-info \
       --with-build-number=$BUILD_NUMBER \
       --with-cacerts-file=$(pwd)/../cacerts.jks \
-      --with-freetype-include=/usr/include/freetype2 \
-      --with-freetype-lib=/usr/lib/x86_64-linux-gnu \
+      $(freetype_flags) \
       --with-milestone=fcs \
-      --with-update-version=$UPDATE_VERSION
+      --with-update-version=$UPDATE_VERSION \
+      $(xcode_location)
 
     COMPANY_NAME="Cloud Foundry" make images
 
-    tar czvf $(pwd)/../openjdk-jdk.tar.gz -C build/linux-x86_64-normal-server-release/images/j2sdk-image .
-    tar czvf $(pwd)/../openjdk.tar.gz -C build/linux-x86_64-normal-server-release/images/j2re-image . -C ../j2sdk-image ./lib/tools.jar ./bin/jcmd ./bin/jmap ./bin/jstack ./man/man1/jcmd.1 ./man/man1/jmap.1 ./man/man1/jstack.1 -C ./jre ./lib/amd64/libattach.so
+    tar czvf $(pwd)/../openjdk-jdk.tar.gz -C build/$(release_name)/images/j2sdk-image .
+    tar czvf $(pwd)/../openjdk.tar.gz -C build/$(release_name)/images/j2re-image . -C ../j2sdk-image ./lib/tools.jar ./bin/jcmd ./bin/jmap ./bin/jstack ./man/man1/jcmd.1 ./man/man1/jmap.1 ./man/man1/jstack.1 -C ./jre $(libattach_location)
   popd
 }
 
@@ -56,18 +58,73 @@ clone_repository() {
 
 create_cacerts() {
   curl -L https://curl.haxx.se/ca/cacert.pem  > cacerts.pem
-  local size=$(grep -c -- '-----BEGIN CERTIFICATE-----' cacerts.pem)
-
-  mkdir cacerts
-  awk '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/{ print $0; }' cacerts.pem | csplit -n 3 -s -f cacerts/ - '/-----BEGIN CERTIFICATE-----/' {$((size - 1))}
+  split_cacerts cacerts.pem cacerts
 
   for I in $(find cacerts -type f | sort) ; do
-    if [[ -s $I ]]; then
-      echo "Importing $I"
-      keytool -importcert -noprompt -keystore cacerts.jks -storepass changeit -file $I -alias $(basename $I)
-    fi
-
+    echo "Importing $I"
+    keytool -importcert -noprompt -keystore cacerts.jks -storepass changeit -file $I -alias $(basename $I)
   done
+}
+
+freetype_flags() {
+  if [[ -z "$PLATFORM" ]]; then
+    echo "PLATFORM must be set" >&2
+    exit 1
+  fi
+
+  if [[ "$PLATFORM" == "mountainlion" ]]; then
+    echo "--with-freetype-include=/usr/local/include/freetype2 \
+      --with-freetype-lib=/usr/local/lib"
+  else
+    echo "--with-freetype-include=/usr/include/freetype2 \
+      --with-freetype-lib=/usr/lib/x86_64-linux-gnu"
+  fi
+}
+
+libattach_location() {
+  if [[ -z "$PLATFORM" ]]; then
+    echo "PLATFORM must be set" >&2
+    exit 1
+  fi
+
+  if [[ "$PLATFORM" == "mountainlion" ]]; then
+    echo "./lib/libattach.dylib"
+  else
+    echo "./lib/amd64/libattach.so"
+  fi
+}
+
+release_name() {
+  if [[ -z "$PLATFORM" ]]; then
+    echo "PLATFORM must be set" >&2
+    exit 1
+  fi
+
+  if [[ "$PLATFORM" == "mountainlion" ]]; then
+    echo "macosx-x86_64-normal-server-release"
+  else
+    echo "linux-x86_64-normal-server-release"
+  fi
+}
+
+split_cacerts() {
+  if [[ -z "$PLATFORM" ]]; then
+    echo "PLATFORM must be set" >&2
+    exit 1
+  fi
+
+  local source=$1
+  local target=$2
+
+  mkdir -p $target
+
+  if [[ "$PLATFORM" == "mountainlion" ]]; then
+    split -a 3 -p '-----BEGIN CERTIFICATE-----' $source $target/
+    rm $target/aaa
+  else
+    awk '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/{ print $0; }' $source | csplit -n 3 -s -f $target/ - '/-----BEGIN CERTIFICATE-----/' {*}
+    rm $target/000
+  fi
 }
 
 upload_path_jdk() {
@@ -97,6 +154,16 @@ upload_path_jre() {
 
   echo "/openjdk/$PLATFORM/x86_64/openjdk-$UPLOAD_VERSION.tar.gz"
 }
+
+xcode_location() {
+  if [[ -n "$XCODE_LOCATION" ]]; then
+    echo "--with-xcode-path=$XCODE_LOCATION"
+  else
+    echo ""
+  fi
+}
+
+PATH=/usr/local/bin:$PATH
 
 UPLOAD_PATH_JDK=$(upload_path_jdk)
 UPLOAD_PATH_JRE=$(upload_path_jre)
