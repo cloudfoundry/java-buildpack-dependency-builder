@@ -1,0 +1,20 @@
+---
+platform: darwin
+
+inputs:
+- name: java-buildpack-dependency-builder
+
+run:
+  path: java-buildpack-dependency-builder/jvmkill.sh
+
+params:
+  TAG:            v1.0.2
+  UPLOAD_VERSION: 1.0.2
+
+  JAVA_HOME: /Library/Java/JavaVirtualMachines/jdk1.8.0_77.jdk/Contents/Home
+  PLATFORM:  mountainlion
+
+  AWS_ACCESS_KEY_ID:
+  AWS_SECRET_ACCESS_KEY:
+  CLOUDFRONT_DISTRIBUTION_ID:
+  S3_BUCKET:
