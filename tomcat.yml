@@ -14,8 +14,8 @@ run:
   path: java-buildpack-dependency-builder/tomcat.sh
 
 params:
-  DOWNLOAD_VERSION: 7.0.68
-  UPLOAD_VERSION:   7.0.68
+  DOWNLOAD_VERSION: 7.0.69
+  UPLOAD_VERSION:   7.0.69
 
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
