@@ -10,7 +10,7 @@ download_uri() {
     exit 1
   fi
 
-  echo "http://archive.apache.org/dist/tomcat/tomcat-8/v$DOWNLOAD_VERSION/bin/apache-tomcat-$DOWNLOAD_VERSION.tar.gz"
+  echo "http://archive.apache.org/dist/tomcat/tomcat-6/v$DOWNLOAD_VERSION/bin/apache-tomcat-$DOWNLOAD_VERSION.tar.gz"
 }
 
 upload_path() {

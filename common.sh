@@ -78,7 +78,7 @@ transfer_direct() {
 
   echo "$source -> $target"
 
-  curl --location $source | aws s3 cp - $target
+  curl --fail --location $source | aws s3 cp - $target
 }
 
 # $1: Download URI
@@ -89,7 +89,7 @@ transfer_to_file() {
 
   echo "$source -> $target"
 
-  curl --location $source -o $target
+  curl --fail --location $source -o $target
 }
 
 # $1: Source path
