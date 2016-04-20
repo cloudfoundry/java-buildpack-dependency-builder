@@ -32,6 +32,7 @@ build() {
 
     COMPANY_NAME="Cloud Foundry" make images
 
+    chmod -R a+r build/$(release_name)/images
     tar czvf $(pwd)/../openjdk-jdk.tar.gz -C build/$(release_name)/images/j2sdk-image .
     tar czvf $(pwd)/../openjdk.tar.gz -C build/$(release_name)/images/j2re-image . -C ../j2sdk-image ./lib/tools.jar ./bin/jcmd ./bin/jmap ./bin/jstack ./man/man1/jcmd.1 ./man/man1/jmap.1 ./man/man1/jstack.1 -C ./jre $(libattach_location)
   popd
