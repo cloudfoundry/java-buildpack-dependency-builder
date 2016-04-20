@@ -14,8 +14,8 @@ run:
   path: java-buildpack-dependency-builder/app-dynamics.sh
 
 params:
-  DOWNLOAD_VERSION: 4.2.1.6
-  UPLOAD_VERSION:   4.2.1_6
+  DOWNLOAD_VERSION: 4.2.1.7
+  UPLOAD_VERSION:   4.2.1_7
 
   APP_DYNAMICS_USERNAME:
   APP_DYNAMICS_PASSWORD:

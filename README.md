@@ -23,6 +23,7 @@ The list of available versions for each dependency can be found at the following
 
 | Dependency | Location
 | ---------- | ---------
+| AppDynamics | [`universal`](https://download.run.pivotal.io/app-dynamics/index.yml)
 | Auto Reconfiguration | [`universal`](https://download.run.pivotal.io/auto-reconfiguration/index.yml)
 | Container Customizer | [`universal`](https://download.run.pivotal.io/container-customizer/index.yml)
 | GemFire Modules Tomcat 7| [`universal`](https://download.run.pivotal.io/gem-fire-modules-tomcat7/index.yml)
@@ -72,6 +73,7 @@ This table shows locations to check for new releases of cached dependencies.  It
 
 | Dependency | Location
 | ---------- | --------
+| AppDynamics | [`release`](https://download.appdynamics.com/browse/zone/1/)
 | Auto Reconfiguration | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/auto-reconfiguration/maven-metadata.xml)
 | Container Customizer | [`release`](https://repo.spring.io/webapp/#/artifacts/browse//search/quick/eyJzZWFyY2giOiJxdWljayIsInF1ZXJ5IjoiamF2YS1idWlsZHBhY2stY29udGFpbmVyLWN1c3RvbWl6ZXIiLCJzZWxlY3RlZFJlcG9zaXRvcmllcyI6W3sicmVwb0tleSI6ImxpYnMtcmVsZWFzZS1sb2NhbCIsInR5cGUiOiJsb2NhbCIsIl9pY29uQ2xhc3MiOiJpY29uIGljb24tbG9jYWwtcmVwbyJ9XX0=)
 | GemFire Modules Tomcat 7| [`release`](http://dist.gemstone.com.s3.amazonaws.com/)
