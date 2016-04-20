@@ -1,0 +1,26 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: cfje/java-buildpack-dependency-builder
+    tag: latest
+
+inputs:
+- name: java-buildpack-dependency-builder
+
+run:
+  path: java-buildpack-dependency-builder/app-dynamics.sh
+
+params:
+  DOWNLOAD_VERSION: 4.2.1.6
+  UPLOAD_VERSION:   4.2.1_6
+
+  APP_DYNAMICS_USERNAME:
+  APP_DYNAMICS_PASSWORD:
+
+  AWS_ACCESS_KEY_ID:
+  AWS_SECRET_ACCESS_KEY:
+  CLOUDFRONT_DISTRIBUTION_ID:
+  S3_BUCKET:

@@ -1,3 +1,7 @@
+cookies_file() {
+  echo "cookies.txt"
+}
+
 # $@: S3 invalidation paths without bucket
 invalidate_cache() {
   if [[ -z "$CLOUDFRONT_DISTRIBUTION_ID" ]]; then
@@ -78,7 +82,7 @@ transfer_direct() {
 
   echo "$source -> $target"
 
-  curl --fail --location $source | aws s3 cp - $target
+  curl --cookie $(cookies_file) --location --fail $source | aws s3 cp - $target
 }
 
 # $1: Download URI
@@ -89,7 +93,7 @@ transfer_to_file() {
 
   echo "$source -> $target"
 
-  curl --fail --location $source -o $target
+  curl --cookie $(cookies_file) --location --fail $source -o $target
 }
 
 # $1: Source path
