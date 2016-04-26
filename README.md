@@ -6,7 +6,7 @@ To host the Java Buildpack dependency artifacts on your own server, first downlo
 
 All the artifacts and `index.yml` files may be downloaded using the [`replicate`](replicate.sh) script.
 
-To use the script, issue the following commands from the root directory of a clone of this repository:
+To use the script, ensure that you have installed the [AWS CLI][c] and issue the following commands from the root directory of a clone of this repository:
 
 ```bash
 BASE_URI=<BASE-URI> DESTINATION=<DESTINATION> ./replicate.sh
@@ -58,14 +58,15 @@ The list of available versions for each dependency can be found at the following
 | YourKit | [`mountainlion`](https://download.run.pivotal.io/your-kit/mountainlion/x86_64/index.yml), [`trusty`](https://download.run.pivotal.io/your-kit/trusty/x86_64/index.yml)
 
 ## Contributing
-[Pull requests][] are welcome; see the [contributor guidelines][] for details.
+[Pull requests][p] are welcome; see the [contributor guidelines][g] for details.
 
 ## License
-The Builder is released under version 2.0 of the [Apache License][].
+The Builder is released under version 2.0 of the [Apache License][a].
 
-[Apache License]: http://www.apache.org/licenses/LICENSE-2.0
-[contributor guidelines]: CONTRIBUTING.md
-[Pull requests]: http://help.github.com/send-pull-requests
+[c]: https://aws.amazon.com/cli/
+[a]: http://www.apache.org/licenses/LICENSE-2.0
+[g]: CONTRIBUTING.md
+[p]: http://help.github.com/send-pull-requests
 ---
 
 ## Update Locations

@@ -10,7 +10,10 @@ if [[ -z "$DESTINATION" ]]; then
   exit 1
 fi
 
-aws s3 sync "s3://download.pivotal.io" "$DESTINATION" --exclude "*" \
+mkdir -p "$DESTINATION"
+
+aws s3 sync "s3://download.pivotal.io" "$DESTINATION" --no-sign-request --exclude "*" \
+  --include "app-dynamics/*" \
   --include "auto-reconfiguration/*" \
   --include "container-customizer/*" \
   --include "gem-fire/*" \
@@ -48,4 +51,4 @@ aws s3 sync "s3://download.pivotal.io" "$DESTINATION" --exclude "*" \
   --exclude "*/lucid/*" \
   --exclude "*/precise/*"
 
-find $DESTINATION -name "index.yml" | xargs sed -ie "s|https://download.run.pivotal.io|$BASE_URI|g"
+find "$DESTINATION" -name "index.yml" | xargs sed -ie "s|https://download.run.pivotal.io|$BASE_URI|g"
