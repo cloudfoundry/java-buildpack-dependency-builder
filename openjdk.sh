@@ -23,6 +23,7 @@ build() {
     ./configure \
       --disable-debug-symbols \
       --disable-zip-debug-info \
+      --enable-unlimited-crypto \
       --with-build-number=$BUILD_NUMBER \
       --with-cacerts-file=$(pwd)/../cacerts.jks \
       $(freetype_flags) \

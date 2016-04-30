@@ -17,7 +17,7 @@ params:
   BUILD_NUMBER:   b14
   TAG:            jdk8u91-b14
   UPDATE_VERSION: 91
-  UPLOAD_VERSION: 1.8.0_91
+  UPLOAD_VERSION: 1.8.0_91-unlimited-crypto
 
   PLATFORM: trusty
 
