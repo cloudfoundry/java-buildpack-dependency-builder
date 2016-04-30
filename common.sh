@@ -5,8 +5,7 @@ cookies_file() {
 # $@: S3 invalidation paths without bucket
 invalidate_cache() {
   if [[ -z "$CLOUDFRONT_DISTRIBUTION_ID" ]]; then
-    echo "CLOUDFRONT_DISTRIBUTION_ID must be set" >&2
-    exit 1
+    return
   fi
 
   aws configure set preview.cloudfront true

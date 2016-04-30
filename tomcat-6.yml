@@ -11,11 +11,11 @@ inputs:
 - name: java-buildpack-dependency-builder
 
 run:
-  path: java-buildpack-dependency-builder/tomcat.sh
+  path: java-buildpack-dependency-builder/tomcat-6.sh
 
 params:
-  DOWNLOAD_VERSION: 7.0.69
-  UPLOAD_VERSION:   7.0.69
+  DOWNLOAD_VERSION: 6.0.45
+  UPLOAD_VERSION:   6.0.45
 
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
