@@ -14,8 +14,8 @@ run:
   path: java-buildpack-dependency-builder/spring-boot-cli.sh
 
 params:
-  DOWNLOAD_VERSION: 1.3.3.RELEASE
-  UPLOAD_VERSION:   1.3.3_RELEASE
+  DOWNLOAD_VERSION: 1.3.5.RELEASE
+  UPLOAD_VERSION:   1.3.5_RELEASE
 
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
