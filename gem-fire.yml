@@ -14,8 +14,8 @@ run:
   path: java-buildpack-dependency-builder/gem-fire.sh
 
 params:
-  DOWNLOAD_VERSION: 8.2.0
-  UPLOAD_VERSION:   8.2.0
+  DOWNLOAD_VERSION: 8.2.1
+  UPLOAD_VERSION:   8.2.1
 
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
