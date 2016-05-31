@@ -11,7 +11,7 @@ inputs:
 - name: java-buildpack-dependency-builder
 
 run:
-  path: java-buildpack-dependency-builder/tomee.sh
+  path: java-buildpack-dependency-builder/tomee-1.7.sh
 
 params:
   DOWNLOAD_VERSION: 1.7.4
