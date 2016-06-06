@@ -14,8 +14,8 @@ run:
   path: java-buildpack-dependency-builder/your-kit.sh
 
 params:
-  DOWNLOAD_VERSION: 2016.02-b36
-  UPLOAD_VERSION:   2016.02.36
+  DOWNLOAD_VERSION: 2016.02-b38
+  UPLOAD_VERSION:   2016.02.38
 
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
