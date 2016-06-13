@@ -14,8 +14,8 @@ run:
   path: java-buildpack-dependency-builder/log4j-api.sh
 
 params:
-  DOWNLOAD_VERSION: 2.6
-  UPLOAD_VERSION:   2.6.0
+  DOWNLOAD_VERSION: 2.6.1
+  UPLOAD_VERSION:   2.6.1
 
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
