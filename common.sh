@@ -19,9 +19,9 @@ invalidate_cache() {
       printf "."
       sleep 10
     done
-  done
 
-  echo
+    echo
+  done
 }
 
 # $1: groupId
