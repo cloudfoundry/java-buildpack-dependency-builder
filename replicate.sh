@@ -51,4 +51,4 @@ aws s3 sync "s3://download.pivotal.io" "$DESTINATION" --no-sign-request --exclud
   --exclude "*/lucid/*" \
   --exclude "*/precise/*"
 
-find "$DESTINATION" -name "index.yml" | xargs sed -ie "s|https://download.run.pivotal.io|$BASE_URI|g"
+find "$DESTINATION" -name "index.yml" | xargs sed -ie "s|https://java-buildpack.cloudfoundry.org|$BASE_URI|g"

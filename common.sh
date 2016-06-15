@@ -4,18 +4,21 @@ cookies_file() {
 
 # $@: S3 invalidation paths without bucket
 invalidate_cache() {
-  if [[ -z "$CLOUDFRONT_DISTRIBUTION_ID" ]]; then
+  if [[ -z "$CLOUDFRONT_DISTRIBUTION_IDS" ]]; then
     return
   fi
 
   aws configure set preview.cloudfront true
-  local invalidation_id=$(aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "$@" | jq -r '.Invalidation.Id')
 
-  printf "Waiting for invalidation $invalidation_id"
+  for cloudfront_distribution_id in $CLOUDFRONT_DISTRIBUTION_IDS; do
+    local invalidation_id=$(aws cloudfront create-invalidation --distribution-id $cloudfront_distribution_id --paths "$@" | jq -r '.Invalidation.Id')
 
-  while [[ $(aws cloudfront get-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --id $invalidation_id | jq -r '.Invalidation.Status') == "InProgress" ]]; do
-    printf "."
-    sleep 10
+    printf "Waiting for invalidation $invalidation_id"
+
+    while [[ $(aws cloudfront get-invalidation --distribution-id $cloudfront_distribution_id --id $invalidation_id | jq -r '.Invalidation.Status') == "InProgress" ]]; do
+      printf "."
+      sleep 10
+    done
   done
 
   echo
@@ -122,7 +125,7 @@ update_index() {
 
   local index_path="s3://$S3_BUCKET$1"
   local version=$2
-  local download_uri="https://download.run.pivotal.io$3"
+  local download_uri="https://java-buildpack.cloudfoundry.org$3"
 
   echo "$version: $download_uri -> $index_path"
 

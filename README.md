@@ -14,7 +14,7 @@ BASE_URI=<BASE-URI> DESTINATION=<DESTINATION> ./replicate.sh
 
 | Environment Variable | Description |
 | ------ | ----------- |
-| `BASE_URI` | A URI to replace `https://download.run.pivotal.io` with, in `index.yml` files.  This value should be the network location that the repository is replicated to (e.g. `https://internal-repository:8000/dependencies`).
+| `BASE_URI` | A URI to replace `https://java-buildpack.cloudfoundry.org` with, in `index.yml` files.  This value should be the network location that the repository is replicated to (e.g. `https://internal-repository:8000/dependencies`).
 | `DESTINATION` | A filesystem location to replicate the repository to.
 
 
@@ -23,40 +23,40 @@ The list of available versions for each dependency can be found at the following
 
 | Dependency | Location
 | ---------- | ---------
-| AppDynamics | [`universal`](https://download.run.pivotal.io/app-dynamics/index.yml)
-| Auto Reconfiguration | [`universal`](https://download.run.pivotal.io/auto-reconfiguration/index.yml)
-| Container Customizer | [`universal`](https://download.run.pivotal.io/container-customizer/index.yml)
-| GemFire Modules Tomcat 7| [`universal`](https://download.run.pivotal.io/gem-fire-modules-tomcat7/index.yml)
-| GemFire Modules | [`universal`](https://download.run.pivotal.io/gem-fire-modules/index.yml)
-| GemFire Security | [`universal`](https://download.run.pivotal.io/gem-fire-security/index.yml)
-| GemFire | [`universal`](https://download.run.pivotal.io/gem-fire/index.yml)
-| Groovy | [`universal`](https://download.run.pivotal.io/groovy/index.yml)
-| JBoss AS | [`universal`](https://download.run.pivotal.io/jboss-as/index.yml)
-| `jvmkill` | [`mountainlion`](https://download.run.pivotal.io/jvmkill/mountainlion/x86_64/index.yml), [`trusty`](https://download.run.pivotal.io/jvmkill/trusty/x86_64/index.yml)
-| Log4j API | [`universal`](https://download.run.pivotal.io/log4j-api/index.yml)
-| Log4j Core | [`universal`](https://download.run.pivotal.io/log4j-core/index.yml)
-| Log4j Jcl | [`universal`](https://download.run.pivotal.io/log4j-jcl/index.yml)
-| Log4j Jul | [`universal`](https://download.run.pivotal.io/log4j-jul/index.yml)
-| Log4j Slf4j Impl | [`universal`](https://download.run.pivotal.io/log4j-slf4j-impl/index.yml)
-| MariaDB JDBC | [`universal`](https://download.run.pivotal.io/mariadb-jdbc/index.yml)
-| Memory Calculator | [`mountainlion`](https://download.run.pivotal.io/memory-calculator/mountainlion/x86_64/index.yml), [`trusty`](https://download.run.pivotal.io/memory-calculator/trusty/x86_64/index.yml)
-| New Relic | [`universal`](https://download.run.pivotal.io/new-relic/index.yml)
-| OpenJDK JRE | [`mountainlion`](https://download.run.pivotal.io/openjdk/mountainlion/x86_64/index.yml), [`trusty`](https://download.run.pivotal.io/openjdk/trusty/x86_64/index.yml)
-| OpenJDK JDK | [`mountainlion`](https://download.run.pivotal.io/openjdk-jdk/mountainlion/x86_64/index.yml), [`trusty`](https://download.run.pivotal.io/openjdk-jdk/trusty/x86_64/index.yml)
-| Play JPA Plugin | [`universal`](https://download.run.pivotal.io/play-jpa-plugin/index.yml)
-| PostgreSQL JDBC | [`universal`](https://download.run.pivotal.io/postgresql-jdbc/index.yml)
-| RedisStore | [`universal`](https://download.run.pivotal.io/redis-store/index.yml)
-| Slf4j API | [`universal`](https://download.run.pivotal.io/slf4j-api/index.yml)
-| Slf4j JDK14 | [`universal`](https://download.run.pivotal.io/slf4j-jdk14/index.yml)
-| Spring Boot CLI | [`universal`](https://download.run.pivotal.io/spring-boot-cli/index.yml)
-| tc Server| [`universal`](https://download.run.pivotal.io/tc-server/index.yml)
-| Tomcat Access Logging Support | [`universal`](https://download.run.pivotal.io/tomcat-access-logging-support/index.yml)
-| Tomcat Lifecycle Support | [`universal`](https://download.run.pivotal.io/tomcat-lifecycle-support/index.yml)
-| Tomcat Logging Support | [`universal`](https://download.run.pivotal.io/tomcat-logging-support/index.yml)
-| Tomcat | [`universal`](https://download.run.pivotal.io/tomcat/index.yml)
-| TomEE Resource Configuration | [`universal`](https://download.run.pivotal.io/tomee-resource-configuration/index.yml)
-| TomEE | [`universal`](https://download.run.pivotal.io/tomee/index.yml)
-| YourKit | [`mountainlion`](https://download.run.pivotal.io/your-kit/mountainlion/x86_64/index.yml), [`trusty`](https://download.run.pivotal.io/your-kit/trusty/x86_64/index.yml)
+| AppDynamics | [`universal`](https://java-buildpack.cloudfoundry.org/app-dynamics/index.yml)
+| Auto Reconfiguration | [`universal`](https://java-buildpack.cloudfoundry.org/auto-reconfiguration/index.yml)
+| Container Customizer | [`universal`](https://java-buildpack.cloudfoundry.org/container-customizer/index.yml)
+| GemFire Modules Tomcat 7| [`universal`](https://java-buildpack.cloudfoundry.org/gem-fire-modules-tomcat7/index.yml)
+| GemFire Modules | [`universal`](https://java-buildpack.cloudfoundry.org/gem-fire-modules/index.yml)
+| GemFire Security | [`universal`](https://java-buildpack.cloudfoundry.org/gem-fire-security/index.yml)
+| GemFire | [`universal`](https://java-buildpack.cloudfoundry.org/gem-fire/index.yml)
+| Groovy | [`universal`](https://java-buildpack.cloudfoundry.org/groovy/index.yml)
+| JBoss AS | [`universal`](https://java-buildpack.cloudfoundry.org/jboss-as/index.yml)
+| `jvmkill` | [`mountainlion`](https://java-buildpack.cloudfoundry.org/jvmkill/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/jvmkill/trusty/x86_64/index.yml)
+| Log4j API | [`universal`](https://java-buildpack.cloudfoundry.org/log4j-api/index.yml)
+| Log4j Core | [`universal`](https://java-buildpack.cloudfoundry.org/log4j-core/index.yml)
+| Log4j Jcl | [`universal`](https://java-buildpack.cloudfoundry.org/log4j-jcl/index.yml)
+| Log4j Jul | [`universal`](https://java-buildpack.cloudfoundry.org/log4j-jul/index.yml)
+| Log4j Slf4j Impl | [`universal`](https://java-buildpack.cloudfoundry.org/log4j-slf4j-impl/index.yml)
+| MariaDB JDBC | [`universal`](https://java-buildpack.cloudfoundry.org/mariadb-jdbc/index.yml)
+| Memory Calculator | [`mountainlion`](https://java-buildpack.cloudfoundry.org/memory-calculator/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/memory-calculator/trusty/x86_64/index.yml)
+| New Relic | [`universal`](https://java-buildpack.cloudfoundry.org/new-relic/index.yml)
+| OpenJDK JRE | [`mountainlion`](https://java-buildpack.cloudfoundry.org/openjdk/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/openjdk/trusty/x86_64/index.yml)
+| OpenJDK JDK | [`mountainlion`](https://java-buildpack.cloudfoundry.org/openjdk-jdk/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/openjdk-jdk/trusty/x86_64/index.yml)
+| Play JPA Plugin | [`universal`](https://java-buildpack.cloudfoundry.org/play-jpa-plugin/index.yml)
+| PostgreSQL JDBC | [`universal`](https://java-buildpack.cloudfoundry.org/postgresql-jdbc/index.yml)
+| RedisStore | [`universal`](https://java-buildpack.cloudfoundry.org/redis-store/index.yml)
+| Slf4j API | [`universal`](https://java-buildpack.cloudfoundry.org/slf4j-api/index.yml)
+| Slf4j JDK14 | [`universal`](https://java-buildpack.cloudfoundry.org/slf4j-jdk14/index.yml)
+| Spring Boot CLI | [`universal`](https://java-buildpack.cloudfoundry.org/spring-boot-cli/index.yml)
+| tc Server| [`universal`](https://java-buildpack.cloudfoundry.org/tc-server/index.yml)
+| Tomcat Access Logging Support | [`universal`](https://java-buildpack.cloudfoundry.org/tomcat-access-logging-support/index.yml)
+| Tomcat Lifecycle Support | [`universal`](https://java-buildpack.cloudfoundry.org/tomcat-lifecycle-support/index.yml)
+| Tomcat Logging Support | [`universal`](https://java-buildpack.cloudfoundry.org/tomcat-logging-support/index.yml)
+| Tomcat | [`universal`](https://java-buildpack.cloudfoundry.org/tomcat/index.yml)
+| TomEE Resource Configuration | [`universal`](https://java-buildpack.cloudfoundry.org/tomee-resource-configuration/index.yml)
+| TomEE | [`universal`](https://java-buildpack.cloudfoundry.org/tomee/index.yml)
+| YourKit | [`mountainlion`](https://java-buildpack.cloudfoundry.org/your-kit/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/your-kit/trusty/x86_64/index.yml)
 
 ## Contributing
 [Pull requests][p] are welcome; see the [contributor guidelines][g] for details.
