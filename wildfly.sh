@@ -10,7 +10,7 @@ download_uri() {
     exit 1
   fi
 
-  echo "http://download.jboss.org/jbossas/7.1/jboss-as-$DOWNLOAD_VERSION/jboss-as-$DOWNLOAD_VERSION.tar.gz"
+  echo "http://download.jboss.org/wildfly/$DOWNLOAD_VERSION/wildfly-$DOWNLOAD_VERSION.tar.gz"
 }
 
 upload_path() {
@@ -19,12 +19,12 @@ upload_path() {
     exit 1
   fi
 
-  echo "/jboss-as/jboss-as-$UPLOAD_VERSION.tar.gz"
+  echo "/wildfly/wildfly-$UPLOAD_VERSION.tar.gz"
 }
 
 DOWNLOAD_URI=$(download_uri)
 UPLOAD_PATH=$(upload_path)
-INDEX_PATH="/jboss-as/index.yml"
+INDEX_PATH="/wildfly/index.yml"
 
 transfer_direct $DOWNLOAD_URI $UPLOAD_PATH
 update_index $INDEX_PATH $UPLOAD_VERSION $UPLOAD_PATH

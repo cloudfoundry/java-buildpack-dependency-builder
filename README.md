@@ -56,6 +56,7 @@ The list of available versions for each dependency can be found at the following
 | Tomcat | [`universal`](https://java-buildpack.cloudfoundry.org/tomcat/index.yml)
 | TomEE Resource Configuration | [`universal`](https://java-buildpack.cloudfoundry.org/tomee-resource-configuration/index.yml)
 | TomEE | [`universal`](https://java-buildpack.cloudfoundry.org/tomee/index.yml)
+| Wildfly | [`universal`](https://java-buildpack.cloudfoundry.org/wildfly/index.yml)
 | YourKit | [`mountainlion`](https://java-buildpack.cloudfoundry.org/your-kit/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/your-kit/trusty/x86_64/index.yml)
 
 ## Contributing
@@ -83,7 +84,6 @@ This table shows locations to check for new releases of cached dependencies.  It
 | GemFire Security | [`release`](http://dist.gemstone.com.s3.amazonaws.com/)
 | GemFire | [`release`](http://dist.gemstone.com.s3.amazonaws.com/)
 | Groovy | [`release`](http://groovy-lang.org/download.html)
-| JBoss AS | [`release`](http://www.jboss.org/jbossas/downloads)
 | `jvmkill` | [`release`](https://github.com/cloudfoundry/jvmkill/releases)
 | Log4j API | [`release`](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.apache.logging.log4j%22%20AND%20a%3A%22log4j-api%22)
 | Log4j Core | [`release`](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.apache.logging.log4j%22%20AND%20a%3A%22log4j-core%22)
@@ -107,4 +107,5 @@ This table shows locations to check for new releases of cached dependencies.  It
 | Tomcat | [`8.x`](http://tomcat.apache.org/download-80.cgi), [`7.x`](http://tomcat.apache.org/download-70.cgi), [`6.x`](http://tomcat.apache.org/download-60.cgi)
 | TomEE Resource Configuration | [`release`](https://repo.spring.io/webapp/#/artifacts/browse//search/quick/eyJzZWFyY2giOiJxdWljayIsInF1ZXJ5IjoidG9tZWUtcmVzb3VyY2UtY29uZmlndXJhdGlvbiIsInNlbGVjdGVkUmVwb3NpdG9yaWVzIjpbeyJyZXBvS2V5IjoibGlicy1yZWxlYXNlLWxvY2FsIiwidHlwZSI6ImxvY2FsIiwiX2ljb25DbGFzcyI6Imljb24gaWNvbi1sb2NhbC1yZXBvIn1dfQ==)
 | TomEE | [`release`](http://tomee.apache.org/downloads.html)
+| Wildfly | [`release`](http://wildfly.org/downloads)
 | YourKit | [`release`](https://www.yourkit.com/download)
