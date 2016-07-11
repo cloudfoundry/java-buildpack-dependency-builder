@@ -11,11 +11,11 @@ inputs:
 - name: java-buildpack-dependency-builder
 
 run:
-  path: java-buildpack-dependency-builder/jboss-as.sh
+  path: java-buildpack-dependency-builder/wildfly.sh
 
 params:
-  DOWNLOAD_VERSION: 7.1.1.Final
-  UPLOAD_VERSION:   7.1.1_Final
+  DOWNLOAD_VERSION: 10.0.0.Final
+  UPLOAD_VERSION:   10.0.0.Final
 
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:

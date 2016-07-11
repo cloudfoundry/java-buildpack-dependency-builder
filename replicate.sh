@@ -46,6 +46,7 @@ aws s3 sync "s3://download.pivotal.io" "$DESTINATION" --no-sign-request --exclud
   --include "tomcat-logging-support/*" \
   --include "tomee/*" \
   --include "tomee-resource-configuration/*" \
+  --include "wildfly/*" \
   --include "your-kit/*" \
   --exclude "*/centos6/*" \
   --exclude "*/lucid/*" \
