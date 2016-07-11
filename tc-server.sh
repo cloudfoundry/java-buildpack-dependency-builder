@@ -28,8 +28,8 @@ accept_eula() {
     echo "RELEASE_ID must be set" >&2
     exit 1
   fi
-
-  wget -O- --header="Authorization: Token ${PIVNET_API_KEY}" https://network.pivotal.io/api/v2/products/pivotal-tcserver/releases/${RELEASE_ID}/eula_acceptance
+  
+  curl -X POST -H "Authorization: Token ${PIVNET_API_KEY}" https://network.pivotal.io/api/v2/products/pivotal-tcserver/releases/${RELEASE_ID}/eula_acceptance
 }
 
 upload_path() {
