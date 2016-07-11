@@ -88,6 +88,24 @@ transfer_direct() {
 }
 
 # $1: Download URI
+# $2: S3 path without bucket
+# $3: Pivnet API Key
+transfer_from_pivnet_direct() {
+  if [[ -z "$S3_BUCKET" ]]; then
+    echo "S3_BUCKET must be set" >&2
+    exit 1
+  fi
+
+  local source=$1
+  local target="s3://$S3_BUCKET$2"
+  local key=$3
+
+  echo "$source -> $target"
+
+  curl --cookie $(cookies_file) --header="Authorization: Token ${API_TOKEN}" --location --fail $source | aws s3 cp - $target
+}
+
+# $1: Download URI
 # $2: Destination path
 transfer_to_file() {
   local source=$1
