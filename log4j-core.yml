@@ -14,8 +14,8 @@ run:
   path: java-buildpack-dependency-builder/log4j-core.sh
 
 params:
-  DOWNLOAD_VERSION: 2.6.1
-  UPLOAD_VERSION:   2.6.1
+  DOWNLOAD_VERSION: 2.6.2
+  UPLOAD_VERSION:   2.6.2
 
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
