@@ -29,7 +29,7 @@ accept_eula() {
     exit 1
   fi
   
-  curl -X POST -H "Authorization: Token ${PIVNET_API_KEY}" https://network.pivotal.io/api/v2/products/pivotal-tcserver/releases/${RELEASE_ID}/eula_acceptance
+  curl -H "Authorization: Token ${PIVNET_API_KEY}" -X POST https://network.pivotal.io/api/v2/products/pivotal-tcserver/releases/${RELEASE_ID}/eula_acceptance
 }
 
 upload_path() {
