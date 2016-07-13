@@ -29,7 +29,7 @@ fi
     exit 1
   fi
 
-  curl --cookie $(cookies_file) --data '' --header "Authorization: Token $PIVOTAL_NETWORK_API_KEY" --location --fail https://network.pivotal.io/api/v2/products/pivotal-tcserver/releases/${RELEASE_ID}/eula_acceptance > /dev/null
+  curl --cookie $(cookies_file) --data '' --header "Authorization: Token $PIVOTAL_NETWORK_API_KEY" --location --fail --silent https://network.pivotal.io/api/v2/products/pivotal-tcserver/releases/${RELEASE_ID}/eula_acceptance > /dev/null
 }
 
 upload_path() {
