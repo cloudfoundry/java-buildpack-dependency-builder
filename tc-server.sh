@@ -4,11 +4,6 @@ set -e -o pipefail
 
 source $(dirname "$0")/common.sh
 
-if [[ -z "$PIVNET_API_KEY" ]]; then
-  echo "DOWNLOAD_VERSION must be set" >&2
-  exit 1
-fi
-  
 download_uri() {
   if [[ -z "$RELEASE_ID" ]]; then
     echo "RELEASE_ID must be set" >&2
@@ -16,20 +11,25 @@ download_uri() {
   fi
 
   if [[ -z "$PRODUCT_ID" ]]; then
-    echo "RELEASE_ID must be set" >&2
+    echo "PRODUCT_ID must be set" >&2
     exit 1
   fi
-  
+
   echo "https://network.pivotal.io/api/v2/products/pivotal-tcserver/releases/${RELEASE_ID}/product_files/${PRODUCT_ID}/download"
 }
 
 accept_eula() {
+if [[ -z "$PIVOTAL_NETWORK_API_KEY" ]]; then
+  echo "PIVOTAL_NETWORK_API_KEY must be set" >&2
+  exit 1
+fi
+
   if [[ -z "$RELEASE_ID" ]]; then
     echo "RELEASE_ID must be set" >&2
     exit 1
   fi
-  
-  curl -X POST -H "Authorization: Token ${PIVNET_API_KEY}" https://network.pivotal.io/api/v2/products/pivotal-tcserver/releases/${RELEASE_ID}/eula_acceptance
+
+  curl -X POST -H "Authorization: Token ${PIVOTAL_NETWORK_API_KEY}" https://network.pivotal.io/api/v2/products/pivotal-tcserver/releases/${RELEASE_ID}/eula_acceptance
 }
 
 upload_path() {
@@ -46,6 +46,6 @@ UPLOAD_PATH=$(upload_path)
 INDEX_PATH="/tc-server/index.yml"
 
 accept_eula
-transfer_from_pivnet_direct $DOWNLOAD_URI $UPLOAD_PATH $PIVNET_API_KEY
+transfer_from_pivnet_direct $DOWNLOAD_URI $UPLOAD_PATH $PIVOTAL_NETWORK_API_KEY
 update_index $INDEX_PATH $UPLOAD_VERSION $UPLOAD_PATH
 invalidate_cache $INDEX_PATH $UPLOAD_PATH

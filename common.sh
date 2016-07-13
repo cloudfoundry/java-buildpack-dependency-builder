@@ -98,11 +98,11 @@ transfer_from_pivnet_direct() {
 
   local source=$1
   local target="s3://$S3_BUCKET$2"
-  local key=$3
+  local token=$3
 
   echo "$source -> $target"
 
-  curl --cookie $(cookies_file) -X POST -H "Authorization: Token $key" --location --fail $source | aws s3 cp - $target
+  curl --cookie $(cookies_file) -X POST -H "Authorization: Token $token" --location --fail $source | aws s3 cp - $target
 }
 
 # $1: Download URI
