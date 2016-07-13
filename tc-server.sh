@@ -29,7 +29,7 @@ fi
     exit 1
   fi
 
-  curl -X POST -H "Authorization: Token ${PIVOTAL_NETWORK_API_KEY}" https://network.pivotal.io/api/v2/products/pivotal-tcserver/releases/${RELEASE_ID}/eula_acceptance
+  curl --request POST --header "Authorization: Token ${PIVOTAL_NETWORK_API_KEY}" https://network.pivotal.io/api/v2/products/pivotal-tcserver/releases/${RELEASE_ID}/eula_acceptance > /dev/null
 }
 
 upload_path() {
