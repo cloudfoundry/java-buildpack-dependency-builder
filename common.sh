@@ -102,7 +102,7 @@ transfer_from_pivnet_direct() {
 
   echo "$source -> $target"
 
-  curl --cookie $(cookies_file) --header "Authorization: Token $token" --data '' --location --fail $source | aws s3 cp - $target
+  curl --cookie $(cookies_file) --data '' --header "Authorization: Token $token" --location --fail $source | aws s3 cp - $target
 }
 
 # $1: Download URI
