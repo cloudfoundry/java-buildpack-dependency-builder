@@ -14,8 +14,8 @@ run:
   path: java-buildpack-dependency-builder/postgresql-jdbc.sh
 
 params:
-  DOWNLOAD_VERSION: 9.4.1208
-  UPLOAD_VERSION:   9.4.1208
+  DOWNLOAD_VERSION: 9.4.1209
+  UPLOAD_VERSION:   9.4.1209
 
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
