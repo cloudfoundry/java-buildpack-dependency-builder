@@ -31,7 +31,6 @@ The list of available versions for each dependency can be found at the following
 | GemFire Security | [`universal`](https://java-buildpack.cloudfoundry.org/gem-fire-security/index.yml)
 | GemFire | [`universal`](https://java-buildpack.cloudfoundry.org/gem-fire/index.yml)
 | Groovy | [`universal`](https://java-buildpack.cloudfoundry.org/groovy/index.yml)
-| JBoss AS | [`universal`](https://java-buildpack.cloudfoundry.org/jboss-as/index.yml)
 | `jvmkill` | [`mountainlion`](https://java-buildpack.cloudfoundry.org/jvmkill/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/jvmkill/trusty/x86_64/index.yml)
 | Log4j API | [`universal`](https://java-buildpack.cloudfoundry.org/log4j-api/index.yml)
 | Log4j Core | [`universal`](https://java-buildpack.cloudfoundry.org/log4j-core/index.yml)
