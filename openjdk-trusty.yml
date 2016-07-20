@@ -14,10 +14,10 @@ run:
   path: java-buildpack-dependency-builder/openjdk.sh
 
 params:
-  BUILD_NUMBER:   b14
-  TAG:            jdk8u91-b14
-  UPDATE_VERSION: 91
-  UPLOAD_VERSION: 1.8.0_91-unlimited-crypto
+  BUILD_NUMBER:   b13
+  TAG:            jdk8u101-b13
+  UPDATE_VERSION: 101
+  UPLOAD_VERSION: 1.8.0_101
 
   PLATFORM: trusty
 
