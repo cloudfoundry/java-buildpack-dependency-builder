@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-set -x
 set -e -o pipefail
 
 source $(dirname "$0")/common.sh
