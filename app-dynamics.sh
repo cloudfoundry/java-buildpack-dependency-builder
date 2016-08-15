@@ -10,7 +10,7 @@ download_uri() {
     exit 1
   fi
 
-  echo "https://download.appdynamics.com/saas/public/archives/$DOWNLOAD_VERSION/AppServerAgent-$DOWNLOAD_VERSION.zip"
+  echo "https://aperture.appdynamics.com/download/prox/download-file/sun-jvm/$DOWNLOAD_VERSION/AppServerAgent-$DOWNLOAD_VERSION.zip"
 }
 
 login() {
