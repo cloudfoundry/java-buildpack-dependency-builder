@@ -14,8 +14,8 @@ run:
   path: java-buildpack-dependency-builder/jvmkill.sh
 
 params:
-  TAG:            v1.0.2
-  UPLOAD_VERSION: 1.0.2
+  TAG:            v1.1.0
+  UPLOAD_VERSION: 1.1.0
 
   PLATFORM: trusty
 
