@@ -14,9 +14,9 @@ run:
   path: java-buildpack-dependency-builder/tc-server.sh
 
 params:
-  RELEASE_ID:     2106
-  PRODUCT_ID:     5660
-  UPLOAD_VERSION: 3.2.0_RELEASE
+  RELEASE_ID:     2402
+  PRODUCT_ID:     7658
+  UPLOAD_VERSION: 3.2.1_RELEASE
 
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
