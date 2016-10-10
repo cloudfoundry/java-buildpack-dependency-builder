@@ -14,8 +14,8 @@ run:
   path: java-buildpack-dependency-builder/tomee-resource-configuration.sh
 
 params:
-  DOWNLOAD_VERSION: 1.1.0.RELEASE
-  UPLOAD_VERSION:   1.1.0_RELEASE
+  DOWNLOAD_VERSION: 1.2.0.RELEASE
+  UPLOAD_VERSION:   1.2.0_RELEASE
 
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
