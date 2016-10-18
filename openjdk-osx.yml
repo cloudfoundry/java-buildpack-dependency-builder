@@ -9,9 +9,9 @@ run:
 
 params:
   BUILD_NUMBER:   b14
-  TAG:            jdk8u101-b14
+  TAG:            jdk8u111-b14
   UPDATE_VERSION: 111
-  UPLOAD_VERSION: 1.8.0_121
+  UPLOAD_VERSION: 1.8.0_111
 
   PLATFORM:       mountainlion
   XCODE_LOCATION: /Users/pivotalcf/concourse/Xcode4.app
