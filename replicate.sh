@@ -13,7 +13,6 @@ fi
 mkdir -p "$DESTINATION"
 
 aws s3 sync "s3://download.pivotal.io" "$DESTINATION" --no-sign-request --exclude "*" \
-  --include "app-dynamics/*" \
   --include "auto-reconfiguration/*" \
   --include "container-customizer/*" \
   --include "gem-fire/*" \
