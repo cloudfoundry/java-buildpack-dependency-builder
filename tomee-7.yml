@@ -14,8 +14,8 @@ run:
   path: java-buildpack-dependency-builder/tomee-7.sh
 
 params:
-  DOWNLOAD_VERSION: 7.0.1
-  UPLOAD_VERSION:   7.0.1
+  DOWNLOAD_VERSION: 7.0.2
+  UPLOAD_VERSION:   7.0.2
 
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
