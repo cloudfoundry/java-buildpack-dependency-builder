@@ -14,8 +14,8 @@ run:
   path: java-buildpack-dependency-builder/slf4j-jdk14.sh
 
 params:
-  DOWNLOAD_VERSION: 1.7.21
-  UPLOAD_VERSION:   1.7.21
+  DOWNLOAD_VERSION: 1.7.22
+  UPLOAD_VERSION:   1.7.22
 
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
