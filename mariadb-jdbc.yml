@@ -14,8 +14,8 @@ run:
   path: java-buildpack-dependency-builder/mariadb-jdbc.sh
 
 params:
-  DOWNLOAD_VERSION: 1.5.5
-  UPLOAD_VERSION:   1.5.5
+  DOWNLOAD_VERSION: 1.5.6
+  UPLOAD_VERSION:   1.5.6
 
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
