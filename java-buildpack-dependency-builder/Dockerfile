@@ -5,7 +5,7 @@ RUN apk add --update \
     coreutils \
     curl \
     jq \
-    py-pip \
+    py2-pip \
     unzip \
  && rm -rf /var/cache/apk/*
 
