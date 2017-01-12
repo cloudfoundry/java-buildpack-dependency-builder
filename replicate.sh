@@ -14,6 +14,7 @@ mkdir -p "$DESTINATION"
 
 aws s3 sync "s3://download.pivotal.io" "$DESTINATION" --no-sign-request --exclude "*" \
   --include "auto-reconfiguration/*" \
+  --include "container-certificate-trust-store/*" \
   --include "container-customizer/*" \
   --include "gem-fire/*" \
   --include "gem-fire-modules/*" \

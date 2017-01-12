@@ -24,6 +24,7 @@ The list of available versions for each dependency can be found at the following
 | Dependency | Location
 | ---------- | ---------
 | Auto Reconfiguration | [`universal`](https://java-buildpack.cloudfoundry.org/auto-reconfiguration/index.yml)
+| Container Certificate Trust Store | [`universal`](https://java-buildpack.cloudfoundry.org/container-certificate-trust-store/index.yml)
 | Container Customizer | [`universal`](https://java-buildpack.cloudfoundry.org/container-customizer/index.yml)
 | GemFire Modules Tomcat 7| [`universal`](https://java-buildpack.cloudfoundry.org/gem-fire-modules-tomcat7/index.yml)
 | GemFire Modules | [`universal`](https://java-buildpack.cloudfoundry.org/gem-fire-modules/index.yml)
@@ -75,6 +76,7 @@ This table shows locations to check for new releases of cached dependencies.  It
 | Dependency | Location
 | ---------- | --------
 | Auto Reconfiguration | [`release`](http://maven.gopivotal.com.s3.amazonaws.com/release/org/cloudfoundry/auto-reconfiguration/maven-metadata.xml)
+| Container Certificate Trust Store | [`release`](https://repo.spring.io/webapp/#/artifacts/browse//search/quick/eyJzZWFyY2giOiJxdWljayIsInF1ZXJ5IjoiamF2YS1idWlsZHBhY2stY29udGFpbmVyLWNlcnRpZmljYXRlLXRydXN0LXN0b3JlIiwic2VsZWN0ZWRSZXBvc2l0b3JpZXMiOlt7InJlcG9LZXkiOiJsaWJzLXJlbGVhc2UtbG9jYWwiLCJ0eXBlIjoibG9jYWwiLCJfaWNvbkNsYXNzIjoiaWNvbiBpY29uLWxvY2FsLXJlcG8ifV19)
 | Container Customizer | [`release`](https://repo.spring.io/webapp/#/artifacts/browse//search/quick/eyJzZWFyY2giOiJxdWljayIsInF1ZXJ5IjoiamF2YS1idWlsZHBhY2stY29udGFpbmVyLWN1c3RvbWl6ZXIiLCJzZWxlY3RlZFJlcG9zaXRvcmllcyI6W3sicmVwb0tleSI6ImxpYnMtcmVsZWFzZS1sb2NhbCIsInR5cGUiOiJsb2NhbCIsIl9pY29uQ2xhc3MiOiJpY29uIGljb24tbG9jYWwtcmVwbyJ9XX0=)
 | GemFire Modules Tomcat 7| [`release`](http://dist.gemstone.com.s3.amazonaws.com/)
 | GemFire Modules | [`release`](http://dist.gemstone.com.s3.amazonaws.com/)
