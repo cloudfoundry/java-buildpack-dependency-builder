@@ -14,8 +14,8 @@ run:
   path: java-buildpack-dependency-builder/new-relic.sh
 
 params:
-  DOWNLOAD_VERSION: 3.35.1
-  UPLOAD_VERSION:   3.35.1
+  DOWNLOAD_VERSION: 3.35.2
+  UPLOAD_VERSION:   3.35.2
 
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
