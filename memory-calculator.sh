@@ -10,7 +10,7 @@ download_uri_darwin() {
     exit 1
   fi
 
-  echo $(spring_release_uri 'org.cloudfoundry' 'memory-calculator' $DOWNLOAD_VERSION "-darwin.tar.gz")
+  echo $(spring_release_uri 'org.cloudfoundry' 'java-buildpack-memory-calculator' $DOWNLOAD_VERSION "-darwin.tar.gz")
 }
 
 download_uri_linux() {
@@ -19,7 +19,7 @@ download_uri_linux() {
     exit 1
   fi
 
-  echo $(spring_release_uri 'org.cloudfoundry' 'memory-calculator' $DOWNLOAD_VERSION "-linux.tar.gz")
+  echo $(spring_release_uri 'org.cloudfoundry' 'java-buildpack-memory-calculator' $DOWNLOAD_VERSION "-linux.tar.gz")
 }
 
 upload_path_mountainlion() {
