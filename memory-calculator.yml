@@ -14,8 +14,8 @@ run:
   path: java-buildpack-dependency-builder/memory-calculator.sh
 
 params:
-  TAG:            v2.0.2.RELEASE
-  UPLOAD_VERSION: 2.0.2_RELEASE
+  DOWNLOAD_VERSION: 2.0.2.RELEASE
+  UPLOAD_VERSION:   2.0.2_RELEASE
 
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
