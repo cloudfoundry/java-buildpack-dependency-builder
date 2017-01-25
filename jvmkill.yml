@@ -4,7 +4,7 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: cfje/jvmkill
+    repository: cfje/java-buildpack-dependency-builder
     tag: latest
 
 inputs:
@@ -14,10 +14,8 @@ run:
   path: java-buildpack-dependency-builder/jvmkill.sh
 
 params:
-  TAG:            v1.1.0
-  UPLOAD_VERSION: 1.1.0
-
-  PLATFORM: trusty
+  DOWNLOAD_VERSION: 1.2.0.RELEASE
+  UPLOAD_VERSION:   1.2.0_RELEASE
 
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
