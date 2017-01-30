@@ -14,8 +14,8 @@ run:
   path: java-buildpack-dependency-builder/log4j-slf4j-impl.sh
 
 params:
-  DOWNLOAD_VERSION: 2.7
-  UPLOAD_VERSION:   2.7.0
+  DOWNLOAD_VERSION: 2.8
+  UPLOAD_VERSION:   2.8.0
 
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
