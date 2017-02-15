@@ -9,14 +9,12 @@ image_resource:
 
 inputs:
 - name: java-buildpack-dependency-builder
+- name: tomcat-archives
 
 run:
-  path: java-buildpack-dependency-builder/tomcat-9.sh
+  path: java-buildpack-dependency-builder/tomcat.sh
 
 params:
-  DOWNLOAD_VERSION: 9.0.0.M8
-  UPLOAD_VERSION:   9.0.0_M8
-
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
   CLOUDFRONT_DISTRIBUTION_IDS:
