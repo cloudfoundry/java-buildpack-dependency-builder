@@ -37,7 +37,6 @@ The list of available versions for each dependency can be found at the following
 | Log4j Jcl | [`universal`](https://java-buildpack.cloudfoundry.org/log4j-jcl/index.yml)
 | Log4j Jul | [`universal`](https://java-buildpack.cloudfoundry.org/log4j-jul/index.yml)
 | Log4j Slf4j Impl | [`universal`](https://java-buildpack.cloudfoundry.org/log4j-slf4j-impl/index.yml)
-| MariaDB JDBC | [`universal`](https://java-buildpack.cloudfoundry.org/mariadb-jdbc/index.yml)
 | Memory Calculator | [`mountainlion`](https://java-buildpack.cloudfoundry.org/memory-calculator/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/memory-calculator/trusty/x86_64/index.yml)
 | New Relic | [`universal`](https://java-buildpack.cloudfoundry.org/new-relic/index.yml)
 | OpenJDK JRE | [`mountainlion`](https://java-buildpack.cloudfoundry.org/openjdk/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/openjdk/trusty/x86_64/index.yml)
