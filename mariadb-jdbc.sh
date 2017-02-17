@@ -4,28 +4,15 @@ set -e -o pipefail
 
 source $(dirname "$0")/common.sh
 
-download_uri() {
-  if [[ -z "$DOWNLOAD_VERSION" ]]; then
-    echo "DOWNLOAD_VERSION must be set" >&2
-    exit 1
-  fi
-
-  echo $(maven_central_uri 'org.mariadb.jdbc' 'mariadb-java-client' $DOWNLOAD_VERSION)
-}
-
 upload_path() {
-  if [[ -z "$UPLOAD_VERSION" ]]; then
-    echo "UPLOAD_VERSION must be set" >&2
-    exit 1
-  fi
-
-  echo "/mariadb-jdbc/mariadb-jdbc-$UPLOAD_VERSION.jar"
+  echo "/mariadb-jdbc/mariadb-jdbc-$VERSION.jar"
 }
 
-DOWNLOAD_URI=$(download_uri)
+VERSION=$(cat mariadb-jdbc-archives/version)
+
 UPLOAD_PATH=$(upload_path)
 INDEX_PATH="/mariadb-jdbc/index.yml"
 
-transfer_direct $DOWNLOAD_URI $UPLOAD_PATH
-update_index $INDEX_PATH $UPLOAD_VERSION $UPLOAD_PATH
+transfer_to_s3 "mariadb-jdbc-archives/mariadb-jdbc-$VERSION.jar" $UPLOAD_PATH
+update_index $INDEX_PATH $VERSION $UPLOAD_PATH
 invalidate_cache $INDEX_PATH $UPLOAD_PATH
