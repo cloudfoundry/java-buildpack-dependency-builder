@@ -13,6 +13,6 @@ VERSION=$(cat mariadb-jdbc-archives/version)
 UPLOAD_PATH=$(upload_path)
 INDEX_PATH="/mariadb-jdbc/index.yml"
 
-transfer_to_s3 "mariadb-jdbc-archives/mariadb-java-client-$VERSION.jar" $UPLOAD_PATH
+transfer_to_s3 "mariadb-jdbc-archives/mariadb-java-client-*.jar" $UPLOAD_PATH
 update_index $INDEX_PATH $VERSION $UPLOAD_PATH
 invalidate_cache $INDEX_PATH $UPLOAD_PATH
