@@ -29,10 +29,13 @@ public final class Source {
 
     private final Optional<String> groupId;
 
+    private final Optional<String> versionPattern;
+
     @JsonCreator
-    public Source(@JsonProperty("artifact_id") Optional<String> artifactId, @JsonProperty("group_id") Optional<String> groupId) {
+    public Source(@JsonProperty("artifact_id") Optional<String> artifactId, @JsonProperty("group_id") Optional<String> groupId, @JsonProperty("version_pattern") Optional<String> versionPattern) {
         this.artifactId = artifactId;
         this.groupId = groupId;
+        this.versionPattern = versionPattern;
     }
 
     @Override
@@ -56,6 +59,10 @@ public final class Source {
         return this.groupId;
     }
 
+    public Optional<String> getVersionPattern() {
+        return this.versionPattern;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(artifactId, groupId);
@@ -66,6 +73,7 @@ public final class Source {
         return "Source{" +
             "artifactId=" + artifactId +
             ", groupId=" + groupId +
+            ", versionPattern" + versionPattern +
             '}';
     }
 

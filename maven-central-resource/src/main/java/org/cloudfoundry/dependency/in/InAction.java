@@ -80,7 +80,10 @@ final class InAction implements CommandLineRunner {
     }
 
     private Path getArchiveFile() {
-        return this.destination.resolve(String.format("%s-%s.jar", this.request.getSource().getArtifactId().get(), this.request.getVersion().getRef()));
+        String artifactId = this.request.getSource().getArtifactId()
+            .orElseThrow(() -> new IllegalArgumentException("Artifact ID must be specified"));
+
+        return this.destination.resolve(String.format("%s-%s.jar", artifactId, this.request.getVersion().getRef()));
     }
 
     private Mono<String> getUri() {

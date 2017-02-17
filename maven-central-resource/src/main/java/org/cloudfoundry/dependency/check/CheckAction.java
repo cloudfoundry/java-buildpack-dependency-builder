@@ -18,8 +18,8 @@ package org.cloudfoundry.dependency.check;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.cloudfoundry.dependency.OutputUtils;
-import org.cloudfoundry.dependency.VersionReference;
 import org.cloudfoundry.dependency.VersionHolder;
+import org.cloudfoundry.dependency.VersionReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -35,6 +35,7 @@ import java.io.InputStream;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 @Component
 @Profile("check")
@@ -71,9 +72,17 @@ final class CheckAction implements CommandLineRunner {
             .collectList();
     }
 
+    private Flux<String> filteredVersions(Flux<String> versions) {
+        return this.request.getSource().getVersionPattern()
+            .map(filter -> versions
+                .filter(Pattern.compile(filter).asPredicate()))
+            .orElse(versions);
+    }
+
     private Flux<VersionHolder> getCandidateVersions(Map<String, Map<String, List<Map<String, String>>>> payload) {
         return Flux.fromIterable(payload.get("response").get("docs"))
             .map(d -> d.get("v"))
+            .transform(this::filteredVersions)
             .map(VersionHolder::new)
             .sort();
     }
