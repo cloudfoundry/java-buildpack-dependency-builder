@@ -9,6 +9,7 @@ image_resource:
 
 inputs:
 - name: java-buildpack-dependency-builder
+- name: mariadb-jdbc-archives
 
 run:
   path: java-buildpack-dependency-builder/mariadb-jdbc.sh
