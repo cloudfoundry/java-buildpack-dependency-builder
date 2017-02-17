@@ -9,14 +9,12 @@ image_resource:
 
 inputs:
 - name: java-buildpack-dependency-builder
+- name: postgresql-jdbc-archives
 
 run:
   path: java-buildpack-dependency-builder/postgresql-jdbc.sh
 
 params:
-  DOWNLOAD_VERSION: 9.4.1212
-  UPLOAD_VERSION:   9.4.1212
-
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
   CLOUDFRONT_DISTRIBUTION_IDS:
