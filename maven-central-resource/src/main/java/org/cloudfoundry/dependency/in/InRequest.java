@@ -18,7 +18,7 @@ package org.cloudfoundry.dependency.in;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.cloudfoundry.dependency.Source;
-import org.cloudfoundry.dependency.Version;
+import org.cloudfoundry.dependency.VersionReference;
 
 import java.util.Map;
 import java.util.Objects;
@@ -29,9 +29,9 @@ final class InRequest {
 
     private final Source source;
 
-    private final Version version;
+    private final VersionReference version;
 
-    InRequest(@JsonProperty("params") Map<String, Object> params, @JsonProperty("source") Source source, @JsonProperty("version") Version version) {
+    InRequest(@JsonProperty("params") Map<String, Object> params, @JsonProperty("source") Source source, @JsonProperty("version") VersionReference version) {
         this.params = params;
         this.source = source;
         this.version = version;
@@ -73,7 +73,7 @@ final class InRequest {
         return this.source;
     }
 
-    Version getVersion() {
+    VersionReference getVersion() {
         return this.version;
     }
 

@@ -18,7 +18,8 @@ package org.cloudfoundry.dependency.check;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.cloudfoundry.dependency.OutputUtils;
-import org.cloudfoundry.dependency.Version;
+import org.cloudfoundry.dependency.VersionReference;
+import org.cloudfoundry.dependency.VersionHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -28,20 +29,12 @@ import reactor.core.Exceptions;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.ipc.netty.http.client.HttpClient;
-import reactor.util.function.Tuple2;
-import reactor.util.function.Tuples;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Duration;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
-import java.util.StringTokenizer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 @Component
 @Profile("check")
@@ -69,12 +62,12 @@ final class CheckAction implements CommandLineRunner {
             .block(Duration.ofMinutes(5));
     }
 
-    Mono<List<Version>> run() {
+    Mono<List<VersionReference>> run() {
         return getUri()
             .then(this::requestPayload)
             .flatMap(this::getCandidateVersions)
             .transform(this::sinceVersion)
-            .map(version -> new org.cloudfoundry.dependency.Version(version.getRaw()))
+            .map(version -> new VersionReference(version.getRaw()))
             .collectList();
     }
 
@@ -120,113 +113,6 @@ final class CheckAction implements CommandLineRunner {
                     .filter(previous::lessThanOrEqualTo);
             })
             .orElseGet(() -> versions.takeLast(1));
-    }
-
-    private static final class VersionHolder implements Comparable<VersionHolder> {
-
-        private static final Pattern MAJOR_OR_MINOR = Pattern.compile("^([^\\.-]+)(?:[\\.-](.*))?");
-
-        private static final Pattern MICRO_AND_QUALIFIER = Pattern.compile("^([^\\.-]+)(?:[\\.-](.*))?");
-
-        private final String raw;
-
-        private final com.github.zafarkhaja.semver.Version semver;
-
-        private VersionHolder(String raw) {
-            this.raw = raw;
-            this.semver = parse(raw);
-        }
-
-        @Override
-        public int compareTo(VersionHolder o) {
-            return this.semver.compareTo(o.getSemver());
-        }
-
-        private static Tuple2<Integer, String> majorOrMinorAndTail(String s) {
-            if (s.isEmpty()) {
-                return Tuples.of(0, s);
-            }
-
-            Matcher matcher = MAJOR_OR_MINOR.matcher(s);
-            if (!matcher.find()) {
-                throw new IllegalArgumentException("Invalid Version");
-            }
-
-            return Tuples.of(Integer.parseInt(matcher.group(1)), matcher.group(2));
-        }
-
-        private static Tuple2<Integer, String> microAndQualifier(String s) {
-            if (s == null || s.isEmpty()) {
-                return Tuples.of(0, s);
-            }
-
-            Matcher matcher = MICRO_AND_QUALIFIER.matcher(s);
-            if (!matcher.find()) {
-                throw new IllegalArgumentException("Invalid Version");
-            }
-
-            return Tuples.of(Integer.parseInt(matcher.group(1)), matcher.group(2));
-        }
-
-        private static com.github.zafarkhaja.semver.Version parse(String raw) {
-            StringTokenizer stringTokenizer = new StringTokenizer(raw, ".-");
-
-            Queue<String> tokens = new LinkedList<>();
-            while (stringTokenizer.hasMoreElements()) {
-                tokens.add(stringTokenizer.nextToken());
-            }
-
-            Integer major;
-            try {
-                major = Integer.parseInt(tokens.peek());
-                tokens.remove();
-            } catch (NumberFormatException e) {
-                major = 0;
-            }
-
-            Integer minor;
-            try {
-                minor = Integer.parseInt(tokens.peek());
-                tokens.remove();
-            } catch (NumberFormatException e) {
-                minor = 0;
-            }
-
-            Integer micro;
-            try {
-                micro = Integer.parseInt(tokens.peek());
-                tokens.remove();
-            } catch (NumberFormatException e) {
-                micro = 0;
-            }
-
-            String qualifier = tokens.stream().collect(Collectors.joining());
-
-            try {
-                com.github.zafarkhaja.semver.Version version = com.github.zafarkhaja.semver.Version.forIntegers(major, minor, micro);
-
-                if (qualifier != null && !qualifier.isEmpty()) {
-                    version.setPreReleaseVersion(qualifier);
-                }
-
-                return version;
-            } catch (Exception e) {
-                throw new IllegalArgumentException("Invalid version " + raw, e);
-            }
-        }
-
-        private String getRaw() {
-            return this.raw;
-        }
-
-        private com.github.zafarkhaja.semver.Version getSemver() {
-            return this.semver;
-        }
-
-        private boolean lessThanOrEqualTo(VersionHolder other) {
-            return this.semver.lessThanOrEqualTo(other.getSemver());
-        }
-
     }
 
 }
