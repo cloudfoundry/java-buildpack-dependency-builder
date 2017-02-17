@@ -13,6 +13,6 @@ VERSION=$(cat slf4j-api-archives/version)
 UPLOAD_PATH=$(upload_path)
 INDEX_PATH="/slf4j-api/index.yml"
 
-transfer_to_s3 "slf4j-api-archives/slfj4-api-$VERSION.jar" $UPLOAD_PATH
+transfer_to_s3 "slf4j-api-archives/slf4j-api-$VERSION.jar" $UPLOAD_PATH
 update_index $INDEX_PATH $ERSION $UPLOAD_PATH
 invalidate_cache $INDEX_PATH $UPLOAD_PATH
