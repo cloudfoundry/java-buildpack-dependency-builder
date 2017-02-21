@@ -9,14 +9,12 @@ image_resource:
 
 inputs:
 - name: java-buildpack-dependency-builder
+- name: container-certificate-trust-store-archives
 
 run:
   path: java-buildpack-dependency-builder/container-certificate-trust-store.sh
 
 params:
-  DOWNLOAD_VERSION: 2.0.0.RELEASE
-  UPLOAD_VERSION:   2.0.0_RELEASE
-
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
   CLOUDFRONT_DISTRIBUTION_IDS:
