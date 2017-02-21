@@ -29,12 +29,17 @@ public final class Source {
 
     private final Optional<String> groupId;
 
+    private final Optional<String> uri;
+
     private final Optional<String> versionPattern;
 
     @JsonCreator
-    public Source(@JsonProperty("artifact_id") Optional<String> artifactId, @JsonProperty("group_id") Optional<String> groupId, @JsonProperty("version_pattern") Optional<String> versionPattern) {
+    public Source(@JsonProperty("artifact_id") Optional<String> artifactId, @JsonProperty("group_id") Optional<String> groupId, @JsonProperty("uri") Optional<String> uri,
+                  @JsonProperty("version_pattern") Optional<String> versionPattern) {
+
         this.artifactId = artifactId;
         this.groupId = groupId;
+        this.uri = uri;
         this.versionPattern = versionPattern;
     }
 
@@ -59,6 +64,10 @@ public final class Source {
         return this.groupId;
     }
 
+    public Optional<String> getUri() {
+        return this.uri;
+    }
+
     public Optional<String> getVersionPattern() {
         return this.versionPattern;
     }
@@ -73,6 +82,7 @@ public final class Source {
         return "Source{" +
             "artifactId=" + artifactId +
             ", groupId=" + groupId +
+            ", uri=" + uri +
             ", versionPattern" + versionPattern +
             '}';
     }

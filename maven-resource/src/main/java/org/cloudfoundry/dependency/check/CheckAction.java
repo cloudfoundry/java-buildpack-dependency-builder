@@ -25,21 +25,42 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
+import org.xml.sax.SAXException;
 import reactor.core.Exceptions;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.ipc.netty.http.client.HttpClient;
 
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 @Component
 @Profile("check")
 final class CheckAction implements CommandLineRunner {
+
+    private static final XPathExpression VERSIONS;
+
+    static {
+        try {
+            VERSIONS = XPathFactory.newInstance().newXPath().compile("/metadata/versioning/versions/version/text()");
+        } catch (XPathExpressionException e) {
+            throw Exceptions.propagate(e);
+        }
+    }
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -79,9 +100,20 @@ final class CheckAction implements CommandLineRunner {
             .orElse(versions);
     }
 
-    private Flux<VersionHolder> getCandidateVersions(Map<String, Map<String, List<Map<String, String>>>> payload) {
-        return Flux.fromIterable(payload.get("response").get("docs"))
-            .map(d -> d.get("v"))
+    private Flux<VersionHolder> getCandidateVersions(Document payload) {
+        return Mono.fromCallable(() -> VERSIONS.evaluate(payload, XPathConstants.NODESET))
+            .cast(NodeList.class)
+            .flatMap(nodes -> {
+                List<Node> versions = new ArrayList<>(nodes.getLength());
+
+                for (int i = 0; i < nodes.getLength(); i++) {
+                    versions.add(nodes.item(i));
+                }
+
+                return Flux.fromIterable(versions);
+            })
+            .cast(Text.class)
+            .map(Text::getWholeText)
             .transform(this::filteredVersions)
             .map(VersionHolder::new)
             .sort();
@@ -89,25 +121,29 @@ final class CheckAction implements CommandLineRunner {
 
     private Mono<String> getUri() {
         return Mono.when(
+            Mono.justOrEmpty(this.request.getSource().getUri())
+                .otherwiseIfEmpty(Mono.error(new IllegalArgumentException("URI must be specified"))),
             Mono.justOrEmpty(this.request.getSource().getGroupId())
                 .otherwiseIfEmpty(Mono.error(new IllegalArgumentException("Group ID must be specified"))),
             Mono.justOrEmpty(this.request.getSource().getArtifactId())
                 .otherwiseIfEmpty(Mono.error(new IllegalArgumentException("Artifact ID must be specified"))))
             .map(tuple -> {
-                String groupId = tuple.getT1();
-                String artifactId = tuple.getT2();
-                return String.format("http://search.maven.org/solrsearch/select?q=g:%%22%s%%22%%20AND%%20a:%%22%s%%22&core=gav&rows=1000&wt=json", groupId, artifactId);
+                String uri = tuple.getT1();
+                String groupId = tuple.getT2();
+                String artifactId = tuple.getT3();
+
+                return String.format("%s/%s/%s/maven-metadata.xml", uri, groupId.replaceAll("\\.", "/"), artifactId);
             });
     }
 
     @SuppressWarnings("unchecked")
-    private Mono<Map<String, Map<String, List<Map<String, String>>>>> requestPayload(String uri) {
+    private Mono<Document> requestPayload(String uri) {
         return this.httpClient.get(uri)
             .then(response -> response.receive().aggregate().asInputStream())
             .map(content -> {
                 try (InputStream in = content) {
-                    return this.objectMapper.readValue(in, Map.class);
-                } catch (IOException e) {
+                    return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(in);
+                } catch (IOException | ParserConfigurationException | SAXException e) {
                     throw Exceptions.propagate(e);
                 }
             });

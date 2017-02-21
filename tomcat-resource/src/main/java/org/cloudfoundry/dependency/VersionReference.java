@@ -21,12 +21,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
-public final class Version {
+public final class VersionReference {
 
     private final String ref;
 
     @JsonCreator
-    public Version(@JsonProperty("ref") String ref) {
+    public VersionReference(@JsonProperty("ref") String ref) {
         this.ref = ref;
     }
 
@@ -38,7 +38,7 @@ public final class Version {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Version version = (Version) o;
+        VersionReference version = (VersionReference) o;
         return Objects.equals(ref, version.ref);
     }
 
@@ -54,7 +54,7 @@ public final class Version {
 
     @Override
     public String toString() {
-        return "Version{" +
+        return "VersionReference{" +
             "ref='" + ref + '\'' +
             '}';
     }

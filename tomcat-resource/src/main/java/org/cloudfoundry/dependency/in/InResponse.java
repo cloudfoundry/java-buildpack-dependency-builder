@@ -18,7 +18,7 @@ package org.cloudfoundry.dependency.in;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.cloudfoundry.dependency.Metadata;
-import org.cloudfoundry.dependency.Version;
+import org.cloudfoundry.dependency.VersionReference;
 
 import java.util.List;
 import java.util.Objects;
@@ -27,9 +27,9 @@ final class InResponse {
 
     private final List<Metadata> metadata;
 
-    private final Version version;
+    private final VersionReference version;
 
-    InResponse(List<Metadata> metadata, Version version) {
+    InResponse(List<Metadata> metadata, VersionReference version) {
         this.metadata = metadata;
         this.version = version;
     }
@@ -66,7 +66,7 @@ final class InResponse {
     }
 
     @JsonProperty("version")
-    Version getVersion() {
+    VersionReference getVersion() {
         return this.version;
     }
 

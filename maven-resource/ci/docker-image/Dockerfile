@@ -6,4 +6,4 @@ COPY out                 /opt/resource/out
 
 RUN chmod +x /opt/resource/*
 
-COPY maven-central-resource.jar /opt/resource/maven-central-resource.jar
+COPY maven-resource.jar /opt/resource/maven-resource.jar

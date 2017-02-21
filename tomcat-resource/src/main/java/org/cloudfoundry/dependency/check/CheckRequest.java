@@ -18,7 +18,7 @@ package org.cloudfoundry.dependency.check;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.cloudfoundry.dependency.Source;
-import org.cloudfoundry.dependency.Version;
+import org.cloudfoundry.dependency.VersionReference;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -27,9 +27,9 @@ final class CheckRequest {
 
     private final Source source;
 
-    private final Optional<Version> version;
+    private final Optional<VersionReference> version;
 
-    CheckRequest(@JsonProperty("source") Source source, @JsonProperty("version") Optional<Version> version) {
+    CheckRequest(@JsonProperty("source") Source source, @JsonProperty("version") Optional<VersionReference> version) {
         this.source = source;
         this.version = version;
     }
@@ -64,7 +64,7 @@ final class CheckRequest {
         return this.source;
     }
 
-    Optional<Version> getVersion() {
+    Optional<VersionReference> getVersion() {
         return this.version;
     }
 
