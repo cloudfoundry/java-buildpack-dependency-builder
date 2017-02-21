@@ -21,7 +21,6 @@ aws s3 sync "s3://download.pivotal.io" "$DESTINATION" --no-sign-request --exclud
   --include "gem-fire-modules-tomcat7/*" \
   --include "gem-fire-security/*" \
   --include "groovy/*" \
-  --include "jboss-as/*" \
   --include "jvmkill/*" \
   --include "log4j-api/*" \
   --include "log4j-core/*" \
