@@ -69,7 +69,7 @@ final class CheckAction implements CommandLineRunner {
             .then(this::requestDirectoryListing)
             .flatMap(this::getCandidateVersions)
             .transform(this::sinceVersion)
-            .map(version -> new VersionReference(version.toString()))
+            .map(version -> new VersionReference(version.getRaw()))
             .collectList();
     }
 
