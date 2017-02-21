@@ -18,7 +18,7 @@ package org.cloudfoundry.dependency.out;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.cloudfoundry.dependency.OutputUtils;
-import org.cloudfoundry.dependency.Version;
+import org.cloudfoundry.dependency.VersionReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -57,7 +57,7 @@ final class OutAction implements CommandLineRunner {
     }
 
     Mono<OutResponse> run() {
-        return Mono.just(new OutResponse(Collections.emptyList(), new Version("")));
+        return Mono.just(new OutResponse(Collections.emptyList(), new VersionReference("")));
     }
 
 }

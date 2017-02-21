@@ -18,6 +18,7 @@ package org.cloudfoundry.dependency.in;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.cloudfoundry.dependency.OutputUtils;
+import org.cloudfoundry.dependency.VersionHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -112,7 +113,7 @@ final class InAction implements CommandLineRunner {
     }
 
     private Mono<Void> writeVersion() {
-        try (InputStream in = new ByteArrayInputStream(this.request.getVersion().getRef().getBytes(Charset.defaultCharset()))) {
+        try (InputStream in = new ByteArrayInputStream(new VersionHolder(this.request.getVersion().getRef()).toRepositoryVersion().getBytes(Charset.defaultCharset()))) {
             Files.createDirectories(this.destination);
             Files.copy(in, getVersionFile(), StandardCopyOption.REPLACE_EXISTING);
             return Mono.empty();

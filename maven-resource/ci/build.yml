@@ -14,4 +14,4 @@ outputs:
 - name: docker-image
 
 run:
-  path: java-buildpack-dependency-builder/maven-central-resource/ci/build.sh
+  path: java-buildpack-dependency-builder/maven-resource/ci/build.sh

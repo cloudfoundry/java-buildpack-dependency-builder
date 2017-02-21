@@ -88,16 +88,19 @@ final class InAction implements CommandLineRunner {
 
     private Mono<String> getUri() {
         return Mono.when(
+            Mono.justOrEmpty(this.request.getSource().getUri())
+                .otherwiseIfEmpty(Mono.error(new IllegalArgumentException("URI must be specified"))),
             Mono.justOrEmpty(this.request.getSource().getGroupId())
                 .otherwiseIfEmpty(Mono.error(new IllegalArgumentException("Group ID must be specified"))),
             Mono.justOrEmpty(this.request.getSource().getArtifactId())
                 .otherwiseIfEmpty(Mono.error(new IllegalArgumentException("Artifact ID must be specified"))))
             .map(tuple -> {
-                String groupId = tuple.getT1();
-                String artifactId = tuple.getT2();
+                String uri = tuple.getT1();
+                String groupId = tuple.getT2();
+                String artifactId = tuple.getT3();
                 String version = this.request.getVersion().getRef();
 
-                return String.format("https://repo1.maven.org/maven2/%s/%s/%s/%s-%s.jar", groupId.replaceAll("\\.", "/"), artifactId, version, artifactId, version);
+                return String.format("%s/%s/%s/%s/%s-%s.jar", uri, groupId.replaceAll("\\.", "/"), artifactId, version, artifactId, version);
             });
     }
 

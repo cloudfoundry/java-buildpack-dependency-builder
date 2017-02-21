@@ -18,7 +18,8 @@ package org.cloudfoundry.dependency.check;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.cloudfoundry.dependency.OutputUtils;
-import org.cloudfoundry.dependency.Version;
+import org.cloudfoundry.dependency.VersionHolder;
+import org.cloudfoundry.dependency.VersionReference;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
@@ -63,12 +64,12 @@ final class CheckAction implements CommandLineRunner {
             .block(Duration.ofMinutes(5));
     }
 
-    Mono<List<Version>> run() {
+    Mono<List<VersionReference>> run() {
         return getUri()
             .then(this::requestDirectoryListing)
             .flatMap(this::getCandidateVersions)
             .transform(this::sinceVersion)
-            .map(version -> new org.cloudfoundry.dependency.Version(version.toString()))
+            .map(version -> new VersionReference(version.toString()))
             .collectList();
     }
 
@@ -79,13 +80,13 @@ final class CheckAction implements CommandLineRunner {
             .orElse(versions);
     }
 
-    private Flux<com.github.zafarkhaja.semver.Version> getCandidateVersions(String response) {
+    private Flux<VersionHolder> getCandidateVersions(String response) {
         return Mono.just(Jsoup.parse(response))
             .flatMapIterable(d -> d.select("a[href]"))
             .map(Element::text)
             .transform(this::validVersions)
             .transform(this::filteredVersions)
-            .map(com.github.zafarkhaja.semver.Version::valueOf)
+            .map(VersionHolder::new)
             .sort();
     }
 
@@ -99,10 +100,10 @@ final class CheckAction implements CommandLineRunner {
             .then(response -> response.receive().aggregate().asString());
     }
 
-    private Flux<com.github.zafarkhaja.semver.Version> sinceVersion(Flux<com.github.zafarkhaja.semver.Version> versions) {
+    private Flux<VersionHolder> sinceVersion(Flux<VersionHolder> versions) {
         return this.request.getVersion()
             .map(version -> {
-                com.github.zafarkhaja.semver.Version previous = com.github.zafarkhaja.semver.Version.valueOf(version.getRef());
+                VersionHolder previous = new VersionHolder(version.getRef());
 
                 return versions
                     .filter(previous::lessThanOrEqualTo);

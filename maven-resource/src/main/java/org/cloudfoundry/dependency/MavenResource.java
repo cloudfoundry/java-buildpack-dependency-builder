@@ -33,10 +33,10 @@ import reactor.ipc.netty.http.client.HttpClient;
 import java.io.IOException;
 
 @SpringBootApplication
-public class MavenCentralResource {
+public class MavenResource {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        SpringApplication.run(MavenCentralResource.class, args);
+        SpringApplication.run(MavenResource.class, args);
     }
 
     @Bean

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/maven-central-resource.iml" filepath="$PROJECT_DIR$/maven-central-resource.iml" />
+      <module fileurl="file://$PROJECT_DIR$/maven-resource.iml" filepath="$PROJECT_DIR$/maven-resource.iml" />
     </modules>
   </component>
 </project>
