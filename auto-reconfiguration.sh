@@ -13,6 +13,6 @@ VERSION=$(cat auto-reconfiguration-archives/version)
 UPLOAD_PATH=$(upload_path)
 INDEX_PATH="/auto-reconfiguration/index.yml"
 
-transfer_to_s3 "auto-reconfiguration-archives/java-buildpack-auto-reconfiguration-*.jar" $UPLOAD_PATH
+transfer_to_s3 "auto-reconfiguration-archives/auto-reconfiguration-*.jar" $UPLOAD_PATH
 update_index $INDEX_PATH $VERSION $UPLOAD_PATH
 invalidate_cache $INDEX_PATH $UPLOAD_PATH
