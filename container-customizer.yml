@@ -9,14 +9,12 @@ image_resource:
 
 inputs:
 - name: java-buildpack-dependency-builder
+- name: container-customizer-archives
 
 run:
   path: java-buildpack-dependency-builder/container-customizer.sh
 
 params:
-  DOWNLOAD_VERSION: 1.1.0.RELEASE
-  UPLOAD_VERSION:   1.1.0_RELEASE
-
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
   CLOUDFRONT_DISTRIBUTION_IDS:

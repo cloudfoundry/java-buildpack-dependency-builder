@@ -23,7 +23,6 @@ The list of available versions for each dependency can be found at the following
 
 | Dependency | Location
 | ---------- | ---------
-| Container Customizer | [`universal`](https://java-buildpack.cloudfoundry.org/container-customizer/index.yml)
 | GemFire Modules Tomcat 7| [`universal`](https://java-buildpack.cloudfoundry.org/gem-fire-modules-tomcat7/index.yml)
 | GemFire Modules | [`universal`](https://java-buildpack.cloudfoundry.org/gem-fire-modules/index.yml)
 | GemFire Security | [`universal`](https://java-buildpack.cloudfoundry.org/gem-fire-security/index.yml)
