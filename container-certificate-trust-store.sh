@@ -8,7 +8,8 @@ upload_path() {
   echo "/container-certificate-trust-store/container-certificate-trust-store-$VERSION.jar"
 }
 
-DOWNLOAD_URI=$(download_uri)
+VERSION=$(cat container-certificate-trust-store-archives/version)
+
 UPLOAD_PATH=$(upload_path)
 INDEX_PATH="/container-certificate-trust-store/index.yml"
 
