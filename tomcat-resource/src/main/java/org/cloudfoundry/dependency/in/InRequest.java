@@ -21,7 +21,6 @@ import org.cloudfoundry.dependency.Source;
 import org.cloudfoundry.dependency.VersionReference;
 
 import java.util.Map;
-import java.util.Objects;
 
 final class InRequest {
 
@@ -35,34 +34,6 @@ final class InRequest {
         this.params = params;
         this.source = source;
         this.version = version;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        InRequest inRequest = (InRequest) o;
-        return Objects.equals(params, inRequest.params) &&
-            Objects.equals(source, inRequest.source) &&
-            Objects.equals(version, inRequest.version);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(params, source, version);
-    }
-
-    @Override
-    public String toString() {
-        return "InRequest{" +
-            "params=" + params +
-            ", source=" + source +
-            ", version=" + version +
-            '}';
     }
 
     Map<String, Object> getParams() {

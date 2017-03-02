@@ -20,7 +20,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.cloudfoundry.dependency.Source;
 import org.cloudfoundry.dependency.VersionReference;
 
-import java.util.Objects;
 import java.util.Optional;
 
 final class CheckRequest {
@@ -32,32 +31,6 @@ final class CheckRequest {
     CheckRequest(@JsonProperty("source") Source source, @JsonProperty("version") Optional<VersionReference> version) {
         this.source = source;
         this.version = version;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        CheckRequest request = (CheckRequest) o;
-        return Objects.equals(source, request.source) &&
-            Objects.equals(version, request.version);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(source, version);
-    }
-
-    @Override
-    public String toString() {
-        return "CheckRequest{" +
-            "source=" + source +
-            ", version=" + version +
-            '}';
     }
 
     Source getSource() {

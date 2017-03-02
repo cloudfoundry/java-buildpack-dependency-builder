@@ -19,8 +19,6 @@ package org.cloudfoundry.dependency;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Objects;
-
 public final class VersionReference {
 
     private final String ref;
@@ -30,33 +28,9 @@ public final class VersionReference {
         this.ref = ref;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        VersionReference version = (VersionReference) o;
-        return Objects.equals(ref, version.ref);
-    }
-
     @JsonProperty("ref")
     public String getRef() {
         return this.ref;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(ref);
-    }
-
-    @Override
-    public String toString() {
-        return "VersionReference{" +
-            "ref='" + ref + '\'' +
-            '}';
     }
 
 }

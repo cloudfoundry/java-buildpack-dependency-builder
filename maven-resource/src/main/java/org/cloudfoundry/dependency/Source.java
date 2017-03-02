@@ -19,7 +19,6 @@ package org.cloudfoundry.dependency;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Objects;
 import java.util.Optional;
 
 
@@ -43,19 +42,6 @@ public final class Source {
         this.versionPattern = versionPattern;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Source source = (Source) o;
-        return Objects.equals(artifactId, source.artifactId) &&
-            Objects.equals(groupId, source.groupId);
-    }
-
     public Optional<String> getArtifactId() {
         return this.artifactId;
     }
@@ -70,21 +56,6 @@ public final class Source {
 
     public Optional<String> getVersionPattern() {
         return this.versionPattern;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(artifactId, groupId);
-    }
-
-    @Override
-    public String toString() {
-        return "Source{" +
-            "artifactId=" + artifactId +
-            ", groupId=" + groupId +
-            ", uri=" + uri +
-            ", versionPattern" + versionPattern +
-            '}';
     }
 
 }

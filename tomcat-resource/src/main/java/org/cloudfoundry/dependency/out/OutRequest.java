@@ -20,7 +20,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.cloudfoundry.dependency.Source;
 
 import java.util.Map;
-import java.util.Objects;
 
 final class OutRequest {
 
@@ -31,32 +30,6 @@ final class OutRequest {
     OutRequest(@JsonProperty("params") Map<String, Object> params, @JsonProperty("source") Source source) {
         this.params = params;
         this.source = source;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        OutRequest that = (OutRequest) o;
-        return Objects.equals(params, that.params) &&
-            Objects.equals(source, that.source);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(params, source);
-    }
-
-    @Override
-    public String toString() {
-        return "OutRequest{" +
-            "params=" + params +
-            ", source=" + source +
-            '}';
     }
 
     Map<String, Object> getParams() {
