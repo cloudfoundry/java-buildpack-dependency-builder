@@ -9,14 +9,12 @@ image_resource:
 
 inputs:
 - name: java-buildpack-dependency-builder
+- name: memory-calculator-archives
 
 run:
   path: java-buildpack-dependency-builder/memory-calculator.sh
 
 params:
-  DOWNLOAD_VERSION: 3.0.1.RELEASE
-  UPLOAD_VERSION:   3.0.1_RELEASE
-
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
   CLOUDFRONT_DISTRIBUTION_IDS:
