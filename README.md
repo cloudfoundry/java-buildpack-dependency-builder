@@ -80,7 +80,6 @@ This table shows locations to check for new releases of cached dependencies.  It
 | GemFire Security | [`release`](http://dist.gemstone.com.s3.amazonaws.com/)
 | GemFire | [`release`](http://dist.gemstone.com.s3.amazonaws.com/)
 | Groovy | [`release`](http://groovy-lang.org/download.html)
-| `jvmkill` | [`release`](https://github.com/cloudfoundry/jvmkill/releases)
 | Memory Calculator | [`release`](https://github.com/cloudfoundry/java-buildpack-memory-calculator/releases)
 | OpenJDK | [`oracle`](http://www.oracle.com/technetwork/java/javase/downloads/index.html), [`jdk8u`](http://hg.openjdk.java.net/jdk8u/jdk8u)
 | Spring Boot CLI | [`release`](http://repo.springsource.org/release/org/springframework/boot/spring-boot-cli/)
