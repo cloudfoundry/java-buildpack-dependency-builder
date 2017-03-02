@@ -2,4 +2,4 @@
 
 set -e
 
-java -Dspring.profiles.active=in -jar "$(dirname $0)/artifactor-resource.jar" "$@"
+java -Dspring.profiles.active=in -jar "$(dirname $0)/artifactory-resource.jar" "$@"
