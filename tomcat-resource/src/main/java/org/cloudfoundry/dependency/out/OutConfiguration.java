@@ -35,17 +35,17 @@ class OutConfiguration {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Bean
-    Path source(ApplicationArguments applicationArguments) {
-        Path source = Paths.get(applicationArguments.getSourceArgs()[0]);
-        this.logger.debug("Source: {}", source);
-        return source;
-    }
-
-    @Bean
     OutRequest outRequest(ObjectMapper objectMapper) throws IOException {
         OutRequest request = objectMapper.readValue(System.in, OutRequest.class);
         this.logger.debug("Request: {}", request);
         return request;
+    }
+
+    @Bean
+    Path source(ApplicationArguments applicationArguments) {
+        Path source = Paths.get(applicationArguments.getSourceArgs()[0]);
+        this.logger.debug("Source: {}", source);
+        return source;
     }
 
 }

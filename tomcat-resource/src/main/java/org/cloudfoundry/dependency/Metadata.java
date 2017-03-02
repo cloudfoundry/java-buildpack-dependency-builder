@@ -18,8 +18,6 @@ package org.cloudfoundry.dependency;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Objects;
-
 public final class Metadata {
 
     private final String name;
@@ -31,19 +29,6 @@ public final class Metadata {
         this.value = value;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Metadata metadata = (Metadata) o;
-        return Objects.equals(name, metadata.name) &&
-            Objects.equals(value, metadata.value);
-    }
-
     @JsonProperty("name")
     public String getName() {
         return this.name;
@@ -52,19 +37,6 @@ public final class Metadata {
     @JsonProperty("value")
     public String getValue() {
         return this.value;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, value);
-    }
-
-    @Override
-    public String toString() {
-        return "Metadata{" +
-            "name='" + name + '\'' +
-            ", value='" + value + '\'' +
-            '}';
     }
 
 }

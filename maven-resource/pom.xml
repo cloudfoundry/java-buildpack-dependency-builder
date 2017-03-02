@@ -24,7 +24,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <reactor.version>3.0.5.RELEASE</reactor.version>
-        <reactor-netty.version>0.6.0.RELEASE</reactor-netty.version>
+        <reactor-netty.version>0.6.1.RELEASE</reactor-netty.version>
     </properties>
 
     <dependencies>

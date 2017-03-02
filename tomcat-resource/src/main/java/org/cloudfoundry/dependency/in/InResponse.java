@@ -21,7 +21,6 @@ import org.cloudfoundry.dependency.Metadata;
 import org.cloudfoundry.dependency.VersionReference;
 
 import java.util.List;
-import java.util.Objects;
 
 final class InResponse {
 
@@ -32,32 +31,6 @@ final class InResponse {
     InResponse(List<Metadata> metadata, VersionReference version) {
         this.metadata = metadata;
         this.version = version;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        InResponse that = (InResponse) o;
-        return Objects.equals(metadata, that.metadata) &&
-            Objects.equals(version, that.version);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(metadata, version);
-    }
-
-    @Override
-    public String toString() {
-        return "InResponse{" +
-            "metadata=" + metadata +
-            ", version=" + version +
-            '}';
     }
 
     @JsonProperty("metadata")
