@@ -26,18 +26,28 @@ public final class Source {
 
     private final Optional<String> artifactId;
 
+    private final Optional<String> classifier;
+
     private final Optional<String> groupId;
+
+    private final Optional<String> packaging;
 
     private final Optional<String> uri;
 
     private final Optional<String> versionPattern;
 
     @JsonCreator
-    public Source(@JsonProperty("artifact_id") Optional<String> artifactId, @JsonProperty("group_id") Optional<String> groupId, @JsonProperty("uri") Optional<String> uri,
+    public Source(@JsonProperty("artifact_id") Optional<String> artifactId,
+                  @JsonProperty("classifier") Optional<String> classifier,
+                  @JsonProperty("group_id") Optional<String> groupId,
+                  @JsonProperty("packaging") Optional<String> packaging,
+                  @JsonProperty("uri") Optional<String> uri,
                   @JsonProperty("version_pattern") Optional<String> versionPattern) {
 
         this.artifactId = artifactId;
+        this.classifier = classifier;
         this.groupId = groupId;
+        this.packaging = packaging;
         this.uri = uri;
         this.versionPattern = versionPattern;
     }
@@ -46,8 +56,16 @@ public final class Source {
         return this.artifactId;
     }
 
+    public Optional<String> getClassifier() {
+        return this.classifier;
+    }
+
     public Optional<String> getGroupId() {
         return this.groupId;
+    }
+
+    public Optional<String> getPackaging() {
+        return this.packaging;
     }
 
     public Optional<String> getUri() {

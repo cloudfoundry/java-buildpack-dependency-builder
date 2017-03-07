@@ -132,7 +132,12 @@ final class CheckAction implements CommandLineRunner {
                 String groupId = tuple.getT2();
                 String artifactId = tuple.getT3();
 
-                return String.format("%s/%s/%s/maven-metadata.xml", uri, groupId.replaceAll("\\.", "/"), artifactId);
+                StringBuilder sb = new StringBuilder(uri);
+                sb.append("/").append(groupId.replaceAll("\\.", "/"));
+                sb.append("/").append(artifactId);
+                sb.append("/maven-metadata.xml");
+
+                return sb.toString();
             });
     }
 

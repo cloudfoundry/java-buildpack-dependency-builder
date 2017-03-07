@@ -27,6 +27,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.Exceptions;
 import reactor.core.publisher.Mono;
 import reactor.ipc.netty.http.client.HttpClient;
+import reactor.ipc.netty.http.client.HttpClientRequest;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -83,7 +84,14 @@ final class InAction implements CommandLineRunner {
         String artifactId = this.request.getSource().getArtifactId()
             .orElseThrow(() -> new IllegalArgumentException("Artifact ID must be specified"));
 
-        return this.destination.resolve(String.format("%s-%s.jar", artifactId, this.request.getVersion().getRef()));
+        StringBuilder sb = new StringBuilder(artifactId).append("-").append(this.request.getVersion().getRef());
+
+        this.request.getSource().getClassifier()
+            .ifPresent(classifier -> sb.append("-").append(classifier));
+
+        sb.append(".").append(this.request.getSource().getPackaging().orElse("jar"));
+
+        return this.destination.resolve(sb.toString());
     }
 
     private Mono<String> getUri() {
@@ -100,7 +108,19 @@ final class InAction implements CommandLineRunner {
                 String artifactId = tuple.getT3();
                 String version = this.request.getVersion().getRef();
 
-                return String.format("%s/%s/%s/%s/%s-%s.jar", uri, groupId.replaceAll("\\.", "/"), artifactId, version, artifactId, version);
+
+                StringBuilder sb = new StringBuilder(uri);
+                sb.append("/").append(groupId.replaceAll("\\.", "/"));
+                sb.append("/").append(artifactId);
+                sb.append("/").append(version);
+                sb.append("/").append(artifactId).append("-").append(version);
+
+                this.request.getSource().getClassifier()
+                    .ifPresent(classifier -> sb.append("-").append(classifier));
+
+                sb.append(".").append(this.request.getSource().getPackaging().orElse("jar"));
+
+                return sb.toString();
             });
     }
 
@@ -109,7 +129,7 @@ final class InAction implements CommandLineRunner {
     }
 
     private Mono<InputStream> requestArchive(String uri) {
-        return this.httpClient.get(uri)
+        return this.httpClient.get(uri, HttpClientRequest::followRedirect)
             .then(response -> response.receive().aggregate().asInputStream());
     }
 
