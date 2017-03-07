@@ -9,14 +9,12 @@ image_resource:
 
 inputs:
 - name: java-buildpack-dependency-builder
+- name: tomee-archives
 
 run:
-  path: java-buildpack-dependency-builder/tomee-7.sh
+  path: java-buildpack-dependency-builder/tomee.sh
 
 params:
-  DOWNLOAD_VERSION: 7.0.2
-  UPLOAD_VERSION:   7.0.2
-
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
   CLOUDFRONT_DISTRIBUTION_IDS:
