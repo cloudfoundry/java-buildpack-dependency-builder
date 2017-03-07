@@ -4,28 +4,15 @@ set -e -o pipefail
 
 source $(dirname "$0")/common.sh
 
-download_uri() {
-  if [[ -z "$DOWNLOAD_VERSION" ]]; then
-    echo "DOWNLOAD_VERSION must be set" >&2
-    exit 1
-  fi
-
-  echo $(spring_release_uri 'org.springframework.boot' 'spring-boot-cli' $DOWNLOAD_VERSION '-bin.tar.gz')
-}
-
 upload_path() {
-  if [[ -z "$UPLOAD_VERSION" ]]; then
-    echo "UPLOAD_VERSION must be set" >&2
-    exit 1
-  fi
-
-  echo "/spring-boot-cli/spring-boot-cli-$UPLOAD_VERSION.tar.gz"
+  echo "/spring-boot-cli/spring-boot-cli-$VERSION.tar.gz"
 }
 
-DOWNLOAD_URI=$(download_uri)
+VERSION=$(cat spring-boot-cli-archives/version)
+
 UPLOAD_PATH=$(upload_path)
 INDEX_PATH="/spring-boot-cli/index.yml"
 
-transfer_direct $DOWNLOAD_URI $UPLOAD_PATH
-update_index $INDEX_PATH $UPLOAD_VERSION $UPLOAD_PATH
+transfer_to_s3 "spring-boot-cli-archives/spring-boot-cli-*-bin.tar.gz" $UPLOAD_PATH
+update_index $INDEX_PATH $VERSION $UPLOAD_PATH
 invalidate_cache $INDEX_PATH $UPLOAD_PATH
