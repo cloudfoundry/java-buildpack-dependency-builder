@@ -32,22 +32,6 @@ gemfire_release_uri() {
   echo $(maven_uri 'http://dist.gemstone.com.s3.amazonaws.com/maven/release' $1 $2 $3 $4)
 }
 
-# $1: groupId
-# $2: artifactId
-# $3: version
-# $4: suffix
-gopivotal_release_uri() {
-  echo $(maven_uri 'http://maven.gopivotal.com.s3.amazonaws.com/release' $1 $2 $3 $4)
-}
-
-# $1: groupId
-# $2: artifactId
-# $3: version
-# $4: suffix
-maven_central_uri() {
-  echo $(maven_uri 'https://repo1.maven.org/maven2' $1 $2 $3 $4)
-}
-
 # $1: prefix
 # $2: groupId
 # $3: artifactId
@@ -61,14 +45,6 @@ maven_uri() {
   local suffix=${5:-.jar}
 
   echo "$prefix/$group_id/$artifact_id/$version/$artifact_id-$version$suffix"
-}
-
-# $1: groupId
-# $2: artifactId
-# $3: version
-# $4: suffix
-spring_release_uri() {
-  echo $(maven_uri 'https://repo.spring.io/release' $1 $2 $3 $4)
 }
 
 # $1: Download URI

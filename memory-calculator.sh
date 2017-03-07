@@ -4,20 +4,12 @@ set -e -o pipefail
 
 source $(dirname "$0")/common.sh
 
-upload_path_mountainlion() {
-  echo "/memory-calculator/mountainlion/x86_64/memory-calculator-$VERSION.tar.gz"
-}
-
-upload_path_trusty() {
-  echo "/memory-calculator/trusty/x86_64/memory-calculator-$VERSION.tar.gz"
-}
-
 VERSION=$(cat memory-calculator-archives/version)
 
-UPLOAD_PATH_MOUNTAINLION=$(upload_path_mountainlion)
-UPLOAD_PATH_TRUSTY=$(upload_path_trusty)
 INDEX_PATH_MOUNTAINLION="/memory-calculator/mountainlion/x86_64/index.yml"
 INDEX_PATH_TRUSTY="/memory-calculator/trusty/x86_64/index.yml"
+UPLOAD_PATH_MOUNTAINLION="/memory-calculator/mountainlion/x86_64/memory-calculator-$VERSION.tar.gz"
+UPLOAD_PATH_TRUSTY="/memory-calculator/trusty/x86_64/memory-calculator-$VERSION.tar.gz"
 
 transfer_to_s3 "memory-calculator-archives/java-buildpack-memory-calculator-*-darwin.tar.gz" $UPLOAD_PATH_MOUNTAINLION
 transfer_to_s3 "memory-calculator-archives/java-buildpack-memory-calculator-*-linux.tar.gz" $UPLOAD_PATH_TRUSTY
