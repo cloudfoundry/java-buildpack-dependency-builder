@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.cloudfoundry.dependency</groupId>
-    <artifactId>artifactory-resource</artifactId>
+    <artifactId>pivotal-network-resource</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>artifactory-resource</name>
-    <description>Concourse Artifactory Resource</description>
+    <name>pivotal-network-resource</name>
+    <description>Concourse Pivotal Network Resource</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
