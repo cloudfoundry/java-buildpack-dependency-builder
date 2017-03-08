@@ -1,6 +1,8 @@
 # Java Buildpack Dependency Builders
 This project automates the building and publication of Java Buildpack dependency artifacts.
 
+**NOTE:**  OpenJDK is the only dependency that is actually built via this repository.  For the rest of the dependencies, this repository serves as the automation of caching them in the Java Buildpack's respository.
+
 ## Replicating Repository
 To host the Java Buildpack dependency artifacts on your own server, first download the artifacts and `index.yml` files as described below, make them available at suitable locations on a web server, and then fork the Java buildpack and update its [repository configuration](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/extending-repositories.md#configuration) to point at the web server.
 
