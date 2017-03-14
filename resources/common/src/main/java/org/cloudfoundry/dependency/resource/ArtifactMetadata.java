@@ -16,29 +16,30 @@
 
 package org.cloudfoundry.dependency.resource;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+public final class ArtifactMetadata {
 
-import java.util.List;
+    private final Digests digests;
 
-public final class OutResponse {
+    private final String name;
 
-    private final List<ArtifactMetadata> metadata;
+    private final String uri;
 
-    private final VersionReference version;
-
-    public OutResponse(List<ArtifactMetadata> metadata, VersionReference version) {
-        this.metadata = metadata;
-        this.version = version;
+    public ArtifactMetadata(Digests digests, String name, String uri) {
+        this.digests = digests;
+        this.name = name;
+        this.uri = uri;
     }
 
-    @JsonProperty("metadata")
-    public List<ArtifactMetadata> getMetadata() {
-        return this.metadata;
+    public Digests getDigests() {
+        return this.digests;
     }
 
-    @JsonProperty("version")
-    public VersionReference getVersion() {
-        return this.version;
+    public String getName() {
+        return this.name;
+    }
+
+    public String getUri() {
+        return this.uri;
     }
 
 }

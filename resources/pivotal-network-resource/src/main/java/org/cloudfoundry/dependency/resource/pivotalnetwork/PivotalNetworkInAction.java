@@ -17,9 +17,9 @@
 package org.cloudfoundry.dependency.resource.pivotalnetwork;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.cloudfoundry.dependency.resource.ArtifactMetadata;
 import org.cloudfoundry.dependency.resource.CommonUtils;
 import org.cloudfoundry.dependency.resource.InAction;
-import org.cloudfoundry.dependency.resource.Metadata;
 import org.cloudfoundry.dependency.resource.NetworkLogging;
 import org.cloudfoundry.dependency.resource.OutputUtils;
 import org.springframework.context.annotation.Profile;
@@ -28,18 +28,14 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.ipc.netty.NettyInbound;
 import reactor.ipc.netty.http.client.HttpClient;
-import reactor.util.function.Tuple2;
-import reactor.util.function.Tuples;
 
 import java.io.InputStream;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-import static org.cloudfoundry.dependency.resource.CommonUtils.toMetadata;
 import static org.cloudfoundry.dependency.resource.pivotalnetwork.PivotalNetworkUtils.addAuthorization;
 import static org.cloudfoundry.dependency.resource.pivotalnetwork.PivotalNetworkUtils.getReleasesUri;
 import static org.cloudfoundry.dependency.resource.pivotalnetwork.PivotalNetworkUtils.requestPayload;
@@ -62,9 +58,7 @@ final class PivotalNetworkInAction extends InAction {
     }
 
     @Override
-    protected Mono<List<Metadata>> doRun() {
-        List<Tuple2<String, String>> artifacts = new ArrayList<>();
-
+    protected Flux<ArtifactMetadata> doRun() {
         Optional<String> apiToken = this.request.getSource().getApiToken();
         String releasesUri = getReleasesUri(this.request.getSource().getProduct());
 
@@ -80,13 +74,11 @@ final class PivotalNetworkInAction extends InAction {
             .flatMap(payload -> {
                 String artifactUri = getArtifactUri(payload);
                 String artifactName = getArtifactName(payload);
-                artifacts.add(Tuples.of(artifactUri, artifactName));
 
                 return requestArtifact(apiToken, artifactUri)
-                    .doOnNext(content -> writeArtifact(artifactName, content));
-            })
-            .then()
-            .then(() -> toMetadata(artifacts));
+                    .map(content -> writeArtifact(artifactName, content))
+                    .map(digests -> new ArtifactMetadata(digests, artifactName, artifactUri));
+            });
     }
 
     private Flux<Map<String, Object>> filteredArtifacts(Optional<String> artifactPattern, Flux<Map<String, Object>> productFiles) {

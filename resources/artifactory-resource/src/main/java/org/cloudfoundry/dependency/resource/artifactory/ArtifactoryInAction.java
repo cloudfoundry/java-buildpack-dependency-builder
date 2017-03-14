@@ -17,25 +17,20 @@
 package org.cloudfoundry.dependency.resource.artifactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.cloudfoundry.dependency.resource.ArtifactMetadata;
 import org.cloudfoundry.dependency.resource.InAction;
-import org.cloudfoundry.dependency.resource.Metadata;
 import org.cloudfoundry.dependency.resource.OutputUtils;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 import reactor.ipc.netty.http.client.HttpClient;
-import reactor.util.function.Tuple2;
-import reactor.util.function.Tuples;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import static org.cloudfoundry.dependency.resource.CommonUtils.getArtifactName;
 import static org.cloudfoundry.dependency.resource.CommonUtils.requestArtifact;
-import static org.cloudfoundry.dependency.resource.CommonUtils.toMetadata;
 import static org.cloudfoundry.dependency.resource.artifactory.ArtifactoryUtils.filteredArtifacts;
 import static org.cloudfoundry.dependency.resource.artifactory.ArtifactoryUtils.requestSearchPayload;
 
@@ -57,9 +52,7 @@ final class ArtifactoryInAction extends InAction {
     }
 
     @Override
-    protected Mono<List<Metadata>> doRun() {
-        List<Tuple2<String, String>> artifacts = new ArrayList<>();
-
+    protected Flux<ArtifactMetadata> doRun() {
         String searchUri = getSearchUri();
 
         return requestSearchPayload(this.httpClient, this.objectMapper, searchUri)
@@ -67,13 +60,11 @@ final class ArtifactoryInAction extends InAction {
             .map(this::getArtifactUri)
             .flatMap(artifactUri -> {
                 String artifactName = getArtifactName(artifactUri);
-                artifacts.add(Tuples.of(artifactUri, artifactName));
 
                 return requestArtifact(this.httpClient, artifactUri)
-                    .doOnNext(content -> writeArtifact(artifactName, content));
-            })
-            .then()
-            .then(() -> toMetadata(artifacts));
+                    .map(content -> writeArtifact(artifactName, content))
+                    .map(digests -> new ArtifactMetadata(digests, artifactName, artifactUri));
+            });
     }
 
     private String getArtifactUri(String path) {

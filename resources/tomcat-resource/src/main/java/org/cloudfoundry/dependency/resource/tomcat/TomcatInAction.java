@@ -16,17 +16,15 @@
 
 package org.cloudfoundry.dependency.resource.tomcat;
 
+import org.cloudfoundry.dependency.resource.ArtifactMetadata;
 import org.cloudfoundry.dependency.resource.InAction;
-import org.cloudfoundry.dependency.resource.Metadata;
 import org.cloudfoundry.dependency.resource.OutputUtils;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
 import reactor.ipc.netty.http.client.HttpClient;
 
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.List;
 
 import static org.cloudfoundry.dependency.resource.CommonUtils.getArtifactName;
 import static org.cloudfoundry.dependency.resource.CommonUtils.requestArtifact;
@@ -46,16 +44,14 @@ final class TomcatInAction extends InAction {
     }
 
     @Override
-    protected Mono<List<Metadata>> doRun() {
+    protected Flux<ArtifactMetadata> doRun() {
         String artifactUri = getArtifactUri();
         String artifactName = getArtifactName(artifactUri);
 
         return requestArtifact(this.httpClient, artifactUri)
-            .doOnNext(content -> writeArtifact(artifactName, content))
-            .then(Mono.just(Arrays.asList(
-                new Metadata("artifact_uri", artifactUri),
-                new Metadata("artifact_name", artifactName)
-            )));
+            .map(content -> writeArtifact(artifactName, content))
+            .map(digests -> new ArtifactMetadata(digests, artifactName, artifactUri))
+            .flux();
     }
 
     private String getArtifactUri() {

@@ -23,6 +23,7 @@ import reactor.util.function.Tuple2;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,30 +51,6 @@ public final class CommonUtils {
             .doOnSubscribe(NetworkLogging.get(uri))
             .transform(NetworkLogging.response(uri))
             .then(response -> response.receive().aggregate().asInputStream());
-    }
-
-    public static Mono<List<Metadata>> toMetadata(List<Tuple2<String, String>> artifacts) {
-        List<Metadata> metadata = new ArrayList<>(artifacts.size() * 2);
-
-        if (artifacts.size() == 1) {
-            Tuple2<String, String> tuple = artifacts.get(0);
-            String artifactUri = tuple.getT1();
-            String artifactName = tuple.getT2();
-
-            metadata.add(new Metadata("artifact_uri", artifactUri));
-            metadata.add(new Metadata("artifact_name", artifactName));
-        } else {
-            for (int i = 0; i < artifacts.size(); i++) {
-                Tuple2<String, String> tuple = artifacts.get(i);
-                String artifactUri = tuple.getT1();
-                String artifactName = tuple.getT2();
-
-                metadata.add(new Metadata(String.format("%d.artifact_uri", i), artifactUri));
-                metadata.add(new Metadata(String.format("%d.artifact_name", i), artifactName));
-            }
-        }
-
-        return Mono.just(metadata);
     }
 
 }
