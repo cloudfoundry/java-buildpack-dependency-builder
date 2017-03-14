@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="artifactory-resource" />
+        <module name="common" />
+        <module name="maven-resource" />
+        <module name="pivotal-network-resource" />
+        <module name="tomcat-resource" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="artifactory-resource" target="1.8" />
+      <module name="common" target="1.8" />
+      <module name="java-buildpack-dependency-builder-resources" target="1.8" />
+      <module name="maven-resource" target="1.8" />
+      <module name="pivotal-network-resource" target="1.8" />
+      <module name="tomcat-resource" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
