@@ -39,6 +39,18 @@ public final class VersionHolder implements Comparable<VersionHolder> {
         return this.semver.compareTo(o.semver);
     }
 
+    public Integer getMajor() {
+        return this.semver.getMajorVersion();
+    }
+
+    public Integer getMicro() {
+        return this.semver.getPatchVersion();
+    }
+
+    public Integer getMinor() {
+        return this.semver.getMinorVersion();
+    }
+
     public String getRaw() {
         return this.raw;
     }
