@@ -11,7 +11,10 @@ inputs:
 - name: java-buildpack-dependency-builder
 
 outputs:
-- name: docker-image
+- name: artifactory-resource-docker-image
+- name: maven-resource-docker-image
+- name: pivotal-network-resource-docker-image
+- name: tomcat-resource-docker-image
 
 run:
   path: java-buildpack-dependency-builder/resources/ci/build.sh
