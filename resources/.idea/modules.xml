@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/maven-resource/maven-resource.iml" filepath="$PROJECT_DIR$/maven-resource/maven-resource.iml" />
       <module fileurl="file://$PROJECT_DIR$/pivotal-network-resource/pivotal-network-resource.iml" filepath="$PROJECT_DIR$/pivotal-network-resource/pivotal-network-resource.iml" />
       <module fileurl="file://$PROJECT_DIR$/tomcat-resource/tomcat-resource.iml" filepath="$PROJECT_DIR$/tomcat-resource/tomcat-resource.iml" />
+      <module fileurl="file://$PROJECT_DIR$/your-kit-resource/your-kit-resource.iml" filepath="$PROJECT_DIR$/your-kit-resource/your-kit-resource.iml" />
     </modules>
   </component>
 </project>

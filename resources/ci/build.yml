@@ -15,6 +15,7 @@ outputs:
 - name: maven-resource-docker-image
 - name: pivotal-network-resource-docker-image
 - name: tomcat-resource-docker-image
+- name: your-kit-resource-docker-image
 
 run:
   path: java-buildpack-dependency-builder/resources/ci/build.sh
