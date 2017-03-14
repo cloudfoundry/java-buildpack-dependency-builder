@@ -123,13 +123,13 @@ public class InAction implements CommandLineRunner {
             ArtifactMetadata artifactMetadata = artifacts.get(i);
             Digests digests = artifactMetadata.getDigests();
 
-            metadata.add(new Metadata(String.format("%d-name", i), artifactMetadata.getName()));
-            metadata.add(new Metadata(String.format("%d-uri", i), artifactMetadata.getUri()));
-            metadata.add(new Metadata(String.format("%d-sha1", i), digests.getSha1()));
-            metadata.add(new Metadata(String.format("%d-sha256", i), digests.getSha256()));
-            metadata.add(new Metadata(String.format("%d-sha384", i), digests.getSha384()));
-            metadata.add(new Metadata(String.format("%d-sha512", i), digests.getSha512()));
-            metadata.add(new Metadata(String.format("%d-md5", i), digests.getMd5()));
+            metadata.add(new Metadata(String.format("[%d] name", i), artifactMetadata.getName()));
+            metadata.add(new Metadata(String.format("[%d] uri", i), artifactMetadata.getUri()));
+            metadata.add(new Metadata(String.format("[%d] sha1", i), digests.getSha1()));
+            metadata.add(new Metadata(String.format("[%d] sha256", i), digests.getSha256()));
+            metadata.add(new Metadata(String.format("[%d] sha384", i), digests.getSha384()));
+            metadata.add(new Metadata(String.format("[%d] sha512", i), digests.getSha512()));
+            metadata.add(new Metadata(String.format("[%d] md5", i), digests.getMd5()));
         }
 
         return metadata;
