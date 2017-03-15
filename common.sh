@@ -20,33 +20,6 @@ invalidate_cache() {
   done
 }
 
-# $1: Download URI
-# $2: S3 path without bucket
-transfer_direct() {
-  if [[ -z "$S3_BUCKET" ]]; then
-    echo "S3_BUCKET must be set" >&2
-    exit 1
-  fi
-
-  local source=$1
-  local target="s3://$S3_BUCKET$2"
-
-  echo "$source -> $target"
-
-  curl --location --fail $source | aws s3 cp - $target
-}
-
-# $1: Download URI
-# $2: Destination path
-transfer_to_file() {
-  local source=$1
-  local target=$2
-
-  echo "$source -> $target"
-
-  curl --location --fail $source -o $target
-}
-
 # $1: Source path
 # $2: S3 path without bucket
 transfer_to_s3() {
