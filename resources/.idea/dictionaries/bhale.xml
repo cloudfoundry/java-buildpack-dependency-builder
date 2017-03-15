@@ -2,6 +2,7 @@
   <dictionary name="bhale">
     <words>
       <w>artifactory</w>
+      <w>wildfly</w>
     </words>
   </dictionary>
 </component>

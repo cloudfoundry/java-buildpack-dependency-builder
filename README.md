@@ -67,4 +67,3 @@ This table shows locations to check for new releases of cached dependencies.  It
 | Dependency | Location
 | ---------- | --------
 | OpenJDK | [`oracle`](http://www.oracle.com/technetwork/java/javase/downloads/index.html), [`jdk8u`](http://hg.openjdk.java.net/jdk8u/jdk8u)
-| Wildfly | [`release`](http://wildfly.org/downloads)

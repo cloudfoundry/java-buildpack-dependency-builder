@@ -21,6 +21,7 @@
         <module>maven-resource</module>
         <module>pivotal-network-resource</module>
         <module>tomcat-resource</module>
+        <module>wildfly-resource</module>
         <module>your-kit-resource</module>
     </modules>
 
