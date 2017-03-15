@@ -20,29 +20,6 @@ invalidate_cache() {
   done
 }
 
-# $1: groupId
-# $2: artifactId
-# $3: version
-# $4: suffix
-gemfire_release_uri() {
-  echo $(maven_uri 'http://dist.gemstone.com.s3.amazonaws.com/maven/release' $1 $2 $3 $4)
-}
-
-# $1: prefix
-# $2: groupId
-# $3: artifactId
-# $4: version
-# $5: suffix
-maven_uri() {
-  local prefix=$1
-  local group_id=$(echo $2 | tr '.' '/')
-  local artifact_id=$3
-  local version=$4
-  local suffix=${5:-.jar}
-
-  echo "$prefix/$group_id/$artifact_id/$version/$artifact_id-$version$suffix"
-}
-
 # $1: Download URI
 # $2: S3 path without bucket
 transfer_direct() {
