@@ -11,6 +11,7 @@
         <module name="maven-resource" />
         <module name="pivotal-network-resource" />
         <module name="tomcat-resource" />
+        <module name="wildfly-resource" />
         <module name="your-kit-resource" />
       </profile>
     </annotationProcessing>
@@ -21,6 +22,7 @@
       <module name="maven-resource" target="1.8" />
       <module name="pivotal-network-resource" target="1.8" />
       <module name="tomcat-resource" target="1.8" />
+      <module name="wildfly-resource" target="1.8" />
       <module name="your-kit-resource" target="1.8" />
     </bytecodeTargetLevel>
   </component>

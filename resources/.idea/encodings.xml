@@ -7,6 +7,7 @@
     <file url="file://$PROJECT_DIR$/maven-resource" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pivotal-network-resource" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tomcat-resource" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wildfly-resource" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/your-kit-resource" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>

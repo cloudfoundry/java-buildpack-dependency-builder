@@ -15,6 +15,7 @@ outputs:
 - name: maven-resource-docker-image
 - name: pivotal-network-resource-docker-image
 - name: tomcat-resource-docker-image
+- name: wildfly-resource-docker-image
 - name: your-kit-resource-docker-image
 
 run:
