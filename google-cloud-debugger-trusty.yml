@@ -1,0 +1,23 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: cfje/google-cloud-debugger
+    tag: latest
+
+inputs:
+- name: cloud-debug-java
+- name: java-buildpack-dependency-builder
+
+run:
+  path: java-buildpack-dependency-builder/google-cloud-debugger.sh
+
+params:
+  PLATFORM: trusty
+
+  AWS_ACCESS_KEY_ID:
+  AWS_SECRET_ACCESS_KEY:
+  CLOUDFRONT_DISTRIBUTION_IDS:
+  S3_BUCKET:
