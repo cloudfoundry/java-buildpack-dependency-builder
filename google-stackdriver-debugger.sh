@@ -4,6 +4,8 @@ set -e -o pipefail
 
 source $(dirname "$0")/common.sh
 
+PATH=/usr/local/bin:$PATH
+
 cd cloud-debug-java
 chmod +x build.sh
 ./build.sh

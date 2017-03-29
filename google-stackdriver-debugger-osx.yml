@@ -1,0 +1,17 @@
+---
+platform: darwin
+
+inputs:
+- name: cloud-debug-java
+- name: java-buildpack-dependency-builder
+
+run:
+  path: java-buildpack-dependency-builder/google-stackdriver-debugger.sh
+
+params:
+  PLATFORM: mountainlion
+
+  AWS_ACCESS_KEY_ID:
+  AWS_SECRET_ACCESS_KEY:
+  CLOUDFRONT_DISTRIBUTION_IDS:
+  S3_BUCKET:
