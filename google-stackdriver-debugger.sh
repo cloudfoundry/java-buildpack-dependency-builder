@@ -11,7 +11,7 @@ chmod +x build.sh
 VERSION=$(git describe --tags)
 VERSION=${VERSION##v}
 
-INDEX_PATH="/google-stackdriver-debugger/index.yml"
+INDEX_PATH="/google-stackdriver-debugger/$PLATFORM/x86_64/index.yml"
 UPLOAD_PATH="/google-stackdriver-debugger/$PLATFORM/x86_64/google-stackdriver-debugger-$VERSION.tar.gz"
 
 transfer_to_s3 "cdbg_java_agent_gce.tar.gz" $UPLOAD_PATH
