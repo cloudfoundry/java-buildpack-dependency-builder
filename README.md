@@ -28,7 +28,7 @@ The list of available versions for each dependency can be found at the following
 | Auto Reconfiguration | [`universal`](https://java-buildpack.cloudfoundry.org/auto-reconfiguration/index.yml)
 | Container Certificate Trust Store | [`universal`](https://java-buildpack.cloudfoundry.org/container-certificate-trust-store/index.yml)
 | Container Customizer | [`universal`](https://java-buildpack.cloudfoundry.org/container-customizer/index.yml)
-| Google Stackdriver Debugger | [`trusty`](https://java-buildpack.cloudfoundry.org/google-stack-driver-debugger/trusty/x86_64/index.yml)
+| Google Stackdriver Debugger | [`mountainlion`](https://java-buildpack.cloudfoundry.org/google-stack-driver-debugger/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/google-stack-driver-debugger/trusty/x86_64/index.yml)
 | Groovy | [`universal`](https://java-buildpack.cloudfoundry.org/groovy/index.yml)
 | `jvmkill` | [`mountainlion`](https://java-buildpack.cloudfoundry.org/jvmkill/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/jvmkill/trusty/x86_64/index.yml)
 | MariaDB JDBC | [`universal`](https://java-buildpack.cloudfoundry.org/mariadb-jdbc/index.yml)
