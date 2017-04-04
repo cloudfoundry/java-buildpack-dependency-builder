@@ -56,10 +56,11 @@ The list of available versions for each dependency can be found at the following
 ## License
 The Builder is released under version 2.0 of the [Apache License][a].
 
-[c]: https://aws.amazon.com/cli/
 [a]: http://www.apache.org/licenses/LICENSE-2.0
+[c]: https://aws.amazon.com/cli/
 [g]: CONTRIBUTING.md
 [p]: http://help.github.com/send-pull-requests
+
 ---
 
 ## Update Locations
