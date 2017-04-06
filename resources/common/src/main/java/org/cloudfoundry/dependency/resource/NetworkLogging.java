@@ -48,7 +48,7 @@ public final class NetworkLogging {
     }
 
     public static Function<Mono<HttpClientResponse>, Mono<HttpClientResponse>> response(String uri) {
-        if (!LOGGER.isDebugEnabled()) {
+        if (!LOGGER.isInfoEnabled()) {
             return inbound -> inbound;
         }
 
@@ -61,6 +61,10 @@ public final class NetworkLogging {
             .doFinally(signalType -> {
                 String elapsed = asTime(System.currentTimeMillis() - startTimeHolder.get());
                 HttpClientResponse response = responseHolder.get();
+
+                if (response == null) {
+                    return;
+                }
 
                 LOGGER.info("{}  {} ({})", response.status().code(), uri, elapsed);
             });
