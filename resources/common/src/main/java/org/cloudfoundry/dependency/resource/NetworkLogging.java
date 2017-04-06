@@ -22,6 +22,8 @@ import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Mono;
 import reactor.ipc.netty.http.client.HttpClientResponse;
 
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -46,14 +48,21 @@ public final class NetworkLogging {
     }
 
     public static Function<Mono<HttpClientResponse>, Mono<HttpClientResponse>> response(String uri) {
-        return inbound -> inbound
-            .elapsed()
-            .map(tuple -> {
-                Long elapsed = tuple.getT1();
-                HttpClientResponse response = tuple.getT2();
+        if (!LOGGER.isDebugEnabled()) {
+            return inbound -> inbound;
+        }
 
-                LOGGER.info("{}  {} ({})", response.status().code(), uri, asTime(elapsed));
-                return response;
+        AtomicLong startTimeHolder = new AtomicLong();
+        AtomicReference<HttpClientResponse> responseHolder = new AtomicReference<>();
+
+        return inbound -> inbound
+            .doOnSubscribe(s -> startTimeHolder.set(System.currentTimeMillis()))
+            .doOnNext(responseHolder::set)
+            .doFinally(signalType -> {
+                String elapsed = asTime(System.currentTimeMillis() - startTimeHolder.get());
+                HttpClientResponse response = responseHolder.get();
+
+                LOGGER.info("{}  {} ({})", response.status().code(), uri, elapsed);
             });
     }
 
