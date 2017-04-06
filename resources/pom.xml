@@ -31,7 +31,7 @@
         <jsoup.version>1.10.2</jsoup.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <reactor.version>3.0.5.RELEASE</reactor.version>
+        <reactor.version>3.0.6.RELEASE</reactor.version>
         <reactor-netty.version>0.6.2.RELEASE</reactor-netty.version>
     </properties>
 
