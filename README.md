@@ -33,14 +33,14 @@ The list of available versions for each dependency can be found at the following
 | `jvmkill` | [`mountainlion`](https://java-buildpack.cloudfoundry.org/jvmkill/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/jvmkill/trusty/x86_64/index.yml)
 | MariaDB JDBC | [`universal`](https://java-buildpack.cloudfoundry.org/mariadb-jdbc/index.yml)
 | Memory Calculator | [`mountainlion`](https://java-buildpack.cloudfoundry.org/memory-calculator/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/memory-calculator/trusty/x86_64/index.yml)
-| New Relic | [`universal`](https://java-buildpack.cloudfoundry.org/new-relic/index.yml)
+| New Relic | [`universal`](https://download.run.pivotal.io/new-relic/index.yml)
 | OpenJDK JRE | [`mountainlion`](https://java-buildpack.cloudfoundry.org/openjdk/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/openjdk/trusty/x86_64/index.yml)
 | OpenJDK JDK | [`mountainlion`](https://java-buildpack.cloudfoundry.org/openjdk-jdk/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/openjdk-jdk/trusty/x86_64/index.yml)
 | Play JPA Plugin | [`universal`](https://java-buildpack.cloudfoundry.org/play-jpa-plugin/index.yml)
 | PostgreSQL JDBC | [`universal`](https://java-buildpack.cloudfoundry.org/postgresql-jdbc/index.yml)
 | RedisStore | [`universal`](https://java-buildpack.cloudfoundry.org/redis-store/index.yml)
 | Spring Boot CLI | [`universal`](https://java-buildpack.cloudfoundry.org/spring-boot-cli/index.yml)
-| tc Server| [`universal`](https://java-buildpack.cloudfoundry.org/tc-server/index.yml)
+| tc Server| [`universal`](https://download.run.pivotal.io/tc-server/index.yml)
 | Tomcat Access Logging Support | [`universal`](https://java-buildpack.cloudfoundry.org/tomcat-access-logging-support/index.yml)
 | Tomcat Lifecycle Support | [`universal`](https://java-buildpack.cloudfoundry.org/tomcat-lifecycle-support/index.yml)
 | Tomcat Logging Support | [`universal`](https://java-buildpack.cloudfoundry.org/tomcat-logging-support/index.yml)
@@ -48,7 +48,7 @@ The list of available versions for each dependency can be found at the following
 | TomEE Resource Configuration | [`universal`](https://java-buildpack.cloudfoundry.org/tomee-resource-configuration/index.yml)
 | TomEE | [`universal`](https://java-buildpack.cloudfoundry.org/tomee/index.yml)
 | Wildfly | [`universal`](https://java-buildpack.cloudfoundry.org/wildfly/index.yml)
-| YourKit | [`mountainlion`](https://java-buildpack.cloudfoundry.org/your-kit/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/your-kit/trusty/x86_64/index.yml)
+| YourKit | [`mountainlion`](https://download.run.pivotal.io/your-kit/mountainlion/x86_64/index.yml), [`trusty`](https://download.run.pivotal.io/your-kit/trusty/x86_64/index.yml)
 
 ## Contributing
 [Pull requests][p] are welcome; see the [contributor guidelines][g] for details.
