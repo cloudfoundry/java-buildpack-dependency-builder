@@ -40,6 +40,11 @@ transfer_to_s3() {
 # $2: Version
 # $3: S3 artifact path without bucket
 update_index() {
+  if [[ -z "$DOWNLOAD_DOMAIN" ]]; then
+    echo "DOWNLOAD_DOMAIN must be set" >&2
+    exit 1
+  fi
+
   if [[ -z "$S3_BUCKET" ]]; then
     echo "S3_BUCKET must be set" >&2
     exit 1
@@ -47,7 +52,7 @@ update_index() {
 
   local index_path="s3://$S3_BUCKET$1"
   local version=$2
-  local download_uri="https://java-buildpack.cloudfoundry.org$3"
+  local download_uri="https://$DOWNLOAD_DOMAIN$3"
 
   echo "$version: $download_uri -> $index_path"
 
