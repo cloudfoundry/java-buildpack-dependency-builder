@@ -22,6 +22,7 @@ aws s3 sync "s3://download.pivotal.io" "$DESTINATION" --no-sign-request --exclud
   --include "jvmkill/*" \
   --include "mariadb-jdbc/*" \
   --include "memory-calculator/*" \
+  --include "metric-writer/*" \
   --include "openjdk/*" \
   --include "play-jpa-plugin/*" \
   --include "postgresql-jdbc/*" \
