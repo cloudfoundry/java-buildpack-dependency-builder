@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e -u
+
 if [[ -z "$BASE_URI" ]]; then
   echo "BASE_URI must be set" >&2
   exit 1
