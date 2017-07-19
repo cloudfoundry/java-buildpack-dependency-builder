@@ -26,7 +26,7 @@ The list of available versions for each dependency can be found at the following
 | Dependency | Location
 | ---------- | ---------
 | Auto Reconfiguration | [`universal`](https://java-buildpack.cloudfoundry.org/auto-reconfiguration/index.yml)
-| Container Certificate Trust Store | [`universal`](https://java-buildpack.cloudfoundry.org/container-certificate-trust-store/index.yml)
+| Client Certificate Mapper | [`universal`](https://java-buildpack.cloudfoundry.org/client-certificate-mapper/index.yml)
 | Container Customizer | [`universal`](https://java-buildpack.cloudfoundry.org/container-customizer/index.yml)
 | Container Security Provider | [`universal`](https://java-buildpack.cloudfoundry.org/container-security-provider/index.yml)
 | Geode Store | [`universal`](https://java-buildpack.cloudfoundry.org/geode-store/index.yml)
