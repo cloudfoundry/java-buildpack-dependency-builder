@@ -8,10 +8,10 @@ run:
   path: java-buildpack-dependency-builder/openjdk.sh
 
 params:
-  BUILD_NUMBER:   b11
-  TAG:            jdk8u131-b11
-  UPDATE_VERSION: 131
-  UPLOAD_VERSION: 1.8.0_131
+  BUILD_NUMBER:   b15
+  TAG:            jdk8u141-b15
+  UPDATE_VERSION: 141
+  UPLOAD_VERSION: 1.8.0_141
 
   PLATFORM:       mountainlion
   XCODE_LOCATION: /Users/pivotalcf/concourse/Xcode4.app
