@@ -3,16 +3,12 @@ platform: darwin
 
 inputs:
 - name: java-buildpack-dependency-builder
+- name: java-archives
 
 run:
   path: java-buildpack-dependency-builder/openjdk.sh
 
 params:
-  BUILD_NUMBER:   b01
-  TAG:            jdk8u144-b01
-  UPDATE_VERSION: 144
-  UPLOAD_VERSION: 1.8.0_144
-
   PLATFORM:       mountainlion
   XCODE_LOCATION: /Users/pivotalcf/concourse/Xcode4.app
 

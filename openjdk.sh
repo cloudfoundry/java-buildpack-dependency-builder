@@ -11,7 +11,7 @@ build() {
   fi
 
   if [[ -z "$UPDATE_VERSION" ]]; then
-    echo "UPLOAD_VERSION must be set" >&2
+    echo "UPDATE_VERSION must be set" >&2
     exit 1
   fi
 
@@ -167,6 +167,11 @@ xcode_location() {
 
 PATH=/usr/local/bin:$PATH
 
+BUILD_NUMBER="b$(cat java-archives/build_number)"
+TAG="jdk$(cat java-archives/minor_version)u$(cat java-archives/update_version)-b$(cat java-archives/build_number)"
+UPDATE_VERSION=$(cat java-archives/update_version)
+UPLOAD_VERSION="1.$(cat java-archives/minor_version).0_$(cat java-archives/update_version)"
+
 UPLOAD_PATH_JDK=$(upload_path_jdk)
 UPLOAD_PATH_JRE=$(upload_path_jre)
 INDEX_PATH_JDK="/openjdk-jdk/$PLATFORM/x86_64/index.yml"
@@ -176,8 +181,8 @@ create_cacerts
 clone_repository
 build
 
-transfer_to_s3 'openjdk-jdk.tar.gz' $UPLOAD_PATH_JDK
-transfer_to_s3 'openjdk.tar.gz' $UPLOAD_PATH_JRE
-update_index $INDEX_PATH_JDK $UPLOAD_VERSION $UPLOAD_PATH_JDK
-update_index $INDEX_PATH_JRE $UPLOAD_VERSION $UPLOAD_PATH_JRE
-invalidate_cache $INDEX_PATH_JDK $INDEX_PATH_JRE $UPLOAD_PATH_JDK $UPLOAD_PATH_JRE
+# transfer_to_s3 'openjdk-jdk.tar.gz' $UPLOAD_PATH_JDK
+# transfer_to_s3 'openjdk.tar.gz' $UPLOAD_PATH_JRE
+# update_index $INDEX_PATH_JDK $UPLOAD_VERSION $UPLOAD_PATH_JDK
+# update_index $INDEX_PATH_JRE $UPLOAD_VERSION $UPLOAD_PATH_JRE
+# invalidate_cache $INDEX_PATH_JDK $INDEX_PATH_JRE $UPLOAD_PATH_JDK $UPLOAD_PATH_JRE
