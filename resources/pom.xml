@@ -11,13 +11,14 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.3.RELEASE</version>
+        <version>1.5.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <modules>
         <module>artifactory-resource</module>
         <module>common</module>
+        <module>java-resource</module>
         <module>maven-resource</module>
         <module>pivotal-network-resource</module>
         <module>tomcat-resource</module>
@@ -28,11 +29,11 @@
     <properties>
         <java.version>1.8</java.version>
         <java-semver.version>0.9.0</java-semver.version>
-        <jsoup.version>1.10.2</jsoup.version>
+        <jsoup.version>1.10.3</jsoup.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <reactor.version>3.0.6.RELEASE</reactor.version>
-        <reactor-netty.version>0.6.2.RELEASE</reactor-netty.version>
+        <reactor.version>3.0.7.RELEASE</reactor.version>
+        <reactor-netty.version>0.6.5.RELEASE</reactor-netty.version>
     </properties>
 
     <dependencyManagement>

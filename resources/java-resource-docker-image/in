@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+set -e
+
+java -Dspring.profiles.active=in -jar "$(dirname $0)/java-resource.jar" "$@"

@@ -62,7 +62,7 @@ final class MavenCheckAction extends CheckAction {
         String mavenMetadataUri = getMavenMetadataUri();
 
         return requestPayload(mavenMetadataUri)
-            .flatMap(this::getCandidateVersions)
+            .flatMapMany(this::getCandidateVersions)
             .transform(this::filteredVersions);
     }
 

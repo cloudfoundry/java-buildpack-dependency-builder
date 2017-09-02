@@ -52,7 +52,7 @@ final class PivotalNetworkCheckAction extends CheckAction {
         String releasesUri = getReleasesUri(this.request.getSource().getProduct());
 
         return requestPayload(this.request.getSource().getApiToken(), this.httpClient, this.objectMapper, releasesUri)
-            .flatMap(this::getCandidateVersions);
+            .flatMapMany(this::getCandidateVersions);
     }
 
     @SuppressWarnings("unchecked")
