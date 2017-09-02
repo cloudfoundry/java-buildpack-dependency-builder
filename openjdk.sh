@@ -172,6 +172,11 @@ TAG="jdk$(cat java-archives/minor_version)u$(cat java-archives/update_version)-b
 UPDATE_VERSION=$(cat java-archives/update_version)
 UPLOAD_VERSION="1.$(cat java-archives/minor_version).0_$(cat java-archives/update_version)"
 
+echo $BUILD_NUMBER
+echo $TAG
+echo $UPDATE_VERSION
+echo $UPLOAD_VERSION
+
 UPLOAD_PATH_JDK=$(upload_path_jdk)
 UPLOAD_PATH_JRE=$(upload_path_jre)
 INDEX_PATH_JDK="/openjdk-jdk/$PLATFORM/x86_64/index.yml"
