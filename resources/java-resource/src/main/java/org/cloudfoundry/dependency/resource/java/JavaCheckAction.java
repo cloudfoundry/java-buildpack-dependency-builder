@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package org.cloudfoundry.dependency.resource.tomcat;
+package org.cloudfoundry.dependency.resource.java;
 
 import org.cloudfoundry.dependency.resource.CheckAction;
 import org.cloudfoundry.dependency.resource.OutputUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.ipc.netty.http.client.HttpClient;
@@ -32,15 +32,13 @@ import java.util.regex.Pattern;
 
 @Component
 @Profile("check")
-final class TomcatCheckAction extends CheckAction {
-
-    private static final Pattern VERSION = Pattern.compile("^v(.+)/$");
+final class JavaCheckAction extends CheckAction {
 
     private final HttpClient httpClient;
 
-    private final TomcatCheckRequest request;
+    private final JavaCheckRequest request;
 
-    TomcatCheckAction(TomcatCheckRequest request, OutputUtils outputUtils, HttpClient httpClient) {
+    JavaCheckAction(JavaCheckRequest request, OutputUtils outputUtils, HttpClient httpClient) {
         super(request, outputUtils);
         this.httpClient = httpClient;
         this.request = request;
@@ -50,39 +48,53 @@ final class TomcatCheckAction extends CheckAction {
     protected Flux<String> doRun() {
         String directoryUri = getDirectoryUri();
 
-        return requestPayload(directoryUri)
-            .flatMapMany(this::getCandidateVersions);
+        return requestDirectoryPayload(directoryUri)
+            .flatMapMany(this::extractReleaseUri)
+            .flatMap(this::requestReleasePayload)
+            .flatMap(this::getCandidateVersions);
     }
 
-    private Flux<String> filteredVersions(Flux<String> versions) {
-        return this.request.getSource().getVersionFilter()
-            .map(filter -> versions
-                .filter(Pattern.compile(filter).asPredicate()))
-            .orElse(versions);
+    private Flux<String> extractReleaseUri(Document payload) {
+        return Flux.fromIterable(payload.select("table.innerPgSignpost"))
+            .flatMapIterable(table -> table.select("li"))
+            .flatMapIterable(item -> item.select("a[href]"))
+            .filter(element -> element.text().contains("(public release)"))
+            .map(element -> UriComponentsBuilder.fromUriString(getDirectoryUri()).replacePath(element.attr("href")).toUriString());
     }
 
-    private Flux<String> getCandidateVersions(Document payload) {
-        return Flux.fromIterable(payload.select("a[href]"))
-            .map(Element::text)
-            .transform(this::validVersions)
-            .transform(this::filteredVersions);
+    private Flux<String> getCandidateVersions(String payload) {
+        return Flux.just(payload)
+            .transform(this::validVersions);
     }
 
     private String getDirectoryUri() {
         return this.request.getSource().getUri().orElseThrow(() -> new IllegalArgumentException("URI must be specified"));
     }
 
-    private Mono<Document> requestPayload(String uri) {
+    private Pattern getVersionFilter() {
+        return this.request.getSource().getVersionFilter()
+            .map(Pattern::compile)
+            .orElseThrow(() -> new IllegalArgumentException("Version pattern must be specified"));
+    }
+
+    private Mono<Document> requestDirectoryPayload(String uri) {
         return this.httpClient.get(uri)
             .then(response -> response.receive().aggregate().asString())
             .map(Jsoup::parse);
     }
 
+    private Mono<String> requestReleasePayload(String uri) {
+        return this.httpClient.get(uri)
+            .then(response -> response.receive().aggregate().asString());
+    }
+
     private Flux<String> validVersions(Flux<String> versions) {
+        Pattern versionFilter = getVersionFilter();
+
         return versions
-            .map(VERSION::matcher)
+            .map(versionFilter::matcher)
             .filter(Matcher::find)
-            .map(matcher -> matcher.group(1));
+            .map(matcher -> String.format("%s.%s.%s", matcher.group(1), matcher.group(2), matcher.group(3)));
     }
 
 }

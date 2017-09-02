@@ -56,7 +56,7 @@ final class ArtifactoryCheckAction extends CheckAction {
         String searchUri = getSearchUri();
 
         return requestSearchPayload(this.httpClient, this.objectMapper, searchUri)
-            .flatMap(this::getCandidateVersions);
+            .flatMapMany(this::getCandidateVersions);
     }
 
     private String extractVersion(String path) {

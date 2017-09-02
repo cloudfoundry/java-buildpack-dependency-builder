@@ -65,7 +65,7 @@ final class PivotalNetworkInAction extends InAction {
         return requestPayload(apiToken, this.httpClient, this.objectMapper, releasesUri)
             .then(this::getReleaseUri)
             .then(releaseUri -> requestPayload(apiToken, this.httpClient, this.objectMapper, releaseUri))
-            .flatMap(payload -> {
+            .flatMapMany(payload -> {
                 String eulaAcceptanceUri = getEulaAcceptanceUri(payload);
 
                 return requestEulaAcceptance(apiToken, eulaAcceptanceUri)
@@ -135,7 +135,7 @@ final class PivotalNetworkInAction extends InAction {
             .post(uri, request -> addAuthorization(apiToken, request).followRedirect().send())
             .doOnSubscribe(NetworkLogging.post(uri))
             .transform(NetworkLogging.response(uri))
-            .flatMap(NettyInbound::receive)
+            .flatMapMany(NettyInbound::receive)
             .then();
     }
 

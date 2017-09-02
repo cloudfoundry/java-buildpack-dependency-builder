@@ -56,7 +56,7 @@ final class ArtifactoryInAction extends InAction {
         String searchUri = getSearchUri();
 
         return requestSearchPayload(this.httpClient, this.objectMapper, searchUri)
-            .flatMap(this::getCandidateArtifacts)
+            .flatMapMany(this::getCandidateArtifacts)
             .map(this::getArtifactUri)
             .flatMap(artifactUri -> {
                 String artifactName = getArtifactName(artifactUri);

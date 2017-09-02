@@ -43,7 +43,7 @@ final class WildflyCheckAction extends CheckAction {
         String downloadUri = getDownloadUri();
 
         return requestPayload(downloadUri)
-            .flatMap(this::getCandidateVersions);
+            .flatMapMany(this::getCandidateVersions);
     }
 
     private Flux<String> getCandidateVersions(Document payload) {
