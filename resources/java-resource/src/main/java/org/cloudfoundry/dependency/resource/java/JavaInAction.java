@@ -47,14 +47,18 @@ final class JavaInAction extends InAction {
 
             writeArtifact("minor_version", getInputStream(versionHolder.getMajor()));
             writeArtifact("update_version", getInputStream(versionHolder.getMinor()));
-            writeArtifact("build_number", getInputStream(versionHolder.getMicro()));
+            writeArtifact("build_number", getInputStream(String.format("%02d", versionHolder.getMicro())));
 
             return Flux.empty();
         });
     }
 
     private InputStream getInputStream(Integer i) {
-        return new ByteArrayInputStream(i.toString().getBytes(StandardCharsets.UTF_8));
+        return getInputStream(i.toString());
+    }
+
+    private InputStream getInputStream(String s) {
+        return new ByteArrayInputStream(s.getBytes(StandardCharsets.UTF_8));
     }
 
 }
