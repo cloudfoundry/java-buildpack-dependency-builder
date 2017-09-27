@@ -10,9 +10,12 @@ image_resource:
 inputs:
 - name: java-buildpack-dependency-builder
 
+outputs:
+- name: java-buildpack-artifacts
+
 run:
   path: java-buildpack-dependency-builder/replicate.sh
 
 params:
   BASE_URI:
-  DESTINATION:
+  DESTINATION: java-buildpack-artifacts
