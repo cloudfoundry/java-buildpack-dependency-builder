@@ -1,0 +1,25 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: cfje/openjdk
+    tag: latest
+
+inputs:
+- name: java-buildpack-dependency-builder
+
+run:
+  path: java-buildpack-dependency-builder/openjdk9.sh
+
+params:
+  BUILD_NUMBER: 181
+
+  PLATFORM: trusty
+
+  AWS_ACCESS_KEY_ID:
+  AWS_SECRET_ACCESS_KEY:
+  CLOUDFRONT_DISTRIBUTION_IDS:
+  DOWNLOAD_DOMAIN:
+  S3_BUCKET:
