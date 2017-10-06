@@ -1,4 +1,12 @@
-FROM openjdk:7-jdk
+FROM cloudfoundry/cflinuxfs2
+
+RUN apt-get update && apt-get install -y \
+    python-software-properties \
+    software-properties-common \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN add-apt-repository ppa:openjdk-r/ppa
 
 RUN apt-get update && apt-get install -y \
     build-essential \
@@ -13,6 +21,8 @@ RUN apt-get update && apt-get install -y \
     libxt-dev \
     libxtst-dev \
     mercurial \
+    openjdk-8-jdk \
+    python-dev \
     python-pip \
     zip \
  && apt-get clean \
