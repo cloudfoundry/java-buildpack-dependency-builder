@@ -18,7 +18,6 @@ build() {
   unset JAVA_HOME
   export MACOSX_DEPLOYMENT_TARGET=10.9
 
-
   pushd jdk8u
     ./configure \
       --disable-debug-symbols \
