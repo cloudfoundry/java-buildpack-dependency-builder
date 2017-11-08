@@ -38,7 +38,6 @@ The list of available versions for each dependency can be found at the following
 | New Relic | [`universal`](https://download.run.pivotal.io/new-relic/index.yml)
 | OpenJDK JDK | [`mountainlion`](https://java-buildpack.cloudfoundry.org/openjdk-jdk/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/openjdk-jdk/trusty/x86_64/index.yml)
 | OpenJDK JRE | [`mountainlion`](https://java-buildpack.cloudfoundry.org/openjdk/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/openjdk/trusty/x86_64/index.yml)
-| Play JPA Plugin | [`universal`](https://java-buildpack.cloudfoundry.org/play-jpa-plugin/index.yml)
 | PostgreSQL JDBC | [`universal`](https://java-buildpack.cloudfoundry.org/postgresql-jdbc/index.yml)
 | RedisStore | [`universal`](https://java-buildpack.cloudfoundry.org/redis-store/index.yml)
 | Spring Boot CLI | [`universal`](https://java-buildpack.cloudfoundry.org/spring-boot-cli/index.yml)
