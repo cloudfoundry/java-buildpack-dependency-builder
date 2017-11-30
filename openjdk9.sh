@@ -10,10 +10,7 @@ build() {
     exit 1
   fi
 
-  # unset JAVA_HOME
-  # export MACOSX_DEPLOYMENT_TARGET=10.9
-
-  pushd jdk9
+  pushd jdk9u
     ./configure \
       --disable-warnings-as-errors \
       --with-cacerts-file=$(pwd)/../cacerts.jks \
@@ -38,9 +35,9 @@ clone_repository() {
     exit 1
   fi
 
-  hg clone http://hg.openjdk.java.net/jdk9/jdk9
+  hg clone http://hg.openjdk.java.net/jdk-updates/jdk9u
 
-  pushd jdk9
+  pushd jdk9u
     chmod +x \
       common/bin/hgforest.sh \
       configure \
@@ -161,9 +158,9 @@ xcode_location() {
 
 PATH=/usr/local/bin:$PATH
 
-# BUILD_NUMBER="$(cat java-archives/build_number)"
-TAG="jdk-9+$BUILD_NUMBER"
-UPLOAD_VERSION="9.0.0_$BUILD_NUMBER"
+BUILD_NUMBER="$(cat java-archives/build_number)"
+TAG="jdk-$(cat java-archives/major_version).$(cat java-archives/minor_version).$(cat java-archives/update_version)+$(cat java-archives/build_number)"
+UPLOAD_VERSION="$(cat java-archives/major_version).$(cat java-archives/minor_version).$(cat java-archives/update_version)_$(cat java-archives/build_number)"
 
 UPLOAD_PATH_JDK=$(upload_path_jdk)
 UPLOAD_PATH_JRE=$(upload_path_jre)

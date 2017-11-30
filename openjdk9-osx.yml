@@ -2,14 +2,13 @@
 platform: darwin
 
 inputs:
+- name: java-archives
 - name: java-buildpack-dependency-builder
 
 run:
   path: java-buildpack-dependency-builder/openjdk9.sh
 
 params:
-  BUILD_NUMBER: 181
-
   PLATFORM:       mountainlion
   XCODE_LOCATION: /Users/pivotalcf/concourse/Xcode8.app
 
