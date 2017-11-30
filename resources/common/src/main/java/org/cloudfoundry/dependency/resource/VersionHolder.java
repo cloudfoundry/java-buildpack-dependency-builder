@@ -51,6 +51,10 @@ public final class VersionHolder implements Comparable<VersionHolder> {
         return this.semver.getMinorVersion();
     }
 
+    public String getQualifier() {
+        return this.semver.getPreReleaseVersion();
+    }
+
     public String getRaw() {
         return this.raw;
     }

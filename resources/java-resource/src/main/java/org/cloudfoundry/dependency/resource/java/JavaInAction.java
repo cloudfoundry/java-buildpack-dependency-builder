@@ -45,9 +45,10 @@ final class JavaInAction extends InAction {
         return Flux.defer(() -> {
             VersionHolder versionHolder = new VersionHolder(this.request.getVersion().getRef());
 
-            writeArtifact("minor_version", getInputStream(versionHolder.getMajor()));
-            writeArtifact("update_version", getInputStream(versionHolder.getMinor()));
-            writeArtifact("build_number", getInputStream(String.format("%02d", versionHolder.getMicro())));
+            writeArtifact("major_version", getInputStream(versionHolder.getMajor()));
+            writeArtifact("minor_version", getInputStream(versionHolder.getMinor()));
+            writeArtifact("update_version", getInputStream(versionHolder.getMicro()));
+            writeArtifact("build_number", getInputStream(String.format("%02d", Integer.parseInt(versionHolder.getQualifier()))));
 
             return Flux.empty();
         });

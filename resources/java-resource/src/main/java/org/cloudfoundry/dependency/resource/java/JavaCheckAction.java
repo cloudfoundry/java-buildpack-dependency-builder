@@ -57,8 +57,8 @@ final class JavaCheckAction extends CheckAction {
     private Flux<String> extractReleaseUri(Document payload) {
         return Flux.fromIterable(payload.select("table.innerPgSignpost"))
             .flatMapIterable(table -> table.select("li"))
-            .flatMapIterable(item -> item.select("a[href]"))
             .filter(element -> element.text().contains("(public release)"))
+            .flatMapIterable(item -> item.select("a[href]"))
             .map(element -> UriComponentsBuilder.fromUriString(getDirectoryUri()).replacePath(element.attr("href")).toUriString());
     }
 
@@ -94,7 +94,7 @@ final class JavaCheckAction extends CheckAction {
         return versions
             .map(versionFilter::matcher)
             .filter(Matcher::find)
-            .map(matcher -> String.format("%s.%s.%s", matcher.group(1), matcher.group(2), matcher.group(3)));
+            .map(matcher -> String.format("%s.%s.%s-%d", matcher.group(1), matcher.group(2), matcher.group(3), Integer.parseInt(matcher.group(4))));
     }
 
 }
