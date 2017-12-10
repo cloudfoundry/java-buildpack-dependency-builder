@@ -18,24 +18,24 @@ package org.cloudfoundry.dependency.resource;
 
 public final class ArtifactMetadata {
 
-    private final Digests digests;
-
     private final String name;
+
+    private final String sha256;
 
     private final String uri;
 
-    public ArtifactMetadata(Digests digests, String name, String uri) {
-        this.digests = digests;
+    public ArtifactMetadata(String name, String sha256, String uri) {
         this.name = name;
+        this.sha256 = sha256;
         this.uri = uri;
-    }
-
-    public Digests getDigests() {
-        return this.digests;
     }
 
     public String getName() {
         return this.name;
+    }
+
+    public String getSha256() {
+        return this.sha256;
     }
 
     public String getUri() {

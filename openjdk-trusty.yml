@@ -8,8 +8,8 @@ image_resource:
     tag: latest
 
 inputs:
-- name: java-buildpack-dependency-builder
 - name: java-archives
+- name: java-buildpack-dependency-builder
 
 run:
   path: java-buildpack-dependency-builder/openjdk.sh

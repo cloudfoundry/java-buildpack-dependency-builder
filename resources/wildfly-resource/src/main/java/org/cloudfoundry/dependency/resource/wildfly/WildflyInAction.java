@@ -50,7 +50,7 @@ final class WildflyInAction extends InAction {
 
         return requestArtifact(this.httpClient, artifactUri)
             .map(content -> writeArtifact(artifactName, content))
-            .map(digests -> new ArtifactMetadata(digests, artifactName, artifactUri))
+            .map(sha256 -> new ArtifactMetadata(artifactName, sha256, artifactUri))
             .flux();
     }
 

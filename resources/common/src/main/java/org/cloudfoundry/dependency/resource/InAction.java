@@ -48,7 +48,7 @@ public class InAction implements CommandLineRunner {
     }
 
     @Override
-    public final void run(String... args) throws Exception {
+    public final void run(String... args) {
         doRun()
             .doOnNext(response -> writeVersion())
             .collectList()
@@ -62,25 +62,13 @@ public class InAction implements CommandLineRunner {
         return Flux.empty();
     }
 
-    protected final Digests writeArtifact(String artifactName, InputStream content) {
+    protected final String writeArtifact(String artifactName, InputStream content) {
         try (InputStream in = content) {
             Path artifactFile = Files.createDirectories(this.destination).resolve(artifactName);
             Files.copy(in, artifactFile, StandardCopyOption.REPLACE_EXISTING);
-            return new Digests(getMd5(artifactFile), getSha1(artifactFile), getSha256(artifactFile), getSha384(artifactFile), getSha512(artifactFile));
+            return getSha256(artifactFile);
         } catch (IOException e) {
             throw Exceptions.propagate(e);
-        }
-    }
-
-    private String getMd5(Path artifact) throws IOException {
-        try (InputStream in = Files.newInputStream(artifact, StandardOpenOption.READ)) {
-            return DigestUtils.md5Hex(in);
-        }
-    }
-
-    private String getSha1(Path artifact) throws IOException {
-        try (InputStream in = Files.newInputStream(artifact, StandardOpenOption.READ)) {
-            return DigestUtils.sha1Hex(in);
         }
     }
 
@@ -90,46 +78,24 @@ public class InAction implements CommandLineRunner {
         }
     }
 
-    private String getSha384(Path artifact) throws IOException {
-        try (InputStream in = Files.newInputStream(artifact, StandardOpenOption.READ)) {
-            return DigestUtils.sha384Hex(in);
-        }
-    }
-
-    private String getSha512(Path artifact) throws IOException {
-        try (InputStream in = Files.newInputStream(artifact, StandardOpenOption.READ)) {
-            return DigestUtils.sha512Hex(in);
-        }
-    }
-
     private List<Metadata> toMetadata(List<ArtifactMetadata> artifacts) {
         if (artifacts.size() == 1) {
             ArtifactMetadata artifactMetadata = artifacts.get(0);
-            Digests digests = artifactMetadata.getDigests();
 
             return Arrays.asList(
                 new Metadata("name", artifactMetadata.getName()),
-                new Metadata("uri", artifactMetadata.getUri()),
-                new Metadata("sha1", digests.getSha1()),
-                new Metadata("sha256", digests.getSha256()),
-                new Metadata("sha384", digests.getSha384()),
-                new Metadata("sha512", digests.getSha512()),
-                new Metadata("md5", digests.getMd5()));
+                new Metadata("sha256", artifactMetadata.getSha256()),
+                new Metadata("uri", artifactMetadata.getUri()));
         }
 
-        List<Metadata> metadata = new ArrayList<>(artifacts.size() * 7);
+        List<Metadata> metadata = new ArrayList<>(artifacts.size() * 3);
 
         for (int i = 0; i < artifacts.size(); i++) {
             ArtifactMetadata artifactMetadata = artifacts.get(i);
-            Digests digests = artifactMetadata.getDigests();
 
             metadata.add(new Metadata(String.format("[%d] name", i), artifactMetadata.getName()));
             metadata.add(new Metadata(String.format("[%d] uri", i), artifactMetadata.getUri()));
-            metadata.add(new Metadata(String.format("[%d] sha1", i), digests.getSha1()));
-            metadata.add(new Metadata(String.format("[%d] sha256", i), digests.getSha256()));
-            metadata.add(new Metadata(String.format("[%d] sha384", i), digests.getSha384()));
-            metadata.add(new Metadata(String.format("[%d] sha512", i), digests.getSha512()));
-            metadata.add(new Metadata(String.format("[%d] md5", i), digests.getMd5()));
+            metadata.add(new Metadata(String.format("[%d] sha256", i), artifactMetadata.getSha256()));
         }
 
         return metadata;

@@ -51,7 +51,7 @@ final class ArtifactoryUtils {
             .get(uri, request -> request.addHeader("X-Result-Detail", "info").followRedirect())
             .doOnSubscribe(NetworkLogging.get(uri))
             .transform(NetworkLogging.response(uri))
-            .then(response -> response.receive().aggregate().asInputStream())
+            .flatMap(response -> response.receive().aggregate().asInputStream())
             .map(content -> {
                 try {
                     return objectMapper.readValue(content, Map.class);

@@ -79,13 +79,13 @@ final class JavaCheckAction extends CheckAction {
 
     private Mono<Document> requestDirectoryPayload(String uri) {
         return this.httpClient.get(uri)
-            .then(response -> response.receive().aggregate().asString())
+            .flatMap(response -> response.receive().aggregate().asString())
             .map(Jsoup::parse);
     }
 
     private Mono<String> requestReleasePayload(String uri) {
         return this.httpClient.get(uri)
-            .then(response -> response.receive().aggregate().asString());
+            .flatMap(response -> response.receive().aggregate().asString());
     }
 
     private Flux<String> validVersions(Flux<String> versions) {

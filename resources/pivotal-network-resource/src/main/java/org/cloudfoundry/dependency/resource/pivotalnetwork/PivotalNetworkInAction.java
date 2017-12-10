@@ -63,8 +63,8 @@ final class PivotalNetworkInAction extends InAction {
         String releasesUri = getReleasesUri(this.request.getSource().getProduct());
 
         return requestPayload(apiToken, this.httpClient, this.objectMapper, releasesUri)
-            .then(this::getReleaseUri)
-            .then(releaseUri -> requestPayload(apiToken, this.httpClient, this.objectMapper, releaseUri))
+            .flatMap(this::getReleaseUri)
+            .flatMap(releaseUri -> requestPayload(apiToken, this.httpClient, this.objectMapper, releaseUri))
             .flatMapMany(payload -> {
                 String eulaAcceptanceUri = getEulaAcceptanceUri(payload);
 
@@ -77,7 +77,7 @@ final class PivotalNetworkInAction extends InAction {
 
                 return requestArtifact(apiToken, artifactUri)
                     .map(content -> writeArtifact(artifactName, content))
-                    .map(digests -> new ArtifactMetadata(digests, artifactName, artifactUri));
+                    .map(sha256 -> new ArtifactMetadata(artifactName, sha256, artifactUri));
             });
     }
 
@@ -127,7 +127,7 @@ final class PivotalNetworkInAction extends InAction {
             .get(uri, request -> addAuthorization(apiToken, request).followRedirect())
             .doOnSubscribe(NetworkLogging.get(uri))
             .transform(NetworkLogging.response(uri))
-            .then(response -> response.receive().aggregate().asInputStream());
+            .flatMap(response -> response.receive().aggregate().asInputStream());
     }
 
     private Mono<Void> requestEulaAcceptance(Optional<String> apiToken, String uri) {

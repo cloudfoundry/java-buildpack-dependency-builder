@@ -169,7 +169,7 @@ PATH=/usr/local/bin:$PATH
 BUILD_NUMBER="b$(cat java-archives/build_number)"
 TAG="jdk$(cat java-archives/minor_version)u$(cat java-archives/update_version)-b$(cat java-archives/build_number)"
 UPDATE_VERSION=$(cat java-archives/update_version)
-UPLOAD_VERSION="1.$(cat java-archives/minor_version).0_$(cat java-archives/update_version)"
+UPLOAD_VERSION="$(cat java-archives/major_version).$(cat java-archives/minor_version).0_$(cat java-archives/update_version)"
 
 UPLOAD_PATH_JDK=$(upload_path_jdk)
 UPLOAD_PATH_JRE=$(upload_path_jre)

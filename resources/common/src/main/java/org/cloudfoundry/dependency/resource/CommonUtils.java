@@ -19,12 +19,8 @@ package org.cloudfoundry.dependency.resource;
 import reactor.core.publisher.Mono;
 import reactor.ipc.netty.http.client.HttpClient;
 import reactor.ipc.netty.http.client.HttpClientRequest;
-import reactor.util.function.Tuple2;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,7 +46,7 @@ public final class CommonUtils {
             .get(uri, HttpClientRequest::followRedirect)
             .doOnSubscribe(NetworkLogging.get(uri))
             .transform(NetworkLogging.response(uri))
-            .then(response -> response.receive().aggregate().asInputStream());
+            .flatMap(response -> response.receive().aggregate().asInputStream());
     }
 
 }

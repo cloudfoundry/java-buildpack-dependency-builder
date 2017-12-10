@@ -51,14 +51,14 @@ final class YourKitInAction extends InAction {
 
         return requestArtifact(this.httpClient, artifactUri)
             .map(content -> writeArtifact(artifactName, content))
-            .map(digests -> new ArtifactMetadata(digests, artifactName, artifactUri))
+            .map(sha256 -> new ArtifactMetadata(artifactName, sha256, artifactUri))
             .flux();
     }
 
     private String getArtifactUri() {
         VersionHolder version = new VersionHolder(this.request.getVersion().getRef());
 
-        return String.format("https://www.yourkit.com/download/yjp-%04d.%02d-b%02d.zip", version.getMajor(), version.getMinor(), version.getMicro());
+        return String.format("https://www.yourkit.com/download/YourKit-JavaProfiler-%04d.%02d-b%02d.zip", version.getMajor(), version.getMinor(), version.getMicro());
     }
 
 }

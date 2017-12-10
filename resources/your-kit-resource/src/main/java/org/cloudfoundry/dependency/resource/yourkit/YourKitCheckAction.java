@@ -33,7 +33,7 @@ import java.util.regex.Pattern;
 @Profile("check")
 final class YourKitCheckAction extends CheckAction {
 
-    private static final Pattern VERSION = Pattern.compile(".+/yjp-([\\d]{4})\\.([\\d]{2})-b([\\d]+)\\.zip");
+    private static final Pattern VERSION = Pattern.compile(".+/YourKit-JavaProfiler-([\\d]{4})\\.([\\d]{2})-b([\\d]+)\\.zip");
 
     private final HttpClient httpClient;
 
@@ -62,7 +62,7 @@ final class YourKitCheckAction extends CheckAction {
 
     private Mono<Document> requestPayload(String uri) {
         return this.httpClient.get(uri)
-            .then(response -> response.receive().aggregate().asString())
+            .flatMap(response -> response.receive().aggregate().asString())
             .map(Jsoup::parse);
     }
 

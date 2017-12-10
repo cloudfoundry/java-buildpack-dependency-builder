@@ -100,7 +100,7 @@ final class MavenCheckAction extends CheckAction {
     @SuppressWarnings("unchecked")
     private Mono<Document> requestPayload(String uri) {
         return this.httpClient.get(uri)
-            .then(response -> response.receive().aggregate().asInputStream())
+            .flatMap(response -> response.receive().aggregate().asInputStream())
             .map(content -> {
                 try (InputStream in = content) {
                     return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(in);

@@ -74,7 +74,7 @@ final class TomcatCheckAction extends CheckAction {
 
     private Mono<Document> requestPayload(String uri) {
         return this.httpClient.get(uri)
-            .then(response -> response.receive().aggregate().asString())
+            .flatMap(response -> response.receive().aggregate().asString())
             .map(Jsoup::parse);
     }
 
