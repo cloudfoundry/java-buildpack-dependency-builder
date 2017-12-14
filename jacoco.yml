@@ -1,0 +1,22 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: cfje/java-buildpack-dependency-builder
+    tag: latest
+
+inputs:
+- name: java-buildpack-dependency-builder
+- name: jacoco-archives
+
+run:
+  path: java-buildpack-dependency-builder/jacoco.sh
+
+params:
+  AWS_ACCESS_KEY_ID:
+  AWS_SECRET_ACCESS_KEY:
+  CLOUDFRONT_DISTRIBUTION_IDS:
+  DOWNLOAD_DOMAIN:
+  S3_BUCKET:
