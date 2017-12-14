@@ -8,8 +8,8 @@ image_resource:
     tag: latest
 
 inputs:
-- name: java-buildpack-dependency-builder
 - name: jacoco-archives
+- name: java-buildpack-dependency-builder
 
 run:
   path: java-buildpack-dependency-builder/jacoco.sh
