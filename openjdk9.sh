@@ -25,7 +25,7 @@ build() {
 
     chmod -R a+r build/$(release_name)/images
     tar czvf $(pwd)/../openjdk-jdk.tar.gz -C build/$(release_name)/images/jdk .
-    tar czvf $(pwd)/../openjdk.tar.gz -C build/$(release_name)/images/jre . -C ../jdk ./bin/jcmd ./bin/jmap ./bin/jstack ./man/man1/jcmd.1 ./man/man1/jmap.1 ./man/man1/jstack.1 $(libattach_location)
+    tar czvf $(pwd)/../openjdk.tar.gz -C build/$(release_name)/images/jre . -C ../jdk ./bin/jcmd ./bin/jimage ./bin/jmap ./bin/jstack ./man/man1/jcmd.1 ./man/man1/jmap.1 ./man/man1/jstack.1 $(libattach_location)
   popd
 }
 
