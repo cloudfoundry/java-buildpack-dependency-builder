@@ -30,16 +30,16 @@
     <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.2" level="project" />
     <orderEntry type="library" name="Maven: io.projectreactor.ipc:reactor-netty:0.7.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-codec-http:4.1.20.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.netty:netty-codec:4.1.20.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.netty:netty-handler:4.1.20.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.netty:netty-buffer:4.1.20.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.netty:netty-transport:4.1.20.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.netty:netty-resolver:4.1.20.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.netty:netty-handler-proxy:4.1.20.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.netty:netty-codec-socks:4.1.20.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.netty:netty-transport-native-epoll:4.1.20.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.netty:netty-common:4.1.20.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.netty:netty-transport-native-unix-common:4.1.20.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-codec:4.1.21.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-handler:4.1.21.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-buffer:4.1.21.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-transport:4.1.21.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-resolver:4.1.21.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-handler-proxy:4.1.21.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-codec-socks:4.1.21.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-transport-native-epoll:4.1.21.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-common:4.1.21.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-transport-native-unix-common:4.1.21.Final" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:1.5.10.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:1.5.10.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:4.3.14.RELEASE" level="project" />
