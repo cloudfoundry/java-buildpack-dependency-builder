@@ -26,6 +26,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.ipc.netty.http.client.HttpClient;
+import reactor.ipc.netty.http.client.HttpClientRequest;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -73,7 +74,7 @@ final class TomcatCheckAction extends CheckAction {
     }
 
     private Mono<Document> requestPayload(String uri) {
-        return this.httpClient.get(uri)
+        return this.httpClient.get(uri, HttpClientRequest::followRedirect)
             .flatMap(response -> response.receive().aggregate().asString())
             .map(Jsoup::parse);
     }

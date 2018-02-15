@@ -45,7 +45,7 @@ final class PivotalNetworkUtils {
     @SuppressWarnings("unchecked")
     static Mono<Map<String, Object>> requestPayload(Optional<String> apiToken, HttpClient httpClient, ObjectMapper objectMapper, String uri) {
         return httpClient
-            .get(uri, request -> addAuthorization(apiToken, request).followRedirect().send())
+            .get(uri, request -> addAuthorization(apiToken, request).followRedirect())
             .doOnSubscribe(NetworkLogging.get(uri))
             .transform(NetworkLogging.response(uri))
             .flatMap(response -> response.receive().aggregate().asInputStream())
