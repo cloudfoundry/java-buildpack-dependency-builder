@@ -9,10 +9,10 @@ image_resource:
 
 inputs:
 - name: java-buildpack-dependency-builder
-- name: skywalking-archives
+- name: sky-walking-archives
 
 run:
-  path: java-buildpack-dependency-builder/skywalking.sh
+  path: java-buildpack-dependency-builder/sky-walking.sh
 
 params:
   AWS_ACCESS_KEY_ID:
