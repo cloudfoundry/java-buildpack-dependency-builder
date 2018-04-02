@@ -6,8 +6,6 @@ RUN apt-get update && apt-get install -y \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-RUN add-apt-repository ppa:openjdk-r/ppa
-
 RUN apt-get update && apt-get install -y \
     build-essential \
     cpio \
@@ -22,6 +20,7 @@ RUN apt-get update && apt-get install -y \
     libxtst-dev \
     mercurial \
     openjdk-8-jdk \
+    openjdk-9-jdk \
     python-dev \
     python-pip \
     zip \
