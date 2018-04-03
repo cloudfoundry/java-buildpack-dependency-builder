@@ -22,7 +22,6 @@ RUN apt-get update && apt-get install -y \
     libxtst-dev \
     mercurial \
     openjdk-8-jdk \
-    openjdk-9-jdk \
     python-dev \
     python-pip \
     zip \
@@ -30,3 +29,7 @@ RUN apt-get update && apt-get install -y \
  && rm -rf /var/lib/apt/lists/*
 
 RUN pip install awscli --ignore-installed six
+
+RUN mkdir -p /opt/openjdk-9 \
+ && curl -sL https://java-buildpack.cloudfoundry.org/openjdk-jdk/trusty/x86_64/openjdk-9.0.4_11.tar.gz \
+    | tar xzvf - -C /opt/openjdk-9
