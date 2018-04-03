@@ -15,7 +15,8 @@ run:
   path: java-buildpack-dependency-builder/openjdk10.sh
 
 params:
-  PLATFORM: trusty
+  JAVA_HOME: /opt/openjdk-9
+  PLATFORM:  trusty
 
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:

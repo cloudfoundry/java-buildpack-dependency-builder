@@ -11,7 +11,7 @@ build() {
   fi
 
   pushd jdk10u
-    ./configure \
+    bash configure \
       --disable-warnings-as-errors \
       --with-cacerts-file=$(pwd)/../cacerts.jks \
       --with-native-debug-symbols=none \
@@ -38,14 +38,7 @@ clone_repository() {
   hg clone http://hg.openjdk.java.net/jdk-updates/jdk10u
 
   pushd jdk10u
-    chmod +x \
-      common/bin/hgforest.sh \
-      configure \
-      get_source.sh
-
-    ./get_source.sh
-
-    ./common/bin/hgforest.sh checkout $TAG
+    hg checkout $TAG
   popd
 }
 
