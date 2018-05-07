@@ -30,6 +30,7 @@ The list of available versions for each dependency can be found at the following
 | Container Customizer | [`universal`](https://java-buildpack.cloudfoundry.org/container-customizer/index.yml)
 | Container Security Provider | [`universal`](https://java-buildpack.cloudfoundry.org/container-security-provider/index.yml)
 | Google Stackdriver Debugger | [`mountainlion`](https://java-buildpack.cloudfoundry.org/google-stackdriver-debugger/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/google-stackdriver-debugger/trusty/x86_64/index.yml)
+| Google Stackdriver Profiler | [`mountainlion`](https://java-buildpack.cloudfoundry.org/google-stackdriver-profiler/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/google-stackdriver-profiler/trusty/x86_64/index.yml)
 | Groovy | [`universal`](https://java-buildpack.cloudfoundry.org/groovy/index.yml)
 | JaCoCo | [`universal`](https://java-buildpack.cloudfoundry.org/jacoco/index.yml)
 | `jvmkill` | [`mountainlion`](https://java-buildpack.cloudfoundry.org/jvmkill/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/jvmkill/trusty/x86_64/index.yml)
