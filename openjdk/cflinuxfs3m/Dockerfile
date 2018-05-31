@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     jq \
     libasound2-dev \
     libcups2-dev \
+    libfontconfig1-dev \
     libfreetype6-dev \
     libxext-dev \
     libxrender-dev \
