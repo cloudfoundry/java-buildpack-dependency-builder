@@ -5,7 +5,7 @@ image_resource:
   type: docker-image
   source:
     repository: cfje/google-stackdriver-debugger
-    tag: cflinuxfs2
+    tag: cflinuxfs3m
 
 inputs:
 - name: cloud-debug-java
@@ -15,7 +15,7 @@ run:
   path: java-buildpack-dependency-builder/google-stackdriver-debugger.sh
 
 params:
-  PLATFORM: trusty
+  PLATFORM: bionic
 
   AWS_ACCESS_KEY_ID:
   AWS_SECRET_ACCESS_KEY:
