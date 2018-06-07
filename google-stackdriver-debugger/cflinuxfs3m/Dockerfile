@@ -2,7 +2,7 @@ FROM cloudfoundry/cflinuxfs3m
 
 RUN mkdir -p /usr/share/man/man1
 
-RUN apt-get install -y \
+RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
     curl \
