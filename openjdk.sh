@@ -190,7 +190,6 @@ INDEX_PATH_JDK="/openjdk-jdk/$PLATFORM/x86_64/index.yml"
 INDEX_PATH_JRE="/openjdk/$PLATFORM/x86_64/index.yml"
 
 create_cacerts
-  jkfdl
 build
 
 transfer_to_s3 'openjdk-jdk.tar.gz' $UPLOAD_PATH_JDK
