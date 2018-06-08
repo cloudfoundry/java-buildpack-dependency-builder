@@ -8,6 +8,7 @@ image_resource:
     tag: cflinuxfs3m
 
 inputs:
+- name: cacerts-keystores
 - name: java-archives
 - name: java-buildpack-dependency-builder
 

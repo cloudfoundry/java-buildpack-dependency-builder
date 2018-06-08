@@ -8,6 +8,7 @@ image_resource:
     tag: cflinuxfs2
 
 inputs:
+- name: cacerts-keystores
 - name: java-archives
 - name: java-buildpack-dependency-builder
 

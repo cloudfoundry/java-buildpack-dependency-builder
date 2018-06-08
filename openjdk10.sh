@@ -13,7 +13,7 @@ build() {
   pushd jdk10u
     bash configure \
       --disable-warnings-as-errors \
-      --with-cacerts-file=$(pwd)/../cacerts.jks \
+      --with-cacerts-file=$(pwd)/../cacerts-keystores/cacerts-*.jks \
       --with-native-debug-symbols=none \
       --with-version-pre= \
       --with-version-opt=\
@@ -40,16 +40,6 @@ clone_repository() {
   pushd jdk10u
     hg checkout $TAG
   popd
-}
-
-create_cacerts() {
-  curl -L https://curl.haxx.se/ca/cacert.pem  > cacerts.pem
-  split_cacerts cacerts.pem cacerts
-
-  for I in $(find cacerts -type f | sort) ; do
-    echo "Importing $I"
-    keytool -importcert -noprompt -keystore cacerts.jks -storepass changeit -file $I -alias $(basename $I)
-  done
 }
 
 freetype_flags() {
@@ -90,26 +80,6 @@ release_name() {
     echo "macosx-x86_64-normal-server-release"
   else
     echo "linux-x86_64-normal-server-release"
-  fi
-}
-
-split_cacerts() {
-  if [[ -z "$PLATFORM" ]]; then
-    echo "PLATFORM must be set" >&2
-    exit 1
-  fi
-
-  local source=$1
-  local target=$2
-
-  mkdir -p $target
-
-  if [[ "$PLATFORM" == "mountainlion" ]]; then
-    split -a 3 -p '-----BEGIN CERTIFICATE-----' $source $target/
-    rm $target/aaa
-  else
-    awk '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/{ print $0; }' $source | csplit -n 3 -s -f $target/ - '/-----BEGIN CERTIFICATE-----/' {*}
-    rm $target/000
   fi
 }
 
@@ -160,7 +130,6 @@ UPLOAD_PATH_JRE=$(upload_path_jre)
 INDEX_PATH_JDK="/openjdk-jdk/$PLATFORM/x86_64/index.yml"
 INDEX_PATH_JRE="/openjdk/$PLATFORM/x86_64/index.yml"
 
-create_cacerts
 clone_repository
 build
 
