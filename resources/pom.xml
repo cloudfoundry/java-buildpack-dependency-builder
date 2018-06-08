@@ -18,6 +18,7 @@
     <modules>
         <module>artifactory-resource</module>
         <module>common</module>
+        <module>http-resource</module>
         <module>java-resource</module>
         <module>maven-resource</module>
         <module>pivotal-network-resource</module>

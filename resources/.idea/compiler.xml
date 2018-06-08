@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="artifactory-resource" />
         <module name="common" />
+        <module name="http-resource" />
         <module name="java-resource" />
         <module name="maven-resource" />
         <module name="pivotal-network-resource" />
@@ -19,6 +20,7 @@
     <bytecodeTargetLevel>
       <module name="artifactory-resource" target="1.8" />
       <module name="common" target="1.8" />
+      <module name="http-resource" target="1.8" />
       <module name="java-buildpack-dependency-builder-resources" target="1.8" />
       <module name="java-resource" target="1.8" />
       <module name="maven-resource" target="1.8" />
