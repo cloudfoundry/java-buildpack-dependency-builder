@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+set -e
+
+java -Dspring.profiles.active=out -jar "$(dirname $0)/http-resource.jar" "$@"
