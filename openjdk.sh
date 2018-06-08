@@ -24,7 +24,7 @@ build() {
       --disable-zip-debug-info \
       --enable-unlimited-crypto \
       --with-build-number=$BUILD_NUMBER \
-      --with-cacerts-file=$(pwd)/../cacerts-keystores/cacerts-*.jks \
+      --with-cacerts-file=$(pwd)/../cacerts-keystores/$(ls ../cacerts-keystores/*.jks) \
       $(freetype_flags) \
       --with-milestone=fcs \
       --with-update-version=$UPDATE_VERSION \

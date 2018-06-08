@@ -13,7 +13,7 @@ build() {
   pushd jdk10u
     bash configure \
       --disable-warnings-as-errors \
-      --with-cacerts-file=$(pwd)/../cacerts-keystores/cacerts-*.jks \
+      --with-cacerts-file=$(pwd)/../cacerts-keystores/$(ls ../cacerts-keystores/*.jks) \
       --with-native-debug-symbols=none \
       --with-version-pre= \
       --with-version-opt=\
