@@ -30,7 +30,7 @@ build() {
       --with-update-version=$UPDATE_VERSION \
       $(xcode_location)
 
-    COMPANY_NAME="Cloud Foundry" "$(cflags)" make images
+    COMPANY_NAME="Cloud Foundry" CFLAGS=$(cflags) make images
 
     chmod -R a+r build/$(release_name)/images
     tar czvf $(pwd)/../openjdk-jdk.tar.gz -C build/$(release_name)/images/j2sdk-image .
@@ -47,7 +47,7 @@ cflags() {
   if [[ "$PLATFORM" == "mountainlion" ]]; then
     echo ""
   else
-    echo 'CFLAGS="-Wno-deprecated-declarations -Wno-error=deprecated-declarations -Wno-error=format-overflow -Wno-error=nonnull"'
+    echo "-Wno-deprecated-declarations -Wno-error=deprecated-declarations -Wno-error=format-overflow -Wno-error=nonnull"
   fi
 }
 
