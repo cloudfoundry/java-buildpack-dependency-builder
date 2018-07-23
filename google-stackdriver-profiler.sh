@@ -6,7 +6,7 @@ source $(dirname "$0")/common.sh
 
 PATH=/usr/local/bin:$PATH
 
-cd cloud-profile-java
+cd cloud-profiler-java
 chmod +x build.sh
 ./build.sh
 

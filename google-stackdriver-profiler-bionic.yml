@@ -8,7 +8,7 @@ image_resource:
     tag: cflinuxfs3m
 
 inputs:
-- name: cloud-profile-java
+- name: cloud-profiler-java
 - name: java-buildpack-dependency-builder
 
 run:
