@@ -46,6 +46,8 @@ cflags() {
 
   if [[ "$PLATFORM" == "mountainlion" ]]; then
     echo ""
+  elif [[ "$PLATFORM" == "trusty" ]]; then
+    echo "-Wno-error=deprecated-declarations -Wno-deprecated-declarations"
   else
     echo "-Wno-deprecated-declarations -Wno-error=deprecated-declarations -Wno-error=format-overflow -Wno-error=nonnull"
   fi
