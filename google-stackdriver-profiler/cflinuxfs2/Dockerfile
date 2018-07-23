@@ -4,9 +4,7 @@ RUN apt-get update && apt-get install -y \
     apt-transport-https \
     ca-certificates \
     curl \
-    software-properties-common \
- && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
+    software-properties-common
 
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
