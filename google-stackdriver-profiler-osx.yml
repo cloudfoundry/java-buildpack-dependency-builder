@@ -1,0 +1,19 @@
+---
+platform: darwin
+
+inputs:
+- name: cloud-profile-java
+- name: java-buildpack-dependency-builder
+
+run:
+  path: java-buildpack-dependency-builder/google-stackdriver-profiler.sh
+
+params:
+  JAVA_HOME: /Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home
+  PLATFORM:  mountainlion
+
+  AWS_ACCESS_KEY_ID:
+  AWS_SECRET_ACCESS_KEY:
+  CLOUDFRONT_DISTRIBUTION_IDS:
+  DOWNLOAD_DOMAIN:
+  S3_BUCKET:
