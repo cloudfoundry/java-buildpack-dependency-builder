@@ -1,12 +1,11 @@
 FROM alpine:latest
 
-RUN apk add --update \
+RUN apk add --no-cache --update \
     bash \
     coreutils \
     curl \
     jq \
     py2-pip \
-    unzip \
- && rm -rf /var/cache/apk/*
+    unzip
 
 RUN pip install awscli --ignore-installed six
