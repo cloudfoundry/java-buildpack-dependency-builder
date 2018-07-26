@@ -37,7 +37,7 @@ RUN git clone --depth=1 -b curl-7_55_1 https://github.com/curl/curl.git /tmp/cur
     cd ~ && rm -rf /tmp/curl
 
 # cmake
-RUN git clone -b v3.6.2 https://github.com/Kitware/CMake.git /tmp/cmake && \
+RUN git clone -b v3.12.0 https://github.com/Kitware/CMake.git /tmp/cmake && \
     cd /tmp/cmake && \
     ./bootstrap && \
     make && make install && \
