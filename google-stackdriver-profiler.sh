@@ -9,7 +9,7 @@ PATH=/usr/local/bin:$PATH
 cd cloud-profiler-java
 make all
 tar zcf profiler_java_agent.tar.gz \
-    -C build/.out \
+    -C .out \
     NOTICES profiler_java_agent.so
 
 VERSION=$(git describe --tags)
