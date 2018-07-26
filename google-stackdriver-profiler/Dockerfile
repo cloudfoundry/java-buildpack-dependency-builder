@@ -1,23 +1,16 @@
-FROM cloudfoundry/cflinuxfs3m
-
-RUN mkdir -p /usr/share/man/man1
+FROM cloudfoundry/cflinuxfs2
 
 RUN apt-get update && apt-get install -y \
     apt-utils \
     autoconf \
     automake \
-    build-essential \
-    cmake \
     curl \
     g++ \
-    gcc \
     git \
-    jq \
     libssl-dev \
     libtool \
     make \
-    maven \
-    openjdk-8-jdk \
+    openjdk-7-jdk \
     python \
     python-dev \
     python-pip \
@@ -37,7 +30,7 @@ RUN git clone --depth=1 -b curl-7_55_1 https://github.com/curl/curl.git /tmp/cur
     cd ~ && rm -rf /tmp/curl
 
 # cmake
-RUN git clone -b v3.12.0 https://github.com/Kitware/CMake.git /tmp/cmake && \
+RUN git clone -b v3.6.2 https://github.com/Kitware/CMake.git /tmp/cmake && \
     cd /tmp/cmake && \
     ./bootstrap && \
     make && make install && \

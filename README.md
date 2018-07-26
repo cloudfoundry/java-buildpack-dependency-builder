@@ -29,7 +29,7 @@ The list of available versions for each dependency can be found at the following
 | Client Certificate Mapper | [`universal`](https://java-buildpack.cloudfoundry.org/client-certificate-mapper/index.yml)
 | Container Customizer | [`universal`](https://java-buildpack.cloudfoundry.org/container-customizer/index.yml)
 | Container Security Provider | [`universal`](https://java-buildpack.cloudfoundry.org/container-security-provider/index.yml)
-| Google Stackdriver Debugger | [`bionic`](https://java-buildpack.cloudfoundry.org/google-stackdriver-debugger/bionic/x86_64/index.yml), [`mountainlion`](https://java-buildpack.cloudfoundry.org/google-stackdriver-debugger/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/google-stackdriver-debugger/trusty/x86_64/index.yml)
+| Google Stackdriver Debugger | [`bionic`](https://java-buildpack.cloudfoundry.org/google-stackdriver-debugger/bionic/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/google-stackdriver-debugger/trusty/x86_64/index.yml)
 | Groovy | [`universal`](https://java-buildpack.cloudfoundry.org/groovy/index.yml)
 | JaCoCo | [`universal`](https://java-buildpack.cloudfoundry.org/jacoco/index.yml)
 | `jvmkill` | [`bionic`](https://java-buildpack.cloudfoundry.org/jvmkill/bionic/x86_64/index.yml), [`mountainlion`](https://java-buildpack.cloudfoundry.org/jvmkill/mountainlion/x86_64/index.yml), [`trusty`](https://java-buildpack.cloudfoundry.org/jvmkill/trusty/x86_64/index.yml)
