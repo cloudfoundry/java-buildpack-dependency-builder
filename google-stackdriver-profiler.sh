@@ -22,6 +22,6 @@ UPLOAD_PATH_TRUSTY="/google-stackdriver-profiler/trusty/x86_64/google-stackdrive
 
 transfer_to_s3 "profiler_java_agent.tar.gz" $UPLOAD_PATH_BIONIC
 transfer_to_s3 "profiler_java_agent.tar.gz" $UPLOAD_PATH_TRUSTY
-update_index $INDEX_PATH $VERSION $UPLOAD_PATH_BIONIC
-update_index $INDEX_PATH $VERSION $UPLOAD_PATH_TRUSTY
+update_index $INDEX_PATH_BIONIC $VERSION $UPLOAD_PATH_BIONIC
+update_index $INDEX_PATH_TRUSTY $VERSION $UPLOAD_PATH_TRUSTY
 invalidate_cache $INDEX_PATH_BIONIC $UPLOAD_PATH_BIONIC $INDEX_PATH_TRUSTY $UPLOAD_PATH_TRUSTY
