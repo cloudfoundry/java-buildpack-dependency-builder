@@ -14,6 +14,7 @@ outputs:
 - name: artifactory-resource-docker-image
 - name: http-resource-docker-image
 - name: java-resource-docker-image
+- name: jprofiler-resource-docker-image
 - name: maven-resource-docker-image
 - name: pivotal-network-resource-docker-image
 - name: tomcat-resource-docker-image
