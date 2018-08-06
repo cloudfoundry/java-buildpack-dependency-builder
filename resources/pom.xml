@@ -36,6 +36,7 @@
         <module>common</module>
         <module>http-resource</module>
         <module>java-resource</module>
+        <module>jprofiler-resource</module>
         <module>maven-resource</module>
         <module>pivotal-network-resource</module>
         <module>tomcat-resource</module>
