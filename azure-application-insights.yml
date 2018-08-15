@@ -8,11 +8,11 @@ image_resource:
     tag: latest
 
 inputs:
-- name: application-insights-archives
+- name: azure-application-insights-archives
 - name: java-buildpack-dependency-builder
 
 run:
-  path: java-buildpack-dependency-builder/application-insights.sh
+  path: java-buildpack-dependency-builder/azure-application-insights.sh
 
 params:
   AWS_ACCESS_KEY_ID:

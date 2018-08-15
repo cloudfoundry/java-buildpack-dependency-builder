@@ -25,6 +25,7 @@ The list of available versions for each dependency can be found at the following
 
 | Dependency | Location
 | ---------- | ---------
+| Azure Application Insights | [`universal`](https://java-buildpack.cloudfoundry.org/azure-application-insights/index.yml)
 | Auto Reconfiguration | [`universal`](https://java-buildpack.cloudfoundry.org/auto-reconfiguration/index.yml)
 | Client Certificate Mapper | [`universal`](https://java-buildpack.cloudfoundry.org/client-certificate-mapper/index.yml)
 | Container Customizer | [`universal`](https://java-buildpack.cloudfoundry.org/container-customizer/index.yml)
