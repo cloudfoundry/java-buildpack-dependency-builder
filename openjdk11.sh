@@ -21,7 +21,7 @@ build() {
       $(freetype_flags) \
       $(xcode_location)
 
-    make images
+    make product-images legacy-jre-image
 
     chmod -R a+r build/$(release_name)/images
     tar czvf $(pwd)/../openjdk-jdk.tar.gz -C build/$(release_name)/images/jdk .
