@@ -30,6 +30,6 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip install awscli --ignore-installed six
 
-RUN mkdir -p /opt/openjdk-9 \
- && curl -sL https://java-buildpack.cloudfoundry.org/openjdk-jdk/trusty/x86_64/openjdk-9.0.4_11.tar.gz \
-    | tar xzvf - -C /opt/openjdk-9
+RUN mkdir -p /opt/openjdk-10 \
+ && curl -sL https://java-buildpack.cloudfoundry.org/openjdk-jdk/trusty/x86_64/openjdk-10.0.2_13.tar.gz \
+    | tar xzvf - -C /opt/openjdk-10
