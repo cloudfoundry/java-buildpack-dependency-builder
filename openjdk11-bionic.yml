@@ -16,7 +16,7 @@ run:
   path: java-buildpack-dependency-builder/openjdk11.sh
 
 params:
-  JAVA_HOME: /opt/openjdk-9
+  JAVA_HOME: /opt/openjdk-10
   PLATFORM:  bionic
 
   AWS_ACCESS_KEY_ID:
