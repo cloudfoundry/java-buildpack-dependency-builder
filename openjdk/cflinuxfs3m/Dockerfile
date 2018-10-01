@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-RUN pip install awscli --ignore-installed six
+RUN pip install awscli --ignore-installed six urllib3[secure]
 
 RUN mkdir -p /opt/openjdk-10 \
  && curl -sL https://java-buildpack.cloudfoundry.org/openjdk-jdk/bionic/x86_64/openjdk-10.0.2_13.tar.gz \
