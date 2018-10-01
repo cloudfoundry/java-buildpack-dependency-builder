@@ -10,7 +10,7 @@ build() {
     exit 1
   fi
 
-  pushd jdk10u
+  pushd jdk11u
     bash configure \
       --disable-warnings-as-errors \
       --with-cacerts-file=$(pwd)/$(ls ../cacerts-keystores/*.jks) \
@@ -35,9 +35,9 @@ clone_repository() {
     exit 1
   fi
 
-  hg clone http://hg.openjdk.java.net/jdk-updates/jdk10u
+  hg clone http://hg.openjdk.java.net/jdk-updates/jdk11u
 
-  pushd jdk10u
+  pushd jdk11u
     hg checkout $TAG
   popd
 }
@@ -121,9 +121,13 @@ xcode_location() {
 
 PATH=/usr/local/bin:$PATH
 
-BUILD_NUMBER="$(cat java-archives/build_number)"
-TAG="jdk-$(cat java-archives/major_version).$(cat java-archives/minor_version).$(cat java-archives/update_version)+$(cat java-archives/build_number)"
-UPLOAD_VERSION="$(cat java-archives/major_version).$(cat java-archives/minor_version).$(cat java-archives/update_version)_$(cat java-archives/build_number)"
+BUILD_NUMBER="28"
+TAG="jdk-11+28"
+UPLOAD_VERSION="11.0.0_28"
+
+# BUILD_NUMBER="$(cat java-archives/build_number)"
+# TAG="jdk-$(cat java-archives/major_version).$(cat java-archives/minor_version).$(cat java-archives/update_version)+$(cat java-archives/build_number)"
+# UPLOAD_VERSION="$(cat java-archives/major_version).$(cat java-archives/minor_version).$(cat java-archives/update_version)_$(cat java-archives/build_number)"
 
 UPLOAD_PATH_JDK=$(upload_path_jdk)
 UPLOAD_PATH_JRE=$(upload_path_jre)
