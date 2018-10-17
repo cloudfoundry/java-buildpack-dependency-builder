@@ -121,13 +121,9 @@ xcode_location() {
 
 PATH=/usr/local/bin:$PATH
 
-BUILD_NUMBER="28"
-TAG="jdk-11+28"
-UPLOAD_VERSION="11.0.0_28"
-
-# BUILD_NUMBER="$(cat java-archives/build_number)"
-# TAG="jdk-$(cat java-archives/major_version).$(cat java-archives/minor_version).$(cat java-archives/update_version)+$(cat java-archives/build_number)"
-# UPLOAD_VERSION="$(cat java-archives/major_version).$(cat java-archives/minor_version).$(cat java-archives/update_version)_$(cat java-archives/build_number)"
+BUILD_NUMBER="$(cat java-archives/build_number)"
+TAG="jdk-$(cat java-archives/major_version).$(cat java-archives/minor_version).$(cat java-archives/update_version)+$(cat java-archives/build_number)"
+UPLOAD_VERSION="$(cat java-archives/major_version).$(cat java-archives/minor_version).$(cat java-archives/update_version)_$(cat java-archives/build_number)"
 
 UPLOAD_PATH_JDK=$(upload_path_jdk)
 UPLOAD_PATH_JRE=$(upload_path_jre)
