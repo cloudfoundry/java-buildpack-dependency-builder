@@ -9,17 +9,14 @@ image_resource:
 
 inputs:
 - name: cacerts-keystores
-- name: java-archives
 - name: java-buildpack-dependency-builder
+- name: java-8-release
+
+outputs:
+- name: images
 
 run:
-  path: java-buildpack-dependency-builder/openjdk.sh
+  path: java-buildpack-dependency-builder/openjdk8.sh
 
 params:
-  PLATFORM: bionic
-
-  AWS_ACCESS_KEY_ID:
-  AWS_SECRET_ACCESS_KEY:
-  CLOUDFRONT_DISTRIBUTION_IDS:
-  DOWNLOAD_DOMAIN:
-  S3_BUCKET:
+  JAVA_HOME: /opt/openjdk-8
