@@ -9,18 +9,14 @@ image_resource:
 
 inputs:
 - name: cacerts-keystores
-- name: java-archives
 - name: java-buildpack-dependency-builder
+- name: java-11-release
+
+outputs:
+- name: images
 
 run:
   path: java-buildpack-dependency-builder/openjdk11.sh
 
 params:
-  JAVA_HOME: /opt/openjdk-10
-  PLATFORM:  bionic
-
-  AWS_ACCESS_KEY_ID:
-  AWS_SECRET_ACCESS_KEY:
-  CLOUDFRONT_DISTRIBUTION_IDS:
-  DOWNLOAD_DOMAIN:
-  S3_BUCKET:
+  JAVA_HOME: /opt/openjdk-11

@@ -5,18 +5,18 @@ image_resource:
   type: docker-image
   source:
     repository: cfje/openjdk
-    tag: cflinuxfs2
+    tag: cflinuxfs3m
 
 inputs:
 - name: cacerts-keystores
 - name: java-buildpack-dependency-builder
-- name: java-11-release
+- name: java-12-release
 
 outputs:
 - name: images
 
 run:
-  path: java-buildpack-dependency-builder/openjdk11.sh
+  path: java-buildpack-dependency-builder/openjdk12.sh
 
 params:
   JAVA_HOME: /opt/openjdk-11

@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-SOURCE_DIRECTORY="java-11-release"
+SOURCE_DIRECTORY="java-12-release"
 DESTINATION_DIRECTORY="images"
 
 PATTERN="jdk-([0-9]+)\.?([0-9]+)?\.?([0-9]+)?\+([0-9]+)"
@@ -35,12 +35,12 @@ build_number() {
 }
 
 package() {
-  chmod -R a+r ${SOURCE_DIRECTORY}/build/linux-x86_64-normal-server-release/images
+  chmod -R a+r ${SOURCE_DIRECTORY}/build/linux-x86_64-server-release/images
 
   local identifier="$(version)-$(platform)"
 
-  tar czvf ${DESTINATION_DIRECTORY}/openjdk-${identifier}.tar.gz     -C ${SOURCE_DIRECTORY}/build/linux-x86_64-normal-server-release/images/jre .
-  tar czvf ${DESTINATION_DIRECTORY}/openjdk-jdk-${identifier}.tar.gz -C ${SOURCE_DIRECTORY}/build/linux-x86_64-normal-server-release/images/jdk .
+  tar czvf ${DESTINATION_DIRECTORY}/openjdk-${identifier}.tar.gz     -C ${SOURCE_DIRECTORY}/build/linux-x86_64-server-release/images/jre .
+  tar czvf ${DESTINATION_DIRECTORY}/openjdk-jdk-${identifier}.tar.gz -C ${SOURCE_DIRECTORY}/build/linux-x86_64-server-release/images/jdk .
   echo $(version) >> ${DESTINATION_DIRECTORY}/version
 }
 
