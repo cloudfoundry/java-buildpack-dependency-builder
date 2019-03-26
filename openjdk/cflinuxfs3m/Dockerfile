@@ -28,5 +28,5 @@ RUN pip install --upgrade setuptools \
  && pip install awscli urllib3[secure] --ignore-installed six
 
 RUN mkdir -p /opt/openjdk-11 \
- && curl -sL https://java-buildpack.cloudfoundry.org/openjdk-jdk/bionic/x86_64/openjdk-11.0.2_9.tar.gz \
+ && curl -sL https://java-buildpack.cloudfoundry.org/openjdk-jdk/bionic/x86_64/openjdk-11.0.2_09.tar.gz \
     | tar xzvf - -C /opt/openjdk-11
