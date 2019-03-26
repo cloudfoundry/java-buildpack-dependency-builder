@@ -1,5 +1,2 @@
-.idea/libraries
-.idea/tasks.xml
-.idea/workspace.xml
-target
-*.jar
+.idea/
+*.iml
