@@ -52,7 +52,7 @@ package() {
 
   local identifier="$(version)-$(platform)"
 
-  tar czvf ${DESTINATION_DIRECTORY}/openjdk-${identifier}.tar.gz     -C ${SOURCE_DIRECTORY}/build/linux-x86_64-normal-server-release/images/j2re-image .
+  tar czvf ${DESTINATION_DIRECTORY}/openjdk-jre-${identifier}.tar.gz -C ${SOURCE_DIRECTORY}/build/linux-x86_64-normal-server-release/images/j2re-image .
   tar czvf ${DESTINATION_DIRECTORY}/openjdk-jdk-${identifier}.tar.gz -C ${SOURCE_DIRECTORY}/build/linux-x86_64-normal-server-release/images/j2sdk-image .
   echo $(version) >> ${DESTINATION_DIRECTORY}/version
 }

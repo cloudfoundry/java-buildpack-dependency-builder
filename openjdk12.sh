@@ -39,7 +39,7 @@ package() {
 
   local identifier="$(version)-$(platform)"
 
-  tar czvf ${DESTINATION_DIRECTORY}/openjdk-${identifier}.tar.gz     -C ${SOURCE_DIRECTORY}/build/linux-x86_64-server-release/images/jre .
+  tar czvf ${DESTINATION_DIRECTORY}/openjdk-jre-${identifier}.tar.gz -C ${SOURCE_DIRECTORY}/build/linux-x86_64-server-release/images/jre .
   tar czvf ${DESTINATION_DIRECTORY}/openjdk-jdk-${identifier}.tar.gz -C ${SOURCE_DIRECTORY}/build/linux-x86_64-server-release/images/jdk .
   echo $(version) >> ${DESTINATION_DIRECTORY}/version
 }
