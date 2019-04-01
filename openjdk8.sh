@@ -66,7 +66,7 @@ semver() {
 
     for TAG in $(hg log -r "." --template "{latesttag}\n" | tr ":" "\n"); do
       if [[ ${TAG} =~ ${PATTERN} ]]; then
-        echo "${BASH_REMATCH[1]:-0}.${BASH_REMATCH[2]:-0}.${BASH_REMATCH[3]:-0}-$(printf "%02d" ${BASH_REMATCH[4]:-0})"
+        echo "1.8.0-$(printf "%03d" ${BASH_REMATCH[1]:-0})"
         return
       fi
     done
