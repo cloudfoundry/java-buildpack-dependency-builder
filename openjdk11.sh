@@ -41,11 +41,24 @@ package() {
 
   tar czvf ${DESTINATION_DIRECTORY}/openjdk-jre-${identifier}.tar.gz -C ${SOURCE_DIRECTORY}/build/linux-x86_64-normal-server-release/images/jre .
   tar czvf ${DESTINATION_DIRECTORY}/openjdk-jdk-${identifier}.tar.gz -C ${SOURCE_DIRECTORY}/build/linux-x86_64-normal-server-release/images/jdk .
-  echo $(version) >> ${DESTINATION_DIRECTORY}/version
+  echo $(semver) >> ${DESTINATION_DIRECTORY}/version
 }
 
 platform() {
   lsb_release -cs
+}
+
+semver() {
+  pushd ${SOURCE_DIRECTORY} > /dev/null
+
+    for TAG in $(hg log -r "." --template "{latesttag}\n" | tr ":" "\n"); do
+      if [[ ${TAG} =~ ${PATTERN} ]]; then
+        echo "${BASH_REMATCH[1]:-0}.${BASH_REMATCH[2]:-0}.${BASH_REMATCH[3]:-0}-$(printf "%02d" ${BASH_REMATCH[4]:-0})"
+        return
+      fi
+    done
+
+  popd > /dev/null
 }
 
 version() {
