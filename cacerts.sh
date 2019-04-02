@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e -u -o pipefail
+set -euo pipefail
 
 VERSION=$(cat cacerts-archives/version)
 
@@ -11,5 +11,7 @@ rm split/000
 
 for I in $(find split -type f | sort) ; do
   echo "Importing $I"
-  keytool -importcert -noprompt -keystore cacerts-keystores/cacerts-$VERSION.jks -storepass changeit -file $I -alias $(basename $I)
+  /opt/openjdk-8/bin/keytool -importcert -noprompt -keystore repository/cacerts-$VERSION.jks -storepass changeit -file $I -alias $(basename $I)
 done
+
+cp cacerts-archives/version repository/version

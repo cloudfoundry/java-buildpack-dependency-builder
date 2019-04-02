@@ -12,7 +12,7 @@ build() {
 
     bash configure \
       --disable-warnings-as-errors \
-      --with-cacerts-file=$(pwd)/$(ls ../cacerts-keystores/*.jks) \
+      --with-cacerts-file=$(pwd)/$(ls ../cacerts-repository/*.jks) \
       --with-freetype-include=/usr/include/freetype2 \
       --with-freetype-lib=/usr/lib/x86_64-linux-gnu \
       --with-native-debug-symbols=none \

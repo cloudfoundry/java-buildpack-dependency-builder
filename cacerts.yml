@@ -12,7 +12,7 @@ inputs:
 - name: cacerts-archives
 
 outputs:
-- name: cacerts-keystores
+- name: repository
 
 run:
   path: java-buildpack-dependency-builder/cacerts.sh

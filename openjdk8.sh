@@ -19,7 +19,7 @@ build() {
       --disable-zip-debug-info \
       --enable-unlimited-crypto \
       --with-build-number=$(build_number) \
-      --with-cacerts-file=$(pwd)/$(ls ../cacerts-keystores/*.jks) \
+      --with-cacerts-file=$(pwd)/$(ls ../cacerts-repository/*.jks) \
       --with-freetype-include=/usr/include/freetype2 \
       --with-freetype-lib=/usr/lib/x86_64-linux-gnu \
       --with-milestone=fcs \
