@@ -5,7 +5,7 @@ image_resource:
   type: docker-image
   source:
     repository: cfje/google-stackdriver-debugger
-    tag: cflinuxfs3m
+    tag: cflinuxfs3
 
 inputs:
 - name: cloud-debug-java
