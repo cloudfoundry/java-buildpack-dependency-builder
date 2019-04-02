@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-set -xeuo pipefail
-shopt -s extglob
+set -euo pipefail
 
 VERSION=$(cat your-kit-archives/version)
 
