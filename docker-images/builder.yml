@@ -19,4 +19,4 @@ run:
   path: build
 
 params:
-  CONTEXT: builder
+  CONTEXT: builder/docker-images

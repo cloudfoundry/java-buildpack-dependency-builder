@@ -1,4 +1,4 @@
-FROM cloudfoundry/cflinuxfs3m
+FROM cloudfoundry/cflinuxfs3
 
 RUN mkdir -p /usr/share/man/man1
 
