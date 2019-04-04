@@ -1,14 +1,6 @@
-#!/usr/bin/env bash
-
-set -e -u -o pipefail
-
-source $(dirname "$0")/common.sh
+set -euo pipefail
 
 VERSION=$(cat mariadb-jdbc-archives/version)
 
-INDEX_PATH="/mariadb-jdbc/index.yml"
-UPLOAD_PATH="/mariadb-jdbc/mariadb-jdbc-$VERSION.jar"
-
-transfer_to_s3 "mariadb-jdbc-archives/mariadb-java-client-*.jar" $UPLOAD_PATH
-update_index $INDEX_PATH $VERSION $UPLOAD_PATH
-invalidate_cache $INDEX_PATH $UPLOAD_PATH
+cp mariadb-jdbc-archives/mariadb-java-client-*.jar repository/mariadb-jdbc-$VERSION.jar
+cp mariadb-jdbc-archives/version repository/version
