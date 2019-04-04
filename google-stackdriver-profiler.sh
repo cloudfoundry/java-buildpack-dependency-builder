@@ -1,27 +1,35 @@
 #!/usr/bin/env bash
 
-set -e -u -o pipefail
-
-source $(dirname "$0")/common.sh
+set -euo pipefail
 
 PATH=/usr/local/bin:$PATH
 
-cd cloud-profiler-java
-make all
-tar zcf profiler_java_agent.tar.gz \
-    -C .out \
-    NOTICES profiler_java_agent.so
+SOURCE_DIRECTORY="cloud-profiler-java"
 
-VERSION=$(git describe --tags)
-VERSION="${VERSION##v}"
+build() {
+  pushd ${SOURCE_DIRECTORY} > /dev/null
 
-INDEX_PATH_BIONIC="/google-stackdriver-profiler/bionic/x86_64/index.yml"
-INDEX_PATH_TRUSTY="/google-stackdriver-profiler/trusty/x86_64/index.yml"
-UPLOAD_PATH_BIONIC="/google-stackdriver-profiler/bionic/x86_64/google-stackdriver-profiler-$VERSION.tar.gz"
-UPLOAD_PATH_TRUSTY="/google-stackdriver-profiler/trusty/x86_64/google-stackdriver-profiler-$VERSION.tar.gz"
+    make all
+    tar zcf profiler_java_agent.tar.gz \
+      -C .out \
+      NOTICES profiler_java_agent.so
 
-transfer_to_s3 "profiler_java_agent.tar.gz" $UPLOAD_PATH_BIONIC
-transfer_to_s3 "profiler_java_agent.tar.gz" $UPLOAD_PATH_TRUSTY
-update_index $INDEX_PATH_BIONIC $VERSION $UPLOAD_PATH_BIONIC
-update_index $INDEX_PATH_TRUSTY $VERSION $UPLOAD_PATH_TRUSTY
-invalidate_cache $INDEX_PATH_BIONIC $UPLOAD_PATH_BIONIC $INDEX_PATH_TRUSTY $UPLOAD_PATH_TRUSTY
+  popd > /dev/null
+}
+
+version() {
+  pushd ${SOURCE_DIRECTORY} > /dev/null
+
+    local version=$(git describe --tags)
+    version="${version##v}"
+
+    echo ${version}
+
+  popd > /dev/null
+}
+
+VERSION=$(version)
+
+build
+cp ${SOURCE_DIRECTORY}/profiler_java_agent.tar.gz repository/google-stackdriver-profiler-$VERSION.tar.gz
+echo ${VERSION} > repository/version
