@@ -11,14 +11,8 @@ inputs:
 - name: cloud-debug-java
 - name: java-buildpack-dependency-builder
 
+outputs:
+- name: repository
+
 run:
   path: java-buildpack-dependency-builder/google-stackdriver-debugger.sh
-
-params:
-  PLATFORM: trusty
-
-  AWS_ACCESS_KEY_ID:
-  AWS_SECRET_ACCESS_KEY:
-  CLOUDFRONT_DISTRIBUTION_IDS:
-  DOWNLOAD_DOMAIN:
-  S3_BUCKET:

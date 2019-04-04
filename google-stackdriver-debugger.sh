@@ -1,21 +1,32 @@
 #!/usr/bin/env bash
 
-set -e -u -o pipefail
+set -euo pipefail
 
-source $(dirname "$0")/common.sh
+SOURCE_DIRECTORY="cloud-debug-java"
 
-PATH=/usr/local/bin:$PATH
+build() {
+  pushd ${SOURCE_DIRECTORY} > /dev/null
 
-cd cloud-debug-java
-chmod +x build.sh
-./build.sh
+    PATH=/usr/local/bin:$PATH
 
-VERSION=$(git describe --tags)
-VERSION="${VERSION##v}.0"
+    bash build.sh
 
-INDEX_PATH="/google-stackdriver-debugger/$PLATFORM/x86_64/index.yml"
-UPLOAD_PATH="/google-stackdriver-debugger/$PLATFORM/x86_64/google-stackdriver-debugger-$VERSION.tar.gz"
+  popd > /dev/null
+}
 
-transfer_to_s3 "cdbg_java_agent_service_account.tar.gz" $UPLOAD_PATH
-update_index $INDEX_PATH $VERSION $UPLOAD_PATH
-invalidate_cache $INDEX_PATH $UPLOAD_PATH
+version() {
+  pushd ${SOURCE_DIRECTORY} > /dev/null
+
+    local version=$(git describe --tags)
+    version="${version##v}.0"
+
+    echo ${version}
+
+  popd > /dev/null
+}
+
+VERSION=$(version)
+
+build
+cp ${SOURCE_DIRECTORY}/cdbg_java_agent_service_account.tar.gz repository/google-stackdriver-debugger-$VERSION.tar.gz
+echo ${VERSION} > repository/version

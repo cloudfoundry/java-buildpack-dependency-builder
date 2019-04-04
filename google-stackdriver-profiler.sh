@@ -2,12 +2,12 @@
 
 set -euo pipefail
 
-PATH=/usr/local/bin:$PATH
-
 SOURCE_DIRECTORY="cloud-profiler-java"
 
 build() {
   pushd ${SOURCE_DIRECTORY} > /dev/null
+
+    PATH=/usr/local/bin:$PATH
 
     make all
     tar zcf profiler_java_agent.tar.gz \
