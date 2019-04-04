@@ -1,3 +1,23 @@
+# $1: semver version
+semver_to_repository_version() {
+  local pattern="([0-9]+)\.([0-9]+)\.([0-9]+)-?(.*)"
+
+  if [[ ${1} =~ ${pattern} ]]; then
+    local v="${BASH_REMATCH[1]}.${BASH_REMATCH[2]}.${BASH_REMATCH[3]}"
+
+    if [[ ! "${BASH_REMATCH[4]}" == "" ]]; then
+      v="${v}_${BASH_REMATCH[4]}"
+    fi
+
+    echo ${v}
+    return
+  fi
+
+  >&2 echo "Input is not semver"
+  exit 1
+}
+
+
 # $@: S3 invalidation paths without bucket
 invalidate_cache() {
   if [[ -z "$CLOUDFRONT_DISTRIBUTION_IDS" ]]; then
