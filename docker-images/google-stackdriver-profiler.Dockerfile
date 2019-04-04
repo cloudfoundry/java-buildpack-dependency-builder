@@ -12,8 +12,6 @@ RUN apt-get update && apt-get install -y \
     make \
     openjdk-7-jdk \
     python \
-    python-dev \
-    python-pip \
     unzip \
     zlib1g-dev \
  && apt-get clean \
@@ -80,5 +78,3 @@ RUN git clone --depth=1 --recursive -b v1.11.0 https://github.com/grpc/grpc.git 
     CPPFLAGS="-I /usr/local/ssl/include" make CONFIG=opt EMBED_OPENSSL=false V=1 HAS_SYSTEM_OPENSSL_NPN=0 && \
     CPPFLAGS="-I /usr/local/ssl/include" make CONFIG=opt EMBED_OPENSSL=false V=1 HAS_SYSTEM_OPENSSL_NPN=0 install && \
     rm -rf /tmp/grpc
-
-RUN pip install awscli --ignore-installed six
