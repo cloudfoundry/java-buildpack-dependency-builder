@@ -1,14 +1,8 @@
 #!/usr/bin/env bash
 
-set -e -u -o pipefail
-
-source $(dirname "$0")/common.sh
+set -euo pipefail
 
 VERSION=$(cat redis-store-archives/version)
 
-INDEX_PATH="/redis-store/index.yml"
-UPLOAD_PATH="/redis-store/redis-store-$VERSION.jar"
-
-transfer_to_s3 "redis-store-archives/redis-store-*.jar" $UPLOAD_PATH
-update_index $INDEX_PATH $VERSION $UPLOAD_PATH
-invalidate_cache $INDEX_PATH $UPLOAD_PATH
+cp redis-store-archives/redis-store-*.jar repository/redis-store-$VERSION.jar
+cp redis-store-archives/version repository/version
