@@ -7,4 +7,4 @@ source $(dirname "$0")/common.sh
 VERSION=$(semver_to_repository_version $(cat auto-reconfiguration-archives/version))
 
 cp auto-reconfiguration-archives/java-buildpack-auto-reconfiguration-*.jar repository/auto-reconfiguration-$VERSION.jar
-echo $VERSION > repository/version
+cp auto-reconfiguration/version repository/version
