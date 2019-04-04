@@ -1,14 +1,8 @@
 #!/usr/bin/env bash
 
-set -e -u -o pipefail
-
-source $(dirname "$0")/common.sh
+set -euo pipefail
 
 VERSION=$(cat container-security-provider-archives/version)
 
-INDEX_PATH="/container-security-provider/index.yml"
-UPLOAD_PATH="/container-security-provider/container-security-provider-$VERSION.jar"
-
-transfer_to_s3 "container-security-provider-archives/java-buildpack-container-security-provider-*.jar" $UPLOAD_PATH
-update_index $INDEX_PATH $VERSION $UPLOAD_PATH
-invalidate_cache $INDEX_PATH $UPLOAD_PATH
+cp container-security-provider-archives/java-buildpack-container-security-provider-*.jar repository/container-security-provider-$VERSION.jar
+cp container-security-provider-archives/version repository/version
