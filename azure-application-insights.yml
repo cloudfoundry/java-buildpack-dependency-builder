@@ -11,12 +11,8 @@ inputs:
 - name: azure-application-insights-archives
 - name: java-buildpack-dependency-builder
 
+outputs:
+- name: repository
+
 run:
   path: java-buildpack-dependency-builder/azure-application-insights.sh
-
-params:
-  AWS_ACCESS_KEY_ID:
-  AWS_SECRET_ACCESS_KEY:
-  CLOUDFRONT_DISTRIBUTION_IDS:
-  DOWNLOAD_DOMAIN:
-  S3_BUCKET:
