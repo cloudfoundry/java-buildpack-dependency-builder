@@ -16,10 +16,3 @@ outputs:
 
 run:
   path: java-buildpack-dependency-builder/your-kit.sh
-
-params:
-  AWS_ACCESS_KEY_ID:
-  AWS_SECRET_ACCESS_KEY:
-  CLOUDFRONT_DISTRIBUTION_IDS:
-  DOWNLOAD_DOMAIN:
-  S3_BUCKET:
