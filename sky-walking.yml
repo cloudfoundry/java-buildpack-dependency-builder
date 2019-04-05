@@ -11,12 +11,8 @@ inputs:
 - name: java-buildpack-dependency-builder
 - name: sky-walking-archives
 
+outputs:
+- name: repository
+
 run:
   path: java-buildpack-dependency-builder/sky-walking.sh
-
-params:
-  AWS_ACCESS_KEY_ID:
-  AWS_SECRET_ACCESS_KEY:
-  CLOUDFRONT_DISTRIBUTION_IDS:
-  DOWNLOAD_DOMAIN:
-  S3_BUCKET:
