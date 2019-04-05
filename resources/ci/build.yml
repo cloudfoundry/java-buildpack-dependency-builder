@@ -4,21 +4,25 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: openjdk
-    tag: 8-jdk-alpine
+    repository: golang
+    tag: latest
 
 inputs:
 - name: java-buildpack-dependency-builder
 
 outputs:
-- name: artifactory-resource-docker-image
-- name: http-resource-docker-image
-- name: jprofiler-resource-docker-image
-- name: maven-resource-docker-image
-- name: pivotal-network-resource-docker-image
-- name: tomcat-resource-docker-image
-- name: wildfly-resource-docker-image
-- name: your-kit-resource-docker-image
+- name: artifactory-builder
+- name: http-builder
+- name: jprofiler-builder
+- name: maven-builder
+- name: repository-builder
+- name: sky-walking-builder
+- name: tomcat-builder
+- name: wildfly-builder
+- name: your-kit-builder
+
+caches:
+- path: go-module-cache
 
 run:
   path: java-buildpack-dependency-builder/resources/ci/build.sh

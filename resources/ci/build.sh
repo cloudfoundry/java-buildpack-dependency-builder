@@ -1,16 +1,64 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
-cd java-buildpack-dependency-builder/resources
-./mvnw -q package
-cd -
+if [[ -d $PWD/go-module-cache && ! -d ${GOPATH}/pkg/mod ]]; then
+  mkdir -p ${GOPATH}/pkg
+  ln -s $PWD/go-module-cache ${GOPATH}/pkg/mod
+fi
 
-cp -r java-buildpack-dependency-builder/resources/artifactory-resource-docker-image/* artifactory-resource-docker-image
-cp -r java-buildpack-dependency-builder/resources/http-resource-docker-image/* http-resource-docker-image
-cp -r java-buildpack-dependency-builder/resources/jprofiler-resource-docker-image/* jprofiler-resource-docker-image
-cp -r java-buildpack-dependency-builder/resources/maven-resource-docker-image/* maven-resource-docker-image
-cp -r java-buildpack-dependency-builder/resources/pivotal-network-resource-docker-image/* pivotal-network-resource-docker-image
-cp -r java-buildpack-dependency-builder/resources/tomcat-resource-docker-image/* tomcat-resource-docker-image
-cp -r java-buildpack-dependency-builder/resources/wildfly-resource-docker-image/* wildfly-resource-docker-image
-cp -r java-buildpack-dependency-builder/resources/your-kit-resource-docker-image/* your-kit-resource-docker-image
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+
+echo "Building Artifactory"
+cp Dockerfile ../../artifactory-builder
+GOOS="linux" go build -ldflags='-s -w' -o ../../artifactory-builder/check artifactory/cmd/check.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../artifactory-builder/in    artifactory/cmd/in.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../artifactory-builder/out   artifactory/cmd/out.go
+
+echo "Building HTTP"
+cp Dockerfile ../../http-builder
+GOOS="linux" go build -ldflags='-s -w' -o ../../http-builder/check http/cmd/check.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../http-builder/in    http/cmd/in.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../http-builder/out   http/cmd/out.go
+
+echo "Building JProfiler"
+cp Dockerfile ../../jprofiler-builder
+GOOS="linux" go build -ldflags='-s -w' -o ../../jprofiler-builder/check jprofiler/cmd/check.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../jprofiler-builder/in    jprofiler/cmd/in.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../jprofiler-builder/out   jprofiler/cmd/out.go
+
+echo "Building Maven"
+cp Dockerfile ../../maven-builder
+GOOS="linux" go build -ldflags='-s -w' -o ../../maven-builder/check maven/cmd/check.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../maven-builder/in    maven/cmd/in.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../maven-builder/out   maven/cmd/out.go
+
+echo "Building Repository"
+cp Dockerfile ../../repository-builder
+GOOS="linux" go build -ldflags='-s -w' -o ../../repository-builder/check repository/cmd/check.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../repository-builder/in    repository/cmd/in.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../repository-builder/out   repository/cmd/out.go
+
+echo "Building Sky Walking"
+cp Dockerfile ../../sky-walking-builder
+GOOS="linux" go build -ldflags='-s -w' -o ../../sky-walking-builder/check skywalking/cmd/check.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../sky-walking-builder/in    skywalking/cmd/in.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../sky-walking-builder/out   skywalking/cmd/out.go
+
+echo "Building Tomcat"
+cp Dockerfile ../../tomcat-builder
+GOOS="linux" go build -ldflags='-s -w' -o ../../tomcat-builder/check tomcat/cmd/check.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../tomcat-builder/in    tomcat/cmd/in.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../tomcat-builder/out   tomcat/cmd/out.go
+
+echo "Building WildFly"
+cp Dockerfile ../../wildfly-builder
+GOOS="linux" go build -ldflags='-s -w' -o ../../wildfly-builder/check wildfly/cmd/check.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../wildfly-builder/in    wildfly/cmd/in.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../wildfly-builder/out   wildfly/cmd/out.go
+
+echo "Building YourKit"
+cp Dockerfile ../../your-kit-builder
+GOOS="linux" go build -ldflags='-s -w' -o ../../your-kit-builder/check yourkit/cmd/check.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../your-kit-builder/in    yourkit/cmd/in.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../your-kit-builder/out   yourkit/cmd/out.go
