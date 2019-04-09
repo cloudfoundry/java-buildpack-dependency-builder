@@ -11,6 +11,7 @@ build() {
   pushd ${SOURCE_DIRECTORY} > /dev/null
 
     bash configure \
+      --disable-warnings-as-errors \
       --with-cacerts-file=$(pwd)/$(ls ../cacerts-repository/*.jks) \
       --with-debug-level=release \
       --with-freetype-include=/usr/include/freetype2 \
