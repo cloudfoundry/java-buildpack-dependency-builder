@@ -11,14 +11,17 @@ build() {
   pushd ${SOURCE_DIRECTORY} > /dev/null
 
     bash configure \
-      --disable-warnings-as-errors \
       --with-cacerts-file=$(pwd)/$(ls ../cacerts-repository/*.jks) \
+      --with-debug-level=release \
       --with-freetype-include=/usr/include/freetype2 \
       --with-freetype-lib=/usr/lib/x86_64-linux-gnu \
       --with-native-debug-symbols=none \
+      --with-vendor-name="Pivotal Software, Inc." \
+      --with-vendor-url="https://pivotal.io" \
+      --with-vendor-version-string="Pivotal" \
       --with-version-build=$(build_number) \
-      --with-version-opt= \
-      --with-version-pre=
+      --without-version-opt \
+      --without-version-pre
 
     make product-images legacy-jre-image
 

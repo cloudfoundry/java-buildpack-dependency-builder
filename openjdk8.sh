@@ -20,12 +20,13 @@ build() {
       --enable-unlimited-crypto \
       --with-build-number=$(build_number) \
       --with-cacerts-file=$(pwd)/$(ls ../cacerts-repository/*.jks) \
+      --with-debug-level=release \
       --with-freetype-include=/usr/include/freetype2 \
       --with-freetype-lib=/usr/lib/x86_64-linux-gnu \
       --with-milestone=fcs \
       --with-update-version=$(update_version)
 
-    CFLAGS=$(cflags) make images
+    COMPANY_NAME="Pivotal Software, Inc." CFLAGS=$(cflags) make images
 
   popd > /dev/null
 }
