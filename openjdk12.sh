@@ -17,7 +17,7 @@ build() {
       --with-freetype-include=/usr/include/freetype2 \
       --with-freetype-lib=/usr/lib/x86_64-linux-gnu \
       --with-native-debug-symbols=none \
-      --with-vendor-name="Pivotal Software, Inc." \
+      --with-vendor-name="Pivotal Software Inc" \
       --with-vendor-url="https://pivotal.io" \
       --with-vendor-version-string="Pivotal" \
       --with-version-build=$(build_number) \

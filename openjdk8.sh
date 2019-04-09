@@ -26,7 +26,7 @@ build() {
       --with-milestone=fcs \
       --with-update-version=$(update_version)
 
-    COMPANY_NAME="Pivotal Software, Inc." CFLAGS=$(cflags) make images
+    COMPANY_NAME="Pivotal Software Inc" CFLAGS=$(cflags) make images
 
   popd > /dev/null
 }
