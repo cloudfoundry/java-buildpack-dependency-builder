@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -xeuo pipefail
+set -euo pipefail
 
 SOURCE_DIRECTORY="java-8-release"
 DESTINATION_DIRECTORY="images"
@@ -13,9 +13,6 @@ build() {
     bash get_source.sh
 
     bash common/bin/hgforest.sh checkout $(tag)
-
-    echo $(build_number)
-    exit 1
 
     bash configure \
       --disable-debug-symbols \
@@ -110,4 +107,4 @@ version() {
 }
 
 build
-# package
+package
