@@ -32,7 +32,7 @@ build() {
 build_number() {
   for TAG in $(hg log -r "." --template "{latesttag}\n" | tr ":" "\n"); do
     if [[ ${TAG} =~ ${PATTERN} ]]; then
-      printf "%02d" ${BASH_REMATCH[4]:-0}
+      printf "%02d" $(("10#${BASH_REMATCH[4]:-0}"))
       return
     fi
   done

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -xeuo pipefail
 
 SOURCE_DIRECTORY="java-8-release"
 DESTINATION_DIRECTORY="images"
@@ -13,6 +13,9 @@ build() {
     bash get_source.sh
 
     bash common/bin/hgforest.sh checkout $(tag)
+
+    echo $(build_number)
+    exit 1
 
     bash configure \
       --disable-debug-symbols \
@@ -34,7 +37,7 @@ build() {
 build_number() {
   for TAG in $(hg log -r "." --template "{latesttag}\n" | tr ":" "\n"); do
     if [[ ${TAG} =~ ${PATTERN} ]]; then
-      printf "%02d" ${BASH_REMATCH[2]:-0}
+      printf "%02d" $(("10#${BASH_REMATCH[2]:-0}"))
       return
     fi
   done
@@ -107,4 +110,4 @@ version() {
 }
 
 build
-package
+# package
