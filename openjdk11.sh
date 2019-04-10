@@ -32,7 +32,7 @@ build() {
 build_number() {
   for TAG in $(hg log -r "." --template "{latesttag}\n" | tr ":" "\n"); do
     if [[ ${TAG} =~ ${PATTERN} ]]; then
-      printf "%02d" $(("10#${BASH_REMATCH[4]:-0}"))
+      printf "%02.f" ${BASH_REMATCH[4]:-0}
       return
     fi
   done
@@ -57,7 +57,7 @@ semver() {
 
     for TAG in $(hg log -r "." --template "{latesttag}\n" | tr ":" "\n"); do
       if [[ ${TAG} =~ ${PATTERN} ]]; then
-        echo "${BASH_REMATCH[1]:-0}.${BASH_REMATCH[2]:-0}.${BASH_REMATCH[3]:-0}-$(printf "%02d" ${BASH_REMATCH[4]:-0})"
+        echo "${BASH_REMATCH[1]:-0}.${BASH_REMATCH[2]:-0}.${BASH_REMATCH[3]:-0}-$(printf "%02.f" ${BASH_REMATCH[4]:-0})"
         return
       fi
     done
@@ -70,7 +70,7 @@ version() {
 
     for TAG in $(hg log -r "." --template "{latesttag}\n" | tr ":" "\n"); do
       if [[ ${TAG} =~ ${PATTERN} ]]; then
-        echo "${BASH_REMATCH[1]:-0}.${BASH_REMATCH[2]:-0}.${BASH_REMATCH[3]:-0}_$(printf "%02d" ${BASH_REMATCH[4]:-0})"
+        echo "${BASH_REMATCH[1]:-0}.${BASH_REMATCH[2]:-0}.${BASH_REMATCH[3]:-0}_$(printf "%02.f" ${BASH_REMATCH[4]:-0})"
         return
       fi
     done
@@ -80,4 +80,3 @@ version() {
 
 build
 package
-
