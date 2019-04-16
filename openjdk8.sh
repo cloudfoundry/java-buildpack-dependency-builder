@@ -26,8 +26,7 @@ build() {
       --with-milestone=fcs \
       --with-update-version=$(update_version) \
       --with-vendor-name="Pivotal Software Inc" \
-      --with-vendor-url="https://pivotal.io" \
-      --with-vendor-version-string="Pivotal"
+      --with-vendor-url="https://pivotal.io"
 
     CFLAGS=$(cflags) make images
 
