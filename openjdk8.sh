@@ -24,9 +24,12 @@ build() {
       --with-freetype-include=/usr/include/freetype2 \
       --with-freetype-lib=/usr/lib/x86_64-linux-gnu \
       --with-milestone=fcs \
-      --with-update-version=$(update_version)
+      --with-update-version=$(update_version) \
+      --with-vendor-name="Pivotal Software Inc" \
+      --with-vendor-url="https://pivotal.io" \
+      --with-vendor-version-string="Pivotal"
 
-    COMPANY_NAME="Pivotal Software Inc" CFLAGS=$(cflags) make images
+    CFLAGS=$(cflags) make images
 
   popd > /dev/null
 }
