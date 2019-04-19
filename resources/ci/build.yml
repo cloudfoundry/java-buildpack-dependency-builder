@@ -11,6 +11,7 @@ inputs:
 - name: java-buildpack-dependency-builder
 
 outputs:
+- name: adoptopenjdk-builder
 - name: artifactory-builder
 - name: http-builder
 - name: jprofiler-builder

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package npm
+package adoptopenjdk
 
 import (
 	"encoding/json"
@@ -24,7 +24,9 @@ import (
 )
 
 type metadata struct {
-	Package string
+	Version        string
+	Implementation string
+	Type           string
 
 	versions map[internal.Version]string
 }
@@ -44,31 +46,38 @@ func (m *metadata) load() error {
 	if resp.StatusCode != 200 {
 		return fmt.Errorf("unable to download %s", u)
 	}
-
-	raw := struct {
-		Versions map[string]struct {
-			Dist struct {
-				Tarball string `json:"tarball"`
-			} `json:"dist"`
-		} `json:"versions"`
-	}{}
+	raw := make([]struct {
+		BinaryLink  string `json:"binary_link"`
+		VersionData struct {
+			SemVer string `json:"semver"`
+		} `json:"version_data"`
+	}, 1)
 
 	if err := json.NewDecoder(resp.Body).Decode(&raw); err != nil {
 		return err
 	}
 
 	m.versions = make(map[internal.Version]string)
-	for v, d := range raw.Versions {
-		m.versions[internal.Version{Ref: v}] = d.Dist.Tarball
+	for _, r := range raw {
+		m.versions[internal.Version{Ref: r.VersionData.SemVer}] = r.BinaryLink
 	}
 
 	return nil
 }
 
 func (m *metadata) metadataUri() (string, error) {
-	if m.Package == "" {
-		return "", fmt.Errorf("package must be specified")
+	if m.Version == "" {
+		return "", fmt.Errorf("version must be specified")
 	}
 
-	return fmt.Sprintf("https://registry.npmjs.org/%s", m.Package), nil
+	if m.Implementation == "" {
+		return "", fmt.Errorf("implementation must be specified")
+	}
+
+	if m.Type == "" {
+		return "", fmt.Errorf("type must be specified")
+	}
+
+	return fmt.Sprintf("https://api.adoptopenjdk.net/v2/latestAssets/releases/%s?heap_size=normal&os=linux&arch=x64&openjdk_impl=%s&type=%s",
+		m.Version, m.Implementation, m.Type), nil
 }

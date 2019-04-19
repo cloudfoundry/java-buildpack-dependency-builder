@@ -9,6 +9,12 @@ fi
 
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
+echo "Building AdoptOpenJDK"
+cp Dockerfile ../../adoptopenjdk-builder
+GOOS="linux" go build -ldflags='-s -w' -o ../../adoptopenjdk-builder/check adoptopenjdk/cmd/check.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../adoptopenjdk-builder/in    adoptopenjdk/cmd/in.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../adoptopenjdk-builder/out   adoptopenjdk/cmd/out.go
+
 echo "Building Artifactory"
 cp Dockerfile ../../artifactory-builder
 GOOS="linux" go build -ldflags='-s -w' -o ../../artifactory-builder/check artifactory/cmd/check.go
