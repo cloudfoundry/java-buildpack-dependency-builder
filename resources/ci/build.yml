@@ -15,6 +15,7 @@ outputs:
 - name: http-builder
 - name: jprofiler-builder
 - name: maven-builder
+- name: npm-builder
 - name: repository-builder
 - name: sky-walking-builder
 - name: tomcat-builder

@@ -33,6 +33,12 @@ GOOS="linux" go build -ldflags='-s -w' -o ../../maven-builder/check maven/cmd/ch
 GOOS="linux" go build -ldflags='-s -w' -o ../../maven-builder/in    maven/cmd/in.go
 GOOS="linux" go build -ldflags='-s -w' -o ../../maven-builder/out   maven/cmd/out.go
 
+echo "Building NPM"
+cp Dockerfile ../../npm-builder
+GOOS="linux" go build -ldflags='-s -w' -o ../../npm-builder/check npm/cmd/check.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../npm-builder/in    npm/cmd/in.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../npm-builder/out   npm/cmd/out.go
+
 echo "Building Repository"
 cp Dockerfile ../../repository-builder
 GOOS="linux" go build -ldflags='-s -w' -o ../../repository-builder/check repository/cmd/check.go
