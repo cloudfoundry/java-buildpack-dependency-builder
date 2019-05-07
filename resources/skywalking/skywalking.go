@@ -27,7 +27,7 @@ import (
 
 const root = "https://skywalking.apache.org/downloads"
 
-var checkPattern = internal.Pattern{Regexp: regexp.MustCompile("([\\d]+)\\.([\\d]+)\\.([\\d]+)-GA")}
+var checkPattern = internal.Pattern{Regexp: regexp.MustCompile("([\\d]+)\\.([\\d]+)\\.([\\d]+)")}
 
 type SkyWalking struct {
 	Version internal.Version `json:"version"`
@@ -41,7 +41,7 @@ func (s SkyWalking) Check() (check.Result, error) {
 	c.OnHTML("table tbody tr td:nth-child(2)", func(e *colly.HTMLElement) {
 
 		_ = checkPattern.IfMatches(e.Text, func(g []string) error {
-			result.Add(internal.Version{Ref: fmt.Sprintf("%s.%s.%s-GA", g[1], g[2], g[3])})
+			result.Add(internal.Version{Ref: fmt.Sprintf("%s.%s.%s", g[1], g[2], g[3])})
 			return nil
 		})
 	})
@@ -74,9 +74,9 @@ func (s SkyWalking) In(destination string) (in.Result, error) {
 }
 
 func (s SkyWalking) name() string {
-	return fmt.Sprintf("apache-skywalking-apm-incubating-%s.tar.gz", s.Version.Ref)
+	return fmt.Sprintf("apache-skywalking-apm-%s.tar.gz", s.Version.Ref)
 }
 
 func (s SkyWalking) uri(name string) string {
-	return fmt.Sprintf("http://apache.mirrors.tds.net/incubator/skywalking/%s/%s", s.Version.Ref, name)
+	return fmt.Sprintf("http://apache.mirrors.tds.net/skywalking/%s/%s", s.Version.Ref, name)
 }
