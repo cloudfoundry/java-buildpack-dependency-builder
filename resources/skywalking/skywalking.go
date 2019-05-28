@@ -78,5 +78,5 @@ func (s SkyWalking) name() string {
 }
 
 func (s SkyWalking) uri(name string) string {
-	return fmt.Sprintf("http://apache.mirrors.tds.net/skywalking/%s/%s", s.Version.Ref, name)
+	return fmt.Sprintf("https://mirrors.ocf.berkeley.edu/apache/skywalking/%s/%s", s.Version.Ref, name)
 }
