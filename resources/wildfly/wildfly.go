@@ -25,7 +25,7 @@ import (
 	"resources/internal"
 )
 
-const root = "https://wildfly.org/downloads"
+const root = "https://wildfly.org/downloads/"
 
 var checkPattern = internal.Pattern{Regexp: regexp.MustCompile("([\\d]+)\\.([\\d]+)\\.([\\d]+)\\.Final")}
 
