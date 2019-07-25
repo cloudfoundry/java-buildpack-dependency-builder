@@ -25,7 +25,10 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"gopkg.in/yaml.v2"
 	"io"
+	"io/ioutil"
 	"log"
+	"net/http"
+	"net/url"
 	"os"
 	"path"
 )
@@ -34,6 +37,7 @@ type index struct {
 	session *session.Session
 	bucket  string
 	path    string
+	uri     string
 
 	contents map[string]string
 }
@@ -43,12 +47,26 @@ func (i *index) Key() string {
 }
 
 func (i *index) load() error {
-	if i.bucket == "" {
-		return fmt.Errorf("bucket must be specified")
+	if output, ok, err := i.loadS3(); err != nil {
+		return err
+	} else if ok {
+		defer output.Close()
+		return yaml.NewDecoder(output).Decode(&i.contents)
 	}
 
-	if i.path == "" {
-		return fmt.Errorf("path must be specified")
+	if output, ok, err := i.loadURI(); err != nil {
+		return err
+	} else if ok {
+		defer output.Close()
+		return yaml.NewDecoder(output).Decode(&i.contents)
+	}
+
+	return fmt.Errorf("either bucket and path or uri must be specified")
+}
+
+func (i index) loadS3() (io.ReadCloser, bool, error) {
+	if i.bucket == "" || i.path == "" {
+		return nil, false, nil
 	}
 
 	s := s3.New(i.session)
@@ -62,18 +80,35 @@ func (i *index) load() error {
 			switch a.Code() {
 			case s3.ErrCodeNoSuchKey:
 				i.contents = make(map[string]string)
-				return nil
+				return ioutil.NopCloser(nil), true, nil
 			default:
-				return err
+				return nil, false, err
 			}
 		} else {
-			return err
+			return nil, false, err
 		}
 
 	}
-	defer output.Body.Close()
+	return output.Body, true, nil
+}
 
-	return yaml.NewDecoder(output.Body).Decode(&i.contents)
+func (i index) loadURI() (io.ReadCloser, bool, error) {
+	if i.uri == "" {
+		return nil, false, nil
+	}
+
+	u, err := url.Parse(i.uri)
+	if err != nil {
+		return nil, false, err
+	}
+	u.Path = path.Join(u.Path, "index.yml")
+
+	r, err := http.Get(u.String())
+	if err != nil {
+		return nil, false, err
+	}
+
+	return r.Body, true, nil
 }
 
 func (i index) save() error {

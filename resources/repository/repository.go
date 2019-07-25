@@ -56,6 +56,7 @@ type source struct {
 
 	Bucket         string           `json:"bucket"`
 	Path           string           `json:"path"`
+	URI            string           `json:"uri"`
 	VersionPattern internal.Pattern `json:"version_pattern"`
 }
 
@@ -69,6 +70,7 @@ func (r Repository) Check() (check.Result, error) {
 		session: s,
 		bucket:  r.Source.Bucket,
 		path:    r.Source.Path,
+		uri:     r.Source.URI,
 	}
 	if err := i.load(); err != nil {
 		return check.Result{}, err
@@ -106,6 +108,7 @@ func (r Repository) In(destination string) (in.Result, error) {
 		session: s,
 		bucket:  r.Source.Bucket,
 		path:    r.Source.Path,
+		uri:     r.Source.URI,
 	}
 	if err := i.load(); err != nil {
 		return in.Result{}, err
