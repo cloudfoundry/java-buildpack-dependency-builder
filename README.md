@@ -52,8 +52,8 @@ The list of available versions for each dependency can be found at the following
 | TomEE Resource Configuration | [`universal`](https://java-buildpack.cloudfoundry.org/tomee-resource-configuration/index.yml)
 | TomEE | [`universal`](https://java-buildpack.cloudfoundry.org/tomee/index.yml)
 | Wildfly | [`universal`](https://java-buildpack.cloudfoundry.org/wildfly/index.yml)
-| WSO2 Microgateway Runtime | [`universal`](https://download.run.pivotal.io/wso2-runtime/index.yml)
-| WSO2 Microgateway Toolkit | [`universal`](https://download.run.pivotal.io/wso2-toolkit/index.yml)
+| WSO2 Microgateway Runtime | [`universal`](https://download.run.pivotal.io/wso2-microgateway-runtime/index.yml)
+| WSO2 Microgateway Toolkit | [`universal`](https://download.run.pivotal.io/wso2-microgateway-toolkit/index.yml)
 | YourKit | [`bionic`](https://download.run.pivotal.io/your-kit/bionic/x86_64/index.yml), [`mountainlion`](https://download.run.pivotal.io/your-kit/mountainlion/x86_64/index.yml), [`trusty`](https://download.run.pivotal.io/your-kit/trusty/x86_64/index.yml)
 
 ## Contributing
