@@ -31,6 +31,7 @@ import (
 	"net/url"
 	"os"
 	"path"
+	"strings"
 )
 
 type index struct {
@@ -51,14 +52,28 @@ func (i *index) load() error {
 		return err
 	} else if ok {
 		defer output.Close()
-		return yaml.NewDecoder(output).Decode(&i.contents)
+
+		switch yaml.NewDecoder(output).Decode(&i.contents) {
+		case io.EOF:
+			i.contents = make(map[string]string)
+			return nil
+		default:
+			return err
+		}
 	}
 
 	if output, ok, err := i.loadURI(); err != nil {
 		return err
 	} else if ok {
 		defer output.Close()
-		return yaml.NewDecoder(output).Decode(&i.contents)
+
+		switch yaml.NewDecoder(output).Decode(&i.contents) {
+		case io.EOF:
+			i.contents = make(map[string]string)
+			return nil
+		default:
+			return err
+		}
 	}
 
 	return fmt.Errorf("either bucket and path or uri must be specified")
@@ -79,8 +94,7 @@ func (i index) loadS3() (io.ReadCloser, bool, error) {
 		if a, ok := err.(awserr.Error); ok {
 			switch a.Code() {
 			case s3.ErrCodeNoSuchKey:
-				i.contents = make(map[string]string)
-				return ioutil.NopCloser(nil), true, nil
+				return ioutil.NopCloser(strings.NewReader("")), true, nil
 			default:
 				return nil, false, err
 			}
@@ -136,5 +150,6 @@ func (i index) save() error {
 		Body:        in,
 		ContentType: aws.String("text/x-yaml"),
 	})
+
 	return err
 }
