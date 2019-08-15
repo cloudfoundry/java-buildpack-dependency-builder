@@ -23,6 +23,7 @@ import (
 	"resources/check"
 	"resources/in"
 	"resources/internal"
+	"strings"
 )
 
 const root = "https://skywalking.apache.org/downloads"
@@ -51,11 +52,13 @@ func (s SkyWalking) Check() (check.Result, error) {
 }
 
 func (s SkyWalking) In(destination string) (in.Result, error) {
-	name := s.name()
-	uri := s.uri(name)
+	uri, err := s.uri()
+	if err != nil {
+		return in.Result{}, err
+	}
 
 	sha256, err := in.Artifact{
-		Name:        name,
+		Name:        s.name(),
 		Version:     s.Version,
 		URI:         uri,
 		Destination: destination,
@@ -77,6 +80,17 @@ func (s SkyWalking) name() string {
 	return fmt.Sprintf("apache-skywalking-apm-%s.tar.gz", s.Version.Ref)
 }
 
-func (s SkyWalking) uri(name string) string {
-	return fmt.Sprintf("https://mirrors.ocf.berkeley.edu/apache/skywalking/%s/%s", s.Version.Ref, name)
+func (s SkyWalking) uri() (string, error) {
+	c := colly.NewCollector()
+
+	var u string
+	c.OnHTML("div.container p a strong", func(e *colly.HTMLElement) {
+		u = strings.TrimSpace(e.Text)
+	})
+
+	if err := c.Visit(fmt.Sprintf("https://www.apache.org/dyn/closer.cgi/skywalking/%[1]s/apache-skywalking-apm-%[1]s.tar.gz", s.Version.Ref)); err != nil {
+		return "", err
+	}
+
+	return u, nil
 }
