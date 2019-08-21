@@ -80,3 +80,10 @@ cp Dockerfile ../../your-kit-builder
 GOOS="linux" go build -ldflags='-s -w' -o ../../your-kit-builder/check yourkit/cmd/check.go
 GOOS="linux" go build -ldflags='-s -w' -o ../../your-kit-builder/in    yourkit/cmd/in.go
 GOOS="linux" go build -ldflags='-s -w' -o ../../your-kit-builder/out   yourkit/cmd/out.go
+
+echo "Building Zulu"
+cp Dockerfile ../../zulu-builder
+GOOS="linux" go build -ldflags='-s -w' -o ../../zulu-builder/check zulu/cmd/check.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../zulu-builder/in    zulu/cmd/in.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../zulu-builder/out   zulu/cmd/out.go
+
