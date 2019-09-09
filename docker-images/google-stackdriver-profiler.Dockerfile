@@ -1,16 +1,20 @@
-FROM cloudfoundry/cflinuxfs2
+FROM cloudfoundry/cflinuxfs3
+
+RUN mkdir -p /usr/share/man/man1
 
 RUN apt-get update && apt-get install -y \
     apt-utils \
     autoconf \
     automake \
+    cmake \
     curl \
     g++ \
     git \
+    libcurl4-openssl-dev \
     libssl-dev \
     libtool \
     make \
-    openjdk-7-jdk \
+    openjdk-8-jdk \
     python \
     unzip \
     zlib1g-dev \
@@ -26,13 +30,6 @@ RUN git clone --depth=1 -b curl-7_55_1 https://github.com/curl/curl.git /tmp/cur
                 --with-pic --with-ssl && \
     make -j && make install && \
     cd ~ && rm -rf /tmp/curl
-
-# cmake
-RUN git clone -b v3.6.2 https://github.com/Kitware/CMake.git /tmp/cmake && \
-    cd /tmp/cmake && \
-    ./bootstrap && \
-    make && make install && \
-    cd ~ && rm -rf /tmp/cmake
 
 # gflags
 RUN git clone --depth=1 -b v2.1.2 https://github.com/gflags/gflags.git /tmp/gflags && \

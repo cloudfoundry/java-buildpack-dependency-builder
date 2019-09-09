@@ -8,11 +8,6 @@ DESTINATION_DIRECTORY="images"
 PATTERN="jdk8u([0-9]+)-b([0-9]+)"
 
 build() {
-  # TODO: Remove when trusty support dropped
-  echo "[ui]
-tls = False
-" > ${HOME}/.hgrc
-
   pushd ${SOURCE_DIRECTORY} > /dev/null
 
     bash get_source.sh

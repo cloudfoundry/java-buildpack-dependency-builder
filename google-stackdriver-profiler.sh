@@ -9,7 +9,7 @@ build() {
 
     PATH=/usr/local/bin:$PATH
 
-    make all
+    make JAVA_PATH="/usr/lib/jvm/java-8-openjdk-amd64" all
     tar zcf profiler_java_agent.tar.gz \
       -C .out \
       NOTICES profiler_java_agent.so
