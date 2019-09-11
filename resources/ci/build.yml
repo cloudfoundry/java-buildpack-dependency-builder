@@ -23,6 +23,7 @@ outputs:
 - name: tomcat-builder
 - name: wildfly-builder
 - name: your-kit-builder
+- name: zulu-builder
 
 caches:
 - path: go-module-cache
