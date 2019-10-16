@@ -19,4 +19,4 @@ run:
   path: java-buildpack-dependency-builder/openjdk13.sh
 
 params:
-  JAVA_HOME: /opt/openjdk-11
+  JAVA_HOME: /opt/openjdk-12
