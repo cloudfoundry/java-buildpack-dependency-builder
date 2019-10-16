@@ -16,15 +16,17 @@ RUN apt-get update && apt-get install -y \
     libxrender-dev \
     libxt-dev \
     libxtst-dev \
-    mercurial \
+    python-pip \
     zip \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
+RUN pip2 install mercurial
+
 RUN mkdir -p /opt/openjdk-8 \
- && curl -sL https://java-buildpack.cloudfoundry.org/openjdk-jdk/bionic/x86_64/openjdk-1.8.0_202.tar.gz \
+ && curl -sL https://java-buildpack.cloudfoundry.org/openjdk-jdk/bionic/x86_64/openjdk-jdk-1.8.0_222-bionic.tar.gz \
     | tar xzvf - -C /opt/openjdk-8
 
 RUN mkdir -p /opt/openjdk-11 \
- && curl -sL https://java-buildpack.cloudfoundry.org/openjdk-jdk/bionic/x86_64/openjdk-11.0.2_09.tar.gz \
+ && curl -sL https://java-buildpack.cloudfoundry.org/openjdk-jdk/bionic/x86_64/openjdk-jdk-11.0.4_11-bionic.tar.gz \
     | tar xzvf - -C /opt/openjdk-11
