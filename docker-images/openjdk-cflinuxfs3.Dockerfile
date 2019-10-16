@@ -21,7 +21,9 @@ RUN apt-get update && apt-get install -y \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-RUN pip2 install mercurial
+RUN apt-get remove -y mercurial \
+ && apt-get autoremove -y \
+ && pip2 install mercurial
 
 RUN mkdir -p /opt/openjdk-8 \
  && curl -sL https://java-buildpack.cloudfoundry.org/openjdk-jdk/bionic/x86_64/openjdk-jdk-1.8.0_222-bionic.tar.gz \
