@@ -13,6 +13,7 @@ inputs:
 outputs:
 - name: adoptopenjdk-builder
 - name: artifactory-builder
+- name: corretto-builder
 - name: gradle-builder
 - name: http-builder
 - name: jprofiler-builder

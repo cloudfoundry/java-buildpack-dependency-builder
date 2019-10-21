@@ -21,6 +21,12 @@ GOOS="linux" go build -ldflags='-s -w' -o ../../artifactory-builder/check artifa
 GOOS="linux" go build -ldflags='-s -w' -o ../../artifactory-builder/in    artifactory/cmd/in.go
 GOOS="linux" go build -ldflags='-s -w' -o ../../artifactory-builder/out   artifactory/cmd/out.go
 
+echo "Building Corretto"
+cp Dockerfile ../../corretto-builder
+GOOS="linux" go build -ldflags='-s -w' -o ../../corretto-builder/check corretto/cmd/check.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../corretto-builder/in    corretto/cmd/in.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../corretto-builder/out   corretto/cmd/out.go
+
 echo "Building Gradle"
 cp Dockerfile ../../gradle-builder
 GOOS="linux" go build -ldflags='-s -w' -o ../../gradle-builder/check gradle/cmd/check.go
