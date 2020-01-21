@@ -19,7 +19,7 @@ package corretto
 import (
 	"context"
 	"fmt"
-	"github.com/google/go-github/github"
+	"github.com/google/go-github/v29/github"
 	"regexp"
 	"resources/check"
 	"resources/in"
