@@ -130,5 +130,5 @@ func (c Corretto) releases(client *github.Client) ([]*github.RepositoryRelease, 
 
 func (c Corretto) uri(name string) string {
 	s := strings.Replace(c.Version.Ref, "-", ".", -1)
-	return fmt.Sprintf("https://d3pxv6yz143wms.cloudfront.net/%s/%s", s, name)
+	return fmt.Sprintf("https://corretto.aws/downloads/resources/%s/%s", s, name)
 }
