@@ -74,7 +74,7 @@ func (m *metadata) metadataUri() (string, error) {
 		return "", fmt.Errorf("type must be specified")
 	}
 
-	return fmt.Sprintf("https://api.azul.com/zulu/download/azure-only/v1.0/bundles/latest/?arch=x86&bundle_type=%s&ext=tar.gz&hw_bitness=64&jdk_version=%s&os=linux",
+	return fmt.Sprintf("https://api.azul.com/zulu/download/azure-only/v1.0/bundles/latest/?arch=x86&ext=tar.gz&features=%s&hw_bitness=64&jdk_version=%s&os=linux",
 		m.Type, m.Version), nil
 }
 
