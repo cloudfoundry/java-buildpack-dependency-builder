@@ -27,7 +27,7 @@ import (
 	"strings"
 )
 
-var checkPattern = internal.Pattern{Regexp: regexp.MustCompile("([\\d]+)\\.([\\d]+)\\.([\\d]+)\\.(.+)")}
+var checkPattern = internal.Pattern{Regexp: regexp.MustCompile("([\\d]+)\\.([\\d]+)\\.([\\d]+)\\.([^-]+)")}
 
 type Corretto struct {
 	Source  source           `json:"source"`
