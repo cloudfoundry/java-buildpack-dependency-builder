@@ -20,6 +20,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/url"
 	"resources/internal"
 )
 
@@ -47,7 +48,11 @@ func (m *metadata) load() error {
 		return fmt.Errorf("unable to download %s", u)
 	}
 	raw := make([]struct {
-		BinaryLink  string `json:"binary_link"`
+		Binaries []struct {
+			Package struct {
+				Link string `json:"link"`
+			} `json:"package"`
+		} `json:"binaries"`
 		VersionData struct {
 			SemVer string `json:"semver"`
 		} `json:"version_data"`
@@ -59,7 +64,7 @@ func (m *metadata) load() error {
 
 	m.versions = make(map[internal.Version]string)
 	for _, r := range raw {
-		m.versions[internal.Version{Ref: r.VersionData.SemVer}] = r.BinaryLink
+		m.versions[internal.Version{Ref: r.VersionData.SemVer}] = r.Binaries[0].Package.Link
 	}
 
 	return nil
@@ -78,6 +83,6 @@ func (m *metadata) metadataUri() (string, error) {
 		return "", fmt.Errorf("type must be specified")
 	}
 
-	return fmt.Sprintf("https://api.adoptopenjdk.net/v2/latestAssets/releases/%s?heap_size=normal&os=linux&arch=x64&openjdk_impl=%s&type=%s",
-		m.Version, m.Implementation, m.Type), nil
+	return fmt.Sprintf("https://api.adoptopenjdk.net/v3/assets/version/%s?architecture=x64&heap_size=normal&image_type=%s&jvm_impl=%s&os=linux&release_type=ga",
+		url.PathEscape(m.Version), m.Type, m.Implementation), nil
 }
