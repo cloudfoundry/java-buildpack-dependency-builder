@@ -83,6 +83,6 @@ func (m *metadata) metadataUri() (string, error) {
 		return "", fmt.Errorf("type must be specified")
 	}
 
-	return fmt.Sprintf("https://api.adoptopenjdk.net/v3/assets/version/%s?architecture=x64&heap_size=normal&image_type=%s&jvm_impl=%s&os=linux&release_type=ga",
+	return fmt.Sprintf("https://api.adoptopenjdk.net/v3/assets/version/%s?architecture=x64&heap_size=normal&image_type=%s&jvm_impl=%s&os=linux&release_type=ga&vendor=adoptopenjdk",
 		url.PathEscape(m.Version), m.Type, m.Implementation), nil
 }
