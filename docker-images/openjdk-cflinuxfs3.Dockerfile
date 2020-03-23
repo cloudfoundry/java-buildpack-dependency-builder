@@ -33,6 +33,6 @@ RUN mkdir -p /opt/openjdk-11 \
  && curl -sL https://java-buildpack.cloudfoundry.org/openjdk-jdk/bionic/x86_64/openjdk-jdk-11.0.4_11-bionic.tar.gz \
     | tar xzvf - -C /opt/openjdk-11
 
-RUN mkdir -p /opt/openjdk-12 \
- && curl -sL https://java-buildpack.cloudfoundry.org/openjdk-jdk/bionic/x86_64/openjdk-jdk-12.0.2_10-bionic.tar.gz \
-    | tar xzvf - -C /opt/openjdk-12
+RUN mkdir -p /opt/openjdk-13 \
+ && curl -sL https://java-buildpack.cloudfoundry.org/openjdk-jdk/bionic/x86_64/openjdk-jdk-13.0.2_08-bionic.tar.gz \
+    | tar xzvf - -C /opt/openjdk-13

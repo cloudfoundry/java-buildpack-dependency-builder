@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-SOURCE_DIRECTORY="java-13-release"
+SOURCE_DIRECTORY="java-14-release"
 DESTINATION_DIRECTORY="images"
 
 PATTERN="jdk-([0-9]+)\.?([0-9]+)?\.?([0-9]+)?\+([0-9]+)"

@@ -10,13 +10,13 @@ image_resource:
 inputs:
 - name: cacerts-repository
 - name: java-buildpack-dependency-builder
-- name: java-13-release
+- name: java-14-release
 
 outputs:
 - name: images
 
 run:
-  path: java-buildpack-dependency-builder/openjdk13.sh
+  path: java-buildpack-dependency-builder/openjdk14.sh
 
 params:
-  JAVA_HOME: /opt/openjdk-12
+  JAVA_HOME: /opt/openjdk-13
