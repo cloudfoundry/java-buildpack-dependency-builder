@@ -4,19 +4,16 @@ platform: linux
 image_resource:
   type: registry-image
   source:
-    repository: cfje/openjdk
-    tag: cflinuxfs3
+    repository: cfje/java-buildpack-dependency-builder
+    tag: latest
 
 inputs:
-- name: cacerts-repository
 - name: java-buildpack-dependency-builder
-- name: java-14-release
+- name: jdk-14
+- name: jre-14
 
 outputs:
 - name: images
 
 run:
   path: java-buildpack-dependency-builder/openjdk14.sh
-
-params:
-  JAVA_HOME: /opt/openjdk-13
