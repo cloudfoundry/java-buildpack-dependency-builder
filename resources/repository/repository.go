@@ -23,6 +23,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"io/ioutil"
+	"net/url"
 	"path"
 	"path/filepath"
 	"reflect"
@@ -214,7 +215,8 @@ func (r Repository) createUri(file string) (string, error) {
 		return "", fmt.Errorf("path must be specified")
 	}
 
-	return fmt.Sprintf("https://%s%s/%s", r.Parameters.DownloadDomain, r.Source.Path, path.Base(file)), nil
+
+	return fmt.Sprintf("https://%s%s/%s", r.Parameters.DownloadDomain, r.Source.Path, url.PathEscape(path.Base(file))), nil
 }
 
 func (r Repository) file(source string) (string, error) {
