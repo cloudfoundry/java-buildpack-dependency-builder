@@ -97,5 +97,5 @@ func (j JProfiler) name() (string, error) {
 }
 
 func (j JProfiler) uri(name string) string {
-	return fmt.Sprintf("https://download-keycdn.ej-technologies.com/jprofiler/%s", name)
+	return fmt.Sprintf("https://download-gcdn.ej-technologies.com/jprofiler/%s", name)
 }
