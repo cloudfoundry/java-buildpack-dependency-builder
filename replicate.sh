@@ -19,6 +19,7 @@ aws s3 sync "s3://download.pivotal.io" "$DESTINATION" --no-sign-request --exclud
   --include "client-certificate-mapper/*" \
   --include "container-customizer/*" \
   --include "container-security-provider/*" \
+  --include "contrast-security/*" \
   --include "google-stackdriver-debugger/*" \
   --include "groovy/*" \
   --include "jvmkill/*" \

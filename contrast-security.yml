@@ -1,0 +1,18 @@
+---
+platform: linux
+
+image_resource:
+  type: registry-image
+  source:
+    repository: cfje/java-buildpack-dependency-builder
+    tag: latest
+
+inputs:
+- name: java-buildpack-dependency-builder
+- name: contrast-security-archives
+
+outputs:
+- name: repository
+
+run:
+  path: java-buildpack-dependency-builder/contrast-security.sh
