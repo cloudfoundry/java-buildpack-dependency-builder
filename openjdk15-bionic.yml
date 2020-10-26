@@ -9,11 +9,11 @@ image_resource:
 
 inputs:
 - name: java-buildpack-dependency-builder
-- name: jdk-14
-- name: jre-14
+- name: jdk-15
+- name: jre-15
 
 outputs:
 - name: images
 
 run:
-  path: java-buildpack-dependency-builder/openjdk14.sh
+  path: java-buildpack-dependency-builder/openjdk15.sh
