@@ -6,6 +6,8 @@ image_resource:
   source:
     repository: cfje/wso2-microgateway
     tag: latest
+    username: ((docker-username))
+    password: ((docker-password))
 
 inputs:
 - name: java-buildpack-dependency-builder

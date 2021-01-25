@@ -6,6 +6,9 @@ image_resource:
   source:
     repository: cfje/java-buildpack-dependency-builder
     tag: latest
+    username: ((docker-username))
+    password: ((docker-password))
+
 
 inputs:
 - name: jacoco-archives

@@ -6,6 +6,9 @@ image_resource:
   source:
     repository: cfje/google-stackdriver-profiler
     tag: latest
+    username: ((docker-username))
+    password: ((docker-password))
+
 
 inputs:
 - name: cloud-profiler-java
