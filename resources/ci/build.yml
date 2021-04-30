@@ -6,6 +6,8 @@ image_resource:
   source:
     repository: golang
     tag: latest
+    username: ((docker-username))
+    password: ((docker-password))
 
 inputs:
 - name: java-buildpack-dependency-builder

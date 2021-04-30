@@ -6,6 +6,9 @@ image_resource:
   source:
     repository: cfje/openjdk
     tag: cflinuxfs3
+    username: ((docker-username))
+    password: ((docker-password))
+
 
 inputs:
 - name: java-buildpack-dependency-builder

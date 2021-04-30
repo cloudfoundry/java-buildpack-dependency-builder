@@ -1,4 +1,5 @@
-FROM cloudfoundry/cflinuxfs3
+ARG base_image=cloudfoundry/cflinuxfs3
+FROM ${base_image}
 
 RUN mkdir -p /usr/share/man/man1
 

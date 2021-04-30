@@ -11,10 +11,11 @@ image_resource:
 
 inputs:
 - name: java-buildpack-dependency-builder
-- name: spring-boot-cli-archives
+- name: jdk-16
+- name: jre-16
 
 outputs:
-- name: repository
+- name: images
 
 run:
-  path: java-buildpack-dependency-builder/spring-boot-cli.sh
+  path: java-buildpack-dependency-builder/openjdk16.sh

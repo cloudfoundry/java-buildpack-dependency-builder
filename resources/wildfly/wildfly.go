@@ -18,8 +18,10 @@ package wildfly
 
 import (
 	"fmt"
-	"github.com/gocolly/colly"
 	"regexp"
+
+	"github.com/gocolly/colly"
+
 	"resources/check"
 	"resources/in"
 	"resources/internal"
@@ -38,8 +40,7 @@ func (w WildFly) Check() (check.Result, error) {
 
 	c := colly.NewCollector()
 
-	c.OnHTML("table tbody tr td:first-child", func(e *colly.HTMLElement) {
-
+	c.OnHTML(".version-id", func(e *colly.HTMLElement) {
 		_ = checkPattern.IfMatches(e.Text, func(g []string) error {
 			result.Add(internal.Version{Ref: fmt.Sprintf("%s.%s.%s-Final", g[1], g[2], g[3])})
 			return nil

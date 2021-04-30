@@ -28,7 +28,7 @@ import (
 
 const root = "https://skywalking.apache.org/downloads"
 
-var checkPattern = internal.Pattern{Regexp: regexp.MustCompile("([\\d]+)\\.([\\d]+)\\.([\\d]+)")}
+var checkPattern = internal.Pattern{Regexp: regexp.MustCompile("v([\\d]+)\\.([\\d]+)\\.([\\d]+) for ElasticSearch 6")}
 
 type SkyWalking struct {
 	Version internal.Version `json:"version"`
@@ -39,8 +39,8 @@ func (s SkyWalking) Check() (check.Result, error) {
 
 	c := colly.NewCollector()
 
-	c.OnHTML("table tbody tr td:nth-child(2)", func(e *colly.HTMLElement) {
-
+	// fixme: this selector is probably fragile
+	c.OnHTML(".dropdown-header", func(e *colly.HTMLElement) {
 		_ = checkPattern.IfMatches(e.Text, func(g []string) error {
 			result.Add(internal.Version{Ref: fmt.Sprintf("%s.%s.%s", g[1], g[2], g[3])})
 			return nil
