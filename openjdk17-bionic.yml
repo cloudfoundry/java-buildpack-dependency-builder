@@ -1,0 +1,21 @@
+---
+platform: linux
+
+image_resource:
+  type: registry-image
+  source:
+    repository: cfje/java-buildpack-dependency-builder
+    tag: latest
+    username: ((docker-username))
+    password: ((docker-password))
+
+inputs:
+- name: java-buildpack-dependency-builder
+- name: jdk-17
+- name: jre-17
+
+outputs:
+- name: images
+
+run:
+  path: java-buildpack-dependency-builder/openjdk17.sh
