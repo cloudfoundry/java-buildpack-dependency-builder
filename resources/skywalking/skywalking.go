@@ -18,17 +18,18 @@ package skywalking
 
 import (
 	"fmt"
-	"github.com/gocolly/colly"
 	"regexp"
 	"resources/check"
 	"resources/in"
 	"resources/internal"
 	"strings"
+
+	"github.com/gocolly/colly"
 )
 
 const root = "https://skywalking.apache.org/downloads"
 
-var checkPattern = internal.Pattern{Regexp: regexp.MustCompile("v([\\d]+)\\.([\\d]+)\\.([\\d]+) for ElasticSearch 6")}
+var checkPattern = internal.Pattern{Regexp: regexp.MustCompile("v([\\d]+)\\.([\\d]+)\\.([\\d]+)")}
 
 type SkyWalking struct {
 	Version internal.Version `json:"version"`
