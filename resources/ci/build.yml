@@ -13,6 +13,7 @@ inputs:
 - name: java-buildpack-dependency-builder
 
 outputs:
+- name: appdynamics-builder
 - name: adoptopenjdk-builder
 - name: artifactory-builder
 - name: corretto-builder
