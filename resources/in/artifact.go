@@ -34,16 +34,27 @@ type Artifact struct {
 	Destination string
 }
 
-func (a Artifact) Download() (string, error) {
+type RequestModifierFunc func(request *http.Request) *http.Request
+
+func (a Artifact) Download(mods ...RequestModifierFunc) (string, error) {
 	out, err := os.Create(filepath.Join(a.Destination, a.Name))
 	if err != nil {
 		return "", err
 	}
 	defer out.Close()
 
-	resp, err := http.Get(a.URI)
+	req, err := http.NewRequest("GET", a.URI, nil)
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("unable to create GET %s request\n%w", a.URI, err)
+	}
+
+	for _, m := range mods {
+		req = m(req)
+	}
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return "", fmt.Errorf("unable to get %s\n%w", a.URI, err)
 	}
 	defer resp.Body.Close()
 
