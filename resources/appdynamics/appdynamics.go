@@ -21,6 +21,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 	"resources/check"
 	"resources/in"
 	"resources/internal"
@@ -55,6 +56,7 @@ type AppDynamicsAPIPageResponse struct {
 }
 
 func (a AppDynamics) Check() (check.Result, error) {
+	fmt.Fprintf(os.Stderr, "Checking... Input: '%s', '%s'", a.Version.Ref, a.Source.Type)
 	result := check.Result{Since: a.Version}
 
 	latest, err := a.latestVersion()
@@ -62,6 +64,7 @@ func (a AppDynamics) Check() (check.Result, error) {
 		return check.Result{}, fmt.Errorf("unable to get latest versions\n%w", err)
 	}
 
+	fmt.Fprintf(os.Stderr, "Latest found: %v", latest)
 	if latest.Version != "" {
 		result.Add(internal.Version{Ref: latest.Version})
 	}
