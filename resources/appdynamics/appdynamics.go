@@ -21,10 +21,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"os"
+	"regexp"
 	"resources/check"
 	"resources/in"
 	"resources/internal"
+
+	"github.com/Masterminds/semver"
 )
 
 const latestURI = "https://download.appdynamics.com/download/downloadfilelatest/"
@@ -55,8 +57,9 @@ type AppDynamicsAPIPageResponse struct {
 	Results  []AppDynamicsAPIResponse
 }
 
+var versionPattern = internal.Pattern{Regexp: regexp.MustCompile(`(\d+)\.(\d+)\.(\d+)\.(\d+)`)}
+
 func (a AppDynamics) Check() (check.Result, error) {
-	fmt.Fprintf(os.Stderr, "Checking... Input: '%s', '%s'", a.Version.Ref, a.Source.Type)
 	result := check.Result{Since: a.Version}
 
 	latest, err := a.latestVersion()
@@ -64,10 +67,10 @@ func (a AppDynamics) Check() (check.Result, error) {
 		return check.Result{}, fmt.Errorf("unable to get latest versions\n%w", err)
 	}
 
-	fmt.Fprintf(os.Stderr, "Latest found: %v", latest)
-	if latest.Version != "" {
-		result.Add(internal.Version{Ref: latest.Version})
-	}
+	_ = versionPattern.IfMatches(latest.Version, func(g []string) error {
+		result.Add(internal.Version{Ref: fmt.Sprintf("%s.%s.%s-%s", g[1], g[2], g[3], g[4])})
+		return nil
+	})
 
 	return result, err
 }
@@ -171,10 +174,15 @@ func (a AppDynamics) fetchVersion(version string) (AppDynamicsAPIResponse, error
 		return AppDynamicsAPIResponse{}, fmt.Errorf("unable to create GET %s request\n%w", fetchURI, err)
 	}
 
+	sv, err := semver.NewVersion(version)
+	if err != nil {
+		return AppDynamicsAPIResponse{}, fmt.Errorf("unable to create semver from %s\n%w", version, err)
+	}
+
 	q := req.URL.Query()
 	q.Add("apm", a.Source.Type)
 	q.Add("apm_os", "linux")
-	q.Add("version", version)
+	q.Add("version", fmt.Sprintf("%d.%d.%d.%s", sv.Major(), sv.Minor(), sv.Patch(), sv.Prerelease()))
 	req.URL.RawQuery = q.Encode()
 
 	resp, err := http.DefaultClient.Do(req)
