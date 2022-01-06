@@ -33,18 +33,14 @@ const latestURI = "https://download.appdynamics.com/download/downloadfilelatest/
 const fetchURI = "https://download.appdynamics.com/download/downloadfile/"
 
 type AppDynamics struct {
-	Parameters parameters       `json:"params"`
-	Source     source           `json:"source"`
-	Version    internal.Version `json:"version"`
+	Source  source           `json:"source"`
+	Version internal.Version `json:"version"`
 }
 
 type source struct {
-	User     string `json:"user"`
 	Password string `json:"password"`
-}
-
-type parameters struct {
-	Type string `json:"type"`
+	Type     string `json:"type"`
+	User     string `json:"user"`
 }
 
 type AppDynamicsAPIResponse struct {
@@ -164,7 +160,7 @@ func (a AppDynamics) latestVersion() (AppDynamicsAPIResponse, error) {
 	}
 
 	for _, r := range raw {
-		if a.Parameters.Type == r.FileType {
+		if a.Source.Type == r.FileType {
 			return r, nil
 		}
 	}
@@ -187,11 +183,11 @@ func (a AppDynamics) fetchVersion(version string) (AppDynamicsAPIResponse, error
 	q.Add("apm_os", "linux")
 	q.Add("version", fmt.Sprintf("%d.%d.%d.%s", sv.Major(), sv.Minor(), sv.Patch(), sv.Prerelease()))
 
-	if a.Parameters.Type == "php-tar" {
+	if a.Source.Type == "php-tar" {
 		q.Add("apm", "php")
 		q.Add("filetype", "tar")
 	} else {
-		q.Add("apm", a.Parameters.Type)
+		q.Add("apm", a.Source.Type)
 	}
 
 	req.URL.RawQuery = q.Encode()
@@ -212,7 +208,7 @@ func (a AppDynamics) fetchVersion(version string) (AppDynamicsAPIResponse, error
 	}
 
 	for _, r := range raw.Results {
-		if a.Parameters.Type == r.FileType {
+		if a.Source.Type == r.FileType {
 			return r, nil
 		}
 	}
