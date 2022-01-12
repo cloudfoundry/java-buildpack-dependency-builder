@@ -20,7 +20,9 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
+	"path/filepath"
 	"regexp"
 	"resources/check"
 	"resources/in"
@@ -92,8 +94,13 @@ func (a AppDynamics) In(destination string) (in.Result, error) {
 		return request
 	}
 
+	ext := "tar.gz"
+	if a.Source.Type == "php-tar" {
+		ext = "tar.bz2"
+	}
+
 	sha256, err := in.Artifact{
-		Name:        fmt.Sprintf("appdynamics_linux_%s.tar.gz", a.Version.Ref),
+		Name:        fmt.Sprintf("appdynamics_linux_%s.%s", a.Version.Ref, ext),
 		Version:     a.Version,
 		URI:         latest.DownloadPath,
 		Destination: destination,
@@ -104,6 +111,11 @@ func (a AppDynamics) In(destination string) (in.Result, error) {
 
 	if sha256 != latest.Checksum {
 		return in.Result{}, fmt.Errorf("downloaded checksum [%s] does not match expected checksum [%s]", sha256, latest.Checksum)
+	}
+
+	// write the file extension, as it differs between languages
+	if err := ioutil.WriteFile(filepath.Join(destination, "extension"), []byte(ext), 0644); err != nil {
+		return in.Result{}, err
 	}
 
 	return in.Result{
