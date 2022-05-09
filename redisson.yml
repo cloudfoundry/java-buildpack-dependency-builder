@@ -11,10 +11,11 @@ image_resource:
 
 inputs:
 - name: java-buildpack-dependency-builder
-- name: redis-store-archives
+- name: redisson-all-archives
+- name: redisson-tomcat-archives
 
 outputs:
 - name: repository
 
 run:
-  path: java-buildpack-dependency-builder/redis-store.sh
+  path: java-buildpack-dependency-builder/redisson.sh
