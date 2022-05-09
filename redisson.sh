@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-VERSION=$(cat redisson-archives/version)
+VERSION=$(cat redisson-all-archives/version)
 
 cp redisson-all-archives/redisson-all-*.jar repository/redisson-all-$VERSION.jar
 cp redisson-tomcat-8-archives/redisson-tomcat-8-*.jar repository/redisson-tomcat-8-$VERSION.jar
