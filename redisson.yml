@@ -12,7 +12,9 @@ image_resource:
 inputs:
 - name: java-buildpack-dependency-builder
 - name: redisson-all-archives
-- name: redisson-tomcat-archives
+- name: redisson-tomcat-8-archives
+- name: redisson-tomcat-9-archives
+- name: redisson-tomcat-10-archives
 
 outputs:
 - name: repository
