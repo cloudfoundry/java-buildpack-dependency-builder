@@ -18,16 +18,20 @@ package yourkit
 
 import (
 	"fmt"
-	"github.com/gocolly/colly"
 	"regexp"
 	"resources/check"
 	"resources/in"
 	"resources/internal"
+
+	"github.com/gocolly/colly"
 )
 
-const root = "https://www.yourkit.com/download"
+const check_root = "https://www.yourkit.com/download/"
+const download_root = "https://download.yourkit.com/yjp"
 
-var checkPattern = internal.Pattern{Regexp: regexp.MustCompile(".+/YourKit-JavaProfiler-([\\d]{4})\\.([\\d]{1,2})-b([\\d]+)\\.zip")}
+var checkPattern = internal.Pattern{
+	Regexp: regexp.MustCompile(`.+/YourKit-JavaProfiler-([\d]{4})\.([\d]{1,2})-b([\d]+)\.zip`),
+}
 
 type YourKit struct {
 	Version internal.Version `json:"version"`
@@ -39,14 +43,13 @@ func (y YourKit) Check() (check.Result, error) {
 	c := colly.NewCollector()
 
 	c.OnHTML("a[href]", func(e *colly.HTMLElement) {
-
 		_ = checkPattern.IfMatches(e.Attr("href"), func(g []string) error {
 			result.Add(internal.Version{Ref: fmt.Sprintf("%s.%s.%s", g[1], g[2], g[3])})
 			return nil
 		})
 	})
 
-	err := c.Visit(root)
+	err := c.Visit(check_root)
 	return result, err
 }
 
@@ -55,7 +58,11 @@ func (y YourKit) In(destination string) (in.Result, error) {
 	if err != nil {
 		return in.Result{}, err
 	}
-	uri := y.uri(name)
+
+	uri, err := y.uri(name)
+	if err != nil {
+		return in.Result{}, err
+	}
 
 	sha256, err := in.Artifact{
 		Name:        name,
@@ -70,8 +77,8 @@ func (y YourKit) In(destination string) (in.Result, error) {
 	return in.Result{
 		Version: y.Version,
 		Metadata: []in.Metadata{
-			{"uri", uri},
-			{"sha256", sha256},
+			{Name: "uri", Value: uri},
+			{Name: "sha256", Value: sha256},
 		},
 	}, nil
 }
@@ -85,6 +92,11 @@ func (y YourKit) name() (string, error) {
 	return fmt.Sprintf("YourKit-JavaProfiler-%d.%d-b%d.zip", s.Major(), s.Minor(), s.Patch()), nil
 }
 
-func (y YourKit) uri(name string) string {
-	return fmt.Sprintf("%s/%s", root, name)
+func (y YourKit) uri(name string) (string, error) {
+	s, err := y.Version.AsSemver()
+	if err != nil {
+		return "", err
+	}
+
+	return fmt.Sprintf("%s/%d.%d/%s", download_root, s.Major(), s.Minor(), name), nil
 }
