@@ -9,6 +9,8 @@ fi
 
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
+export CGO_ENABLED=0
+
 echo "Building AppDynamics"
 cp Dockerfile ../../appdynamics-builder
 GOOS="linux" go build -ldflags='-s -w' -o ../../appdynamics-builder/check appdynamics/cmd/check.go
