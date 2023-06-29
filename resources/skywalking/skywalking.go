@@ -43,7 +43,7 @@ func (s SkyWalking) Check() (check.Result, error) {
 	// fixme: this selector is probably fragile
 	// make sure to grab the java agent, not one of the other downloads on that page
 	c.OnHTML(".card-body", func(e *colly.HTMLElement) {
-		if e.ChildText(".title-box > .card-title") == "SkyWalking Java Agent" {
+		if e.ChildText(".title-box > .card-title") == "Java Agent" {
 			version := e.ChildText(".dropdown-header")
 
 			_ = checkPattern.IfMatches(version, func(g []string) error {
