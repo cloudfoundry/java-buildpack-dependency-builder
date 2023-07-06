@@ -18,10 +18,6 @@ package repository
 
 import (
 	"fmt"
-	"github.com/Masterminds/semver"
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/credentials"
-	"github.com/aws/aws-sdk-go/aws/session"
 	"io/ioutil"
 	"net/url"
 	"path"
@@ -33,6 +29,12 @@ import (
 	"resources/internal"
 	"resources/out"
 	"strings"
+
+	"github.com/Masterminds/semver"
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/credentials"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/sts"
 )
 
 var (
@@ -54,6 +56,7 @@ type parameters struct {
 type source struct {
 	AccessKeyId     string `json:"access_key_id"`
 	SecretAccessKey string `json:"secret_access_key"`
+	ArnRole         string `json:"arn_role"`
 
 	Bucket         string           `json:"bucket"`
 	Path           string           `json:"path"`
@@ -251,6 +254,8 @@ func (r Repository) session() (*session.Session, error) {
 
 	if r.Source.AccessKeyId == "" {
 		c = credentials.AnonymousCredentials
+	} else if r.Source.ArnRole != "" {
+		return r.getAssumedSession(r.Source.ArnRole)
 	} else {
 		c = credentials.NewStaticCredentials(r.Source.AccessKeyId, r.Source.SecretAccessKey, "")
 	}
@@ -276,4 +281,26 @@ func (Repository) version(semver *semver.Version) string {
 		v = fmt.Sprintf("%s_%s", v, semver.Prerelease())
 	}
 	return v
+}
+func (r Repository) getAssumedSession(roleArn string) (*session.Session, error) {
+	c := credentials.NewStaticCredentials(r.Source.AccessKeyId, r.Source.SecretAccessKey, "")
+	baseSess := session.Must(session.NewSession(&aws.Config{
+		Credentials: c,
+		Region: aws.String("us-east-1"),
+	}))
+	stsSvc := sts.New(baseSess)
+	assumedRole, err := stsSvc.AssumeRole(&sts.AssumeRoleInput{
+		RoleArn:         aws.String(roleArn),
+		RoleSessionName: aws.String("role-session"),
+	})
+	if err != nil {
+		return nil, fmt.Errorf("could not assume role\n%w", err)
+	}
+	return session.NewSession(&aws.Config{
+		Credentials:   credentials.NewStaticCredentials(
+			*assumedRole.Credentials.AccessKeyId,
+			*assumedRole.Credentials.SecretAccessKey,
+			*assumedRole.Credentials.SessionToken),
+		Region:        aws.String("us-east-1"),
+	})
 }
