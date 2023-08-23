@@ -1,0 +1,21 @@
+---
+platform: linux
+
+image_resource:
+  type: registry-image
+  source:
+    repository: cfje/java-buildpack-dependency-builder
+    tag: latest
+    username: ((docker-username))
+    password: ((docker-password))
+
+
+inputs:
+- name: java-cfenv-archives
+- name: java-buildpack-dependency-builder
+
+outputs:
+- name: repository
+
+run:
+  path: java-buildpack-dependency-builder/java-cfenv.sh

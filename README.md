@@ -34,6 +34,7 @@ The list of available versions for each dependency can be found at the following
 | Google Stackdriver Debugger | [`bionic`](https://java-buildpack.cloudfoundry.org/google-stackdriver-debugger/bionic/x86_64/index.yml)
 | Groovy | [`universal`](https://java-buildpack.cloudfoundry.org/groovy/index.yml)
 | JaCoCo | [`universal`](https://java-buildpack.cloudfoundry.org/jacoco/index.yml)
+| Java CfEnv | [`universal`](https://java-buildpack.cloudfoundry.org/java-cfenv/index.yml)
 | `jvmkill` | [`bionic`](https://java-buildpack.cloudfoundry.org/jvmkill/bionic/x86_64/index.yml)
 | MariaDB JDBC | [`universal`](https://java-buildpack.cloudfoundry.org/mariadb-jdbc/index.yml)
 | Memory Calculator | [`bionic`](https://java-buildpack.cloudfoundry.org/memory-calculator/bionic/x86_64/index.yml)
