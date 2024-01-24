@@ -89,7 +89,7 @@ func (y YourKit) name() (string, error) {
 		return "", err
 	}
 
-	return fmt.Sprintf("YourKit-JavaProfiler-%d.%d-b%d.zip", s.Major(), s.Minor(), s.Patch()), nil
+	return fmt.Sprintf("YourKit-JavaProfiler-%d.%d-b%d-x64.zip", s.Major(), s.Minor(), s.Patch()), nil
 }
 
 func (y YourKit) uri(name string) (string, error) {
