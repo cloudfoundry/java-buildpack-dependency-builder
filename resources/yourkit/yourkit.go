@@ -30,7 +30,7 @@ const check_root = "https://www.yourkit.com/download/"
 const download_root = "https://download.yourkit.com/yjp"
 
 var checkPattern = internal.Pattern{
-	Regexp: regexp.MustCompile(`.+/YourKit-JavaProfiler-([\d]{4})\.([\d]{1,2})-b([\d]+)\.zip`),
+	Regexp: regexp.MustCompile(`.+/YourKit-JavaProfiler-([\d]{4})\.([\d]{1,2})-b([\d]+)-x64\.zip`),
 }
 
 type YourKit struct {
