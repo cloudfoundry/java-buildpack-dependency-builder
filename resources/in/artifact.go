@@ -32,6 +32,7 @@ type Artifact struct {
 	Version     internal.Version
 	URI         string
 	Destination string
+	Header     string
 }
 
 type RequestModifierFunc func(request *http.Request) *http.Request
@@ -39,9 +40,10 @@ type RequestModifierFunc func(request *http.Request) *http.Request
 func (a Artifact) Download(mods ...RequestModifierFunc) (string, error) {
 	out, err := os.Create(filepath.Join(a.Destination, a.Name))
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("unable to create file \n%w", err)
 	}
 	defer out.Close()
+	
 
 	req, err := http.NewRequest("GET", a.URI, nil)
 	if err != nil {
@@ -59,7 +61,7 @@ func (a Artifact) Download(mods ...RequestModifierFunc) (string, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != 200 {
-		return "", fmt.Errorf("unable to download %s", a.URI)
+		return "", fmt.Errorf("unable to download %s, code %d", a.URI, resp.StatusCode)
 	}
 
 	_, _ = fmt.Fprintf(os.Stderr, "Downloading %s\n", a.URI)
