@@ -71,7 +71,7 @@ func (b Bellsoft) In(destination string) (in.Result, error) {
 	}
 	
 	uri := md.versions[b.Version]
-	url, err := url.Parse(uri)
+	downloadUrl, err := url.Parse(uri)
 	if err != nil {
 		return in.Result{}, err
 	}
