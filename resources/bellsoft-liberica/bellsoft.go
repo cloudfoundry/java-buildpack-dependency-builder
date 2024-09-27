@@ -77,7 +77,7 @@ func (b Bellsoft) In(destination string) (in.Result, error) {
 	}
 
 	sha256, err := in.Artifact{
-		Name:        b.name(url.Path),
+		Name:        b.name(downloadUrl.Path),
 		Version:     b.Version,
 		URI:         uri,
 		Destination: destination,
