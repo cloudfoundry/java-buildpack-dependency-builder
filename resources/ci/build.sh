@@ -29,6 +29,12 @@ GOOS="linux" go build -ldflags='-s -w' -o ../../artifactory-builder/check artifa
 GOOS="linux" go build -ldflags='-s -w' -o ../../artifactory-builder/in    artifactory/cmd/in.go
 GOOS="linux" go build -ldflags='-s -w' -o ../../artifactory-builder/out   artifactory/cmd/out.go
 
+echo "Building Bellsoft"
+cp Dockerfile ../../bellsoft-builder
+GOOS="linux" go build -ldflags='-s -w' -o ../../bellsoft-builder/check bellsoft-liberica/cmd/check.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../bellsoft-builder/in    bellsoft-liberica/cmd/in.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../bellsoft-builder/out   bellsoft-liberica/cmd/out.go
+
 echo "Building Corretto"
 cp Dockerfile ../../corretto-builder
 GOOS="linux" go build -ldflags='-s -w' -o ../../corretto-builder/check corretto/cmd/check.go
