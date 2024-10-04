@@ -35,6 +35,12 @@ GOOS="linux" go build -ldflags='-s -w' -o ../../corretto-builder/check corretto/
 GOOS="linux" go build -ldflags='-s -w' -o ../../corretto-builder/in    corretto/cmd/in.go
 GOOS="linux" go build -ldflags='-s -w' -o ../../corretto-builder/out   corretto/cmd/out.go
 
+echo "Building GCS Repository"
+cp Dockerfile ../../gcs-repository-builder
+GOOS="linux" go build -ldflags='-s -w' -o ../../gcs-repository-builder/check gcs-repository/cmd/check.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../gcs-repository-builder/in    gcs-repository/cmd/in.go
+GOOS="linux" go build -ldflags='-s -w' -o ../../gcs-repository-builder/out   gcs-repository/cmd/out.go
+
 echo "Building Gradle"
 cp Dockerfile ../../gradle-builder
 GOOS="linux" go build -ldflags='-s -w' -o ../../gradle-builder/check gradle/cmd/check.go
