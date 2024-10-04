@@ -17,6 +17,7 @@ outputs:
 - name: adoptopenjdk-builder
 - name: artifactory-builder
 - name: corretto-builder
+- name: gcs-repository-builder
 - name: bellsoft-builder
 - name: gradle-builder
 - name: http-builder
