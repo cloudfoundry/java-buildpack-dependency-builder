@@ -25,22 +25,23 @@ import (
 	"net/url"
 	"os"
 	"path"
+	"strings"
 
 	"cloud.google.com/go/storage"
 	"gopkg.in/yaml.v2"
 )
 
 type index struct {
-	client *storage.Client
-	bucketHandle  string
-	path    string
-	uri     string
+	client       *storage.Client
+	bucketHandle string
+	path         string
+	uri          string
 
 	contents map[string]string
 }
 
 func (i *index) Key() string {
-	return path.Join(i.path, "index.yml")
+	return path.Join(i.path, "/index.yml")
 }
 
 func (i *index) load() error {
@@ -71,7 +72,6 @@ func (i *index) load() error {
 			return err
 		}
 	}
-
 	return fmt.Errorf("either bucket and path or uri must be specified")
 }
 
@@ -82,8 +82,12 @@ func (i index) loadGCS() (io.ReadCloser, bool, error) {
 
 	ctx := context.Background()
 
-	rc, err := i.client.Bucket(i.bucketHandle).Object(i.Key()).NewReader(ctx)
+	obj := i.client.Bucket(i.bucketHandle).Object(i.Key())
+	rc, err := obj.NewReader(ctx)
 	if err != nil {
+		if err == storage.ErrObjectNotExist {
+			return io.NopCloser(strings.NewReader("")), true, nil
+		}
 		return nil, false, fmt.Errorf("error reading object: %s\n%w", i.Key(), err)
 	}
 	defer rc.Close()
@@ -100,7 +104,7 @@ func (i index) loadURI() (io.ReadCloser, bool, error) {
 	if err != nil {
 		return nil, false, err
 	}
-	u.Path = path.Join(u.Path, "index.yml")
+	u.Path = path.Join(u.Path, "/index.yml")
 
 	r, err := http.Get(u.String())
 	if err != nil {

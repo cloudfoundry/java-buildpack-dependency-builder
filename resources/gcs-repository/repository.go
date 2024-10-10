@@ -18,6 +18,7 @@ package gcsrepository
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/url"
 	"os"
@@ -48,6 +49,7 @@ type Repository struct {
 type parameters struct {
 	File                     string `json:"file"`
 	DownloadDomain           string `json:"download_domain"`
+	GcsCreds				 string `json:"GOOGLE_APPLICATION_CREDENTIALS"`
 }
 
 type source struct {
@@ -55,9 +57,15 @@ type source struct {
 	Path           string           `json:"path"`
 	URI            string           `json:"uri"`
 	VersionPattern internal.Pattern `json:"version_pattern"`
+	GcsCreds	   string           `json:"GOOGLE_APPLICATION_CREDENTIALS"`
 }
 
 func (r Repository) Check() (check.Result, error) {
+
+	if err := r.setAuthCreds(r.Source.Path, r.Source.GcsCreds); err != nil{
+		return check.Result{}, err
+	}
+
 	c, err := r.client()
 	if err != nil {
 		return check.Result{}, err
@@ -96,6 +104,11 @@ func (r Repository) Check() (check.Result, error) {
 }
 
 func (r Repository) In(destination string) (in.Result, error) {
+
+	if err := r.setAuthCreds(destination, r.Source.GcsCreds); err != nil{
+		return in.Result{}, err
+	}
+
 	c, err := r.client()
 	if err != nil {
 		return in.Result{}, err
@@ -136,6 +149,10 @@ func (r Repository) In(destination string) (in.Result, error) {
 }
 
 func (r Repository) Out(source string) (out.Result, error) {
+	if err := r.setAuthCreds(source, r.Parameters.GcsCreds); err != nil{
+		return out.Result{}, err
+	}
+
 	c, err := r.client()
 	if err != nil {
 		return out.Result{}, err
@@ -183,7 +200,7 @@ func (r Repository) Out(source string) (out.Result, error) {
 	if err := i.save(); err != nil {
 		return out.Result{}, err
 	}
-	
+
 	return out.Result{
 		Version: v,
 		Metadata: []out.Metadata{
@@ -258,4 +275,28 @@ func (Repository) version(semver *semver.Version) string {
 		v = fmt.Sprintf("%s_%s", v, semver.Prerelease())
 	}
 	return v
+}
+
+type GcpCredentials struct {
+	ClientEmail  string `json:"client_email" structs:"client_email" mapstructure:"client_email"`
+	ClientId     string `json:"client_id" structs:"client_id" mapstructure:"client_id"`
+	PrivateKeyId string `json:"private_key_id" structs:"private_key_id" mapstructure:"private_key_id"`
+	PrivateKey   string `json:"private_key" structs:"private_key" mapstructure:"private_key"`
+	ProjectId    string `json:"project_id" structs:"project_id" mapstructure:"project_id"`
+	Type         string `json:"type" structs:"type" mapstructure:"type"`
+}
+
+func (Repository) setAuthCreds(path string, creds string) error {
+	var wrapper GcpCredentials
+	err := json.Unmarshal([]byte(creds), &wrapper)
+	if err != nil {
+		return fmt.Errorf("unable to encode gcs creds\n%w", err)
+	}
+	b, _ := json.Marshal(&wrapper)
+	if err := os.WriteFile(filepath.Join(filepath.Dir(path), "gcs.json"), b, 0644); err != nil {
+		return fmt.Errorf("unable to write gcs creds file\n%w", err)
+	}
+	
+	os.Setenv("GOOGLE_APPLICATION_CREDENTIALS", filepath.Join(filepath.Dir(path), "gcs.json"))
+	return nil
 }
