@@ -62,7 +62,7 @@ type source struct {
 
 func (r Repository) Check() (check.Result, error) {
 
-	if err := r.setAuthCreds(r.Source.Path, r.Source.GcsCreds); err != nil{
+	if err := r.setAuthCreds(r.Source.GcsCreds); err != nil{
 		return check.Result{}, err
 	}
 
@@ -105,7 +105,7 @@ func (r Repository) Check() (check.Result, error) {
 
 func (r Repository) In(destination string) (in.Result, error) {
 
-	if err := r.setAuthCreds(destination, r.Source.GcsCreds); err != nil{
+	if err := r.setAuthCreds(r.Source.GcsCreds); err != nil{
 		return in.Result{}, err
 	}
 
@@ -149,7 +149,7 @@ func (r Repository) In(destination string) (in.Result, error) {
 }
 
 func (r Repository) Out(source string) (out.Result, error) {
-	if err := r.setAuthCreds(source, r.Parameters.GcsCreds); err != nil{
+	if err := r.setAuthCreds(r.Parameters.GcsCreds); err != nil{
 		return out.Result{}, err
 	}
 
@@ -286,17 +286,17 @@ type GcpCredentials struct {
 	Type         string `json:"type" structs:"type" mapstructure:"type"`
 }
 
-func (Repository) setAuthCreds(path string, creds string) error {
+func (Repository) setAuthCreds(creds string) error {
 	var wrapper GcpCredentials
 	err := json.Unmarshal([]byte(creds), &wrapper)
 	if err != nil {
 		return fmt.Errorf("unable to encode gcs creds\n%w", err)
 	}
 	b, _ := json.Marshal(&wrapper)
-	if err := os.WriteFile(filepath.Join(filepath.Dir(path), "gcs.json"), b, 0644); err != nil {
+	if err := os.WriteFile(filepath.Join(os.TempDir(), "gcs.json"), b, 0644); err != nil {
 		return fmt.Errorf("unable to write gcs creds file\n%w", err)
 	}
 	
-	os.Setenv("GOOGLE_APPLICATION_CREDENTIALS", filepath.Join(filepath.Dir(path), "gcs.json"))
+	os.Setenv("GOOGLE_APPLICATION_CREDENTIALS", filepath.Join(os.TempDir(), "gcs.json"))
 	return nil
 }
