@@ -27,8 +27,6 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-const root = "https://www.ej-technologies.com/download/jprofiler/files"
-
 var checkPattern = internal.Pattern{Regexp: regexp.MustCompile(`^Release ([\d]+)\.([\d]+)\.([\d]+).*$`)}
 
 type JProfiler struct {
@@ -50,7 +48,7 @@ func (j JProfiler) Check() (check.Result, error) {
 	}
 
 	doc.Find("div.release-heading").Each(func(i int, s *goquery.Selection) {
-		if p := checkPattern.FindStringSubmatch(s.Text()); p != nil { 
+		if p := checkPattern.FindStringSubmatch(s.Text()); p != nil {
 			ref := fmt.Sprintf("%s.%s.%s", p[1], p[2], p[3])
 			result.Add(internal.Version{Ref: ref})
 		}
