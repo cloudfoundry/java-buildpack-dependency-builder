@@ -18,16 +18,16 @@ package jprofiler
 
 import (
 	"fmt"
-	"github.com/gocolly/colly"
+	"net/http"
 	"regexp"
 	"resources/check"
 	"resources/in"
 	"resources/internal"
+
+	"github.com/PuerkitoBio/goquery"
 )
 
-const root = "https://www.ej-technologies.com/download/jprofiler/files"
-
-var checkPattern = internal.Pattern{Regexp: regexp.MustCompile("Version: ([\\d]+)\\.([\\d]+)\\.?([\\d]+)?")}
+var checkPattern = internal.Pattern{Regexp: regexp.MustCompile(`^Release ([\d]+)\.([\d]+)\.([\d]+).*$`)}
 
 type JProfiler struct {
 	Version internal.Version `json:"version"`
@@ -36,23 +36,25 @@ type JProfiler struct {
 func (j JProfiler) Check() (check.Result, error) {
 	result := check.Result{Since: j.Version}
 
-	c := colly.NewCollector()
+	res, err := http.Get("https://www.ej-technologies.com/jprofiler/changelog")
+	if err != nil {
+		return check.Result{}, fmt.Errorf("error retrieving changelog\n%w", err)
+	}
+	defer res.Body.Close()
 
-	c.OnHTML(".version-meta h5", func(e *colly.HTMLElement) {
+	doc, err := goquery.NewDocumentFromReader(res.Body)
+	if err != nil {
+		return check.Result{}, fmt.Errorf("error parsing response\n%w", err)
+	}
 
-		_ = checkPattern.IfMatches(e.Text, func(g []string) error {
-			ref := fmt.Sprintf("%s.%s", g[1], g[2])
-			if g[3] != "" {
-				ref = fmt.Sprintf("%s.%s", ref, g[3])
-			}
-
+	doc.Find("div.release-heading").Each(func(i int, s *goquery.Selection) {
+		if p := checkPattern.FindStringSubmatch(s.Text()); p != nil {
+			ref := fmt.Sprintf("%s.%s.%s", p[1], p[2], p[3])
 			result.Add(internal.Version{Ref: ref})
-			return nil
-		})
+		}
 	})
 
-	err := c.Visit(root)
-	return result, err
+	return result, nil
 }
 
 func (j JProfiler) In(destination string) (in.Result, error) {
