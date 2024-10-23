@@ -18,8 +18,8 @@ package repository
 
 import (
 	"fmt"
-	"io/ioutil"
 	"net/url"
+	"os"
 	"path"
 	"path/filepath"
 	"reflect"
@@ -50,7 +50,6 @@ type Repository struct {
 type parameters struct {
 	File                     string `json:"file"`
 	DownloadDomain           string `json:"download_domain"`
-	CloudFrontDistributionId string `json:"cloudfront_distribution_id"`
 }
 
 type source struct {
@@ -191,15 +190,6 @@ func (r Repository) Out(source string) (out.Result, error) {
 		return out.Result{}, err
 	}
 
-	d := distribution{
-		session:        s,
-		distributionId: r.Parameters.CloudFrontDistributionId,
-		paths:          []string{a.Key(), i.Key()},
-	}
-	if err := d.invalidate(); err != nil {
-		return out.Result{}, err
-	}
-
 	return out.Result{
 		Version: v,
 		Metadata: []out.Metadata{
@@ -211,7 +201,7 @@ func (r Repository) Out(source string) (out.Result, error) {
 
 func (r Repository) createUri(file string) (string, error) {
 	if r.Parameters.DownloadDomain == "" {
-		return "", fmt.Errorf("download-comain must be specified")
+		return "", fmt.Errorf("download-domain must be specified")
 	}
 
 	if r.Source.Path == "" {
@@ -267,7 +257,7 @@ func (r Repository) session() (*session.Session, error) {
 }
 
 func (Repository) readVersion(file string) (internal.Version, error) {
-	v, err := ioutil.ReadFile(filepath.Join(filepath.Dir(file), "version"))
+	v, err := os.ReadFile(filepath.Join(filepath.Dir(file), "version"))
 	if err != nil {
 		return internal.Version{}, err
 	}

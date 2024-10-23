@@ -25,7 +25,6 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"gopkg.in/yaml.v2"
 	"io"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
@@ -94,7 +93,7 @@ func (i index) loadS3() (io.ReadCloser, bool, error) {
 		if a, ok := err.(awserr.Error); ok {
 			switch a.Code() {
 			case s3.ErrCodeNoSuchKey:
-				return ioutil.NopCloser(strings.NewReader("")), true, nil
+				return io.NopCloser(strings.NewReader("")), true, nil
 			default:
 				return nil, false, err
 			}
