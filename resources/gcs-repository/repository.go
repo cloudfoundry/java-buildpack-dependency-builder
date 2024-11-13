@@ -77,7 +77,7 @@ func (r Repository) Check() (check.Result, error) {
 		path:    r.Source.Path,
 		uri:     r.Source.URI,
 	}
-	if err := i.load(); err != nil {
+	if err := i.load(""); err != nil {
 		return check.Result{}, err
 	}
 
@@ -114,13 +114,23 @@ func (r Repository) In(destination string) (in.Result, error) {
 		return in.Result{}, err
 	}
 
+	if r.Source.URI == "" {
+		r.Source.URI = fmt.Sprintf("https://%s/%s", r.Parameters.DownloadDomain, r.Source.Path)
+	}
+
 	i := index{
 		client: c,
 		bucketHandle:  r.Source.Bucket,
 		path:    r.Source.Path,
 		uri:     r.Source.URI,
 	}
-	if err := i.load(); err != nil {
+
+	semver, err := verAsSemver(r.Version)
+	if err != nil {
+		return in.Result{}, err
+	}
+
+	if err := i.load(r.version(semver)); err != nil {
 		return in.Result{}, err
 	}
 
@@ -152,7 +162,6 @@ func (r Repository) Out(source string) (out.Result, error) {
 	if err := r.setAuthCreds(r.Parameters.GcsCreds); err != nil{
 		return out.Result{}, err
 	}
-
 	c, err := r.client()
 	if err != nil {
 		return out.Result{}, err
@@ -179,7 +188,7 @@ func (r Repository) Out(source string) (out.Result, error) {
 		bucketHandle:  r.Source.Bucket,
 		path:    r.Source.Path,
 	}
-	if err := i.load(); err != nil {
+	if err := i.load(""); err != nil {
 		return out.Result{}, err
 	}
 
@@ -187,10 +196,12 @@ func (r Repository) Out(source string) (out.Result, error) {
 	if err != nil {
 		return out.Result{}, err
 	}
-	semver, err := v.AsSemver()
+
+	semver, err := verAsSemver(v)
 	if err != nil {
-		return out.Result{}, fmt.Errorf("error parsing version %s\n%w", v, err)
+		return out.Result{}, err
 	}
+
 	uri, err := r.createUri(file)
 	if err != nil {
 		return out.Result{}, err
@@ -220,6 +231,14 @@ func (r Repository) createUri(file string) (string, error) {
 	}
 
 	return fmt.Sprintf("https://%s/%s/%s", r.Parameters.DownloadDomain, r.Source.Path, url.QueryEscape(path.Base(file))), nil
+}
+
+func verAsSemver(v internal.Version) (*semver.Version, error) {
+	semver, err := v.AsSemver()
+	if err != nil {
+		return nil, fmt.Errorf("error parsing version %s\n%w", v, err)
+	}
+	return semver, nil
 }
 
 func (r Repository) file(source string) (string, error) {
