@@ -49,8 +49,7 @@ func (a artifact) Upload() (string, error) {
 	_, _ = fmt.Fprintf(os.Stderr, "Uploading gcs://%s/%s\n", a.bucketHandle, key)
 
 	obj := bucket.Object(key)
-	// Write something to obj.
-	// w implements io.Writer.
+
 	w := obj.NewWriter(ctx)
 	
 	in, err := os.Open(a.file)
@@ -63,7 +62,6 @@ func (a artifact) Upload() (string, error) {
 		return "", fmt.Errorf("error copying file: %w", err)
 	}
 
-	// Close, just like writing a file.
 	if err := w.Close(); err != nil {
 		return "", fmt.Errorf("error closing file: %w", err)
 	}

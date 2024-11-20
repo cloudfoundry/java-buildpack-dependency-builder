@@ -44,7 +44,7 @@ func (i *index) Key() string {
 	return path.Join(i.path, "/index.yml")
 }
 
-func (i *index) load() error {
+func (i *index) load(version string) error {
 	if output, ok, err := i.loadGCS(); err != nil {
 		return err
 	} else if ok {
@@ -54,6 +54,13 @@ func (i *index) load() error {
 		case io.EOF:
 			i.contents = make(map[string]string)
 			return nil
+		case nil:
+			if version == "" {
+				return err
+			}
+			if _, ok := i.contents[version]; !ok {
+					break
+			} else { return err } 
 		default:
 			return err
 		}
@@ -72,6 +79,7 @@ func (i *index) load() error {
 			return err
 		}
 	}
+
 	return fmt.Errorf("either bucket and path or uri must be specified")
 }
 
@@ -90,7 +98,6 @@ func (i index) loadGCS() (io.ReadCloser, bool, error) {
 		}
 		return nil, false, fmt.Errorf("error reading object: %s\n%w", i.Key(), err)
 	}
-	defer rc.Close()
 
 	return rc, true, nil
 }
@@ -107,10 +114,11 @@ func (i index) loadURI() (io.ReadCloser, bool, error) {
 	u.Path = path.Join(u.Path, "/index.yml")
 
 	r, err := http.Get(u.String())
+	
 	if err != nil {
 		return nil, false, err
 	}
-
+	
 	return r.Body, true, nil
 }
 
@@ -139,8 +147,7 @@ func (i index) save() error {
 	_, _ = fmt.Fprintf(os.Stderr, "Uploading gcs://%s/%s\n", i.bucketHandle, key)
 
 	obj := bucket.Object(key)
-	// Write something to obj.
-	// w implements io.Writer.
+
 	w := obj.NewWriter(ctx)
 
 	if _, err := io.Copy(w, in); err != nil {
@@ -151,6 +158,11 @@ func (i index) save() error {
 	if err := w.Close(); err != nil {
 		return fmt.Errorf("error closing file: %w", err)
 	}
+
+	obj.Update(ctx, storage.ObjectAttrsToUpdate{
+		ContentType:        "application/yaml",
+		CacheControl:       "no-cache, no-store, max-age=0, must-revalidate",
+	})
 
 	return nil
 }
