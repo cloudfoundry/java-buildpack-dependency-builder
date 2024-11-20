@@ -20,7 +20,6 @@ import (
 	"encoding/xml"
 	"fmt"
 	"net/http"
-	"os"
 	"regexp"
 	"resources/internal"
 	"strings"
@@ -32,7 +31,7 @@ type metadata struct {
 	uri        string
 	groupId    string
 	artifactId string
-	user	   string
+	user       string
 	pass       string
 
 	versions map[internal.Version]string
@@ -48,8 +47,8 @@ func (m *metadata) load() error {
 	if err != nil {
 		return err
 	}
-	if m.user != "" && m.pass !=  ""{
-		req.SetBasicAuth(m.user, m.pass);
+	if m.user != "" && m.pass != "" {
+		req.SetBasicAuth(m.user, m.pass)
 	}
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
@@ -97,6 +96,5 @@ func (m *metadata) metadataUri() (string, error) {
 	if m.artifactId == "" {
 		return "", fmt.Errorf("artifact_id must be specified")
 	}
-	os.Stdout.WriteString(fmt.Sprintf("%s/%s/%s/maven-metadata.xml", m.uri, strings.ReplaceAll(m.groupId, ".", "/"), m.artifactId))
 	return fmt.Sprintf("%s/%s/%s/maven-metadata.xml", m.uri, strings.ReplaceAll(m.groupId, ".", "/"), m.artifactId), nil
 }

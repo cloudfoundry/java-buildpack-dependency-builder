@@ -18,6 +18,7 @@ package maven
 
 import (
 	"fmt"
+	"net/http"
 	"reflect"
 	"resources/check"
 	"resources/in"
@@ -37,8 +38,8 @@ type source struct {
 	Packaging      string           `json:"packaging"`
 	URI            string           `json:"uri"`
 	VersionPattern internal.Pattern `json:"version_pattern"`
-	User			string			 `json:"user"`
-	Pass			string			 `json:"pass"`
+	User           string           `json:"user"`
+	Pass           string           `json:"pass"`
 }
 
 func (m Maven) Check() (check.Result, error) {
@@ -56,7 +57,7 @@ func (m Maven) Check() (check.Result, error) {
 
 	result := check.Result{Since: m.Version}
 
-	for v, _ := range md.versions {
+	for v := range md.versions {
 		if reflect.DeepEqual(m.Source.VersionPattern, internal.Pattern{}) || m.Source.VersionPattern.MatchString(v.Ref) {
 			result.Add(v)
 		}
@@ -86,7 +87,7 @@ func (m Maven) In(destination string) (in.Result, error) {
 		Version:     m.Version,
 		URI:         uri,
 		Destination: destination,
-	}.Download()
+	}.Download(m.addNameAndPassword)
 	if err != nil {
 		return in.Result{}, err
 	}
@@ -98,6 +99,13 @@ func (m Maven) In(destination string) (in.Result, error) {
 			{"sha256", sha256},
 		},
 	}, nil
+}
+
+func (m Maven) addNameAndPassword(req *http.Request) *http.Request {
+	if m.Source.User != "" && m.Source.Pass != "" {
+		req.SetBasicAuth(m.Source.User, m.Source.Pass)
+	}
+	return req
 }
 
 func (m Maven) name(version string) (string, error) {
