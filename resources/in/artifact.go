@@ -20,7 +20,6 @@ import (
 	"crypto/sha256"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -32,7 +31,7 @@ type Artifact struct {
 	Version     internal.Version
 	URI         string
 	Destination string
-	Header     string
+	Header      string
 }
 
 type RequestModifierFunc func(request *http.Request) *http.Request
@@ -43,7 +42,6 @@ func (a Artifact) Download(mods ...RequestModifierFunc) (string, error) {
 		return "", fmt.Errorf("unable to create file \n%w", err)
 	}
 	defer out.Close()
-	
 
 	req, err := http.NewRequest("GET", a.URI, nil)
 	if err != nil {
@@ -76,15 +74,15 @@ func (a Artifact) Download(mods ...RequestModifierFunc) (string, error) {
 	}
 
 	hash := h.AsHex()
-	if err := ioutil.WriteFile(filepath.Join(a.Destination, "sha256"), []byte(hash), 0644); err != nil {
+	if err := os.WriteFile(filepath.Join(a.Destination, "sha256"), []byte(hash), 0644); err != nil {
 		return "", err
 	}
 
-	if err := ioutil.WriteFile(filepath.Join(a.Destination, "uri"), []byte(a.URI), 0644); err != nil {
+	if err := os.WriteFile(filepath.Join(a.Destination, "uri"), []byte(a.URI), 0644); err != nil {
 		return "", err
 	}
 
-	if err := ioutil.WriteFile(filepath.Join(a.Destination, "version"), []byte(a.Version.Ref), 0644); err != nil {
+	if err := os.WriteFile(filepath.Join(a.Destination, "version"), []byte(a.Version.Ref), 0644); err != nil {
 		return "", err
 	}
 

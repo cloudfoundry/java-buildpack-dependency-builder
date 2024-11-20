@@ -31,6 +31,8 @@ type metadata struct {
 	uri        string
 	groupId    string
 	artifactId string
+	user       string
+	pass       string
 
 	versions map[internal.Version]string
 }
@@ -41,14 +43,21 @@ func (m *metadata) load() error {
 		return err
 	}
 
-	resp, err := http.Get(u)
+	req, err := http.NewRequest("GET", u, nil)
+	if err != nil {
+		return err
+	}
+	if m.user != "" && m.pass != "" {
+		req.SetBasicAuth(m.user, m.pass)
+	}
+	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return err
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != 200 {
-		return fmt.Errorf("unable to download %s", u)
+		return fmt.Errorf("unable to download %s, code %d", u, resp.StatusCode)
 	}
 
 	versions := struct {
@@ -87,6 +96,5 @@ func (m *metadata) metadataUri() (string, error) {
 	if m.artifactId == "" {
 		return "", fmt.Errorf("artifact_id must be specified")
 	}
-
 	return fmt.Sprintf("%s/%s/%s/maven-metadata.xml", m.uri, strings.ReplaceAll(m.groupId, ".", "/"), m.artifactId), nil
 }
