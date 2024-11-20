@@ -37,6 +37,8 @@ type source struct {
 	Packaging      string           `json:"packaging"`
 	URI            string           `json:"uri"`
 	VersionPattern internal.Pattern `json:"version_pattern"`
+	User			string			 `json:"user"`
+	Pass			string			 `json:"pass"`
 }
 
 func (m Maven) Check() (check.Result, error) {
@@ -44,6 +46,8 @@ func (m Maven) Check() (check.Result, error) {
 		uri:        m.Source.URI,
 		groupId:    m.Source.GroupId,
 		artifactId: m.Source.ArtifactId,
+		user:       m.Source.User,
+		pass:       m.Source.Pass,
 	}
 
 	if err := md.load(); err != nil {
@@ -141,6 +145,8 @@ func (m Maven) version() (string, error) {
 		uri:        m.Source.URI,
 		groupId:    m.Source.GroupId,
 		artifactId: m.Source.ArtifactId,
+		user:       m.Source.User,
+		pass:       m.Source.Pass,
 	}
 
 	if err := md.load(); err != nil {
