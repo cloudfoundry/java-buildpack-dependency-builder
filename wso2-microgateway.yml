@@ -4,10 +4,8 @@ platform: linux
 image_resource:
   type: registry-image
   source:
-    repository: cfje/wso2-microgateway
+    repository: mirror.gcr.io/cfje/wso2-microgateway
     tag: latest
-    username: ((docker-username))
-    password: ((docker-password))
 
 inputs:
 - name: java-buildpack-dependency-builder
