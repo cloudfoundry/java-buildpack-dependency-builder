@@ -4,10 +4,8 @@ platform: linux
 image_resource:
   type: registry-image
   source:
-    repository: cfje/java-buildpack-dependency-builder
+    repository: mirror.gcr.io/cfje/java-buildpack-dependency-builder
     tag: latest
-    username: ((docker-username))
-    password: ((docker-password))
 
 inputs:
 - name: java-buildpack-dependency-builder
