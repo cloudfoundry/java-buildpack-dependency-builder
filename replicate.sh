@@ -14,7 +14,7 @@ fi
 
 mkdir -p "$DESTINATION"
 
-aws s3 sync "s3://download.pivotal.io" "$DESTINATION" --no-sign-request --exclude "*" \
+aws s3 sync "s3://java-buildpack.cloudfoundry.org" "$DESTINATION" --no-sign-request --exclude "*" \
   --include "auto-reconfiguration/*" \
   --include "client-certificate-mapper/*" \
   --include "container-customizer/*" \
