@@ -43,6 +43,7 @@ type source struct {
 	Password string `json:"password"`
 	Type     string `json:"type"`
 	User     string `json:"user"`
+	Extension string `json:"extension"`
 }
 
 type AppDynamicsAPIResponse struct {
@@ -50,6 +51,7 @@ type AppDynamicsAPIResponse struct {
 	FileType     string `json:"filetype"`
 	Version      string `json:"version"`
 	Checksum     string `json:"sha256_checksum"`
+	Extension    string `json:"extension"`
 }
 
 type AppDynamicsAPIPageResponse struct {
@@ -201,7 +203,6 @@ func (a AppDynamics) fetchVersion(version string) (AppDynamicsAPIResponse, error
 	} else {
 		q.Add("apm", a.Source.Type)
 	}
-
 	req.URL.RawQuery = q.Encode()
 
 	resp, err := http.DefaultClient.Do(req)
@@ -220,7 +221,7 @@ func (a AppDynamics) fetchVersion(version string) (AppDynamicsAPIResponse, error
 	}
 
 	for _, r := range raw.Results {
-		if a.Source.Type == r.FileType {
+		if a.Source.Type == r.FileType && a.Source.Extension == r.Extension {
 			return r, nil
 		}
 	}
