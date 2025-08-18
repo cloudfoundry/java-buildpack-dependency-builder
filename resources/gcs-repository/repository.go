@@ -50,6 +50,7 @@ type parameters struct {
 	File                     string `json:"file"`
 	DownloadDomain           string `json:"download_domain"`
 	GcsCreds				 string `json:"GOOGLE_APPLICATION_CREDENTIALS"`
+	IndexOnly				 string `json:"index_only"`
 }
 
 type source struct {
@@ -172,15 +173,18 @@ func (r Repository) Out(source string) (out.Result, error) {
 		return out.Result{}, err
 	}
 
-	a := artifact{
-		client: c,
-		bucketHandle:  r.Source.Bucket,
-		path:    r.Source.Path,
-		file:    file,
-	}
-	sha256, err := a.Upload()
-	if err != nil {
-		return out.Result{}, err
+	sha256 := ""
+	if (r.Parameters.IndexOnly != "true"){
+		a := artifact{
+			client: c,
+			bucketHandle:  r.Source.Bucket,
+			path:    r.Source.Path,
+			file:    file,
+		}
+		sha256, err = a.Upload()
+		if err != nil {
+			return out.Result{}, err
+		}
 	}
 
 	i := index{
