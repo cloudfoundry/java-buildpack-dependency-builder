@@ -51,6 +51,7 @@ type parameters struct {
 	DownloadDomain           string `json:"download_domain"`
 	GcsCreds				 string `json:"GOOGLE_APPLICATION_CREDENTIALS"`
 	IndexOnly				 string `json:"index_only"`
+	URI						 string `json:"uri"`
 }
 
 type source struct {
@@ -206,7 +207,7 @@ func (r Repository) Out(source string) (out.Result, error) {
 		return out.Result{}, err
 	}
 
-	uri, err := r.createUri(file)
+	uri, err := r.createUri(file, source)
 	if err != nil {
 		return out.Result{}, err
 	}
@@ -225,7 +226,12 @@ func (r Repository) Out(source string) (out.Result, error) {
 	}, nil
 }
 
-func (r Repository) createUri(file string) (string, error) {
+func (r Repository) createUri(file string, source string) (string, error) {
+
+	if r.Parameters.URI != "" {
+		return r.readURI(r.Parameters.URI, source)
+	}
+
 	if r.Parameters.DownloadDomain == "" {
 		return "", fmt.Errorf("download-domain must be specified")
 	}
@@ -281,6 +287,15 @@ func (r Repository) client() (*storage.Client, error) {
 	}
 	defer client.Close()
 	return client, nil
+}
+
+func (Repository) readURI(uri_file string, source string) (string, error) {
+	uri, err := os.ReadFile(filepath.Join(source,uri_file))
+	if err != nil {
+		return "", err
+	}
+
+	return string(uri), nil
 }
 
 func (Repository) readVersion(file string) (internal.Version, error) {
