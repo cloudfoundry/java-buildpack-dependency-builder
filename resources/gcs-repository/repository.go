@@ -294,8 +294,8 @@ func (Repository) readURI(uri_file string, source string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-
-	return string(uri), nil
+	s_uri := string(uri)
+	return strings.TrimSpace(s_uri), nil
 }
 
 func (Repository) readVersion(file string) (internal.Version, error) {

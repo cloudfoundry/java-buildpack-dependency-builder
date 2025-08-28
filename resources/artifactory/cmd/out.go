@@ -16,4 +16,11 @@
 
 package main
 
-func main() {}
+import (
+	"resources/artifactory"
+	"resources/out"
+)
+
+func main() {
+	out.Out(&artifactory.Artifactory{})
+}
