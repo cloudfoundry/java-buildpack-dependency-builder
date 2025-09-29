@@ -25,6 +25,9 @@ import (
 
 type metadata struct {
 	Package string
+	URI     string
+	user       string
+	pass       string
 
 	versions map[internal.Version]string
 }
@@ -35,7 +38,15 @@ func (m *metadata) load() error {
 		return err
 	}
 
-	resp, err := http.Get(u)
+	req, err := http.NewRequest("GET", u, nil)
+	if err != nil {
+		return err
+	}
+	if m.user != "" && m.pass != "" {
+		req.SetBasicAuth(m.user, m.pass)
+	}
+
+	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return err
 	}
@@ -70,5 +81,5 @@ func (m *metadata) metadataUri() (string, error) {
 		return "", fmt.Errorf("package must be specified")
 	}
 
-	return fmt.Sprintf("https://registry.npmjs.org/%s", m.Package), nil
+	return fmt.Sprintf("https://%s/%s", m.URI, m.Package), nil
 }

@@ -17,6 +17,7 @@
 package npm
 
 import (
+	"net/http"
 	"path/filepath"
 	"reflect"
 	"resources/check"
@@ -32,11 +33,17 @@ type NPM struct {
 type source struct {
 	Package        string           `json:"package"`
 	VersionPattern internal.Pattern `json:"version_pattern"`
+	URI			   string			`json:"registry_uri"`
+	User       string
+	Pass       string
 }
 
 func (n NPM) Check() (check.Result, error) {
 	md := metadata{
 		Package: n.Source.Package,
+		URI:        n.Source.URI,
+		user:       n.Source.User,
+		pass:       n.Source.Pass,
 	}
 
 	if err := md.load(); err != nil {
@@ -56,7 +63,10 @@ func (n NPM) Check() (check.Result, error) {
 
 func (n NPM) In(destination string) (in.Result, error) {
 	md := metadata{
-		Package: n.Source.Package,
+		Package:    n.Source.Package,
+		URI:        n.Source.URI,
+		user:       n.Source.User,
+		pass:       n.Source.Pass,
 	}
 
 	if err := md.load(); err != nil {
@@ -70,7 +80,7 @@ func (n NPM) In(destination string) (in.Result, error) {
 		Version:     n.Version,
 		URI:         uri,
 		Destination: destination,
-	}.Download()
+	}.Download(n.addNameAndPassword)
 	if err != nil {
 		return in.Result{}, err
 	}
@@ -82,6 +92,13 @@ func (n NPM) In(destination string) (in.Result, error) {
 			{"sha256", sha256},
 		},
 	}, nil
+}
+
+func (n NPM) addNameAndPassword(req *http.Request) *http.Request {
+	if n.Source.User != "" && n.Source.Pass != "" {
+		req.SetBasicAuth(n.Source.User, n.Source.Pass)
+	}
+	return req
 }
 
 func (NPM) name(uri string) string {
