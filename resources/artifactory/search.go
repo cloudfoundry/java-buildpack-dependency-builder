@@ -37,8 +37,8 @@ type search struct {
 	versions map[internal.Version]string
 }
 
-func (s *search) execute() error {
-	uri, err := s.searchUri()
+func (s *search) execute(pattern_search bool) error {
+	uri, err := s.searchUri(pattern_search)
 	if err != nil {
 		return err
 	}
@@ -91,22 +91,26 @@ func (s *search) execute() error {
 	return nil
 }
 
-func (s search) searchUri() (string, error) {
-	if s.uri == "" {
-		return "", fmt.Errorf("uri must be specified")
-	}
+func (s search) searchUri(pattern_search bool) (string, error) {
+	if pattern_search {
+		return fmt.Sprintf("%s/artifactory/api/search/pattern?pattern=%s:%s/%s/%s", s.uri, s.repository, s.groupId, s.artifactId, s.artifactPattern), nil
+	} else{
+		if s.uri == "" {
+			return "", fmt.Errorf("uri must be specified")
+		}
 
-	if s.groupId == "" {
-		return "", fmt.Errorf("group_id must be specified")
-	}
+		if s.groupId == "" {
+			return "", fmt.Errorf("group_id must be specified")
+		}
 
-	if s.artifactId == "" {
-		return "", fmt.Errorf("artifact_id must be specified")
-	}
+		if s.artifactId == "" {
+			return "", fmt.Errorf("artifact_id must be specified")
+		}
 
-	if s.repository == "" {
-		return "", fmt.Errorf("repository must be specified")
-	}
+		if s.repository == "" {
+			return "", fmt.Errorf("repository must be specified")
+		}
 
-	return fmt.Sprintf("%s/api/search/gavc?g=%s&a=%s&repos=%s", s.uri, s.groupId, s.artifactId, s.repository), nil
+		return fmt.Sprintf("%s/api/search/gavc?g=%s&a=%s&repos=%s", s.uri, s.groupId, s.artifactId, s.repository), nil
+	}
 }

@@ -45,8 +45,10 @@ func (a Artifactory) Check() (check.Result, error) {
 		artifactPattern: a.Source.ArtifactPattern,
 	}
 
-	if err := s.execute(); err != nil {
-		return check.Result{}, err
+	if err := s.execute(false); err != nil {
+		if err = s.execute(true); err != nil {
+			return check.Result{}, err
+		}
 	}
 
 	result := check.Result{Since: a.Version}
@@ -67,8 +69,10 @@ func (a Artifactory) In(destination string) (in.Result, error) {
 		artifactPattern: a.Source.ArtifactPattern,
 	}
 
-	if err := s.execute(); err != nil {
-		return in.Result{}, err
+	if err := s.execute(false); err != nil {
+		if err = s.execute(true); err != nil {
+			return in.Result{}, err
+		}
 	}
 
 	uri := s.versions[a.Version]
