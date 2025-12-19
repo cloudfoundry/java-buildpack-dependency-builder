@@ -56,7 +56,7 @@ func (s *search) execute() error {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != 200 {
-		return fmt.Errorf("unable to download %s", uri)
+		return fmt.Errorf("unable to download %s, code: %d, body: %s", uri, resp.StatusCode, resp.Body)
 	}
 
 	b := struct {
