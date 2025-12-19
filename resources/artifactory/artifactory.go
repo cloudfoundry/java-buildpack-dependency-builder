@@ -17,6 +17,7 @@
 package artifactory
 
 import (
+	"net/http"
 	"path"
 	"resources/check"
 	"resources/in"
@@ -34,6 +35,8 @@ type source struct {
 	GroupId         string           `json:"group_id"`
 	Repository      string           `json:"repository"`
 	URI             string           `json:"uri"`
+	User            string           `json:"user"`
+	Pass            string           `json:"pass"`
 }
 
 func (a Artifactory) Check() (check.Result, error) {
@@ -43,6 +46,8 @@ func (a Artifactory) Check() (check.Result, error) {
 		artifactId:      a.Source.ArtifactId,
 		repository:      a.Source.Repository,
 		artifactPattern: a.Source.ArtifactPattern,
+		user:  			 a.Source.User,
+		pass:            a.Source.Pass,
 	}
 
 	if err := s.execute(); err != nil {
@@ -65,6 +70,8 @@ func (a Artifactory) In(destination string) (in.Result, error) {
 		artifactId:      a.Source.ArtifactId,
 		repository:      a.Source.Repository,
 		artifactPattern: a.Source.ArtifactPattern,
+		user:  			 a.Source.User,
+		pass:            a.Source.Pass,
 	}
 
 	if err := s.execute(); err != nil {
@@ -78,7 +85,7 @@ func (a Artifactory) In(destination string) (in.Result, error) {
 		Version:     a.Version,
 		URI:         uri,
 		Destination: destination,
-	}.Download()
+	}.Download(a.addNameAndPassword)
 	if err != nil {
 		return in.Result{}, err
 	}
@@ -94,4 +101,11 @@ func (a Artifactory) In(destination string) (in.Result, error) {
 
 func (a Artifactory) name(uri string) string {
 	return path.Base(uri)
+}
+
+func (a Artifactory) addNameAndPassword(req *http.Request) *http.Request {
+	if a.Source.User != "" && a.Source.Pass != "" {
+		req.SetBasicAuth(a.Source.User, a.Source.Pass)
+	}
+	return req
 }

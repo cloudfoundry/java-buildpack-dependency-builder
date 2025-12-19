@@ -23,6 +23,7 @@ import (
 	"reflect"
 	"regexp"
 	"resources/internal"
+	"strings"
 )
 
 var pattern = internal.Pattern{Regexp: regexp.MustCompile("^.+/([\\d]+)\\.([\\d]+)\\.([\\d]+)[.-]?(.*)/[^/]+$")}
@@ -33,8 +34,9 @@ type search struct {
 	artifactId      string
 	repository      string
 	artifactPattern internal.Pattern
-
 	versions map[internal.Version]string
+	user            string
+	pass            string
 }
 
 func (s *search) execute() error {
@@ -47,6 +49,9 @@ func (s *search) execute() error {
 	if err != nil {
 		return err
 	}
+	if s.user != "" && s.pass != "" {
+		req.SetBasicAuth(s.user, s.pass)
+	}
 	req.Header.Set("X-Result-Detail", "info")
 
 	resp, err := http.DefaultClient.Do(req)
@@ -56,7 +61,7 @@ func (s *search) execute() error {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != 200 {
-		return fmt.Errorf("unable to download %s, code: %d, body: %s", uri, resp.StatusCode, resp.Body)
+		return fmt.Errorf("unable to download %s, code: %d", uri, resp.StatusCode)
 	}
 
 	b := struct {
@@ -76,8 +81,8 @@ func (s *search) execute() error {
 		if reflect.DeepEqual(s.artifactPattern, internal.Pattern{}) || s.artifactPattern.MatchString(r.Path) {
 			if err := pattern.IfMatches(r.Path, func(g []string) error {
 				ref := fmt.Sprintf("%s.%s.%s", g[1], g[2], g[3])
-				if g[4] != "" {
-					ref = fmt.Sprintf("%s-%s", ref, g[4])
+				if g[4] != "" && strings.Contains(g[4], "_") {
+					ref = fmt.Sprintf("%s-%s", ref, strings.TrimPrefix(g[4], "_"))
 				}
 
 				s.versions[internal.Version{Ref: ref}] = r.URI
