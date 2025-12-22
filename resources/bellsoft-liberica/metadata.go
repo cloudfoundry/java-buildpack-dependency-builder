@@ -17,6 +17,7 @@
 package bellsoft
 
 import (
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -53,7 +54,14 @@ func (m *metadata) load() error {
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil || resp.StatusCode != 200 {
-		return fmt.Errorf("unable to get %s\n%w", u, err)
+		tr := &http.Transport{
+        	TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+    	}
+    	client := &http.Client{Transport: tr}
+		resp, err = client.Do(req)
+		if err != nil {
+			return fmt.Errorf("unable to get %s\n%w", u, err)
+		}
 	}
 	defer resp.Body.Close()
 	

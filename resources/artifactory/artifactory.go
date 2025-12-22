@@ -18,6 +18,7 @@ package artifactory
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 	"path"
 	"path/filepath"
@@ -45,6 +46,8 @@ type source struct {
 	GroupId         string           `json:"group_id"`
 	Repository      string           `json:"repository"`
 	URI             string           `json:"uri"`
+	User            string           `json:"user"`
+	Pass            string           `json:"pass"`
 }
 
 type parameters struct {
@@ -64,6 +67,8 @@ func (a Artifactory) Check() (check.Result, error) {
 		artifactId:      a.Source.ArtifactId,
 		repository:      a.Source.Repository,
 		artifactPattern: a.Source.ArtifactPattern,
+		user:  			 a.Source.User,
+		pass:            a.Source.Pass,
 	}
 
 	if err := s.execute(); err != nil {
@@ -86,6 +91,8 @@ func (a Artifactory) In(destination string) (in.Result, error) {
 		artifactId:      a.Source.ArtifactId,
 		repository:      a.Source.Repository,
 		artifactPattern: a.Source.ArtifactPattern,
+		user:  			 a.Source.User,
+		pass:            a.Source.Pass,
 	}
 
 	if err := s.execute(); err != nil {
@@ -99,7 +106,7 @@ func (a Artifactory) In(destination string) (in.Result, error) {
 		Version:     a.Version,
 		URI:         uri,
 		Destination: destination,
-	}.Download()
+	}.Download(a.addNameAndPassword)
 	if err != nil {
 		return in.Result{}, err
 	}
@@ -115,10 +122,10 @@ func (a Artifactory) In(destination string) (in.Result, error) {
 
 func (a Artifactory) Out(source string) (out.Result, error) {
 	rtDetails := auth.NewArtifactoryDetails()
-	rtDetails.SetUrl(a.Parameters.ArtifactoryURL)
+	rtDetails.SetUrl(a.Source.URI)
 	rtDetails.SetApiKey(a.Parameters.APIKey)
-	rtDetails.SetUser(a.Parameters.User)
-	rtDetails.SetPassword(a.Parameters.Password)
+	rtDetails.SetUser(a.Source.User)
+	rtDetails.SetPassword(a.Source.Pass)
 	rtDetails.SetAccessToken(a.Parameters.AccessToken)
 	serviceConfig, err := config.NewConfigBuilder().SetServiceDetails(rtDetails).Build()
 	if err != nil {
@@ -155,7 +162,7 @@ func (a Artifactory) Out(source string) (out.Result, error) {
 	return out.Result{
 		Version: v,
 		Metadata: []out.Metadata{
-			{Name: "uri", Value: fmt.Sprintf("%s%s%s", a.Parameters.ArtifactoryURL, a.Parameters.Path, file)},
+			{Name: "uri", Value: fmt.Sprintf("%s%s%s", a.Source.URI, a.Parameters.Path, file)},
 			{Name: "sha256", Value: sha256},
 		},
 	}, nil
@@ -194,4 +201,11 @@ func (a Artifactory) file(source string) (string, error) {
 
 func (a Artifactory) name(uri string) string {
 	return path.Base(uri)
+}
+
+func (a Artifactory) addNameAndPassword(req *http.Request) *http.Request {
+	if a.Source.User != "" && a.Source.Pass != "" {
+		req.SetBasicAuth(a.Source.User, a.Source.Pass)
+	}
+	return req
 }

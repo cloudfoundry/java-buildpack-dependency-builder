@@ -18,6 +18,7 @@ package in
 
 import (
 	"crypto/sha256"
+	"crypto/tls"
 	"fmt"
 	"io"
 	"net/http"
@@ -54,7 +55,14 @@ func (a Artifact) Download(mods ...RequestModifierFunc) (string, error) {
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
-		return "", fmt.Errorf("unable to get %s\n%w", a.URI, err)
+		tr := &http.Transport{
+        	TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+    	}
+    	client := &http.Client{Transport: tr}
+		resp, err = client.Do(req)
+		if err != nil {
+			return "", fmt.Errorf("unable to get %s\n%w", req.RequestURI, err)
+		}
 	}
 	defer resp.Body.Close()
 
